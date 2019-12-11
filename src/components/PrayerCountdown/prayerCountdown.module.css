@@ -1,0 +1,16 @@
+/* .container {
+	display: flex;
+	flex-flow: column;
+	font-weight: normal;
+} */
+
+.container span {
+	font-size: 1.4rem;
+	display: block;
+	font-family: serif;
+	padding: 0 0 12px;
+}
+
+.container b {
+	text-transform: capitalize;
+}

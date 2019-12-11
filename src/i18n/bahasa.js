@@ -1,0 +1,32 @@
+export default {
+	back: "Kembali",
+	backDesc: "Kembali ke senarai negeri",
+	tazkirahDesc: [
+		`"Berilah khabar gembira kepada orang-orang yang berjalan di dalam
+		kegelapan malam menuju masjid dengan cahaya yang akan diperolehnya pada
+		hari kiamat." (HR. Abu Daud)"`,
+		`tazkirah-bm-2`,
+		`tazkirah-bm-3`,
+		`tazkirah-bm-4`,
+		`tazkirah-bm-5`
+	],
+	prayerList: {
+		fajr: "Subuh",
+		syuruk: "Syuruk",
+		dhuhr: "Zohor",
+		asr: "Asar",
+		maghrib: "Maghrib",
+		isha: "Isyak"
+	},
+	close: "Tutup",
+	settings: "penetapan",
+	locationSelector: "pilih lokasi",
+	prayerTimeEstimate: "minit ke",
+	changeLang: "Tukar bahasa",
+	setDarkMode: "Pilih Mod Gelap",
+	setMinimal: "Pilih Mod Minimal",
+	setLocation: "Pilih Lokasi",
+	credit: "AA bm",
+	credit_alt: "dibuat di Malaysia",
+	enableNotification: "tunjuk notifikasi"
+};

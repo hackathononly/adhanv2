@@ -1,0 +1,43 @@
+{
+	"code": 200,
+	"status": "OK",
+	"data": {
+		"hijri": {
+			"date": "19-05-1440",
+			"format": "DD-MM-YYYY",
+			"day": "19",
+			"weekday": {
+				"en": "Al Sabt",
+				"ar": "\u0627\u0644\u0633\u0628\u062a"
+			},
+			"month": {
+				"number": 5,
+				"en": "Jum\u0101d\u00e1 al-\u016bl\u00e1",
+				"ar": "\u062c\u064f\u0645\u0627\u062f\u0649 \u0627\u0644\u0623\u0648\u0644\u0649"
+			},
+			"year": "1440",
+			"designation": {
+				"abbreviated": "AH",
+				"expanded": "Anno Hegirae"
+			},
+			"holidays": []
+		},
+		"gregorian": {
+			"date": "26-01-2019",
+			"format": "DD-MM-YYYY",
+			"day": "26",
+			"weekday": {
+				"en": "Saturday"
+			},
+			"month": {
+				"number": 1,
+				"en": "January"
+			},
+			"year": "2019",
+			"designation": {
+				"abbreviated": "AD",
+				"expanded": "Anno Domini"
+			}
+		}
+	}
+}

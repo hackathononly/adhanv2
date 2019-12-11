@@ -1,0 +1,55 @@
+.locationSelector {
+	position: relative;
+	max-width: 100%;
+	transition-duration: 300ms;
+	/* width: 30%; */
+	margin: 0 auto;
+	overflow: hidden;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	/* background-color: var(--main-white); */
+}
+
+.locationSelector ul {
+	text-align: left;
+	width: 100%;
+}
+/* .locationSelector span {
+	border-bottom: 1px solid;
+}
+.locationSelector span:hover {
+	border: none;
+	cursor: pointer;
+} */
+.home {
+	margin-bottom: 20px;
+}
+
+.home a:before {
+	content: "←";
+	width: 20px;
+	height: 20px;
+}
+
+.locationSelector > ul {
+	left: 0;
+	position: relative;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+.locationSelector li ul {
+	top: 0;
+	left: 100%;
+	display: none;
+	position: absolute;
+}
+
+.locationSelector ul.active {
+	transition-duration: 300ms;
+	left: -100%;
+}
+
+.locationSelector ul.stateActive {
+	display: block;
+}

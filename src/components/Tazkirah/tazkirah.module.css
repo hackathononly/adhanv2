@@ -1,0 +1,18 @@
+/* .tazkirah {
+	display: flex;
+	padding: 0 80px;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+} */
+.tazkirah {
+	margin-bottom: 60px;
+}
+
+.tazkirah .text {
+	/* font-size: 3vw; */
+	font-weight: normal;
+	font-family: serif;
+	line-height: 4rem;
+	text-align: center;
+}

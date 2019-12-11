@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Constants from "./constants";
+import { Reducer } from "./reducer";
+import { StateProvider } from "./state";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+/* Structure */
+import { Header, Body, Credit, ThemeSelector, i18n } from "./index";
+
+const App = () => {
+	return (
+		<StateProvider
+			i18n={i18n}
+			reducer={Reducer}
+			locations={Constants.locations}
+			languages={Constants.languages}
+			prayerTimes={Constants.prayerTimes}
+			userSettings={Constants.userSettings}
+			initialState={Constants.defaultSettings}
+			locationSettings={Constants.locationSettings}
+		>
+			<ThemeSelector>
+				<Header />
+				<Body />
+				<Credit />
+			</ThemeSelector>
+		</StateProvider>
+	);
+};
 
 export default App;

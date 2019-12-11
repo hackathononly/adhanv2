@@ -1,0 +1,72 @@
+.btn button {
+	/* position: absolute; */
+	/* top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%); */
+	/* font-family: inherit;
+	background-color: var(--main-white);
+	font-size: 21px;
+	width: 200px;
+	overflow: hidden;
+	outline: 0; */
+	border: 0;
+	/* padding: 15px 25px; */
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	-webkit-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	visibility: visible;
+	opacity: 1;
+	font-weight: bold;
+	border: 1px solid #ccc;
+	position: relative;
+	background: none;
+}
+.btn button svg {
+	width: 24px;
+	height: 24px;
+}
+.btn button:hover {
+	cursor: pointer;
+	border: 1px solid transparent;
+	box-shadow: 0 6px 30px var(--main-black-gradient-half);
+}
+
+/* Custom Styling */
+.close button,
+.settings button {
+	top: 10px;
+	right: 10px;
+	position: absolute;
+	border-color: transparent;
+	padding: 6px 8px;
+	border-radius: 10px;
+}
+.locationSelector {
+	margin: 20px 0;
+	display: flex;
+	justify-content: center;
+}
+.locationSelector button {
+	background-color: var(--main-black-gradient-half);
+	border-radius: 30px;
+	display: flex;
+	padding: 8px 18px 8px 12px;
+	border-color: transparent;
+	color: var(--main-white);
+	align-items: center;
+}
+.locationSelector button svg {
+	width: 32px;
+	height: 32px;
+}
+.locationSelector button path {
+	fill: var(--main-white);
+}
+/* @end Custom Styling */

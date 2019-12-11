@@ -46,18 +46,29 @@ a:hover {
 	padding: 0 10%;
 	background: var(--main-green);
 	min-height: 100vh;
-	display: grid;
+	/* display: grid;
 	grid-template-rows: auto 1fr auto;
-	grid-template-columns: 100%;
+	grid-template-columns: 100%; */
 }
 
 article {
 	display: grid;
 	grid-gap: 60px;
 	/* align-items: center; */
-	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	/* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
+	/* grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); */
+	/* grid-template-columns: repeat(6, 1fr); */
+	/* grid-template-rows: repeat(5, 1fr); */
+	/* grid-column-gap: 0px; */
+	/* grid-row-gap: 0px;  */
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
+/* #prayerTimeList {
+	grid-area: 1 / 1 / 6 / 4;
+}
+#tazkirah {
+	grid-area: 1 / 4 / 6 / 7;
+} */
 
 input[type="checkbox"] {
 	margin: 10px;

@@ -123,7 +123,8 @@
 	/* min-height: 100vh; */
 }
 .modal .content .container {
-	padding: 100px 20px 140px;
+	/* padding: 100px 20px 140px; */
+	padding: 60px 40px;
 }
 /* .modal .content .close {
 	position: absolute;

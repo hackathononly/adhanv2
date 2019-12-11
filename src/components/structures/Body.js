@@ -37,7 +37,11 @@ export const Body = () => {
 						maghrib: time.maghrib,
 						isha: time.isha
 					},
-					serverTime: time.date.split("-").join(" ")
+					serverTime: time.date.split("-").join(" "),
+					serverDate: response.serverTime.substr(
+						0,
+						response.serverTime.indexOf(" ")
+					)
 				};
 			setPrayerTimes(datas);
 			getHijriFullDate(serverTime);

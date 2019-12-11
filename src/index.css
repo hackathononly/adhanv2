@@ -11,9 +11,11 @@ body {
 	--main-black-gradient-half: rgba(0, 0, 0, 0.5);
 }
 body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+	font-family: "Open Sans", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+		"Droid Sans", "Helvetica Neue", sans-serif;
+	/* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
 		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-		"Helvetica Neue", sans-serif;
+		"Helvetica Neue", sans-serif; */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

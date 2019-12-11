@@ -55,8 +55,8 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function getHijriFullDate(serverTime) {
-		// const islamicDateAPI = `http://api.aladhan.com/v1/gToH?date=${serverTime}`; //http://api.aladhan.com/v1/gToH?date=22-11-2019
-		const islamicDateAPI = "/sampledata/constants-date.json";
+		const islamicDateAPI = `http://api.aladhan.com/v1/gToH?date=${serverTime}`; //http://api.aladhan.com/v1/gToH?date=22-11-2019
+		// const islamicDateAPI = "/sampledata/constants-date.json";
 		axios.get(islamicDateAPI).then(obj => {
 			const hijriDate = obj.data.data.hijri;
 			const multiLanguageHijriDatesObj = Object.keys(languages || {}).map(

@@ -37,9 +37,13 @@ export const useSetPrayerTimes = () => {
 	function getPrayerTimeList() {
 		const prayerTimeList = prayerTimes.list;
 		return Object.keys(prayerTimeList || {}).reduce((result, key) => {
-			const waktuSolat = translate.prayerList[key];
-			const fullDate = prayerTimes.serverDate + " " + prayerTimeList[key];
-			result[waktuSolat] = formatAMPM(new Date(fullDate));
+			const waktuSolat = translate.prayerList[key],
+				fullDate = prayerTimes.serverDate + " " + prayerTimeList[key],
+				timestamp = Date.parse(fullDate);
+			if (isNaN(timestamp) == false) {
+				result[waktuSolat] = formatAMPM(new Date(fullDate));
+			}
+			// result[waktuSolat] = formatAMPM(new Date(fullDate));
 			return result;
 		}, {});
 	}
@@ -55,7 +59,7 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function getHijriFullDate(serverTime) {
-		const islamicDateAPI = `http://api.aladhan.com/v1/gToH?date=${serverTime}`; //http://api.aladhan.com/v1/gToH?date=22-11-2019
+		const islamicDateAPI = `//api.aladhan.com/v1/gToH?date=${serverTime}`; //http://api.aladhan.com/v1/gToH?date=22-11-2019
 		// const islamicDateAPI = "/sampledata/constants-date.json";
 		axios.get(islamicDateAPI).then(obj => {
 			const hijriDate = obj.data.data.hijri;

@@ -10,15 +10,15 @@ body {
 	--main-darkMode: #333333;
 	--main-black-gradient-half: rgba(0, 0, 0, 0.5);
 }
-body {
-	font-family: "Open Sans", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-		"Droid Sans", "Helvetica Neue", sans-serif;
-	/* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-		"Helvetica Neue", sans-serif; */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+/* h1 {
+	font-size: 5.9vw;
 }
+h2 {
+	font-size: 3vh;
+}
+p {
+	font-size: 2vmin;
+} */
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -33,8 +33,12 @@ code {
 
 body {
 	color: var(--main-darkMode);
-	font-size: 150%;
+	font-size: 3vh;
 	min-height: 100vh;
+	/* font-family: "Open Sans", sans-serif; */
+	font-family: "Roboto", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 a {

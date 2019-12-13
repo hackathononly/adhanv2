@@ -37,7 +37,9 @@
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 }
-
+.locationSelector > ul li {
+	padding: 12px 0;
+}
 .locationSelector li ul {
 	top: 0;
 	left: 100%;

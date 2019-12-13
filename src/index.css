@@ -33,7 +33,7 @@ code {
 
 body {
 	color: var(--main-darkMode);
-	font-size: 3vh;
+	font-size: 150%;
 	min-height: 100vh;
 	/* font-family: "Open Sans", sans-serif; */
 	font-family: "Roboto", sans-serif;
@@ -43,6 +43,15 @@ body {
 
 a {
 	text-decoration: none;
+	color: blue;
+	/* color: var(--main-green); */
+	/* color: var(--main-black-gradient-half); */
+}
+a:hover {
+	text-decoration: underline;
+}
+a:visited {
+	color: var(--main-black-gradient-half);
 }
 a:hover {
 	text-decoration: underline;

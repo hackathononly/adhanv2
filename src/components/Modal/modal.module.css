@@ -120,6 +120,7 @@
 	overflow: hidden;
 	text-align: center;
 	position: relative;
+	line-height: 1.4rem;
 	/* min-height: 100vh; */
 }
 .modal .content .container {
@@ -194,7 +195,8 @@
 }
 @media (min-width: 568px) {
 	.modal .content .container {
-		padding: 50px 20px 80px;
+		/* padding: 50px 20px 80px; */
+		padding: 50px 20px;
 	}
 }
 

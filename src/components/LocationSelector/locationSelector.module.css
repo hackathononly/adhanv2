@@ -38,7 +38,7 @@
 	transform: translateZ(0);
 }
 .locationSelector > ul li {
-	padding: 12px 0;
+	padding: 0 0 18px;
 }
 .locationSelector li ul {
 	top: 0;

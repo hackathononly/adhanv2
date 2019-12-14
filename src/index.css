@@ -146,12 +146,15 @@ header {
 }
 
 /* @end Dark Mode Colors */
-
-.locationIcon {
+.spacer {
+	display: block;
+	margin-bottom: 18px;
+}
+/* .locationIcon {
 	top: 10px;
 	left: 10px;
 	position: absolute;
-}
+} */
 .clearfix:after {
 	content: ".";
 	display: block;

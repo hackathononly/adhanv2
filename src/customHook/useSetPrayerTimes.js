@@ -121,7 +121,6 @@ export const useSetPrayerTimes = () => {
 
 
 
-
 		self.interval = setInterval(function() {
 			self.setState(previousState => ({
 				prayerTime: {

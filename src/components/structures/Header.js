@@ -50,13 +50,42 @@ export const Header = () => {
 				hide={toggleUserSettingsModal}
 				isShowing={showUserSettingsModal}
 			>
-				<h3>{translate.changeLang}</h3>
-				<LanguageSelector
-					langList={languages}
-					setLang={setLang}
-					selectedLang={selectedLang}
-				/>
-				<hr />
+				{/*
+				<ul>
+					<li>
+						{" "}
+						<Checkbox
+							id={"darkMode"}
+							isSet={setDarkMode}
+							isChecked={isDarkMode}
+						/>
+						<label htmlFor="darkMode">
+							{translate.setDarkMode}
+						</label>
+					</li>
+					<li>
+						<Checkbox
+							id={"minimalMode"}
+							isSet={setMinimal}
+							isChecked={isMinimal}
+						/>
+						<label htmlFor="minimalMode">
+							{translate.setMinimal}
+						</label>
+					</li>
+					<li>
+						{" "}
+						<Checkbox
+							id={"notification"}
+							isSet={enableNotification}
+							isChecked={isNotificationEnabled}
+						/>
+						<label htmlFor="notification">
+							{translate.enableNotification}
+						</label>
+					</li>
+				</ul>
+				*/}
 				<Checkbox
 					id={"darkMode"}
 					isSet={setDarkMode}
@@ -79,6 +108,13 @@ export const Header = () => {
 				<label htmlFor="notification">
 					{translate.enableNotification}
 				</label>
+				{/* <h3>{translate.changeLang}</h3> */}
+				<span className={"spacer"}></span>
+				<LanguageSelector
+					langList={languages}
+					setLang={setLang}
+					selectedLang={selectedLang}
+				/>
 			</Modal>
 			<PrayerCountdown timeToNextPrayer={12} nextPrayer={nextPrayer} />
 			<Button type="locationSelector" isShowing={toggleLocationModal}>

@@ -17,6 +17,9 @@
 	.notificationDisable {
 	display: block;
 }
+.enableNotification li {
+	padding-left: 50px;
+}
 /* .enableNotification
 	input[type="checkbox"]:checked
 	+ label
@@ -59,8 +62,10 @@
 .icon {
 	width: 30px;
 	height: 30px;
-	margin-right: 30px;
+	/* margin-right: 30px; */
 	background-size: 30px;
+	position: absolute;
+	left: 0;
 }
 /* .enableDarkMode.icon path {
 	fill: var(--main-green);

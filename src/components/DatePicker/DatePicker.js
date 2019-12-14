@@ -4,8 +4,8 @@ import style from "./datePicker.module.css";
 const DatePicker = React.memo(({ hijriDate, gregorianDate }) => {
 	return (
 		<aside id="datePicker" className={style.datePick}>
-			{hijriDate}
-			<small>{gregorianDate}</small>
+			<b>{gregorianDate}</b>
+			<small>{hijriDate}</small>
 		</aside>
 	);
 });

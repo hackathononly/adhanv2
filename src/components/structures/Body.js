@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { Tazkirah, PrayerTimeList } from "../../index";
+import {
+	// Tazkirah,
+	PrayerTimeList
+} from "../../index";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
 import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
 // import { useGetTranslation } from "../../customHook/useGetTranslation";
@@ -18,7 +21,7 @@ export const Body = () => {
 	// { getRandomTazkirah } = useGetTranslation();
 
 	useEffect(() => {
-		// axios.get("http://localhost:3000/sampledata/daily.json").then(obj => {
+		// axios.get("sampledata/daily.json").then(obj => {
 		axios.get(solatTime).then(obj => {
 			const response = obj.data,
 				time = response.prayerTime[0],

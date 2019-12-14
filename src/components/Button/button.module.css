@@ -61,7 +61,7 @@
 	border-color: transparent;
 	color: var(--main-white);
 	align-items: center;
-	min-height: 62px;
+	/* min-height: 62px; */
 	font-size: 1rem;
 }
 .locationSelector button svg {

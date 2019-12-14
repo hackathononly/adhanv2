@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 import { useStateValue } from "../state";
 import { useGetTranslation } from "../customHook/useGetTranslation";
 import Constants from "../constants";
@@ -23,27 +24,12 @@ export const useSetPrayerTimes = () => {
 		return prayerTimes.nextPrayer;
 	}
 
-	function formatAMPM(date) {
-		var hours = date.getHours();
-		var minutes = date.getMinutes();
-		var ampm = hours >= 12 ? "pm" : "am";
-		hours = hours % 12;
-		hours = hours ? hours : 12; // the hour '0' should be '12'
-		minutes = minutes < 10 ? "0" + minutes : minutes;
-		var strTime = hours + ":" + minutes + " " + ampm;
-		return strTime;
-	}
-
 	function getPrayerTimeList() {
 		const prayerTimeList = prayerTimes.list;
 		return Object.keys(prayerTimeList || {}).reduce((result, key) => {
 			const waktuSolat = translate.prayerList[key],
-				fullDate = prayerTimes.serverDate + " " + prayerTimeList[key],
-				timestamp = Date.parse(fullDate);
-			if (isNaN(timestamp) === false) {
-				result[waktuSolat] = formatAMPM(new Date(fullDate));
-			}
-			// result[waktuSolat] = formatAMPM(new Date(fullDate));
+				fullDate = prayerTimes.serverDate + " " + prayerTimeList[key];
+			result[waktuSolat] = moment(fullDate).format("hh:mm A");
 			return result;
 		}, {});
 	}

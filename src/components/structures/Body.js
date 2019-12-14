@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Tazkirah, PrayerTimeList } from "../../index";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
 import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
-import { useGetTranslation } from "../../customHook/useGetTranslation";
+// import { useGetTranslation } from "../../customHook/useGetTranslation";
 
 export const Body = () => {
 	const { isMinimal, isNotificationEnabled } = useChangeUserSettings(),
@@ -14,8 +14,8 @@ export const Body = () => {
 			calcNextPrayer,
 			setSilencedTime,
 			getHijriFullDate
-		} = useSetPrayerTimes(),
-		{ getRandomTazkirah } = useGetTranslation();
+		} = useSetPrayerTimes();
+	// { getRandomTazkirah } = useGetTranslation();
 
 	useEffect(() => {
 		// axios.get("http://localhost:3000/sampledata/daily.json").then(obj => {
@@ -56,7 +56,7 @@ export const Body = () => {
 				prayerTimeList={prayerTimeList}
 				setSilencedTime={setSilencedTime}
 			/>
-			<Tazkirah description={getRandomTazkirah} />
+			{/* <Tazkirah description={getRandomTazkirah} /> */}
 		</article>
 	);
 };

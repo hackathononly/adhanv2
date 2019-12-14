@@ -4,6 +4,7 @@ body {
 	height: 100%;
 }
 :root {
+	--link: #00a152;
 	--main-green: #69e781;
 	--main-white: #ffffff;
 	--main-black: #000000;
@@ -43,15 +44,15 @@ body {
 
 a {
 	text-decoration: none;
-	color: blue;
-	/* color: var(--main-green); */
+	/* color: var(--link); */
+	color: var(--main-green);
 	/* color: var(--main-black-gradient-half); */
 }
 a:hover {
 	text-decoration: underline;
 }
 a:visited {
-	color: var(--main-black-gradient-half);
+	color: var(--link);
 }
 a:hover {
 	text-decoration: underline;
@@ -96,8 +97,13 @@ hr {
 }
 
 footer {
-	padding: 0 0 6px;
-	text-align: right;
+	/* padding: 0 0 6px; */
+	text-align: center;
+	margin-top: 24px;
+	min-height: 2em;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	/* border-top: 1px solid; */
 	border-color: var(--main-black-gradient-half);
 }
@@ -105,6 +111,9 @@ footer small {
 	font-size: initial;
 	font-weight: bold;
 	/* background-color: var(--main-black-gradient-half); */
+}
+.isMinimal footer {
+	margin-top: 0;
 }
 /* Custom CSS */
 
@@ -116,7 +125,7 @@ header {
 .isMinimal header {
 	padding: 0;
 	display: flex;
-	height: 100vh;
+	height: calc(100vh - 2em);
 	text-align: center;
 	flex-direction: column;
 	justify-content: center;

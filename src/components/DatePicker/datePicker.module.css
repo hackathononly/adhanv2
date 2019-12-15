@@ -1,13 +1,7 @@
-/* .datePick {
-	background: red;
-} */
-.datePick small {
-	/* margin: 0 10px; */
+.datePicker small {
 	display: block;
-	unicode-bidi: bidi-override;
-	/* direction: RTL; */
 }
-
-/* .datePick {
-	margin: 20px;
-} */
+.datePicker .arabic {
+	/* unicode-bidi: bidi-override; */
+	direction: RTL;
+}

@@ -8,7 +8,9 @@ export const useChangeLocationSettings = () => {
 		showLocationModal = locationSettings.showModal,
 		getSelectedState =
 			locationSettings.selectedState || initialState.waktuSolatState,
-		getSelectedStateCode = locationSettings.selectedStateCode;
+		getSelectedStateCode =
+			locationSettings.selectedStateCode ||
+			initialState.waktuSolatStateCode;
 
 	function toggleLocationModal() {
 		setLocationSettings({

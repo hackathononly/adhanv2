@@ -26,7 +26,9 @@ export const useSetPrayerTimes = () => {
 		return Object.keys(prayerTimeList || {}).reduce((result, key) => {
 			const waktuSolat = translate.prayerList[key],
 				fullDate = prayerTimes.serverDate + " " + prayerTimeList[key];
-			result[waktuSolat] = moment(fullDate).format("hh:mm A");
+			result[waktuSolat] = moment(
+				new Date(fullDate.replace(/ /g, "T")) // replace space in dateString with "T"
+			).format("hh:mm A");
 			return result;
 		}, {});
 	}
@@ -94,6 +96,7 @@ export const useSetPrayerTimes = () => {
 			});
 		});
 	}
+
 	return {
 		nextPrayer,
 		timeToNextPrayer,

@@ -53,6 +53,11 @@ const LocationSelector = ({
 										<a
 											href="/#"
 											title={subitem}
+											className={
+												subitem === locationSettings.selectedStateCode
+													? style.active
+													: null
+											}
 											onClick={() =>
 												setStateCode(subitem)
 											}

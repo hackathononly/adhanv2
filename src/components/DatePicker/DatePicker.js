@@ -1,11 +1,13 @@
 import React from "react";
 import style from "./datePicker.module.css";
+import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
 
 const DatePicker = React.memo(({ hijriDate, gregorianDate }) => {
+	const { selectedLang } = useChangeUserSettings();
 	return (
-		<aside id="datePicker" className={style.datePick}>
+		<aside id="datePicker" className={style.datePicker}>
 			<b>{gregorianDate}</b>
-			<small>{hijriDate}</small>
+			<small className={style[selectedLang]}>{hijriDate}</small>
 		</aside>
 	);
 });

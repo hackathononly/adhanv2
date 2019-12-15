@@ -5,7 +5,7 @@ const Credit = () => {
 	const { getTranslation: translate } = useGetTranslation();
 	return (
 		<footer>
-			<small>{translate.credit}</small>
+			<small title={translate.subcredit}>{translate.credit}</small>
 		</footer>
 	);
 };

@@ -48,7 +48,8 @@ export const Body = () => {
 				};
 			setPrayerTimes(datas);
 			getHijriFullDate(serverTime);
-			calcNextPrayer(serverTime);
+			// calcNextPrayer(serverTime);
+			calcNextPrayer(response.serverTime);
 		});
 	}, [solatTime]);
 

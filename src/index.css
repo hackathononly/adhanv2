@@ -4,11 +4,13 @@ body {
 	height: 100%;
 }
 :root {
-	--link: #00a152;
+	/* --link: #00a152; */
+	--link: #1d1da3;
 	--main-green: #69e781;
 	--main-white: #ffffff;
 	--main-black: #000000;
 	--main-darkMode: #333333;
+	--main-grey: #ccc;
 	--main-black-gradient-half: rgba(0, 0, 0, 0.5);
 }
 /* h1 {
@@ -44,15 +46,16 @@ body {
 
 a {
 	text-decoration: none;
-	/* color: var(--link); */
-	color: var(--main-green);
+	color: var(--link);
+	/* color: var(--main-green); */
 	/* color: var(--main-black-gradient-half); */
 }
 a:hover {
 	text-decoration: underline;
 }
 a:visited {
-	color: var(--link);
+	/* color: var(--link); */
+	text-decoration: underline;
 }
 a:hover {
 	text-decoration: underline;
@@ -86,15 +89,15 @@ article {
 	grid-area: 1 / 4 / 6 / 7;
 } */
 
-input[type="checkbox"] {
+/* input[type="checkbox"] {
 	margin: 10px;
-}
-hr {
+} */
+/* hr {
 	margin-bottom: 14px;
 	height: 1px;
 	border: none;
 	background-color: #ccc;
-}
+} */
 
 footer {
 	/* padding: 0 0 6px; */
@@ -118,7 +121,7 @@ footer small {
 /* Custom CSS */
 
 header {
-	padding: 60px;
+	padding: 60px 0;
 	text-align: center;
 }
 
@@ -133,7 +136,7 @@ header {
 /* Dark Mode Colors */
 .enableDarkMode {
 	background-color: var(--main-darkMode);
-	color: white;
+	color: var(--main-white);
 }
 /* Buttons */
 .enableDarkMode button.locationSelector path {
@@ -147,17 +150,33 @@ header {
 	fill: var(--main-green);
 }
 /* prayerTimeList */
-.enableDarkMode #prayerTimeList span {
+/* .enableDarkMode #prayerTimeList span {
 	color: var(--main-black);
-}
+} */
 .enableDarkMode #prayerTimeList svg path {
 	fill: var(--main-green);
 }
 
 /* @end Dark Mode Colors */
-.spacer {
-	display: block;
+.settingsContainer {
+	display: flex;
+	flex-wrap: wrap;
 	margin-bottom: 18px;
+}
+.settingsContainer input {
+	width: 20px;
+	height: 20px;
+	flex-basis: 10%;
+	/* margin-right: 20px; */
+}
+.settingsContainer label {
+	flex-basis: 90%;
+}
+.settingsContainer hr {
+	margin: 14px 0;
+	background-color: var(--main-white);
+	border-color: var(--main-white);
+	flex-basis: 100%;
 }
 /* .locationIcon {
 	top: 10px;

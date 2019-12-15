@@ -19,12 +19,12 @@ export default {
 	close: "أغلق",
 	settings: "الإعدادات",
 	locationSelector: "اختر موقعا",
-	prayerTimeEstimate: "دقائق ل",
+	prayerTimeEstimate: "غادر حتى",
 	changeLang: "غير اللغة",
 	setDarkMode: "حدد الوضع المظلم",
 	setMinimal: "حدد الوضع الأدنى",
 	setLocation: "اختر موقعا",
-	credit: "AA ar",
-	credit_alt: "صنع في ماليزيا",
+	credit: "Adhan App",
+	subcredit: "صنع في ماليزيا",
 	enableNotification: "تفعيل الإشعارات"
 };

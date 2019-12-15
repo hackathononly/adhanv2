@@ -14,15 +14,12 @@ export const useSetPrayerTimes = () => {
 
 	const serverTime = prayerTimes.serverTime,
 		hijriDate = prayerTimes.hijriDate[selectedLang],
-		nextPrayer = getNextPrayer(),
+		nextPrayer = prayerTimes.nextPrayer,
+		timeToNextPrayer = prayerTimes.timeToNextPrayer,
 		solatTime = Constants.waktuSolatURL(
 			locationSettings.selectedStateCode ||
 				Constants.defaultSettings.waktuSolatStateCode
 		);
-
-	function getNextPrayer() {
-		return prayerTimes.nextPrayer;
-	}
 
 	function getPrayerTimeList() {
 		const prayerTimeList = prayerTimes.list;
@@ -39,83 +36,24 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function calcNextPrayer(time) {
+		var firstDate = moment();
+		var secondDate = moment(time);
+		// var secondDate = moment("2018-03-19");
+		var yearDiff = firstDate.diff(secondDate, "year");
+		var monthDiff = firstDate.diff(secondDate, "month");
+		var dayDiff = firstDate.diff(secondDate, "day");
+		console.log(
+			// moment(time),
+			// firstDate,
+			// secondDate,
+			yearDiff + " Years, " + monthDiff + " Months, " + dayDiff + " Days"
+		);
+
 		setPrayerTimes({
+			timeToNextPrayer: "2 jam 15 min",
 			nextPrayer: "Maghrib"
 		});
 	}
-
-	/*
-
-	calcNextPrayerTime = () => {
-		var timeListArray = [],
-			prayerTimeList = Object.values(this.state.prayerTime.list), //["05:53:00","07:09:00","13:20:00","16:30:00","19:27:00","20:37:00"]
-			currentTime = new Date().getTime(),
-			// currentTime = moment().valueOf(), // currentTime in epoch format, ex : 1555544120452
-			ok = Object.keys(this.state.prayerTime.list); // ["fajr","syuruk", "duhr", "asar", "maghrib", "isha"]
-
-		// console.log(currentTime, moment().valueOf());
-
-		for (i = 0; i < prayerTimeList.length; i++) {
-			const string = "2019-04-22T17:00:00Z",
-				// 	newDate = new Date(string).getTime();
-				newDate = new Date("Mon Apr 22 2019 07:36:00 GMT"); // ""Day Mon dd yyyy hh:mm:ss GMT/UTC
-			timeListArray.push(Math.abs(currentTime - newDate)); // get closest Time to current
-			// console.log(prayerTimeList[i], timeListArray);
-			console.log(
-				moment(new Date()).format("YYYY MMM D H:mm:ss"),
-				// new Date(string),
-				// moment().format("ll"),
-				timeListArray,
-				currentTime,
-				newDate
-				// newDate.getTime(),
-				// string
-			);
-		}
-		var i = timeListArray.indexOf(Math.min.apply(Math, timeListArray)),
-			// timeString =
-			// 	moment().format("YYYY-MM-DD") + "T" + timeListArray[i] + "Z",
-			// time = new Date(timeString),
-			// closestPrayerTime = time.getTime();
-			closestPrayerTime = new Date(
-				// moment().format("mm/dd/yyyy") + "11:05:00"
-				"Apr 22 2019 07:31:00 GMT"
-			); // "mm/dd/yyyy hh:mm:ss"
-
-		// console.log(
-		// 	i,
-		// 	timeListArray[i],
-		// 	// timeString,
-		// 	new Date(timeListArray[i]),
-		// 	closestPrayerTime
-		// );
-
-		this.setState(previousState => ({
-			prayerTime: {
-				...previousState.prayerTime,
-				// nextPrayer: ok[i]
-				nextPrayer:
-					currentTime > closestPrayerTime ? ok[i + 1] || ok[0] : ok[i]
-				// timeToNextPrayer: this.calcTimeDiff(currentTime, new Date())
-				// currentTime > timeListArray[i] ? this.calcTimeDiff() : ""
-			}
-		}));
-	};
-
-
-
-
-
-
-		self.interval = setInterval(function() {
-			self.setState(previousState => ({
-				prayerTime: {
-					...previousState.prayerTime,
-					machineTime: new Date().getTime()
-				}
-			}));
-		}, 1000);
-	*/
 
 	function getHijriFullDate(serverTime) {
 		const islamicDateAPI = `//api.aladhan.com/v1/gToH?date=${serverTime}`; //http://api.aladhan.com/v1/gToH?date=22-11-2019
@@ -158,12 +96,13 @@ export const useSetPrayerTimes = () => {
 	}
 	return {
 		nextPrayer,
-		solatTime,
+		timeToNextPrayer,
+		solatTime, // pass state code to axios on Body
 		hijriDate,
 		getHijriFullDate,
 		serverTime,
 		prayerTimeList: getPrayerTimeList(),
-		calcNextPrayer,
+		calcNextPrayer, // set nextPrayer, timeToNextPrayer
 		setPrayerTimes,
 		setSilencedTime
 	};

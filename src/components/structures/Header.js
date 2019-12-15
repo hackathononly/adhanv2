@@ -35,9 +35,15 @@ export const Header = () => {
 			setStateCode,
 			showLocationModal,
 			toggleLocationModal,
-			getSelectedState
+			getSelectedState,
+			getSelectedStateCode
 		} = useChangeLocationSettings(),
-		{ hijriDate, serverTime, nextPrayer } = useSetPrayerTimes(),
+		{
+			hijriDate,
+			serverTime,
+			nextPrayer,
+			timeToNextPrayer
+		} = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
 
 	return (
@@ -86,40 +92,44 @@ export const Header = () => {
 					</li>
 				</ul>
 				*/}
-				<Checkbox
-					id={"darkMode"}
-					isSet={setDarkMode}
-					isChecked={isDarkMode}
-				/>
-				<label htmlFor="darkMode">{translate.setDarkMode}</label>
-				<hr />
-				<Checkbox
-					id={"minimalMode"}
-					isSet={setMinimal}
-					isChecked={isMinimal}
-				/>
-				<label htmlFor="minimalMode">{translate.setMinimal}</label>
-				<hr />
-				<Checkbox
-					id={"notification"}
-					isSet={enableNotification}
-					isChecked={isNotificationEnabled}
-				/>
-				<label htmlFor="notification">
-					{translate.enableNotification}
-				</label>
-				{/* <h3>{translate.changeLang}</h3> */}
-				<span className={"spacer"}></span>
+				<div className={"settingsContainer"}>
+					<Checkbox
+						id={"darkMode"}
+						isSet={setDarkMode}
+						isChecked={isDarkMode}
+					/>
+					<label htmlFor="darkMode">{translate.setDarkMode}</label>
+					<hr />
+					<Checkbox
+						id={"minimalMode"}
+						isSet={setMinimal}
+						isChecked={isMinimal}
+					/>
+					<label htmlFor="minimalMode">{translate.setMinimal}</label>
+					<hr />
+					<Checkbox
+						id={"notification"}
+						isSet={enableNotification}
+						isChecked={isNotificationEnabled}
+					/>
+					<label htmlFor="notification">
+						{translate.enableNotification}
+					</label>
+				</div>
 				<LanguageSelector
 					langList={languages}
 					setLang={setLang}
 					selectedLang={selectedLang}
 				/>
 			</Modal>
-			<PrayerCountdown timeToNextPrayer={12} nextPrayer={nextPrayer} />
+			<PrayerCountdown
+				timeToNextPrayer={timeToNextPrayer}
+				nextPrayer={nextPrayer}
+			/>
 			<Button type="locationSelector" isShowing={toggleLocationModal}>
 				<LocationIcon />
 				{getSelectedState}
+				<span>{getSelectedStateCode}</span>
 			</Button>
 			<Modal
 				key={"locationSettingsModal"}

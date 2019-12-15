@@ -24,7 +24,7 @@
 	visibility: visible;
 	opacity: 1;
 	font-weight: bold;
-	border: 1px solid #ccc;
+	border: 1px solid var(--main-grey);
 	position: relative;
 	background: none;
 }
@@ -57,17 +57,26 @@
 	background-color: var(--main-black-gradient-half);
 	border-radius: 30px;
 	display: flex;
-	padding: 8px 24px 8px 18px;
+	/* padding: 8px 24px 8px 18px; */
+	padding: 12px 32px 12px 48px;
+	/* padding: 0 24px;
+	padding-right: 32px;
+	padding-left: 48px; */
 	border-color: transparent;
 	color: var(--main-white);
-	align-items: center;
-	/* min-height: 62px; */
 	font-size: 1rem;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	min-height: 62px;
 }
 .locationSelector button svg {
 	width: 32px;
 	height: 32px;
 	margin-right: 8px;
+	position: absolute;
+	left: 10px;
 }
 .locationSelector button path {
 	fill: var(--main-white);

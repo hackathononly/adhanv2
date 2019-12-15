@@ -6,12 +6,12 @@ const PrayerCountdown = ({ timeToNextPrayer, nextPrayer }) => {
 	const { getTranslation: translate } = useGetTranslation();
 
 	return (
-		<h2 className={style.container}>
-			{timeToNextPrayer} {translate.prayerTimeEstimate}
+		<div className={style.container}>
+			<h2>{timeToNextPrayer}</h2>
 			<span>
-				<b>{nextPrayer}</b>
+				{translate.prayerTimeEstimate} <b>{nextPrayer}</b>
 			</span>
-		</h2>
+		</div>
 	);
 };
 

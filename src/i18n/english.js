@@ -22,12 +22,12 @@ export default {
 	close: "Close",
 	settings: "settings",
 	locationSelector: "select location",
-	prayerTimeEstimate: "minutes to",
+	prayerTimeEstimate: "left until",
 	changeLang: "Change Language",
 	setDarkMode: "Select Dark Mode",
 	setMinimal: "Select Minimal Mode",
 	setLocation: "Select Location",
-	credit: "AA en",
-	credit_alt: "made in Malaysia",
-	enableNotification: "enable notification"
+	credit: "Adhan App",
+	subcredit: "coded in Malaysia",
+	enableNotification: "Enable notification"
 };

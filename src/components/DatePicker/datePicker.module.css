@@ -1,6 +1,11 @@
-small {
+/* .datePick {
+	background: red;
+} */
+.datePick small {
 	/* margin: 0 10px; */
 	display: block;
+	unicode-bidi: bidi-override;
+	/* direction: RTL; */
 }
 
 /* .datePick {

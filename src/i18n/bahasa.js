@@ -21,12 +21,12 @@ export default {
 	close: "Tutup",
 	settings: "penetapan",
 	locationSelector: "pilih lokasi",
-	prayerTimeEstimate: "minit ke",
+	prayerTimeEstimate: "ke",
 	changeLang: "Tukar bahasa",
 	setDarkMode: "Pilih Mod Gelap",
 	setMinimal: "Pilih Mod Minimal",
 	setLocation: "Pilih Lokasi",
-	credit: "AA bm",
-	credit_alt: "dibuat di Malaysia",
-	enableNotification: "tunjuk notifikasi"
+	credit: "Adhan App",
+	subcredit: "kod di Malaysia",
+	enableNotification: "Tunjuk notifikasi"
 };

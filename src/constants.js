@@ -10,6 +10,38 @@ const Constants = {
 		"https://www.e-solat.gov.my/index.php?r=esolatApi/TakwimSolat&period=today&zone={}",
 	waktuSolatURLMonthly:
 		"https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=month&zone={}",
+	hijriDate: serverTime =>
+		`https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=${serverTime}`,
+	hijriDateArabic: serverTime =>
+		`//api.aladhan.com/v1/gToH?date=${serverTime}`, //http://api.aladhan.com/v1/gToH?date=22-11-2019
+	islamicMonth: {
+		"01": "Muharram",
+		"02": "Safar",
+		"03": "Rabi'ulawal",
+		"04": "Rabi'ulakhir",
+		"05": "Jamadilawwal",
+		"06": "Jamadilakhir",
+		"07": "Rejab",
+		"08": "Sha'ban",
+		"09": "Ramadhan",
+		"10": "Syawal",
+		"11": "Zulqa'idah",
+		"12": "Zullhijjah"
+	},
+	islamicMonthArabic: {
+		"01": "Muharram",
+		"02": "Safar",
+		"03": "Rabi'ulawal",
+		"04": " رَبيع الثاني",
+		"05": "Jamadilawwal",
+		"06": "Jamadilakhir",
+		"07": "Rejab",
+		"08": "Sha'ban",
+		"09": "Ramadhan",
+		"10": "Syawal",
+		"11": "Zulqa'idah",
+		"12": "Zullhijjah"
+	},
 	languages: {
 		english: "english",
 		bahasa: "bahasa",

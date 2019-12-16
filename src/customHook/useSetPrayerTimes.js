@@ -26,9 +26,10 @@ export const useSetPrayerTimes = () => {
 		return Object.keys(prayerTimeList || {}).reduce((result, key) => {
 			const waktuSolat = translate.prayerList[key],
 				fullDate = prayerTimes.serverDate + " " + prayerTimeList[key];
-			result[waktuSolat] = moment(
-				new Date(fullDate.replace(/ /g, "T")) // replace space in dateString with "T"
-			).format("hh:mm A");
+			// result[waktuSolat] = moment(
+			// 	new Date(fullDate.replace(/ /g, "T")) // replace space in dateString with "T"
+			// ).format("hh:mm A");
+			result[waktuSolat] = moment(fullDate).format("hh:mm A");
 			return result;
 		}, {});
 	}
@@ -44,12 +45,12 @@ export const useSetPrayerTimes = () => {
 		var yearDiff = firstDate.diff(secondDate, "year");
 		var monthDiff = firstDate.diff(secondDate, "month");
 		var dayDiff = firstDate.diff(secondDate, "day");
-		console.log(
-			// moment(time),
-			// firstDate,
-			// secondDate,
-			yearDiff + " Years, " + monthDiff + " Months, " + dayDiff + " Days"
-		);
+		// console.log(
+		// 	// moment(time),
+		// 	// firstDate,
+		// 	// secondDate,
+		// 	yearDiff + " Years, " + monthDiff + " Months, " + dayDiff + " Days"
+		// );
 
 		setPrayerTimes({
 			timeToNextPrayer: "2 jam 15 min",
@@ -58,33 +59,45 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function getHijriFullDate(serverTime) {
-		const islamicDateAPI = `//api.aladhan.com/v1/gToH?date=${serverTime}`; //http://api.aladhan.com/v1/gToH?date=22-11-2019
-		// const islamicDateAPI = "/sampledata/constants-date.json";
-		axios.get(islamicDateAPI).then(obj => {
-			const hijriDate = obj.data.data.hijri;
-			const multiLanguageHijriDatesObj = Object.keys(languages || {}).map(
-				keys => {
+		const reverseServerTime = serverTime
+				.split("-")
+				.reverse()
+				.join("-"),
+			islamicDateAPI = Constants.hijriDate(reverseServerTime),
+			// islamicDateAPI = "/sampledata/constants-date.json",
+			islamicDateAPIArabic = Constants.hijriDateArabic(serverTime);
+
+		axios
+			.all([axios.get(islamicDateAPI), axios.get(islamicDateAPIArabic)])
+			.then(obj => {
+				const hijriDate = obj[0].data.takwim[reverseServerTime], // Jakim
+					hijriDateArabic = obj[1].data.data.hijri, // Aladhan
+					jakimDate = hijriDate.split("-"); // [ "1441", "04", "19" ]
+
+				const multiLanguageHijriDatesObj = Object.keys(
+					languages || {}
+				).map(keys => {
 					const hijriFullDate = [
-						hijriDate.day,
+						// hijriDateArabic.day,
+						jakimDate[2],
 						keys === "arabic"
-							? hijriDate.month.ar
-							: hijriDate.month.en,
-						hijriDate.year
+							? hijriDateArabic.month.ar
+							: Constants.islamicMonth[jakimDate[1]],
+						hijriDateArabic.year
 					].join(" ");
 					return { [keys]: hijriFullDate };
-				}
-			);
-			const multiLanguageHijriDates = multiLanguageHijriDatesObj.reduce(
-				(result, key) => {
-					Object.keys(key).forEach(lang => {
-						result[lang] = key[lang];
-					});
-					return result;
-				},
-				{}
-			);
-			return setPrayerTimes({ hijriDate: multiLanguageHijriDates });
-		}, []);
+				});
+				const multiLanguageHijriDates = multiLanguageHijriDatesObj.reduce(
+					(result, key) => {
+						Object.keys(key).forEach(lang => {
+							result[lang] = key[lang];
+						});
+						return result;
+					},
+					{}
+				);
+				return setPrayerTimes({ hijriDate: multiLanguageHijriDates });
+			}, []);
 	}
 
 	function setPrayerTimes(obj) {

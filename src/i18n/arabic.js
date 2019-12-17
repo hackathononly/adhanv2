@@ -24,7 +24,7 @@ export default {
 	setDarkMode: "حدد الوضع المظلم",
 	setMinimal: "حدد الوضع الأدنى",
 	setLocation: "اختر موقعا",
-	credit: "Adhan App",
+	credit: "AA",
 	subcredit: "صنع في ماليزيا",
 	enableNotification: "تفعيل الإشعارات"
 };

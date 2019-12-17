@@ -48,9 +48,9 @@ export const Header = () => {
 
 	return (
 		<header>
-			<Button type="settings" isShowing={toggleUserSettingsModal}>
+			{/* <Button type="settings" isShowing={toggleUserSettingsModal}>
 				<SettingsIcon />
-			</Button>
+			</Button> */}
 			<Modal
 				key={"userSettingsModal"}
 				hide={toggleUserSettingsModal}
@@ -93,6 +93,8 @@ export const Header = () => {
 				</ul>
 				*/}
 				<div className={"settingsContainer"}>
+					<h3>{translate.settings}</h3>
+					<hr />
 					<Checkbox
 						id={"darkMode"}
 						isSet={setDarkMode}

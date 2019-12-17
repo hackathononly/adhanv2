@@ -39,12 +39,12 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function calcNextPrayer(time) {
-		var firstDate = moment();
-		var secondDate = moment(time);
+		// var firstDate = moment();
+		// var secondDate = moment(time);
 		// var secondDate = moment("2018-03-19");
-		var yearDiff = firstDate.diff(secondDate, "year");
-		var monthDiff = firstDate.diff(secondDate, "month");
-		var dayDiff = firstDate.diff(secondDate, "day");
+		// var yearDiff = firstDate.diff(secondDate, "year");
+		// var monthDiff = firstDate.diff(secondDate, "month");
+		// var dayDiff = firstDate.diff(secondDate, "day");
 		// console.log(
 		// 	// moment(time),
 		// 	// firstDate,

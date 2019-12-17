@@ -54,7 +54,8 @@ const LocationSelector = ({
 											href="/#"
 											title={subitem}
 											className={
-												subitem === locationSettings.selectedStateCode
+												subitem ===
+												locationSettings.selectedStateCode
 													? style.active
 													: null
 											}

@@ -19,14 +19,14 @@ export default {
 		isha: "Isyak"
 	},
 	close: "Tutup",
-	settings: "penetapan",
+	settings: "Penetapan",
 	locationSelector: "pilih lokasi",
 	prayerTimeEstimate: "ke",
 	changeLang: "Tukar bahasa",
 	setDarkMode: "Pilih mod gelap",
 	setMinimal: "Pilih mod minimal",
 	setLocation: "Pilih Lokasi",
-	credit: "Adhan App",
+	credit: "AA",
 	subcredit: "kod di Malaysia",
 	enableNotification: "Tunjuk notifikasi"
 };

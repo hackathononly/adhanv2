@@ -20,14 +20,14 @@ export default {
 		isha: "Isha"
 	},
 	close: "Close",
-	settings: "settings",
+	settings: "Settings",
 	locationSelector: "select location",
 	prayerTimeEstimate: "left until",
 	changeLang: "Change Language",
 	setDarkMode: "Select dark mode",
 	setMinimal: "Select minimal mode",
 	setLocation: "Select Location",
-	credit: "Adhan App",
+	credit: "AA",
 	subcredit: "coded in Malaysia",
 	enableNotification: "Enable notification"
 };

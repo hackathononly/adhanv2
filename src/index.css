@@ -4,11 +4,12 @@ body {
 	height: 100%;
 }
 :root {
-	/* --link: #00a152; */
 	--link: #1d1da3;
 	--main-green: #69e781;
+	--main-green-dark: #00a152;
 	--main-white: #ffffff;
 	--main-black: #000000;
+	--main-transparent: transparent;
 	--main-darkMode: #333333;
 	--main-grey: #ccc;
 	--main-black-gradient-half: rgba(0, 0, 0, 0.5);
@@ -100,9 +101,11 @@ article {
 } */
 
 footer {
+	position: relative;
 	/* padding: 0 0 6px; */
-	text-align: center;
-	margin-top: 24px;
+	/* text-align: center; */
+	text-align: left;
+	/* margin-top: 24px; */
 	min-height: 2em;
 	display: flex;
 	flex-direction: column;
@@ -115,9 +118,10 @@ footer small {
 	font-weight: bold;
 	/* background-color: var(--main-black-gradient-half); */
 }
-.isMinimal footer {
+/* .isMinimal footer {
+	position: relative;
 	margin-top: 0;
-}
+} */
 /* Custom CSS */
 
 header {
@@ -128,7 +132,9 @@ header {
 .isMinimal header {
 	padding: 0;
 	display: flex;
-	height: calc(100vh - 2em);
+	margin-top: -2em;
+	/* height: calc(100vh - 2em); */
+	height: 100vh;
 	text-align: center;
 	flex-direction: column;
 	justify-content: center;
@@ -161,7 +167,9 @@ header {
 .settingsContainer {
 	display: flex;
 	flex-wrap: wrap;
-	margin-bottom: 18px;
+	margin-bottom: 32px;
+	font-size: 80%;
+	padding: 0 30px;
 }
 .settingsContainer input {
 	width: 20px;
@@ -175,7 +183,8 @@ header {
 .settingsContainer hr {
 	margin: 14px 0;
 	background-color: var(--main-white);
-	border-color: var(--main-white);
+	/* border-color: var(--main-white); */
+	border-color: var(--main-transparent);
 	flex-basis: 100%;
 }
 /* .locationIcon {

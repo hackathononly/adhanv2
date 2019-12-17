@@ -19,9 +19,9 @@ const App = () => {
 			locationSettings={Constants.locationSettings}
 		>
 			<ThemeSelector>
+				<Credit />
 				<Header />
 				<Body />
-				<Credit />
 			</ThemeSelector>
 		</StateProvider>
 	);

@@ -12,12 +12,13 @@
 	width: 100%;
 }
 .home {
-	margin-bottom: 20px;
+	margin-bottom: 12px;
 }
 .home a:before {
 	content: "←";
 	width: 20px;
 	height: 20px;
+	margin-right: 12px;
 }
 .locationSelector > ul {
 	left: 0;
@@ -25,9 +26,9 @@
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 }
-.locationSelector > ul li {
+/* .locationSelector > ul li {
 	padding: 0 0 18px;
-}
+} */
 .locationSelector li ul {
 	top: 0;
 	left: 100%;
@@ -40,8 +41,17 @@
 	transition-duration: 300ms;
 	left: -100%;
 }
+.locationSelector a {
+	font-size: 80%;
+	padding: 10px 32px;
+	display: block;
+}
+.locationSelector a:hover {
+	cursor: pointer;
+}
 .locationSelector a.active {
-	background-color: var(--main-green);
+	background-color: var(--main-grey);
+	/* background-color: var(--main-green); */
 }
 .locationSelector ul.stateActive {
 	display: block;

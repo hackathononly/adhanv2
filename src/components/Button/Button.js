@@ -1,13 +1,18 @@
 import React from "react";
 import style from "./button.module.css";
 import { useGetTranslation } from "../../customHook/useGetTranslation";
+import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
 
 const Button = ({ type, isShowing, children }) => {
-	const { getTranslation: translate } = useGetTranslation();
+	const { getTranslation: translate } = useGetTranslation(),
+		{ isDarkMode } = useChangeUserSettings();
 	return (
 		<div
 			className={[
-				type ? `${style.btn} ${style[type]}` : `${style.btn} }`
+				isDarkMode ? style.isDarkMode : null,
+				type
+					? `${style.btn} ${style[isDarkMode]} ${style[type]}`
+					: `${style.btn} ${style[isDarkMode]}`
 			].join(" ")}
 		>
 			<button

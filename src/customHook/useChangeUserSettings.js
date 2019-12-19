@@ -15,6 +15,9 @@ export const useChangeUserSettings = () => {
 		);
 	}
 	function toggleUserSettingsModal() {
+		userSettings.showModal
+			? (document.body.style.overflow = "auto")
+			: (document.body.style.overflow = "hidden");
 		return setUserSettings("showModal", !userSettings.showModal);
 	}
 	function setDarkMode() {

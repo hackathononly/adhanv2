@@ -8,7 +8,10 @@ import {
 	LocationSelector,
 	LanguageSelector
 } from "../../index";
-import { LocationIcon, SettingsIcon } from "../../index";
+import {
+	LocationIcon
+	// SettingsIcon
+} from "../../index";
 import { useGetTranslation } from "../../customHook/useGetTranslation";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
 import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
@@ -117,12 +120,15 @@ export const Header = () => {
 					<label htmlFor="notification">
 						{translate.enableNotification}
 					</label>
+					<hr />
+					<h3>{translate.changeLang}</h3>
+					<hr />
+					<LanguageSelector
+						langList={languages}
+						setLang={setLang}
+						selectedLang={selectedLang}
+					/>
 				</div>
-				<LanguageSelector
-					langList={languages}
-					setLang={setLang}
-					selectedLang={selectedLang}
-				/>
 			</Modal>
 			<PrayerCountdown
 				timeToNextPrayer={timeToNextPrayer}

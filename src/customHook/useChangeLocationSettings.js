@@ -13,6 +13,10 @@ export const useChangeLocationSettings = () => {
 			initialState.waktuSolatStateCode;
 
 	function toggleLocationModal() {
+		locationSettings.showModal
+			? (document.body.style.overflow = "auto")
+			: (document.body.style.overflow = "hidden");
+
 		setLocationSettings({
 			showModal: !locationSettings.showModal
 		});

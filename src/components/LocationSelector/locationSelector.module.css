@@ -42,8 +42,8 @@
 	left: -100%;
 }
 .locationSelector a {
-	font-size: 80%;
-	padding: 10px 32px;
+	font-size: 1.1rem;
+	padding: 8px 32px;
 	display: block;
 }
 .locationSelector a:hover {

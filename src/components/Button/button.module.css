@@ -1,20 +1,5 @@
 .btn button {
-	/* position: absolute; */
-	/* top: 50%;
-	left: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	-o-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%); */
-	/* font-family: inherit;
-	background-color: var(--main-white);
-	font-size: 21px;
-	width: 200px;
-	overflow: hidden;
-	outline: 0; */
 	border: 0;
-	/* padding: 15px 25px; */
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	-webkit-transition: all 0.4s;
@@ -45,7 +30,6 @@
 }
 .close button:hover path,
 .settings button:hover path {
-	/* fill: var(--main-green-dark); */
 	fill: var(--main-black-gradient-half);
 }
 .isDarkMode.settings button:hover path {
@@ -61,7 +45,7 @@
 	border-radius: 10px;
 }
 .settings button {
-	/* top: 4px; */
+	top: 20px;
 	right: 0;
 	padding: 0;
 }

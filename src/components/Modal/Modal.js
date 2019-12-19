@@ -7,13 +7,15 @@ const Modal = ({ hide, isShowing, children }) =>
 	isShowing
 		? ReactDOM.createPortal(
 				<>
-					<div className={[style.modal, style.open].join(" ")}>
-						<div className={style.content}>
-							<div className={style.container}>
-								<Button type="close" isShowing={hide}>
-									<CloseIcon width="30" height="30" />
-								</Button>
-								{children}
+					<div className={style.overlay}>
+						<div className={[style.modal, style.open].join(" ")}>
+							<div className={style.content}>
+								<div className={style.container}>
+									<Button type="close" isShowing={hide}>
+										<CloseIcon width="30" height="30" />
+									</Button>
+									{children}
+								</div>
 							</div>
 						</div>
 					</div>

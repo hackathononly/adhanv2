@@ -1,4 +1,4 @@
-.container {
+/* .container {
 	background: var(--main-black);
 	padding: 14px 0;
 	position: absolute;
@@ -6,21 +6,31 @@
 	right: 0;
 	bottom: 0;
 	font-size: 80%;
+} */
+.container {
+	width: 100%;
 }
 .container ul {
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 }
-.container li {
+/* .container li {
 	margin-right: 20px;
-}
+} */
 .container a {
-	color: var(--main-white);
-	text-decoration: none;
+	/* color: var(--main-white);
+	text-decoration: none; */
+	display: block;
+	padding: 8px 30px;
+	margin-left: -30px;
+	margin-right: -30px;
+	text-transform: capitalize;
 }
 .container a:hover {
 	text-decoration: underline;
 }
 .container a.active {
-	color: var(--main-green);
+	/* color: var(--main-green); */
+	background-color: var(--main-grey);
 }

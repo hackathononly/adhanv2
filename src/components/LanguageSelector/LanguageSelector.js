@@ -3,7 +3,8 @@ import style from "./languageSelector.module.css";
 
 const LanguageSelector = ({ langList, setLang, selectedLang }) => {
 	return (
-		<section className={[style.container, "clearfix"].join(" ")}>
+		// <section className={[style.container, "clearfix"].join(" ")}>
+		<section className={style.container}>
 			<ul>
 				{Object.keys(langList || {}).map(key => (
 					<li key={key}>

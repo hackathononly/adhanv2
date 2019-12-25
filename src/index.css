@@ -14,6 +14,24 @@ body {
 	--main-grey: #e1e1e1;
 	--main-black-gradient-half: rgba(0, 0, 0, 0.5);
 }
+.loadingBarContain {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	/* background-image: url("../src/images/loadingBar.svg"); */
+	background-repeat: no-repeat;
+	background-color: var(--main-green);
+	background-position: 0 0;
+	z-index: 8;
+	font-size: 1rem;
+	background-size: 50%;
+	padding: 10px 0 10px 40px;
+}
+.enableDarkMode .loadingBarContain {
+	background-color: var(--main-darkMode);
+}
 /* h1 {
 	font-size: 5.9vw;
 }
@@ -70,7 +88,12 @@ article {
 	grid-gap: 60px;
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
-
+.loadingBarContainer,
+footer,
+article,
+header {
+	position: relative;
+}
 footer {
 	position: relative;
 	text-align: left;
@@ -116,9 +139,6 @@ header {
 	color: var(--main-black);
 }
 .enableDarkMode button.settings path {
-	fill: var(--main-green);
-}
-.enableDarkMode #prayerTimeList svg path {
 	fill: var(--main-green);
 }
 /* @end Dark Mode Colors */

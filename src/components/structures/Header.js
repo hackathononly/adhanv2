@@ -59,42 +59,6 @@ export const Header = () => {
 				hide={toggleUserSettingsModal}
 				isShowing={showUserSettingsModal}
 			>
-				{/*
-				<ul>
-					<li>
-						{" "}
-						<Checkbox
-							id={"darkMode"}
-							isSet={setDarkMode}
-							isChecked={isDarkMode}
-						/>
-						<label htmlFor="darkMode">
-							{translate.setDarkMode}
-						</label>
-					</li>
-					<li>
-						<Checkbox
-							id={"minimalMode"}
-							isSet={setMinimal}
-							isChecked={isMinimal}
-						/>
-						<label htmlFor="minimalMode">
-							{translate.setMinimal}
-						</label>
-					</li>
-					<li>
-						{" "}
-						<Checkbox
-							id={"notification"}
-							isSet={enableNotification}
-							isChecked={isNotificationEnabled}
-						/>
-						<label htmlFor="notification">
-							{translate.enableNotification}
-						</label>
-					</li>
-				</ul>
-				*/}
 				<div className={"settingsContainer"}>
 					<h3>{translate.settings}</h3>
 					<hr />

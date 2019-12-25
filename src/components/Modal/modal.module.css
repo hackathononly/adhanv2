@@ -99,6 +99,7 @@
 	right: 0;
 	bottom: 0;
 	top: 0;
+	z-index: 8;
 	background-color: var(--main-black-gradient-half);
 }
 .modal {
@@ -119,7 +120,7 @@
 	-moz-transition: all 0.3s;
 	-o-transition: all 0.3s;
 	transition: all 0.3s; */
-	z-index: 1000;
+	z-index: 10;
 	background-color: var(--main-white);
 	/* width: 100%; */
 	width: 90%; /* 10% occupied by padding */
@@ -225,7 +226,7 @@
 	}
 } */
 
-.bounceIn {
+/* .bounceIn {
 	animation-name: bounceIn;
 	animation-duration: 250ms;
 }
@@ -252,6 +253,6 @@
 		opacity: 1;
 		transform: scale(1);
 	}
-}
+} */
 
 /* end Popup.less */

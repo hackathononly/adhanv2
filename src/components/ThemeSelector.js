@@ -1,4 +1,5 @@
 import React from "react";
+import { LoadingBar } from "../index";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
 
 const ThemeSelector = React.memo(({ children }) => {
@@ -11,7 +12,10 @@ const ThemeSelector = React.memo(({ children }) => {
 				"wrapper"
 			].join(" ")}
 		>
-			{children}
+			<div className="loadingBarContainer">
+				<LoadingBar />
+				{children}
+			</div>
 		</div>
 	);
 });

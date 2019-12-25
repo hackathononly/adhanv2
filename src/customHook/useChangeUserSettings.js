@@ -6,6 +6,7 @@ export const useChangeUserSettings = () => {
 		selectedLang = userSettings.selectedLang,
 		isDarkMode = userSettings.darkMode,
 		isMinimal = userSettings.minimalMode,
+		isLoadingBarShown = userSettings.showLoadingBar,
 		isNotificationEnabled = userSettings.enableNotification;
 
 	function enableNotification() {
@@ -38,6 +39,7 @@ export const useChangeUserSettings = () => {
 	}
 	return {
 		setUserSettings,
+		isLoadingBarShown,
 		isMinimal,
 		setMinimal,
 		isDarkMode,

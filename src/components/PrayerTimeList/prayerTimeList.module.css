@@ -17,27 +17,19 @@
 	.notificationDisable {
 	display: block;
 }
+
+.notificationDisable path {
+	fill: var(--main-black-gradient-half);
+}
+:global(.enableDarkMode) .notification path {
+	fill: var(--main-green);
+}
+:global(.enableDarkMode) .notificationDisable path {
+	fill: var(--main-green-dark);
+}
 .enableNotification li {
 	padding-left: 50px;
 }
-/* .enableNotification
-	input[type="checkbox"]:checked
-	+ label
-	.enableDarkMode.notificationDisable
-	path {
-	fill: var(--main-green);
-}
-.enableNotification
-	input[type="checkbox"]:checked
-	+ label
-	.notificationDisable
-	path {
-	fill: var(--main-black);
-}
-.enableDarkMode.salahTime,
-.container input[type="checkbox"]:checked + label .salahTime {
-	color: var(--main-black);
-} */
 .container label {
 	display: flex;
 	padding: 20px 0;

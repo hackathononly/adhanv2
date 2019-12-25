@@ -56,7 +56,8 @@ const Constants = {
 		showModal: false,
 		minimalMode: false,
 		selectedLang: "bahasa",
-		enableNotification: false
+		enableNotification: false,
+		showLoadingBar: false
 	},
 	locationSettings: {
 		isNested: false,
@@ -68,7 +69,7 @@ const Constants = {
 		nextPrayer: "",
 		timeToNextPrayer: "",
 		// silenced: [],
-		silenced: ["fajr", "syuruk", "asr"],
+		silenced: [],
 		list: {},
 		serverTime: "",
 		machineTime: "",

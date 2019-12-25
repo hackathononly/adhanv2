@@ -2,6 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import { useStateValue } from "../state";
 import { useGetTranslation } from "../customHook/useGetTranslation";
+import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
 import Constants from "../constants";
 
 export const useSetPrayerTimes = () => {
@@ -10,6 +11,7 @@ export const useSetPrayerTimes = () => {
 			dispatch
 		] = useStateValue(),
 		{ getTranslation: translate } = useGetTranslation(),
+		{ setUserSettings } = useChangeUserSettings(),
 		selectedLang = userSettings.selectedLang;
 
 	const serverTime = prayerTimes.serverTime,
@@ -19,40 +21,83 @@ export const useSetPrayerTimes = () => {
 		solatTime = Constants.waktuSolatURL(
 			locationSettings.selectedStateCode ||
 				Constants.defaultSettings.waktuSolatStateCode
-		);
+		),
+		getSilencedTime = prayerTimes.silenced,
+		prayerTimeList = prayerTimes.list;
+
+	function storeAndCalc() {
+		setUserSettings("showLoadingBar", true);
+
+		// axios.get("sampledata/daily.json").then(obj => {
+		axios.get(solatTime).then(obj => {
+			const response = obj.data,
+				time = response.prayerTime[0],
+				serverTime = response.serverTime
+					.substr(0, response.serverTime.indexOf(" "))
+					.split("-")
+					.reverse()
+					.join("-"),
+				datas = {
+					silenced: ["dhuhr", "isha"],
+					list: {
+						fajr: time.fajr,
+						syuruk: time.syuruk,
+						dhuhr: time.dhuhr,
+						asr: time.asr,
+						maghrib: time.maghrib,
+						isha: time.isha
+					},
+					serverTime: time.date.split("-").join(" "),
+					serverDate: response.serverTime.substr(
+						0,
+						response.serverTime.indexOf(" ")
+					),
+					timeToNextPrayer: "1 jam 15 min",
+					nextPrayer: "Maghrib"
+				};
+
+			setPrayerTimes(datas);
+			getHijriFullDate(serverTime);
+
+			// calcNextPrayer(response.serverTime);
+
+			// setPrayerTimes({
+			// 	timeToNextPrayer: "2 jam 15 min",
+			// 	nextPrayer: "Maghrib"
+			// });
+		});
+	}
 
 	function getPrayerTimeList() {
-		const prayerTimeList = prayerTimes.list;
+		// calculate prayer time in AMPM -> 05:56
 		return Object.keys(prayerTimeList || {}).reduce((result, key) => {
-			const waktuSolat = translate.prayerList[key],
-				fullDate = prayerTimes.serverDate + " " + prayerTimeList[key];
-			// fullDate =
-			// 	prayerTimes.serverDate +
-			// 	"T" +
-			// 	prayerTimeList[key] +
-			// 	".000Z";
-			// fullDate = date.replace(/ /g, "T");
-			// fullDate = new Date(date);
-			// console.log(moment(new Date(date)).format());
-			// console.log(fullDate, a.replace(/ /g, "T"));
-			// console.log(moment("1981-09-24T05:00:00.000Z").format("hh:mm A"));
-			// console.log(typeof fullDate, typeof "1981-09-24T05:00:00.000Z");
-			// console.log(fullDate, "2019-12-19T16:25:00.000Z");
-
-			// result[waktuSolat] = moment(
-			// 	new Date(fullDate.replace(/ /g, "T")) // replace space in dateString with "T"
-			// ).format("hh:mm A");
-			// result[waktuSolat] = moment(fullDate).format("hh:mm A");
-			result[waktuSolat] = moment(fullDate).format("hh:mm A");
+			const waktuSolat = translate.prayerList[key];
+			result[waktuSolat] = moment(
+				`${prayerTimes.serverDate} ${prayerTimeList[key]}`,
+				"YYYY-MM-DD HH:mm:ss"
+			).format("hh:mm A");
 			return result;
 		}, {});
 	}
 
-	function setSilencedTime(val) {
-		return setPrayerTimes({ silenced: val });
+	function setSilencedTime(prayerTime) {
+		const isPrayerTimeSilenced = getSilencedTime.indexOf(prayerTime);
+
+		if (isPrayerTimeSilenced === -1) {
+			// prayerTime does not silenced
+			setPrayerTimes({
+				silenced: [...getSilencedTime, prayerTime]
+			});
+		} else {
+			// prayerTime already silenced
+			getSilencedTime.splice(isPrayerTimeSilenced, 1);
+			setPrayerTimes({
+				silenced: [...getSilencedTime]
+			});
+		}
 	}
 
-	function calcNextPrayer(time) {
+	/* function calcNextPrayer(time) {
 		// var firstDate = moment();
 		// var secondDate = moment(time);
 		// var secondDate = moment("2018-03-19");
@@ -70,7 +115,7 @@ export const useSetPrayerTimes = () => {
 			timeToNextPrayer: "2 jam 15 min",
 			nextPrayer: "Maghrib"
 		});
-	}
+	} */
 
 	function getHijriFullDate(serverTime) {
 		const reverseServerTime = serverTime
@@ -84,33 +129,32 @@ export const useSetPrayerTimes = () => {
 		axios
 			.all([axios.get(islamicDateAPI), axios.get(islamicDateAPIArabic)])
 			.then(obj => {
-				const hijriDate = obj[0].data.takwim[reverseServerTime], // Jakim
-					hijriDateArabic = obj[1].data.data.hijri, // Aladhan
-					jakimDate = hijriDate.split("-"); // [ "1441", "04", "19" ]
-
-				const multiLanguageHijriDatesObj = Object.keys(
-					languages || {}
-				).map(keys => {
-					const hijriFullDate = [
-						// hijriDateArabic.day,
-						jakimDate[2],
-						keys === "arabic"
-							? hijriDateArabic.month.ar
-							: Constants.islamicMonth[jakimDate[1]],
-						hijriDateArabic.year
-					].join(" ");
-					return { [keys]: hijriFullDate };
-				});
-				const multiLanguageHijriDates = multiLanguageHijriDatesObj.reduce(
-					(result, key) => {
+				const hijriDate = obj[0].data.takwim[reverseServerTime], // Jakim Obj
+					hijriDateArabic = obj[1].data.data.hijri, // Aladhan Obj
+					jakimYear = hijriDate.split("-")[1], // [ "1441" ]
+					jakimDay = hijriDate.split("-")[2]; // [ "19" ]
+				const multiLanguageHijriDates = Object.keys(languages || {})
+					.map(keys => {
+						const hijriFullDate = [
+							jakimDay,
+							keys === "arabic"
+								? hijriDateArabic.month.ar
+								: Constants.islamicMonth[jakimYear],
+							hijriDateArabic.year
+						].join(" ");
+						return { [keys]: hijriFullDate };
+					})
+					.reduce((result, key) => {
 						Object.keys(key).forEach(lang => {
 							result[lang] = key[lang];
 						});
 						return result;
-					},
-					{}
-				);
-				return setPrayerTimes({ hijriDate: multiLanguageHijriDates });
+					}, {});
+
+				setPrayerTimes({
+					hijriDate: multiLanguageHijriDates
+				});
+				setUserSettings("showLoadingBar", false);
 			}, []);
 	}
 
@@ -131,9 +175,12 @@ export const useSetPrayerTimes = () => {
 		hijriDate,
 		getHijriFullDate,
 		serverTime,
-		prayerTimeList: getPrayerTimeList(),
-		calcNextPrayer, // set nextPrayer, timeToNextPrayer
+		prayerTimeList,
+		getPrayerTimeList: getPrayerTimeList(),
+		// calcNextPrayer, // set nextPrayer, timeToNextPrayer
 		setPrayerTimes,
-		setSilencedTime
+		setSilencedTime,
+		getSilencedTime,
+		storeAndCalc
 	};
 };

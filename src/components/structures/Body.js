@@ -1,5 +1,8 @@
-import axios from "axios";
-import React, { useEffect } from "react";
+import React, {
+	// useEffect,
+	useMemo
+} from "react";
+// import axios from "axios";
 import {
 	// Tazkirah,
 	PrayerTimeList
@@ -9,19 +12,29 @@ import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
 // import { useGetTranslation } from "../../customHook/useGetTranslation";
 
 export const Body = () => {
-	const { isMinimal, isNotificationEnabled } = useChangeUserSettings(),
+	const {
+			isMinimal,
+			isNotificationEnabled
+			// setUserSettings
+		} = useChangeUserSettings(),
 		{
 			solatTime,
-			prayerTimeList,
-			setPrayerTimes,
-			calcNextPrayer,
+			storeAndCalc,
+			// prayerTimeList,
+			getPrayerTimeList,
 			setSilencedTime,
-			getHijriFullDate
+			getSilencedTime
+			// setPrayerTimes
 		} = useSetPrayerTimes();
 	// { getRandomTazkirah } = useGetTranslation();
 
-	useEffect(() => {
-		// axios.get("sampledata/daily.json").then(obj => {
+	// useEffect(() => {
+	// 	storeAndCalc();
+	// }, [solatTime]);
+	useMemo(() => storeAndCalc(solatTime), [solatTime]);
+	// useMemo(() => expensiveOperation(solatTime), [solatTime]);
+
+	/* 	function expensiveOperation() {
 		axios.get(solatTime).then(obj => {
 			const response = obj.data,
 				time = response.prayerTime[0],
@@ -31,7 +44,7 @@ export const Body = () => {
 					.reverse()
 					.join("-"),
 				datas = {
-					silenced: [],
+					silenced: ["fajr", "asr"],
 					list: {
 						fajr: time.fajr,
 						syuruk: time.syuruk,
@@ -44,20 +57,29 @@ export const Body = () => {
 					serverDate: response.serverTime.substr(
 						0,
 						response.serverTime.indexOf(" ")
-					)
+					),
+					timeToNextPrayer: "1 jam 15 min",
+					nextPrayer: "Maghrib"
 				};
-			setPrayerTimes(datas);
-			getHijriFullDate(serverTime);
-			calcNextPrayer(response.serverTime);
-		});
-	}, [solatTime]);
 
+			setPrayerTimes(datas); // save datas
+			// getHijriFullDate(serverTime);
+			// calcNextPrayer(response.serverTime);
+
+			// setPrayerTimes({
+			// 	timeToNextPrayer: "2 jam 15 min",
+			// 	nextPrayer: "Maghrib"
+			// });
+		});
+	}
+ */
 	return isMinimal ? null : (
 		<article>
 			<PrayerTimeList
-				isNotificationEnabled={isNotificationEnabled}
-				prayerTimeList={prayerTimeList}
+				prayerTimeList={getPrayerTimeList}
 				setSilencedTime={setSilencedTime}
+				getSilencedTime={getSilencedTime}
+				isNotificationEnabled={isNotificationEnabled}
 			/>
 			{/* <Tazkirah description={getRandomTazkirah} /> */}
 		</article>

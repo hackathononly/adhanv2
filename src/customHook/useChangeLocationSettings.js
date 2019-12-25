@@ -22,6 +22,7 @@ export const useChangeLocationSettings = () => {
 		});
 	}
 	function setStateName(val) {
+		document.querySelector(".locationsContainer").scrollIntoView(); // jump to top in modal
 		setLocationSettings({
 			isNested: !locationSettings.isNested,
 			selectedState: val,

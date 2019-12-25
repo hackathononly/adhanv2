@@ -23,6 +23,8 @@ import { ReactComponent as LocationIcon } from "./images/icon-location.svg";
 import { ReactComponent as SettingsIcon } from "./images/settingsIcon.svg";
 // modal close icon
 import { ReactComponent as CloseIcon } from "./images/closeIcon.svg";
+// loadingBar
+import { ReactComponent as LoadingBarIcon } from "./images/loadingBar.svg";
 
 /* Components */
 import Credit from "./components/Credit";
@@ -32,6 +34,7 @@ import Checkbox from "./components/Checkbox";
 import Tazkirah from "./components/Tazkirah/Tazkirah";
 import DatePicker from "./components/DatePicker/DatePicker";
 import ThemeSelector from "./components/ThemeSelector";
+import LoadingBar from "./components/LoadingBar/LoadingBar";
 import PrayerTimeList from "./components/PrayerTimeList/PrayerTimeList";
 import PrayerCountdown from "./components/PrayerCountdown/PrayerCountdown";
 import LocationSelector from "./components/LocationSelector/LocationSelector";
@@ -44,7 +47,8 @@ export {
 	NotificationDisable,
 	LocationIcon,
 	SettingsIcon,
-	CloseIcon
+	CloseIcon,
+	LoadingBarIcon
 };
 export {
 	Modal,
@@ -54,6 +58,7 @@ export {
 	Tazkirah,
 	DatePicker,
 	ThemeSelector,
+	LoadingBar,
 	PrayerTimeList,
 	PrayerCountdown,
 	LocationSelector,

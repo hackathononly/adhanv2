@@ -1,15 +1,13 @@
 import React from "react";
 import style from "./locationSelector.module.css";
-import { useGetTranslation } from "../../customHook/useGetTranslation";
 
 const LocationSelector = ({
+	translate,
 	setStateName,
 	setStateCode,
 	locations,
 	locationSettings
 }) => {
-	const { getTranslation: translation } = useGetTranslation();
-
 	return (
 		<div className={style.locationSelector}>
 			<ul
@@ -42,9 +40,9 @@ const LocationSelector = ({
 								<a
 									href="/#"
 									onClick={() => setStateName(state)}
-									title={translation.backDesc}
+									title={translate.backDesc}
 								>
-									{translation.back}
+									{translate.back}
 								</a>
 							</li>
 							{Object.keys(locations[state] || {}).map(
@@ -60,7 +58,10 @@ const LocationSelector = ({
 													: null
 											}
 											onClick={() =>
-												setStateCode(subitem)
+												setStateCode(
+													subitem,
+													locations[state][subitem]
+												)
 											}
 										>
 											{locations[state][subitem]}

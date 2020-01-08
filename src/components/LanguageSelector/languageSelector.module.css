@@ -1,26 +1,13 @@
 /* .container {
-	background: var(--main-black);
-	padding: 14px 0;
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	font-size: 80%;
-} */
-.container {
 	width: 100%;
+	margin-top: 18px;
 }
 .container ul {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 }
-/* .container li {
-	margin-right: 20px;
-} */
 .container a {
-	/* color: var(--main-white);
-	text-decoration: none; */
 	display: block;
 	padding: 8px 30px;
 	margin-left: -30px;
@@ -29,8 +16,36 @@
 }
 .container a:hover {
 	text-decoration: underline;
+}*/
+/*
+.container {
+	box-shadow: 0 6px 30px var(--main-black-gradient-half);
+} */
+.container{
+	left: 100px
 }
-.container a.active {
-	/* color: var(--main-green); */
+.container a {
+	/* color: var(--main-grey-solid); */
+	padding: 4px 12px;
+	margin-left: -12px;
+	margin-right: -12px;
+}
+.active {
 	background-color: var(--main-grey);
 }
+/* .container li {
+	padding: 4px;
+} */
+/* :global(.enableDarkMode) .container,
+:global(.enableDarkMode) .container ul {
+	background-color: var(--main-green);
+}
+:global(.enableDarkMode) .container a {
+	color: var(--main-black);
+} */
+/* .container {
+	position: absolute;
+}
+.container ul {
+	background-color: var(--main-white);
+} */

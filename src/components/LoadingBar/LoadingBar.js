@@ -1,18 +1,13 @@
 import React from "react";
-// import "../../../src/index.css";
 import style from "./loadingBar.module.css";
 import { LoadingBarIcon } from "../../index";
-import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
 
-const LoadingBar = () => {
-	const { isLoadingBarShown } = useChangeUserSettings();
-	return isLoadingBarShown ? (
-		/* 	<div className={["container", "loadingBarContain"].join(" ")}> */
-		// <div className={style.loadingBarContain}>
-		<div className={"loadingBarContain"}>
+const LoadingBar = ({ isShowing }) => {
+	return isShowing ? (
+		<div className={style.loadingBarContainer}>
 			<div className={style.spinner}>
 				<LoadingBarIcon />
-				{/* Loading */}
+				Loading
 			</div>
 		</div>
 	) : null;

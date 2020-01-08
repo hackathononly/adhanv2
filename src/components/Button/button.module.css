@@ -1,7 +1,7 @@
 .btn button {
 	border: 0;
 	text-transform: uppercase;
-	letter-spacing: 1px;
+	/* letter-spacing: 1px; */
 	-webkit-transition: all 0.4s;
 	-moz-transition: all 0.4s;
 	-o-transition: all 0.4s;
@@ -12,6 +12,7 @@
 	border: 1px solid var(--main-grey);
 	position: relative;
 	background: none;
+	font-family: "Roboto", sans-serif;
 }
 .btn button svg {
 	width: 24px;
@@ -24,6 +25,23 @@
 }
 
 /* Custom Styling */
+.close button,
+.settings button {
+	/* top: 10px;
+	right: 10px; */
+	top: 0;
+	right: 0;
+	position: absolute;
+	border-color: var(--main-transparent);
+	/* padding: 6px 8px; */
+	padding: 6px;
+	border-radius: 10px;
+}
+.settings button {
+	top: 20px;
+	right: 0;
+	padding: 0;
+}
 .close button:hover,
 .settings button:hover {
 	box-shadow: none;
@@ -32,36 +50,31 @@
 .settings button:hover path {
 	fill: var(--main-black-gradient-half);
 }
-.isDarkMode.settings button:hover path {
+:global(.enableDarkMode) .settings path {
+	fill: var(--main-green);
+}
+:global(.enableDarkMode) .settings:hover path {
 	fill: var(--main-green-dark);
 }
-.close button,
-.settings button {
-	top: 10px;
-	right: 10px;
-	position: absolute;
-	border-color: var(--main-transparent);
-	padding: 6px 8px;
-	border-radius: 10px;
-}
-.settings button {
-	top: 20px;
-	right: 0;
-	padding: 0;
-}
+
 .locationSelector {
-	margin: 18px 0;
+	margin: 36px 0 36px;
 	display: flex;
 	justify-content: center;
 }
 .locationSelector button {
-	background-color: var(--main-black-gradient-half);
+	background: var(--main-green);
+	/* background: linear-gradient(
+		180deg,
+		rgba(105, 231, 129, 1) 0%,
+		rgba(0, 161, 82, 1) 100%
+	); */
+	color: var(--main-black);
 	border-radius: 100px;
 	display: flex;
 	padding: 12px 32px 12px 48px;
 	border-color: var(--main-transparent);
-	color: var(--main-white);
-	font-size: 1rem;
+	font-size: 0.8em;
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
@@ -76,6 +89,14 @@
 	left: 10px;
 }
 .locationSelector button path {
-	fill: var(--main-white);
+	/* fill: var(--main-white); */
+	fill: var(--main-black);
 }
+/* :global(.enableDarkMode .locationSelector) path {
+	fill: var(--main-black);
+} */
+/* :global(.enableDarkMode .locationSelector) {
+	background-color: var(--main-green);
+	color: var(--main-black);
+} */
 /* @end Custom Styling */

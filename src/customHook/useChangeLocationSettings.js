@@ -8,6 +8,12 @@ export const useChangeLocationSettings = () => {
 		showLocationModal = locationSettings.showModal,
 		getSelectedState =
 			locationSettings.selectedState || initialState.waktuSolatState,
+		getSelectedMunicipal = locationSettings.selectedMunicipal
+			.toString()
+			.slice(
+				0,
+				locationSettings.selectedMunicipal.toString().indexOf(",")
+			),
 		getSelectedStateCode =
 			locationSettings.selectedStateCode ||
 			initialState.waktuSolatStateCode;
@@ -22,10 +28,17 @@ export const useChangeLocationSettings = () => {
 		});
 	}
 	function setStateName(val) {
+		// document.querySelector(".settingsContainer").scrollIntoView(); // jump to top in modal
 		document.querySelector(".locationsContainer").scrollIntoView(); // jump to top in modal
+
 		setLocationSettings({
 			isNested: !locationSettings.isNested,
 			selectedState: val,
+			selectedMunicipal:
+				locationSettings.selectedMunicipal &&
+				locationSettings.selectedState === val
+					? locationSettings.selectedMunicipal
+					: Object.values(locations[val])[0], // when click on state name, get first state code value
 			selectedStateCode:
 				locationSettings.selectedStateCode &&
 				locationSettings.selectedState === val
@@ -35,6 +48,7 @@ export const useChangeLocationSettings = () => {
 	}
 	function setStateCode(val) {
 		setLocationSettings({
+			selectedMunicipal: locations[getSelectedState][val].toString(),
 			selectedStateCode: val
 		});
 	}
@@ -54,6 +68,7 @@ export const useChangeLocationSettings = () => {
 		setStateName,
 		getSelectedState,
 		getSelectedStateCode,
+		getSelectedMunicipal,
 		showLocationModal,
 		toggleLocationModal,
 		setLocationSettings

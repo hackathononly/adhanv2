@@ -1,15 +1,11 @@
-import React, {
-	// useEffect,
-	useMemo
-} from "react";
-// import axios from "axios";
+import React, { useMemo } from "react";
 import {
 	// Tazkirah,
 	PrayerTimeList
 } from "../../index";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
 import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
-// import { useGetTranslation } from "../../customHook/useGetTranslation";
+import { useGetTranslation } from "../../customHook/useGetTranslation";
 
 export const Body = () => {
 	const {
@@ -25,8 +21,8 @@ export const Body = () => {
 			setSilencedTime,
 			getSilencedTime
 			// setPrayerTimes
-		} = useSetPrayerTimes();
-	// { getRandomTazkirah } = useGetTranslation();
+		} = useSetPrayerTimes(),
+		{ getTranslation: translate } = useGetTranslation();
 
 	// useEffect(() => {
 	// 	storeAndCalc();
@@ -76,6 +72,7 @@ export const Body = () => {
 	return isMinimal ? null : (
 		<article>
 			<PrayerTimeList
+				translate={translate}
 				prayerTimeList={getPrayerTimeList}
 				setSilencedTime={setSilencedTime}
 				getSilencedTime={getSilencedTime}

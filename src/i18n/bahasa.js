@@ -20,7 +20,7 @@ export default {
 	},
 	close: "Tutup",
 	settings: "Penetapan",
-	locationSelector: "pilih lokasi",
+	locationSelector: "Pilih lokasi",
 	prayerTimeEstimate: "ke",
 	changeLang: "Tukar bahasa",
 	setDarkMode: "Pilih mod gelap",

@@ -131,15 +131,16 @@ export const useSetPrayerTimes = () => {
 			.then(obj => {
 				const hijriDate = obj[0].data.takwim[reverseServerTime], // Jakim Obj
 					hijriDateArabic = obj[1].data.data.hijri, // Aladhan Obj
-					jakimYear = hijriDate.split("-")[1], // [ "1441" ]
-					jakimDay = hijriDate.split("-")[2]; // [ "19" ]
+					jakimHijriMonth = hijriDate.split("-")[1], // [ "04" ]
+					jakimHijriDay = hijriDate.split("-")[2]; // [ "19" ]
+
 				const multiLanguageHijriDates = Object.keys(languages || {})
 					.map(keys => {
 						const hijriFullDate = [
-							jakimDay,
+							jakimHijriDay,
 							keys === "arabic"
 								? hijriDateArabic.month.ar
-								: Constants.islamicMonth[jakimYear],
+								: Constants.islamicMonth[jakimHijriMonth],
 							hijriDateArabic.year
 						].join(" ");
 						return { [keys]: hijriFullDate };

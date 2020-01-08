@@ -1,29 +1,49 @@
 import React from "react";
 import style from "./button.module.css";
-import { useGetTranslation } from "../../customHook/useGetTranslation";
-import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
+import { isObjectEmpty } from "../../helper";
 
-const Button = ({ type, isShowing, children }) => {
-	const { getTranslation: translate } = useGetTranslation(),
-		{ isDarkMode } = useChangeUserSettings();
-	return (
-		<div
-			className={[
-				isDarkMode ? style.isDarkMode : null,
-				type
-					? `${style.btn} ${style[isDarkMode]} ${style[type]}`
-					: `${style.btn} ${style[isDarkMode]}`
-			].join(" ")}
-		>
-			<button
-				className={type}
-				title={translate[type]}
-				onClick={isShowing}
+// import { useGetTranslation } from "../../customHook/useGetTranslation";
+// const Button = ({ type, isShowing, children }) => {
+// 	const { getTranslation: translate } = useGetTranslation();
+// 	return (
+// 		<div
+// 			className={[
+// 				type ? `${style.btn} ${style[type]}` : `${style.btn} `
+// 			].join(" ")}
+// 		>
+// 			<button
+// 				className={type}
+// 				title={translate[type]}
+// 				onClick={isShowing}
+// 			>
+// 				{children}
+// 			</button>
+// 		</div>
+// 	);
+// };
+
+const Button = (...props) => {
+	return Object.keys(props || {}).map(keys => {
+		const item = props[keys],
+			type = item.type;
+
+		return !isObjectEmpty(item) ? (
+			<div
+				className={[
+					type ? `${style.btn} ${style[type]}` : `${style.btn} `
+				].join(" ")}
 			>
-				{children}
-			</button>
-		</div>
-	);
+				<button
+					key={item}
+					className={type}
+					// title={item.translate[type]}
+					onClick={item.isShowing}
+				>
+					{item.children}
+				</button>
+			</div>
+		) : null;
+	});
 };
 
 export default Button;

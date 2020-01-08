@@ -3,7 +3,11 @@ import { LoadingBar } from "../index";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
 
 const ThemeSelector = React.memo(({ children }) => {
-	const { isMinimal, isDarkMode } = useChangeUserSettings();
+	const {
+		isMinimal,
+		isDarkMode,
+		isLoadingBarShown
+	} = useChangeUserSettings();
 	return (
 		<div
 			className={[
@@ -12,10 +16,10 @@ const ThemeSelector = React.memo(({ children }) => {
 				"wrapper"
 			].join(" ")}
 		>
-			<div className="loadingBarContainer">
-				<LoadingBar />
-				{children}
-			</div>
+			{/* <div className="loadingBarContainer"> */}
+			<LoadingBar isShowing={isLoadingBarShown} />
+			{children}
+			{/* </div> */}
 		</div>
 	);
 });

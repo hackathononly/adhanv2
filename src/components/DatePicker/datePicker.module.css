@@ -1,5 +1,19 @@
+.datePicker {
+	margin: 0 12px;
+}
+.datePicker small {
+	color: var(--main-black-gradient-half);
+}
+:global(.enableDarkMode) .datePicker {
+	color: var(--main-grey);
+}
+:global(.enableDarkMode) small {
+	color: var(--main-white);
+}
 .datePicker small {
 	display: block;
+	font-size: small;
+	text-transform: uppercase;
 }
 .datePicker .arabic {
 	/* unicode-bidi: bidi-override; */

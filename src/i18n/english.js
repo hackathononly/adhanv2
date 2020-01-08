@@ -21,7 +21,7 @@ export default {
 	},
 	close: "Close",
 	settings: "Settings",
-	locationSelector: "select location",
+	locationSelector: "Select location",
 	prayerTimeEstimate: "left until",
 	changeLang: "Change Language",
 	setDarkMode: "Select dark mode",

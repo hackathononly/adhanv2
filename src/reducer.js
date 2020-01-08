@@ -1,5 +1,5 @@
 export const Reducer = (state, action) => {
-	let locationSettingsState = {
+	const locationSettingsState = {
 			...state.locationSettings,
 			[action.mode]: action.value
 		},

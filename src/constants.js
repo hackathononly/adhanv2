@@ -28,20 +28,6 @@ const Constants = {
 		"11": "Zulqa'idah",
 		"12": "Zullhijjah"
 	},
-	islamicMonthArabic: {
-		"01": "Muharram",
-		"02": "Safar",
-		"03": "Rabi'ulawal",
-		"04": " رَبيع الثاني",
-		"05": "Jamadilawwal",
-		"06": "Jamadilakhir",
-		"07": "Rejab",
-		"08": "Sha'ban",
-		"09": "Ramadhan",
-		"10": "Syawal",
-		"11": "Zulqa'idah",
-		"12": "Zullhijjah"
-	},
 	languages: {
 		english: "english",
 		bahasa: "bahasa",
@@ -52,21 +38,25 @@ const Constants = {
 		waktuSolatStateCode: "WLY01"
 	},
 	userSettings: {
-		darkMode: false,
+		darkMode: true,
 		showModal: false,
+		showLanguageModal: false,
 		minimalMode: false,
 		selectedLang: "bahasa",
 		enableNotification: false,
 		showLoadingBar: false
+		// changeLanguage: false
 	},
 	locationSettings: {
 		isNested: false,
 		showModal: false,
 		selectedState: "",
+		selectedMunicipal: "",
 		selectedStateCode: ""
 	},
 	prayerTimes: {
 		nextPrayer: "",
+		currentPrayer: "asr",
 		timeToNextPrayer: "",
 		// silenced: [],
 		silenced: [],

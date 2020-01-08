@@ -1,20 +1,18 @@
 import React from "react";
 import { Checkbox, Notification, NotificationDisable } from "../../index";
-import { useGetTranslation } from "../../customHook/useGetTranslation";
 import style from "./prayerTimeList.module.css";
 
 const PrayerTimeList = React.memo(
 	({
+		translate,
 		prayerTimeList,
 		setSilencedTime,
 		getSilencedTime,
 		isNotificationEnabled
 	}) => {
-		const { getTranslation } = useGetTranslation();
-		const prayerTimeKey = Object.keys(getTranslation.prayerList); // get keys of prayerTimes, for defaultChecked purpose
+		const prayerTimeKey = Object.keys(translate.prayerList); // get keys of prayerTimes, for defaultChecked purpose : ['fajr', 'syuruk', 'dhuhr', 'asr'...]
 		return (
 			<section
-				id="prayerTimeList"
 				className={[
 					isNotificationEnabled ? style.enableNotification : null,
 					style.container
@@ -22,7 +20,14 @@ const PrayerTimeList = React.memo(
 			>
 				<ul>
 					{Object.keys(prayerTimeList || {}).map((item, index) => (
-						<li key={item}>
+						<li
+							key={item}
+							className={
+								prayerTimeKey[index] === "asr"
+									? style.currentPrayerTime
+									: null
+							}
+						>
 							<Checkbox
 								id={item}
 								isSet={() =>
@@ -57,7 +62,7 @@ const PrayerTimeList = React.memo(
 											/>
 									  ]
 									: null}
-								{item}
+								<span className={style.salahName}>{item}</span>
 								<span className={style.salahTime}>
 									{prayerTimeList[item]}
 								</span>

@@ -2,11 +2,11 @@ import React from "react";
 import {
 	Modal,
 	Button,
-	Checkbox,
+	// Checkbox,
 	DatePicker,
 	PrayerCountdown,
-	LocationSelector,
-	LanguageSelector
+	LocationSelector
+	// LanguageSelector
 } from "../../index";
 import {
 	LocationIcon
@@ -19,17 +19,19 @@ import { useChangeLocationSettings } from "../../customHook/useChangeLocationSet
 
 export const Header = () => {
 	const {
-			languages,
-			setLang,
+			// 		// languages,
+			// 		// setLang,
 			selectedLang,
-			isMinimal,
-			setMinimal,
-			isDarkMode,
-			setDarkMode,
-			enableNotification,
-			isNotificationEnabled,
-			showUserSettingsModal,
-			toggleUserSettingsModal
+			// 		changeLanguage,
+			// 		isLanguageChanged,
+			isMinimal
+			// 		setMinimal,
+			// 		isDarkMode,
+			// 		setDarkMode,
+			// 		enableNotification,
+			// 		isNotificationEnabled,
+			// 		showUserSettingsModal,
+			// 		toggleUserSettingsModal
 		} = useChangeUserSettings(),
 		{
 			locations,
@@ -39,7 +41,8 @@ export const Header = () => {
 			showLocationModal,
 			toggleLocationModal,
 			getSelectedState,
-			getSelectedStateCode
+			// getSelectedStateCode,
+			getSelectedMunicipal
 		} = useChangeLocationSettings(),
 		{
 			hijriDate,
@@ -54,7 +57,7 @@ export const Header = () => {
 			{/* <Button type="settings" isShowing={toggleUserSettingsModal}>
 				<SettingsIcon />
 			</Button> */}
-			<Modal
+			{/* <Modal
 				key={"userSettingsModal"}
 				hide={toggleUserSettingsModal}
 				isShowing={showUserSettingsModal}
@@ -62,60 +65,100 @@ export const Header = () => {
 				<div className={"settingsContainer"}>
 					<h3>{translate.settings}</h3>
 					<hr />
-					<Checkbox
-						id={"darkMode"}
-						isSet={setDarkMode}
-						isChecked={isDarkMode}
-					/>
-					<label htmlFor="darkMode">{translate.setDarkMode}</label>
-					<hr />
-					<Checkbox
-						id={"minimalMode"}
-						isSet={setMinimal}
-						isChecked={isMinimal}
-					/>
-					<label htmlFor="minimalMode">{translate.setMinimal}</label>
-					<hr />
-					<Checkbox
-						id={"notification"}
-						isSet={enableNotification}
-						isChecked={isNotificationEnabled}
-					/>
-					<label htmlFor="notification">
-						{translate.enableNotification}
+					<label htmlFor="darkMode">
+						<Checkbox
+							id={"darkMode"}
+							isSet={setDarkMode}
+							isChecked={isDarkMode}
+						/>
+						{translate.setDarkMode}
 					</label>
 					<hr />
-					<h3>{translate.changeLang}</h3>
+					<label htmlFor="minimalMode">
+						<Checkbox
+							id={"minimalMode"}
+							isSet={setMinimal}
+							isChecked={isMinimal}
+						/>
+						{translate.setMinimal}
+					</label>
 					<hr />
-					<LanguageSelector
+					<label htmlFor="notification">
+						<Checkbox
+							id={"notification"}
+							isSet={enableNotification}
+							isChecked={isNotificationEnabled}
+						/>
+						{translate.enableNotification}
+					</label> */}
+			{/* <hr />
+					<label htmlFor="changeLanguage">
+						<Checkbox
+							id={"changeLanguage"}
+							isSet={changeLanguage}
+							isChecked={isLanguageChanged}
+						/>
+						{translate.changeLang}
+					</label> */}
+			{/* <hr />
+					<h3>{translate.changeLang}</h3>
+					<hr /> */}
+			{/* <LanguageSelector
 						langList={languages}
 						setLang={setLang}
 						selectedLang={selectedLang}
-					/>
-				</div>
-			</Modal>
+					/> */}
+			{/* </div>
+			</Modal> */}
 			<PrayerCountdown
+				translate={translate}
 				timeToNextPrayer={timeToNextPrayer}
 				nextPrayer={nextPrayer}
 			/>
-			<Button type="locationSelector" isShowing={toggleLocationModal}>
+			<Button
+				key={"locationSelector"}
+				type="locationSelector"
+				translate={translate}
+				isShowing={toggleLocationModal}
+			>
 				<LocationIcon />
-				{getSelectedState}
-				<span>{getSelectedStateCode}</span>
+				{/* {getSelectedState} */}
+				{/* <span>{getSelectedStateCode || getSelectedState}</span> */}
+				<span>{getSelectedMunicipal || getSelectedState}</span>
 			</Button>
 			<Modal
 				key={"locationSettingsModal"}
 				hide={toggleLocationModal}
 				isShowing={showLocationModal}
 			>
+				{/* <div className={"settingsContainer"}>
+					<h3>
+						<span>
+							{translate.locationSelector}
+							{locationSettings.selectedState
+								? " : " + locationSettings.selectedState
+								: null}
+							{locationSettings.selectedMunicipal
+								? " > " + locationSettings.selectedMunicipal
+								: null}
+						</span>
+					</h3>
+					<hr />
+				</div> */}
 				<LocationSelector
+					translate={translate}
 					locations={locations}
 					locationSettings={locationSettings}
 					setStateName={setStateName}
 					setStateCode={setStateCode}
 				/>
 			</Modal>
-			<DatePicker hijriDate={hijriDate} gregorianDate={serverTime} />
+			<DatePicker
+				isShowing={isMinimal}
+				selectedLang={selectedLang}
+				hijriDate={hijriDate}
+				gregorianDate={serverTime}
+			/>
 		</header>
 	);
 };

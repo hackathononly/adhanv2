@@ -38,7 +38,7 @@ const Constants = {
 		waktuSolatStateCode: "WLY01"
 	},
 	userSettings: {
-		darkMode: true,
+		darkMode: false,
 		showModal: false,
 		showLanguageModal: false,
 		minimalMode: false,
@@ -56,7 +56,7 @@ const Constants = {
 	},
 	prayerTimes: {
 		nextPrayer: "",
-		currentPrayer: "asr",
+		currentPrayerTime: "asr",
 		timeToNextPrayer: "",
 		// silenced: [],
 		silenced: [],

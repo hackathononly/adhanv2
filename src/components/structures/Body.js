@@ -17,6 +17,7 @@ export const Body = () => {
 			solatTime,
 			storeAndCalc,
 			// prayerTimeList,
+			currentPrayerTime,
 			getPrayerTimeList,
 			setSilencedTime,
 			getSilencedTime
@@ -74,6 +75,7 @@ export const Body = () => {
 			<PrayerTimeList
 				translate={translate}
 				prayerTimeList={getPrayerTimeList}
+				currentPrayerTime={currentPrayerTime}
 				setSilencedTime={setSilencedTime}
 				getSilencedTime={getSilencedTime}
 				isNotificationEnabled={isNotificationEnabled}

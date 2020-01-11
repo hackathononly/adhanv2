@@ -10,6 +10,7 @@ const LocationSelector = ({
 }) => {
 	return (
 		<div className={style.locationSelector}>
+			<h3>{translate.locationSelector}</h3>
 			<ul
 				className="locationsContainer"
 				style={{
@@ -23,6 +24,11 @@ const LocationSelector = ({
 					<li key={state}>
 						<a
 							href="/#"
+							className={
+								state === locationSettings.selectedState
+									? style.active
+									: null
+							}
 							title={state}
 							onClick={() => setStateName(state)}
 						>

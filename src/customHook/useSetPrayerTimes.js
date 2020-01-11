@@ -18,6 +18,7 @@ export const useSetPrayerTimes = () => {
 		hijriDate = prayerTimes.hijriDate[selectedLang],
 		nextPrayer = prayerTimes.nextPrayer,
 		timeToNextPrayer = prayerTimes.timeToNextPrayer,
+		currentPrayerTime = prayerTimes.currentPrayerTime,
 		solatTime = Constants.waktuSolatURL(
 			locationSettings.selectedStateCode ||
 				Constants.defaultSettings.waktuSolatStateCode
@@ -177,6 +178,7 @@ export const useSetPrayerTimes = () => {
 		getHijriFullDate,
 		serverTime,
 		prayerTimeList,
+		currentPrayerTime,
 		getPrayerTimeList: getPrayerTimeList(),
 		// calcNextPrayer, // set nextPrayer, timeToNextPrayer
 		setPrayerTimes,

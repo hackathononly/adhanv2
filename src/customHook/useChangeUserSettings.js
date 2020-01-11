@@ -26,15 +26,15 @@ export const useChangeUserSettings = () => {
 		return setUserSettings("darkMode", !userSettings.darkMode);
 	}
 	function toggleUserSettingsModal() {
-		showUserSettingsModal
-			? (document.body.style.overflow = "auto")
-			: (document.body.style.overflow = "hidden");
+		// showUserSettingsModal
+		// 	? (document.body.style.overflow = "auto")
+		// 	: (document.body.style.overflow = "hidden");
 		return setUserSettings("showModal", !showUserSettingsModal);
 	}
 	function toggleLanguageModal() {
-		showLanguageModal
-			? (document.body.style.overflow = "auto")
-			: (document.body.style.overflow = "hidden");
+		// showLanguageModal
+		// 	? (document.body.style.overflow = "auto")
+		// 	: (document.body.style.overflow = "hidden");
 		return setUserSettings("showLanguageModal", !showLanguageModal);
 	}
 	function setMinimal() {

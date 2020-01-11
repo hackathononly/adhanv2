@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import {
+	TickIcon,
 	// Button,
 	// CloseIcon,
 	// SettingsIcon,
@@ -67,28 +68,31 @@ const Credit = () => {
 				</a>
 				{showUserSettingsModal ? (
 					<div ref={innerRef} className={"settingsContainer"}>
+						<Checkbox
+							id={"darkMode"}
+							isSet={setDarkMode}
+							isChecked={isDarkMode}
+						/>
 						<label htmlFor="darkMode">
-							<Checkbox
-								id={"darkMode"}
-								isSet={setDarkMode}
-								isChecked={isDarkMode}
-							/>
+							<TickIcon width="30" height="30" />
 							{translate.setDarkMode}
 						</label>
+						<Checkbox
+							id={"minimalMode"}
+							isSet={setMinimal}
+							isChecked={isMinimal}
+						/>
 						<label htmlFor="minimalMode">
-							<Checkbox
-								id={"minimalMode"}
-								isSet={setMinimal}
-								isChecked={isMinimal}
-							/>
+							<TickIcon width="30" height="30" />
 							{translate.setMinimal}
 						</label>
+						<Checkbox
+							id={"notification"}
+							isSet={enableNotification}
+							isChecked={isNotificationEnabled}
+						/>
 						<label htmlFor="notification">
-							<Checkbox
-								id={"notification"}
-								isSet={enableNotification}
-								isChecked={isNotificationEnabled}
-							/>
+							<TickIcon width="30" height="30" />
 							{translate.enableNotification}
 						</label>
 						{/* <Button

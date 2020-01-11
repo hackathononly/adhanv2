@@ -28,5 +28,6 @@ export default {
 	setLocation: "Pilih Lokasi",
 	credit: "AA",
 	subcredit: "kod di Malaysia",
-	enableNotification: "Tunjuk notifikasi"
+	enableNotification: "Tunjuk notifikasi",
+	currentPrayerTime: "Waktu solat sekarang"
 };

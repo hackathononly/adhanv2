@@ -25,6 +25,8 @@ import { ReactComponent as SettingsIcon } from "./images/settingsIcon.svg";
 import { ReactComponent as CloseIcon } from "./images/closeIcon.svg";
 // loadingBar
 import { ReactComponent as LoadingBarIcon } from "./images/loadingBar.svg";
+// tick
+import { ReactComponent as TickIcon } from "./images/tickIcon.svg";
 
 /* Components */
 import Credit from "./components/Credit";
@@ -48,6 +50,7 @@ export {
 	LocationIcon,
 	SettingsIcon,
 	CloseIcon,
+	TickIcon,
 	LoadingBarIcon
 };
 export {
@@ -69,4 +72,4 @@ ReactDOM.render(<App />, document.getElementById("root"));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.register();
+serviceWorker.unregister();

@@ -3,12 +3,15 @@ import ReactDOM from "react-dom";
 import style from "./modal.module.css";
 import { Button, CloseIcon } from "../../index";
 
-const Modal = ({ hide, isShowing, children }) =>
-	isShowing
+const Modal = ({ reference, hide, isShowing, children }) => {
+	return isShowing
 		? ReactDOM.createPortal(
 				<>
 					<div className={style.overlay}>
-						<div className={[style.modal, style.open].join(" ")}>
+						<div
+							ref={reference}
+							className={[style.modal, style.open].join(" ")}
+						>
 							<div className={style.content}>
 								<div className={style.container}>
 									<Button type="close" isShowing={hide}>
@@ -23,5 +26,6 @@ const Modal = ({ hide, isShowing, children }) =>
 				document.body
 		  )
 		: null;
+};
 
 export default Modal;

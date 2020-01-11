@@ -8,6 +8,7 @@ const PrayerTimeList = React.memo(
 		prayerTimeList,
 		setSilencedTime,
 		getSilencedTime,
+		currentPrayerTime,
 		isNotificationEnabled
 	}) => {
 		const prayerTimeKey = Object.keys(translate.prayerList); // get keys of prayerTimes, for defaultChecked purpose : ['fajr', 'syuruk', 'dhuhr', 'asr'...]
@@ -21,9 +22,14 @@ const PrayerTimeList = React.memo(
 				<ul>
 					{Object.keys(prayerTimeList || {}).map((item, index) => (
 						<li
+							title={
+								prayerTimeKey[index] === currentPrayerTime
+									? translate.currentPrayerTime
+									: null
+							}
 							key={item}
 							className={
-								prayerTimeKey[index] === "asr"
+								prayerTimeKey[index] === currentPrayerTime
 									? style.currentPrayerTime
 									: null
 							}

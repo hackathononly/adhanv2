@@ -26,5 +26,6 @@ export default {
 	setLocation: "اختر موقعا",
 	credit: "AA",
 	subcredit: "صنع في ماليزيا",
-	enableNotification: "تفعيل الإشعارات"
+	enableNotification: "تفعيل الإشعارات",
+	currentPrayerTime: "وقت الصلاة الحالي"
 };

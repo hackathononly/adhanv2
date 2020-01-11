@@ -5,12 +5,17 @@
 } */
 
 .container span {
-	/* font-size: 1.4rem; */
 	display: block;
+	line-height: 1.5em;
 	/* padding: 0 0 12px; */
 }
 
 .container b {
 	font-family: "Gelasio", serif;
+	font-style: italic;
 	text-transform: capitalize;
+	color: var(--main-green-dark);
+}
+:global(.enableDarkMode) .container b {
+	color: var(--main-green);
 }

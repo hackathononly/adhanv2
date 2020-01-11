@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
 	Modal,
 	Button,
@@ -12,6 +12,7 @@ import {
 	LocationIcon
 	// SettingsIcon
 } from "../../index";
+import { useOuterClickNotifier } from "../../helper";
 import { useGetTranslation } from "../../customHook/useGetTranslation";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
 import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
@@ -51,6 +52,9 @@ export const Header = () => {
 			timeToNextPrayer
 		} = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
+
+	const innerRef = useRef(null);
+	useOuterClickNotifier(innerRef, toggleLocationModal);
 
 	return (
 		<header>
@@ -127,6 +131,7 @@ export const Header = () => {
 				<span>{getSelectedMunicipal || getSelectedState}</span>
 			</Button>
 			<Modal
+				reference={innerRef}
 				key={"locationSettingsModal"}
 				hide={toggleLocationModal}
 				isShowing={showLocationModal}

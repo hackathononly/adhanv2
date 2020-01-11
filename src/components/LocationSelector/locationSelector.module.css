@@ -7,12 +7,15 @@
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 }
+.locationSelector h3 {
+	padding: 8px 32px;
+}
 .locationSelector ul {
 	text-align: left;
 	width: 100%;
 }
 .home {
-	margin-bottom: 12px;
+	margin: 12px 0;
 }
 .home a:before {
 	content: "←";
@@ -31,7 +34,7 @@
 } */
 .locationSelector li ul {
 	top: 0;
-	bottom:0;
+	bottom: 0;
 	left: 100%;
 	display: none;
 	position: absolute;
@@ -43,7 +46,6 @@
 	left: -100%;
 }
 .locationSelector a {
-	font-size: 0.9rem;
 	padding: 6px 32px;
 	display: block;
 }

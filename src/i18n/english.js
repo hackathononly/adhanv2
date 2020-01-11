@@ -22,12 +22,13 @@ export default {
 	close: "Close",
 	settings: "Settings",
 	locationSelector: "Select location",
-	prayerTimeEstimate: "left until",
+	prayerTimeEstimate: "to",
 	changeLang: "Change Language",
 	setDarkMode: "Select dark mode",
 	setMinimal: "Select minimal mode",
 	setLocation: "Select Location",
 	credit: "AA",
 	subcredit: "coded in Malaysia",
-	enableNotification: "Enable notification"
+	enableNotification: "Enable notification",
+	currentPrayerTime: "Current prayer time"
 };

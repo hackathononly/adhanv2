@@ -1,4 +1,7 @@
-import { useEffect } from "react";
+import {
+	useEffect
+	// , useRef
+} from "react";
 // import { useChangeUserSettings } from "../src/customHook/useChangeUserSettings";
 // export const Helper = item => {
 // 	Object.keys(item).length === 0 && item.constructor === Object;
@@ -9,23 +12,31 @@ import { useEffect } from "react";
 // 		Object.keys(item).length === 0 && item.constructor === Object
 // };
 
-export const isObjectEmpty = item => {
-	return Object.keys(item).length === 0 && item.constructor === Object;
-};
+// export const isObjectEmpty = item => {
+// 	return Object.keys(item).length === 0 && item.constructor === Object;
+// };
 
-export const useOuterClickNotifier = (innerRef, toggleModal) => {
+export const useOuterClickNotifier = (refElement, toggleModal) => {
+	function handleClick(e) {
+		refElement.current &&
+			!refElement.current.contains(e.target) &&
+			toggleModal();
+	}
+	function escFunction(e) {
+		if (e.keyCode === 27) {
+			toggleModal();
+		}
+	}
 	useEffect(() => {
-		if (innerRef.current) {
+		if (refElement.current) {
 			document.addEventListener("click", handleClick);
+			document.addEventListener("keydown", escFunction, false);
 		}
-		return () => document.removeEventListener("click", handleClick);
-
-		function handleClick(e) {
-			innerRef.current &&
-				!innerRef.current.contains(e.target) &&
-				toggleModal();
-		}
-	}, [toggleModal, innerRef]);
+		return () => {
+			document.removeEventListener("click", handleClick);
+			document.removeEventListener("keydown", escFunction, false);
+		};
+	}, [toggleModal, refElement]);
 };
 
 /*

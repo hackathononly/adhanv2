@@ -12,7 +12,10 @@ import {
 	LocationIcon
 	// SettingsIcon
 } from "../../index";
-import { useOuterClickNotifier } from "../../helper";
+import {
+	useOuterClickNotifier
+	// , useComponentIntoView
+} from "../../helper";
 import { useGetTranslation } from "../../customHook/useGetTranslation";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
 import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
@@ -53,8 +56,12 @@ export const Header = () => {
 		} = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
 
-	const innerRef = useRef(null);
-	useOuterClickNotifier(innerRef, toggleLocationModal);
+	const locationSettingsModal = useRef(null);
+	useOuterClickNotifier(locationSettingsModal, toggleLocationModal);
+
+	// const locationSelectorTitle = React.createRef();
+	// const locationSelectorTitle = useRef(null);
+	// const myRef = useComponentIntoView();
 
 	return (
 		<header>
@@ -131,7 +138,7 @@ export const Header = () => {
 				<span>{getSelectedMunicipal || getSelectedState}</span>
 			</Button>
 			<Modal
-				reference={innerRef}
+				reference={locationSettingsModal}
 				key={"locationSettingsModal"}
 				hide={toggleLocationModal}
 				isShowing={showLocationModal}
@@ -150,7 +157,14 @@ export const Header = () => {
 					</h3>
 					<hr />
 				</div> */}
+				<h3
+					// ref={locationSelectorTitle}
+					className={"locationSelectorTitle"}
+				>
+					{translate.locationSelector}
+				</h3>
 				<LocationSelector
+					// reference={locationSelectorTitle}
 					translate={translate}
 					locations={locations}
 					locationSettings={locationSettings}

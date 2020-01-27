@@ -24,6 +24,12 @@
 	border-right: none;
 } */
 .container label {
+	-webkit-tap-highlight-color: rgba(
+		0,
+		0,
+		0,
+		0
+	); /* remove grey background when click label */
 	display: flex;
 	flex-direction: column;
 	padding: 28px 0;
@@ -69,7 +75,7 @@
 	/* content: ">"; */
 	content: "*";
 	position: absolute;
-	left: -10px;
+	left: -14px;
 	/* border: 1px solid var(--main-grey-solid);
 	border-radius: var(--default-radius); */
 }

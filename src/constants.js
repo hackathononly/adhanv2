@@ -50,13 +50,13 @@ const Constants = {
 	locationSettings: {
 		isNested: false,
 		showModal: false,
-		selectedState: "",
-		selectedMunicipal: "",
-		selectedStateCode: ""
+		selectedState: "Wilayah Persekutuan",
+		selectedMunicipal: "Kuala Lumpur, Putrajaya",
+		selectedStateCode: "WLY01"
 	},
 	prayerTimes: {
 		nextPrayer: "",
-		currentPrayerTime: "asr",
+		currentPrayerTime: "syuruk",
 		timeToNextPrayer: "",
 		// silenced: [],
 		silenced: [],

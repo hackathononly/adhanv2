@@ -11,6 +11,7 @@ import {
 import { useOuterClickNotifier } from "../helper";
 import { useGetTranslation } from "../customHook/useGetTranslation";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
+import Button from "./Button/Button";
 // import { useSetPrayerTimes } from "../customHook/useSetPrayerTimes";
 
 const Credit = () => {
@@ -34,23 +35,30 @@ const Credit = () => {
 		} = useChangeUserSettings();
 	// { hijriDate, serverTime } = useSetPrayerTimes();
 
-	const innerRef = useRef(null);
-	useOuterClickNotifier(innerRef, toggleUserSettingsModal);
+	const settingsContainer = useRef(null);
+	useOuterClickNotifier(settingsContainer, toggleUserSettingsModal);
 
 	return (
 		<footer>
-			{/* <span title={translate.subcredit}> */}
 			<div>
-				{translate.credit} &nbsp;/
+				{/* <span title={translate.subcredit}>{translate.credit}</span> */}
+				{/* {translate.credit} &nbsp;/ */}
 				{/* <DatePicker hijriDate={hijriDate} gregorianDate={serverTime} /> */}
-				<a
+				<Button
+					translate={translate}
+					type="settings"
+					isShowing={toggleLanguageModal}
+				>
+					{selectedLang}
+				</Button>
+				{/* <a
 					href="/#"
 					className={"settings"}
 					onClick={toggleLanguageModal}
 					title={translate.changeLang}
 				>
 					{selectedLang}
-				</a>{" "}
+				</a> */}{" "}
 				&nbsp;/
 				<LanguageSelector
 					isShowing={showLanguageModal}
@@ -59,15 +67,21 @@ const Credit = () => {
 					setLang={setLang}
 					selectedLang={selectedLang}
 				/>
-				<a
+				<Button type="settings" isShowing={toggleUserSettingsModal}>
+					{translate.settings}
+				</Button>
+				{/* <a
 					href="/#"
 					className={"settings"}
 					onClick={toggleUserSettingsModal}
 				>
 					{translate.settings}
-				</a>
+				</a> */}
 				{showUserSettingsModal ? (
-					<div ref={innerRef} className={"settingsContainer"}>
+					<div
+						ref={settingsContainer}
+						className={"settingsContainer"}
+					>
 						<Checkbox
 							id={"darkMode"}
 							isSet={setDarkMode}

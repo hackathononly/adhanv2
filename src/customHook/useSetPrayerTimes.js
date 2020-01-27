@@ -27,10 +27,74 @@ export const useSetPrayerTimes = () => {
 		prayerTimeList = prayerTimes.list;
 
 	function storeAndCalc() {
-		setUserSettings("showLoadingBar", true);
+		// get prayer time list
+		// get current time
+		// get first prayer time that is more than current time -> next prayertime
 
-		// axios.get("sampledata/daily.json").then(obj => {
-		axios.get(solatTime).then(obj => {
+		// setUserSettings("showLoadingBar", true);
+
+		// var eventTime = "1366549200"; //Sun, 21 Apr 2013 13:00:00 GMT
+		var eventTime = moment().valueOf();
+		// console.log(eventTime); // 1578831050713 : 8:11PM
+
+		var currentTime = "1359032400"; //Thu, 24 Jan 2013 13:00:00 GMT
+		var diffTime = eventTime - currentTime; //better to handle this in Controller to avoid timezone problem
+		var duration = moment.duration(diffTime, "seconds");
+		var interval = 1;
+
+		// setInterval(function() {
+		duration = moment.duration(duration.asSeconds() - interval, "seconds");
+		//.asSeconds()
+		// console.log(
+		// 	Math.round(duration.asHours()) +
+		// 		"h:" +
+		// 		Math.round(duration.asMinutes()) +
+		// 		"m:" +
+		// 		Math.round(duration.asSeconds()) +
+		// 		"s"
+		// );
+
+		// $(".countdown").text(
+		// 	Math.round(duration.asHours()) +
+		// 		"h:" +
+		// 		Math.round(duration.asMinutes()) +
+		// 		"m:" +
+		// 		Math.round(duration.asSeconds()) +
+		// 		"s"
+		// );
+
+		//.seconds()
+		// console.log(
+		// 	duration.days() +
+		// 		"d:" +
+		// 		duration.hours() +
+		// 		"h:" +
+		// 		duration.minutes() +
+		// 		"m:" +
+		// 		duration.seconds() +
+		// 		"s"
+		// );
+
+		// $(".countdown1").text(
+		// 	duration.days() +
+		// 		"d:" +
+		// 		duration.hours() +
+		// 		"h:" +
+		// 		duration.minutes() +
+		// 		"m:" +
+		// 		duration.seconds() +
+		// 		"s"
+		// );
+
+		// .format()
+		// console.log(moment(duration).format("h[h]:mm[m]:ss[s]"));
+		// console.log(moment.toUTC().format("YYYY-MM-DD HH:mm:ss"));
+
+		// $(".countdown2").text(moment(duration).format("h[h]:mm[m]:ss[s]"));
+		// }, 1000);
+
+		axios.get("sampledata/daily.json").then(obj => {
+		// axios.get(solatTime).then(obj => {
 			const response = obj.data,
 				time = response.prayerTime[0],
 				serverTime = response.serverTime
@@ -49,16 +113,27 @@ export const useSetPrayerTimes = () => {
 						isha: time.isha
 					},
 					serverTime: time.date.split("-").join(" "),
+					// serverTime: moment(
+					// 	`${serverTime} ${time.isha}`,
+					// 	"YYYY-MM-DD HH:mm:ss"
+					// ).format("hh:mm A"),
 					serverDate: response.serverTime.substr(
 						0,
 						response.serverTime.indexOf(" ")
 					),
 					timeToNextPrayer: "1 jam 15 min",
-					nextPrayer: "Maghrib"
+					nextPrayer: "isya"
 				};
+			// console.log(
+			// 	eventTime,
+			// 	moment(
+			// 		`${serverTime} ${time.isha}`,
+			// 		"YYYY-MM-DD HH:mm:ss"
+			// 	).valueOf()
+			// );
 
 			setPrayerTimes(datas);
-			getHijriFullDate(serverTime);
+			// getHijriFullDate(serverTime);
 
 			// calcNextPrayer(response.serverTime);
 

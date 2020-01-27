@@ -1,39 +1,23 @@
 .locationSelector {
 	position: relative;
-	max-width: 100%;
+	/* max-width: 100%; */
 	transition-duration: 300ms;
-	margin: 0 auto;
+	/* margin: 0 auto; */
+	padding-top: 3.8em;
 	overflow: hidden;
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 }
-.locationSelector h3 {
-	padding: 8px 32px;
+.locationSelector.top {
+	margin-top: 3em;
 }
 .locationSelector ul {
 	text-align: left;
 	width: 100%;
 }
-.home {
-	margin: 12px 0;
-}
-.home a:before {
-	content: "←";
-	width: 20px;
-	height: 20px;
-	margin-right: 12px;
-}
-.locationSelector > ul {
-	left: 0;
-	position: relative;
-	-webkit-transform: translateZ(0);
-	transform: translateZ(0);
-}
-/* .locationSelector > ul li {
-	padding: 0 0 18px;
-} */
 .locationSelector li ul {
 	top: 0;
+	/* top: 50px; */
 	bottom: 0;
 	left: 100%;
 	display: none;
@@ -45,8 +29,16 @@
 	transition-duration: 300ms;
 	left: -100%;
 }
+.locationSelector > ul {
+	left: 0;
+	position: relative;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	/* height: 100vh; */
+	/* padding: 10px 0; */
+}
 .locationSelector a {
-	padding: 6px 32px;
+	padding: 6px 38px;
 	display: block;
 }
 .locationSelector a:hover {
@@ -58,4 +50,21 @@
 }
 .locationSelector ul.stateActive {
 	display: block;
+}
+
+.home {
+	/* margin: 12px 0; */
+	/* height: 3em; */
+	display: flex;
+	align-items: center;
+}
+.home a {
+	padding: 14px 38px;
+	width: 100%;
+}
+.home a:before {
+	content: "←";
+	width: 20px;
+	height: 20px;
+	margin-right: 12px;
 }

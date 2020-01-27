@@ -1,4 +1,5 @@
 import { useStateValue } from "../state";
+// import { useScrollTop } from "../helper";
 
 export const useChangeLocationSettings = () => {
 	const [
@@ -28,8 +29,14 @@ export const useChangeLocationSettings = () => {
 		});
 	}
 	function setStateName(val) {
-		// document.querySelector(".settingsContainer").scrollIntoView(); // jump to top in modal
-		document.querySelector(".locationsContainer").scrollIntoView(); // jump to top in modal
+		// document.querySelector(".locationsContainer").scrollIntoView(); // jump to top in modal
+		// window.scrollTo({ top: 100, behavior: "smooth" });
+		// useScrollTop();
+
+		// this.anyRef.current.scrollIntoView({
+		// 	behavior: "smooth",
+		// 	block: "start"
+		// });
 
 		setLocationSettings({
 			isNested: !locationSettings.isNested,

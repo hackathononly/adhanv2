@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Button } from "../../index";
 import { useOuterClickNotifier } from "../../helper";
 import style from "./languageSelector.module.css";
 
@@ -15,15 +16,13 @@ const LanguageSelector = ({
 	return isShowing ? (
 		<section
 			ref={innerRef}
-			className={[
-				style.container,
-				selectedLang,
-				"settingsContainer"
-			].join(" ")}
+			className={[style.container, "languages", "settingsContainer"].join(
+				" "
+			)}
 		>
 			{Object.keys(langList || {}).map(key => (
 				<>
-					<a
+					{/* <a
 						key={key}
 						href="/#"
 						title={key}
@@ -31,7 +30,15 @@ const LanguageSelector = ({
 						onClick={e => setLang(e.currentTarget.text)}
 					>
 						{key}
-					</a>
+					</a> */}
+					<Button
+						key={key}
+						title={key}
+						type={key === selectedLang ? style.active : null}
+						isShowing={e => setLang(e.target.innerHTML)}
+					>
+						{key}
+					</Button>
 				</>
 			))}
 		</section>

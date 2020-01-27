@@ -1,5 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import style from "./locationSelector.module.css";
+// import { scrollToRef } from "../../helper";
+
+function scrollToRef(ref) {
+	console.log(ref.current);
+	ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+	ref.current.classList.add("top");
+}
 
 const LocationSelector = ({
 	translate,
@@ -8,11 +15,15 @@ const LocationSelector = ({
 	locations,
 	locationSettings
 }) => {
+	const myRef = useRef(null);
+	const executeScroll = () => scrollToRef(myRef);
+
 	return (
-		<div className={style.locationSelector}>
-			<h3>{translate.locationSelector}</h3>
+		<div
+			ref={myRef}
+			className={[style.locationSelector, "locationsContainer"].join(" ")}
+		>
 			<ul
-				className="locationsContainer"
 				style={{
 					left: locationSettings.isNested ? "-100%" : "0",
 					transitionDuration: locationSettings.isNested
@@ -23,6 +34,7 @@ const LocationSelector = ({
 				{Object.keys(locations || {}).map(state => (
 					<li key={state}>
 						<a
+							key={"container_" + state}
 							href="/#"
 							className={
 								state === locationSettings.selectedState
@@ -30,11 +42,15 @@ const LocationSelector = ({
 									: null
 							}
 							title={state}
-							onClick={() => setStateName(state)}
+							onClick={() => {
+								executeScroll();
+								setStateName(state);
+							}}
 						>
 							{state}
 						</a>
 						<ul
+							key={state}
 							style={{
 								display:
 									locationSettings.selectedState === state
@@ -45,10 +61,13 @@ const LocationSelector = ({
 							<li className={style.home}>
 								<a
 									href="/#"
-									onClick={() => setStateName(state)}
+									onClick={() => {
+										// executeScroll();
+										setStateName(state);
+									}}
 									title={translate.backDesc}
 								>
-									{translate.back}
+									<span>{translate.back}</span>
 								</a>
 							</li>
 							{Object.keys(locations[state] || {}).map(
@@ -82,5 +101,4 @@ const LocationSelector = ({
 		</div>
 	);
 };
-
 export default LocationSelector;

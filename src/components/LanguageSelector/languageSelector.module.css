@@ -21,16 +21,31 @@
 .container {
 	box-shadow: 0 6px 30px var(--main-black-gradient-half);
 } */
-.container{
-	left: 100px
+.container {
+	left: 100px;
 }
-.container a {
-	/* color: var(--main-grey-solid); */
+/* .container a {
+	color: var(--main-grey-solid);
 	padding: 4px 12px;
 	margin-left: -12px;
 	margin-right: -12px;
+} */
+.container button {
+	width: 100%;
+	font-size: 14px;
+	padding: 4px 18px;
+	font-weight: normal;
+	text-transform: capitalize;
+	color: var(--credit-link);
 }
-.active {
+.container button:hover {
+	border: none;
+	color: var(--main-green-dark);
+	text-decoration: underline;
+	box-shadow: none;
+}
+
+button.active {
 	background-color: var(--main-grey);
 }
 /* .container li {

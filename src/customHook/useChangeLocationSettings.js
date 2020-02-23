@@ -29,15 +29,6 @@ export const useChangeLocationSettings = () => {
 		});
 	}
 	function setStateName(val) {
-		// document.querySelector(".locationsContainer").scrollIntoView(); // jump to top in modal
-		// window.scrollTo({ top: 100, behavior: "smooth" });
-		// useScrollTop();
-
-		// this.anyRef.current.scrollIntoView({
-		// 	behavior: "smooth",
-		// 	block: "start"
-		// });
-
 		setLocationSettings({
 			isNested: !locationSettings.isNested,
 			selectedState: val,

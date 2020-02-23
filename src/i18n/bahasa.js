@@ -25,7 +25,7 @@ export default {
 	changeLang: "Tukar bahasa",
 	setDarkMode: "Pilih mod gelap",
 	setMinimal: "Pilih mod minimal",
-	setLocation: "Pilih Lokasi",
+	// setLocation: "Pilih Lokasi",
 	credit: "AA",
 	subcredit: "kod di Malaysia",
 	enableNotification: "Tunjuk notifikasi",

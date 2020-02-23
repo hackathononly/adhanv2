@@ -5,16 +5,22 @@
 } */
 
 .container span {
-	display: block;
+	/* display: block; */
 	line-height: 1.5em;
 	/* padding: 0 0 12px; */
 }
-
-.container b {
-	font-family: "Gelasio", serif;
-	font-style: italic;
+.container h2:first-letter {
 	text-transform: capitalize;
+}
+.container b {
+	/* font-family: "Gelasio", serif; */
+	/* font-style: italic; */
+	text-transform: capitalize;
+	font-weight: normal;
 	color: var(--main-green-dark);
+}
+:global(.enableDarkMode) .container h2 {
+	color: var(--main-white);
 }
 :global(.enableDarkMode) .container b {
 	color: var(--main-green);

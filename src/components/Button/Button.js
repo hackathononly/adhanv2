@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./button.module.css";
-// import { isObjectEmpty } from "../../helper";
+// import { isObjectEmpty } from "../../customHook/useGeneralHelper";
 
 // import { useGetTranslation } from "../../customHook/useGetTranslation";
 const Button = ({ type, isShowing, children }) => {

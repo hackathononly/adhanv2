@@ -1,12 +1,5 @@
 import React, { useRef } from "react";
 import style from "./locationSelector.module.css";
-// import { scrollToRef } from "../../helper";
-
-function scrollToRef(ref) {
-	console.log(ref.current);
-	ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
-	ref.current.classList.add("top");
-}
 
 const LocationSelector = ({
 	translate,
@@ -15,14 +8,16 @@ const LocationSelector = ({
 	locations,
 	locationSettings
 }) => {
-	const myRef = useRef(null);
-	const executeScroll = () => scrollToRef(myRef);
-
+	const locationSelector = useRef(null);
+	const executeScroll = () => {
+		locationSelector.current.scrollIntoView({
+			behavior: "smooth",
+			block: "start"
+		});
+		locationSelector.current.classList.add("top");
+	};
 	return (
-		<div
-			ref={myRef}
-			className={[style.locationSelector, "locationsContainer"].join(" ")}
-		>
+		<div ref={locationSelector} className={style.locationSelector}>
 			<ul
 				style={{
 					left: locationSettings.isNested ? "-100%" : "0",

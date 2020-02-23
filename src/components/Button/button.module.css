@@ -60,17 +60,19 @@
 } */
 
 .locationSelector {
-	margin: 36px 0 36px;
+	/* margin: 42px 0; */
+	/* margin: 20px 0 0; */
 	display: flex;
 	justify-content: center;
 }
 .locationSelector button {
-	background: var(--main-green);
+	/* background: var(--main-green); */
 	/* background: linear-gradient(
 		180deg,
 		rgba(105, 231, 129, 1) 0%,
 		rgba(0, 161, 82, 1) 100%
 	); */
+	border-bottom: 1px dotted;
 	color: var(--main-black);
 	border-radius: 100px;
 	display: flex;
@@ -108,14 +110,18 @@
 }
 .settings button {
 	color: var(--credit-link);
-	font-size: inherit;
-	/* font-weight: normal; */
-	line-height: 2em;
+	/* color: var(--main-white); */
+	font-size: 14px;
+	/* font-size: inherit; */
+	font-weight: normal;
+	/* line-height: 2em; */
 	text-transform: capitalize;
+	/* border-bottom: 1px dashed; */
 }
 .settings button:hover {
 	text-decoration: underline;
 	border: none;
+	border-bottom: 1px solid;
 	box-shadow: none;
 	cursor: pointer;
 }

@@ -23,7 +23,7 @@ export default {
 	changeLang: "غير اللغة",
 	setDarkMode: "حدد الوضع المظلم",
 	setMinimal: "حدد الوضع الأدنى",
-	setLocation: "اختر موقعا",
+	// setLocation: "اختر موقعا",
 	credit: "AA",
 	subcredit: "صنع في ماليزيا",
 	enableNotification: "تفعيل الإشعارات",

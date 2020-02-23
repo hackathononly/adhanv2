@@ -26,122 +26,89 @@ export const useSetPrayerTimes = () => {
 		getSilencedTime = prayerTimes.silenced,
 		prayerTimeList = prayerTimes.list;
 
+	// function getKeyByValue(object, value) {
+	// 	return Object.keys(object).find(key => object[key] === value);
+	// }
+
+	function getCurrentAndNextWaktu(object, value) {
+		const obj = Object.keys(object),
+			nextWaktu = obj.find(key => object[key] === value),
+			currentWaktu = obj[obj.indexOf(nextWaktu) - 1];
+		return { next: nextWaktu, current: currentWaktu };
+	}
+
+	function calculatePrayerTimes(datas) {
+		const dateToday = moment().format("DD/MM/YYYY"),
+			next = Object.values(datas.list || {})
+				.map(function(s) {
+					return moment(dateToday + " " + s, "DD/MM/YYYY HH:mm");
+				})
+				.find(function(m) {
+					return m.isAfter();
+				});
+
+		const time = getCurrentAndNextWaktu(
+			datas.list,
+			next.format("HH:mm:ss")
+		);
+
+		setPrayerTimes({
+			timeToNextPrayer: next.fromNow(),
+			currentPrayerTime: time.current,
+			nextPrayer: time.next
+		});
+	}
+
 	function storeAndCalc() {
-		// get prayer time list
-		// get current time
-		// get first prayer time that is more than current time -> next prayertime
+		setUserSettings("showLoadingBar", true);
 
-		// setUserSettings("showLoadingBar", true);
+		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=27%20Jan%202020
+		// http://api.aladhan.com/v1/gToH?date=27%20Jan%202020
 
-		// var eventTime = "1366549200"; //Sun, 21 Apr 2013 13:00:00 GMT
-		var eventTime = moment().valueOf();
-		// console.log(eventTime); // 1578831050713 : 8:11PM
+		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/TakwimSolat&period=today&zone=WLY01
+		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=2020-01-27
+		// https://api.aladhan.com/v1/gToH?date=27-01-2020
 
-		var currentTime = "1359032400"; //Thu, 24 Jan 2013 13:00:00 GMT
-		var diffTime = eventTime - currentTime; //better to handle this in Controller to avoid timezone problem
-		var duration = moment.duration(diffTime, "seconds");
-		var interval = 1;
-
-		// setInterval(function() {
-		duration = moment.duration(duration.asSeconds() - interval, "seconds");
-		//.asSeconds()
-		// console.log(
-		// 	Math.round(duration.asHours()) +
-		// 		"h:" +
-		// 		Math.round(duration.asMinutes()) +
-		// 		"m:" +
-		// 		Math.round(duration.asSeconds()) +
-		// 		"s"
-		// );
-
-		// $(".countdown").text(
-		// 	Math.round(duration.asHours()) +
-		// 		"h:" +
-		// 		Math.round(duration.asMinutes()) +
-		// 		"m:" +
-		// 		Math.round(duration.asSeconds()) +
-		// 		"s"
-		// );
-
-		//.seconds()
-		// console.log(
-		// 	duration.days() +
-		// 		"d:" +
-		// 		duration.hours() +
-		// 		"h:" +
-		// 		duration.minutes() +
-		// 		"m:" +
-		// 		duration.seconds() +
-		// 		"s"
-		// );
-
-		// $(".countdown1").text(
-		// 	duration.days() +
-		// 		"d:" +
-		// 		duration.hours() +
-		// 		"h:" +
-		// 		duration.minutes() +
-		// 		"m:" +
-		// 		duration.seconds() +
-		// 		"s"
-		// );
-
-		// .format()
-		// console.log(moment(duration).format("h[h]:mm[m]:ss[s]"));
-		// console.log(moment.toUTC().format("YYYY-MM-DD HH:mm:ss"));
-
-		// $(".countdown2").text(moment(duration).format("h[h]:mm[m]:ss[s]"));
-		// }, 1000);
-
-		axios.get("sampledata/daily.json").then(obj => {
-		// axios.get(solatTime).then(obj => {
-			const response = obj.data,
-				time = response.prayerTime[0],
-				serverTime = response.serverTime
-					.substr(0, response.serverTime.indexOf(" "))
-					.split("-")
-					.reverse()
-					.join("-"),
-				datas = {
-					silenced: ["dhuhr", "isha"],
-					list: {
-						fajr: time.fajr,
-						syuruk: time.syuruk,
-						dhuhr: time.dhuhr,
-						asr: time.asr,
-						maghrib: time.maghrib,
-						isha: time.isha
-					},
-					serverTime: time.date.split("-").join(" "),
-					// serverTime: moment(
-					// 	`${serverTime} ${time.isha}`,
-					// 	"YYYY-MM-DD HH:mm:ss"
-					// ).format("hh:mm A"),
-					serverDate: response.serverTime.substr(
+		// axios
+		// 	.get("sampledata/daily.json")
+		// 	.then(obj => {
+		axios
+			.get(solatTime)
+			.then(obj => {
+				const response = obj.data,
+					prayerTime = response.prayerTime[0],
+					serverDate = response.serverTime.substr(
 						0,
 						response.serverTime.indexOf(" ")
 					),
-					timeToNextPrayer: "1 jam 15 min",
-					nextPrayer: "isya"
-				};
-			// console.log(
-			// 	eventTime,
-			// 	moment(
-			// 		`${serverTime} ${time.isha}`,
-			// 		"YYYY-MM-DD HH:mm:ss"
-			// 	).valueOf()
-			// );
-
-			setPrayerTimes(datas);
-			// getHijriFullDate(serverTime);
-
-			// calcNextPrayer(response.serverTime);
-
-			// setPrayerTimes({
-			// 	timeToNextPrayer: "2 jam 15 min",
-			// 	nextPrayer: "Maghrib"
-			// });
-		});
+					datas = {
+						silenced: [],
+						list: {
+							fajr: prayerTime.fajr,
+							syuruk: prayerTime.syuruk,
+							dhuhr: prayerTime.dhuhr,
+							asr: prayerTime.asr,
+							maghrib: prayerTime.maghrib,
+							isha: prayerTime.isha
+						},
+						// serverTime: moment(
+						// 	`${serverTime} ${time.isha}`,
+						// 	"YYYY-MM-DD HH:mm:ss"
+						// ).format("hh:mm A"),
+						serverTime: prayerTime.date.split("-").join(" "),
+						serverDate: serverDate
+							.split("-")
+							.reverse()
+							.join("-"),
+						serverDateReverse: serverDate
+					};
+				return datas;
+			})
+			.then(datas => {
+				setPrayerTimes(datas); // save datas above into DB
+				getHijriFullDate(datas.serverDate, datas.serverDateReverse); // calculate dates - Hijri and Gregorian
+				calculatePrayerTimes(datas); // calculate currentPrayerTime, nextPrayerTime and save into DB
+			});
 	}
 
 	function getPrayerTimeList() {
@@ -173,39 +140,14 @@ export const useSetPrayerTimes = () => {
 		}
 	}
 
-	/* function calcNextPrayer(time) {
-		// var firstDate = moment();
-		// var secondDate = moment(time);
-		// var secondDate = moment("2018-03-19");
-		// var yearDiff = firstDate.diff(secondDate, "year");
-		// var monthDiff = firstDate.diff(secondDate, "month");
-		// var dayDiff = firstDate.diff(secondDate, "day");
-		// console.log(
-		// 	// moment(time),
-		// 	// firstDate,
-		// 	// secondDate,
-		// 	yearDiff + " Years, " + monthDiff + " Months, " + dayDiff + " Days"
-		// );
-
-		setPrayerTimes({
-			timeToNextPrayer: "2 jam 15 min",
-			nextPrayer: "Maghrib"
-		});
-	} */
-
-	function getHijriFullDate(serverTime) {
-		const reverseServerTime = serverTime
-				.split("-")
-				.reverse()
-				.join("-"),
-			islamicDateAPI = Constants.hijriDate(reverseServerTime),
-			// islamicDateAPI = "/sampledata/constants-date.json",
-			islamicDateAPIArabic = Constants.hijriDateArabic(serverTime);
+	function getHijriFullDate(serverDate, serverDateReverse) {
+		const islamicDateAPI = Constants.hijriDate(serverDateReverse), // islamicDateAPI = "/sampledata/constants-date.json",
+			islamicDateAPIArabic = Constants.hijriDateArabic(serverDate);
 
 		axios
 			.all([axios.get(islamicDateAPI), axios.get(islamicDateAPIArabic)])
 			.then(obj => {
-				const hijriDate = obj[0].data.takwim[reverseServerTime], // Jakim Obj
+				const hijriDate = obj[0].data.takwim[serverDateReverse], // Jakim Obj
 					hijriDateArabic = obj[1].data.data.hijri, // Aladhan Obj
 					jakimHijriMonth = hijriDate.split("-")[1], // [ "04" ]
 					jakimHijriDay = hijriDate.split("-")[2]; // [ "19" ]
@@ -255,7 +197,6 @@ export const useSetPrayerTimes = () => {
 		prayerTimeList,
 		currentPrayerTime,
 		getPrayerTimeList: getPrayerTimeList(),
-		// calcNextPrayer, // set nextPrayer, timeToNextPrayer
 		setPrayerTimes,
 		setSilencedTime,
 		getSilencedTime,

@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 import { Button } from "../../index";
-import { useOuterClickNotifier } from "../../helper";
+import { useOuterClickNotifier } from "../../customHook/useGeneralHelper";
 import style from "./languageSelector.module.css";
 
 const LanguageSelector = ({
 	isShowing,
+	// translate,
 	toggleLanguageModal,
 	langList,
 	setLang,
@@ -14,12 +15,14 @@ const LanguageSelector = ({
 	useOuterClickNotifier(innerRef, toggleLanguageModal);
 
 	return isShowing ? (
+		// return (
 		<section
 			ref={innerRef}
 			className={[style.container, "languages", "settingsContainer"].join(
 				" "
 			)}
 		>
+			{/* <h3>{translate.changeLang}</h3> */}
 			{Object.keys(langList || {}).map(key => (
 				<>
 					{/* <a
@@ -43,6 +46,7 @@ const LanguageSelector = ({
 			))}
 		</section>
 	) : null;
+	// ) ;
 };
 
 export default LanguageSelector;

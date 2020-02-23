@@ -8,6 +8,12 @@
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 }
+@media screen and (min-width: 400px), screen and (orientation: landscape) {
+	.locationSelector {
+		padding-top: 2em;
+	}
+}
+
 .locationSelector.top {
 	margin-top: 3em;
 }
@@ -35,6 +41,7 @@
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 	/* height: 100vh; */
+	/* height: 100%; */
 	/* padding: 10px 0; */
 }
 .locationSelector a {

@@ -1,11 +1,21 @@
-import React, { useMemo } from "react";
+import React, { useRef, useMemo } from "react";
 import {
 	// Tazkirah,
+	// Button,
+	// Modal,
+	// PrayerCountdown,
+	// LocationSelector,
 	PrayerTimeList
 } from "../../index";
+// import {
+// 	LocationIcon,
+// 	SettingsIcon
+// } from "../../index";
+import { useOuterClickNotifier } from "../../customHook/useGeneralHelper";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
 import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
 import { useGetTranslation } from "../../customHook/useGetTranslation";
+import { useChangeLocationSettings } from "../../customHook/useChangeLocationSettings";
 
 export const Body = () => {
 	const {
@@ -14,6 +24,17 @@ export const Body = () => {
 			// setUserSettings
 		} = useChangeUserSettings(),
 		{
+			// locations,
+			// locationSettings,
+			// setStateName,
+			// setStateCode,
+			// showLocationModal,
+			toggleLocationModal
+			// getSelectedState,
+			// getSelectedStateCode,
+			// getSelectedMunicipal
+		} = useChangeLocationSettings(),
+		{
 			solatTime,
 			storeAndCalc,
 			// prayerTimeList,
@@ -21,57 +42,53 @@ export const Body = () => {
 			getPrayerTimeList,
 			setSilencedTime,
 			getSilencedTime
+			// nextPrayer,
+			// timeToNextPrayer
 			// setPrayerTimes
 		} = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
 
+	const locationSettingsModal = useRef(null);
+	useOuterClickNotifier(locationSettingsModal, toggleLocationModal);
 	// useEffect(() => {
 	// 	storeAndCalc();
 	// }, [solatTime]);
 	useMemo(() => storeAndCalc(solatTime), [solatTime]);
 	// useMemo(() => expensiveOperation(solatTime), [solatTime]);
 
-	/* 	function expensiveOperation() {
-		axios.get(solatTime).then(obj => {
-			const response = obj.data,
-				time = response.prayerTime[0],
-				serverTime = response.serverTime
-					.substr(0, response.serverTime.indexOf(" "))
-					.split("-")
-					.reverse()
-					.join("-"),
-				datas = {
-					silenced: ["fajr", "asr"],
-					list: {
-						fajr: time.fajr,
-						syuruk: time.syuruk,
-						dhuhr: time.dhuhr,
-						asr: time.asr,
-						maghrib: time.maghrib,
-						isha: time.isha
-					},
-					serverTime: time.date.split("-").join(" "),
-					serverDate: response.serverTime.substr(
-						0,
-						response.serverTime.indexOf(" ")
-					),
-					timeToNextPrayer: "1 jam 15 min",
-					nextPrayer: "Maghrib"
-				};
-
-			setPrayerTimes(datas); // save datas
-			// getHijriFullDate(serverTime);
-			// calcNextPrayer(response.serverTime);
-
-			// setPrayerTimes({
-			// 	timeToNextPrayer: "2 jam 15 min",
-			// 	nextPrayer: "Maghrib"
-			// });
-		});
-	}
- */
 	return isMinimal ? null : (
 		<article>
+			{/* <PrayerCountdown
+				translate={translate}
+				timeToNextPrayer={timeToNextPrayer}
+				nextPrayer={nextPrayer}
+			/>
+			<Button
+				key={"locationSelector"}
+				type="locationSelector"
+				translate={translate}
+				isShowing={toggleLocationModal}
+			>
+				<LocationIcon />
+				<span>{getSelectedMunicipal || getSelectedState}</span>
+			</Button>
+			<Modal
+				reference={locationSettingsModal}
+				key={"locationSettingsModal"}
+				hide={toggleLocationModal}
+				isShowing={showLocationModal}
+			>
+				<h3 className={"locationSelectorTitle"}>
+					{translate.locationSelector}
+				</h3>
+				<LocationSelector
+					translate={translate}
+					locations={locations}
+					locationSettings={locationSettings}
+					setStateName={setStateName}
+					setStateCode={setStateCode}
+				/>
+			</Modal> */}
 			<PrayerTimeList
 				translate={translate}
 				prayerTimeList={getPrayerTimeList}

@@ -1,4 +1,5 @@
 import React from "react";
+// import React, { useRef } from "react";
 import { LoadingBar } from "../index";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
 
@@ -8,6 +9,7 @@ const ThemeSelector = React.memo(({ children }) => {
 		isDarkMode,
 		isLoadingBarShown
 	} = useChangeUserSettings();
+
 	return (
 		<div
 			className={[

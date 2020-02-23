@@ -42,9 +42,10 @@ const Constants = {
 		showModal: false,
 		showLanguageModal: false,
 		minimalMode: false,
-		selectedLang: "bahasa",
+		selectedLang: "english",
 		enableNotification: false,
 		showLoadingBar: false
+		// isScrolling: false
 		// changeLanguage: false
 	},
 	locationSettings: {
@@ -56,9 +57,8 @@ const Constants = {
 	},
 	prayerTimes: {
 		nextPrayer: "",
-		currentPrayerTime: "syuruk",
+		currentPrayerTime: "",
 		timeToNextPrayer: "",
-		// silenced: [],
 		silenced: [],
 		list: {},
 		serverTime: "",

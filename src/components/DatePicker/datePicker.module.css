@@ -1,5 +1,6 @@
 .datePicker {
-	margin: 0 12px;
+	/* margin: 0 12px; */
+	color: var(--main-black);
 }
 .datePicker small {
 	color: var(--main-black-gradient-half);
@@ -10,11 +11,16 @@
 :global(.enableDarkMode) small {
 	color: var(--main-white);
 }
-.datePicker small {
+/* .datePicker span {
+	font-weight: bold;
+	font-size: 18px;
+} */
+/* .datePicker small {
 	display: block;
 	font-size: small;
+	font-weight: normal;
 	text-transform: uppercase;
-}
+} */
 .datePicker .arabic {
 	/* unicode-bidi: bidi-override; */
 	direction: RTL;

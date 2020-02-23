@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
 import {
+	Credit,
 	Modal,
 	Button,
 	// Checkbox,
-	DatePicker,
+	// DatePicker,
 	PrayerCountdown,
 	LocationSelector
 	// LanguageSelector
@@ -13,31 +14,35 @@ import {
 	// SettingsIcon
 } from "../../index";
 import {
+	// useScrollNotifier,
 	useOuterClickNotifier
 	// , useComponentIntoView
-} from "../../helper";
+} from "../../customHook/useGeneralHelper";
 import { useGetTranslation } from "../../customHook/useGetTranslation";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
-import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
+// import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
 import { useChangeLocationSettings } from "../../customHook/useChangeLocationSettings";
 
 export const Header = () => {
+	// const {
+	// 		// 		// languages,
+	// 		// 		// setLang,
+	// 		// selectedLang,
+	// 		// 		changeLanguage,
+	// 		// 		isLanguageChanged,
+	// 		// isScrolling,
+	// 		// checkIsScrolling
+	// 		// handleScroll,
+	// 		// isMinimal
+	// 		// 		setMinimal,
+	// 		// 		isDarkMode,
+	// 		// 		setDarkMode,
+	// 		// 		enableNotification,
+	// 		// 		isNotificationEnabled,
+	// 		// 		showUserSettingsModal,
+	// 		// 		toggleUserSettingsModal
+	// 	} = useChangeUserSettings(),
 	const {
-			// 		// languages,
-			// 		// setLang,
-			selectedLang,
-			// 		changeLanguage,
-			// 		isLanguageChanged,
-			isMinimal
-			// 		setMinimal,
-			// 		isDarkMode,
-			// 		setDarkMode,
-			// 		enableNotification,
-			// 		isNotificationEnabled,
-			// 		showUserSettingsModal,
-			// 		toggleUserSettingsModal
-		} = useChangeUserSettings(),
-		{
 			locations,
 			locationSettings,
 			setStateName,
@@ -49,8 +54,8 @@ export const Header = () => {
 			getSelectedMunicipal
 		} = useChangeLocationSettings(),
 		{
-			hijriDate,
-			serverTime,
+			// hijriDate,
+			// serverTime,
 			nextPrayer,
 			timeToNextPrayer
 		} = useSetPrayerTimes(),
@@ -59,16 +64,17 @@ export const Header = () => {
 	const locationSettingsModal = useRef(null);
 	useOuterClickNotifier(locationSettingsModal, toggleLocationModal);
 
-	// const locationSelectorTitle = React.createRef();
-	// const locationSelectorTitle = useRef(null);
-	// const myRef = useComponentIntoView();
+	// const header = useRef(null);
+	// useScrollNotifier(header, checkIsScrolling);
 
 	return (
 		<header>
-			{/* <Button type="settings" isShowing={toggleUserSettingsModal}>
+			<div className="content">
+				<div className="subcontent">
+					{/* <Button type="settings" isShowing={toggleUserSettingsModal}>
 				<SettingsIcon />
 			</Button> */}
-			{/* <Modal
+					{/* <Modal
 				key={"userSettingsModal"}
 				hide={toggleUserSettingsModal}
 				isShowing={showUserSettingsModal}
@@ -102,7 +108,7 @@ export const Header = () => {
 						/>
 						{translate.enableNotification}
 					</label> */}
-			{/* <hr />
+					{/* <hr />
 					<label htmlFor="changeLanguage">
 						<Checkbox
 							id={"changeLanguage"}
@@ -111,39 +117,39 @@ export const Header = () => {
 						/>
 						{translate.changeLang}
 					</label> */}
-			{/* <hr />
+					{/* <hr />
 					<h3>{translate.changeLang}</h3>
 					<hr /> */}
-			{/* <LanguageSelector
-						langList={languages}
-						setLang={setLang}
-						selectedLang={selectedLang}
-					/> */}
-			{/* </div>
+					{/* <LanguageSelector
+					langList={languages}
+					setLang={setLang}
+					selectedLang={selectedLang}
+				/> */}
+					{/* </div>
 			</Modal> */}
-			<PrayerCountdown
-				translate={translate}
-				timeToNextPrayer={timeToNextPrayer}
-				nextPrayer={nextPrayer}
-			/>
-			<Button
-				key={"locationSelector"}
-				type="locationSelector"
-				translate={translate}
-				isShowing={toggleLocationModal}
-			>
-				<LocationIcon />
-				{/* {getSelectedState} */}
-				{/* <span>{getSelectedStateCode || getSelectedState}</span> */}
-				<span>{getSelectedMunicipal || getSelectedState}</span>
-			</Button>
-			<Modal
-				reference={locationSettingsModal}
-				key={"locationSettingsModal"}
-				hide={toggleLocationModal}
-				isShowing={showLocationModal}
-			>
-				{/* <div className={"settingsContainer"}>
+					<PrayerCountdown
+						translate={translate}
+						timeToNextPrayer={timeToNextPrayer}
+						nextPrayer={nextPrayer}
+					/>
+					<Button
+						key={"locationSelector"}
+						type="locationSelector"
+						translate={translate}
+						isShowing={toggleLocationModal}
+					>
+						<LocationIcon />
+						{/* {getSelectedState} */}
+						{/* <span>{getSelectedStateCode || getSelectedState}</span> */}
+						<span>{getSelectedMunicipal || getSelectedState}</span>
+					</Button>
+					<Modal
+						reference={locationSettingsModal}
+						key={"locationSettingsModal"}
+						hide={toggleLocationModal}
+						isShowing={showLocationModal}
+					>
+						{/* <div className={"settingsContainer"}>
 					<h3>
 						<span>
 							{translate.locationSelector}
@@ -157,27 +163,26 @@ export const Header = () => {
 					</h3>
 					<hr />
 				</div> */}
-				<h3
-					// ref={locationSelectorTitle}
-					className={"locationSelectorTitle"}
-				>
-					{translate.locationSelector}
-				</h3>
-				<LocationSelector
-					// reference={locationSelectorTitle}
-					translate={translate}
-					locations={locations}
-					locationSettings={locationSettings}
-					setStateName={setStateName}
-					setStateCode={setStateCode}
-				/>
-			</Modal>
-			<DatePicker
-				isShowing={isMinimal}
-				selectedLang={selectedLang}
-				hijriDate={hijriDate}
-				gregorianDate={serverTime}
-			/>
+						<h3 className={"locationSelectorTitle"}>
+							{translate.locationSelector}
+						</h3>
+						<LocationSelector
+							translate={translate}
+							locations={locations}
+							locationSettings={locationSettings}
+							setStateName={setStateName}
+							setStateCode={setStateCode}
+						/>
+					</Modal>
+					{/* <DatePicker
+					isShowing={isMinimal}
+					selectedLang={selectedLang}
+					hijriDate={hijriDate}
+					gregorianDate={serverTime}
+				/> */}
+				</div>
+			</div>
+			<Credit />
 		</header>
 	);
 };

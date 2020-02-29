@@ -162,6 +162,12 @@ aside {
 	height: calc(var(--full-height) - 90vh);
 	font-size: 14px;
 }
+.enableDarkMode aside {
+	color: var(--main-white);
+}
+.isMinimal aside {
+	box-shadow: none;
+}
 aside div {
 	display: flex;
 	justify-content: space-between;

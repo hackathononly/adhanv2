@@ -25,8 +25,8 @@ const Credit = () => {
 			setMinimal,
 			isDarkMode,
 			setDarkMode,
-			enableNotification,
-			isNotificationEnabled,
+			// enableNotification,
+			// isNotificationEnabled,
 			showUserSettingsModal,
 			showLanguageModal,
 			toggleUserSettingsModal,
@@ -102,7 +102,7 @@ const Credit = () => {
 								<TickIcon width="30" height="30" />
 								{translate.setMinimal}
 							</label>
-							<Checkbox
+							{/* <Checkbox
 								id={"notification"}
 								isSet={enableNotification}
 								isChecked={isNotificationEnabled}
@@ -110,7 +110,7 @@ const Credit = () => {
 							<label htmlFor="notification">
 								<TickIcon width="30" height="30" />
 								{translate.enableNotification}
-							</label>
+							</label> */}
 							{/* <Button
 							type="close"
 							isShowing={toggleUserSettingsModal}

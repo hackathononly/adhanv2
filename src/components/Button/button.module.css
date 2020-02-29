@@ -31,13 +31,14 @@
 .close button {
 	/* top: 10px;
 	right: 10px; */
-	top: 0;
-	right: 0;
-	position: absolute;
+	top: 1em;
+	right: 1em;
+	position: fixed;
 	border-color: var(--main-transparent);
 	/* padding: 6px 8px; */
 	padding: 6px;
-	border-radius: 10px;
+	/* border-radius: 10px; */
+	z-index: 5;
 }
 /* .settings button {
 	top: 20px;
@@ -85,6 +86,10 @@
 	align-items: center;
 	min-height: 62px;
 }
+:global(.enableDarkMode) .locationSelector button {
+	color: var(--main-white);
+}
+
 .locationSelector button svg {
 	width: 32px;
 	height: 32px;
@@ -96,9 +101,9 @@
 	/* fill: var(--main-white); */
 	fill: var(--main-black);
 }
-/* :global(.enableDarkMode .locationSelector) path {
-	fill: var(--main-black);
-} */
+:global(.enableDarkMode) .locationSelector path {
+	fill: var(--main-white);
+}
 /* :global(.enableDarkMode .locationSelector) {
 	background-color: var(--main-green);
 	color: var(--main-black);

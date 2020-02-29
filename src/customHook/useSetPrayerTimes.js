@@ -33,15 +33,34 @@ export const useSetPrayerTimes = () => {
 	function getCurrentAndNextWaktu(object, value) {
 		const obj = Object.keys(object),
 			nextWaktu = obj.find(key => object[key] === value),
-			currentWaktu = obj[obj.indexOf(nextWaktu) - 1];
+			objIndex = obj.indexOf(nextWaktu),
+			currentWaktu = objIndex === 0 ? obj[5] : obj[objIndex - 1];
 		return { next: nextWaktu, current: currentWaktu };
 	}
 
+	// const dateTime = {
+	// currentTime(){}
+	// 	formatTime() {
+	// 		return "haha";
+	// 	},
+	// 	formatDate() {
+	// 		return "lala";
+	// 	}
+	// };
+
 	function calculatePrayerTimes(datas) {
 		const dateToday = moment().format("DD/MM/YYYY"),
+			dateTomorrow = moment()
+				.add(1, "days")
+				.format("DD/MM/YYYY"),
+			currentTime = moment().format("HH:mm:ss"),
 			next = Object.values(datas.list || {})
 				.map(function(s) {
-					return moment(dateToday + " " + s, "DD/MM/YYYY HH:mm");
+					// console.log(currentTime > s);
+					return s > currentTime
+						? moment(dateToday + " " + s, "DD/MM/YYYY HH:mm:ss")
+						: moment(dateTomorrow + " " + s, "DD/MM/YYYY HH:mm:ss");
+					// return moment(dateToday + " " + s, "DD/MM/YYYY HH:mm");
 				})
 				.find(function(m) {
 					return m.isAfter();
@@ -71,7 +90,6 @@ export const useSetPrayerTimes = () => {
 
 		// axios
 		// 	.get("sampledata/daily.json")
-		// 	.then(obj => {
 		axios
 			.get(solatTime)
 			.then(obj => {

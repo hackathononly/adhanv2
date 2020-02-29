@@ -5,14 +5,14 @@ const DatePicker = React.memo(
 	({
 		isShowing,
 		selectedLang,
-		//  hijriDate,
-		gregorianDate
+		hijriDate
+		// gregorianDate
 	}) => {
 		return !isShowing ? (
 			<div className={style.datePicker}>
 				<span className={style[selectedLang]}>
-					{gregorianDate}
-					{/* {hijriDate} */}
+					{/* {gregorianDate} */}
+					{hijriDate}
 				</span>
 			</div>
 		) : null;

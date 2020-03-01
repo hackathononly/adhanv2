@@ -54,13 +54,16 @@ export const useSetPrayerTimes = () => {
 				.add(1, "days")
 				.format("DD/MM/YYYY"),
 			currentTime = moment().format("HH:mm:ss"),
+			timeStatus = Object.values(datas.list || {}).every(function(
+				dataTime
+			) {
+				return dataTime < currentTime;
+			}),
 			next = Object.values(datas.list || {})
 				.map(function(s) {
-					// console.log(currentTime > s);
-					return s > currentTime
-						? moment(dateToday + " " + s, "DD/MM/YYYY HH:mm:ss")
-						: moment(dateTomorrow + " " + s, "DD/MM/YYYY HH:mm:ss");
-					// return moment(dateToday + " " + s, "DD/MM/YYYY HH:mm");
+					return timeStatus
+						? moment(dateTomorrow + " " + s, "DD/MM/YYYY HH:mm:ss")
+						: moment(dateToday + " " + s, "DD/MM/YYYY HH:mm:ss");
 				})
 				.find(function(m) {
 					return m.isAfter();

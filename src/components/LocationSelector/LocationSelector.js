@@ -10,11 +10,13 @@ const LocationSelector = ({
 }) => {
 	const locationSelector = useRef(null);
 	const executeScroll = () => {
-		locationSelector.current.scrollIntoView({
-			behavior: "smooth",
-			block: "start"
-		});
-		locationSelector.current.classList.add("top");
+		locationSelector.current.scrollIntoView(true);
+		// locationSelector.current.scrollBy(0, -10);
+		// locationSelector.current.scrollIntoView({
+		// 	behavior: "smooth",
+		// 	block: "start"
+		// });
+		// locationSelector.current.classList.add("top");
 	};
 	return (
 		<div ref={locationSelector} className={style.locationSelector}>

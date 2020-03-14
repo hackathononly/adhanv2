@@ -24,6 +24,8 @@ export const useChangeLocationSettings = () => {
 			? (document.body.style.overflow = "auto")
 			: (document.body.style.overflow = "hidden");
 
+		// ! set wrapper overflow as hidden
+
 		setLocationSettings({
 			showModal: !locationSettings.showModal
 		});

@@ -38,7 +38,7 @@ body {
 	--main-black-gradient-point1: rgba(0, 0, 0, 0.1);
 	--main-black-gradient-point2: rgba(0, 0, 0, 0.2);
 	--main-black-gradient-point5: rgba(0, 0, 0, 0.5);
-	--default-radius: 6px;
+	--default-radius: 10px;
 	--viewport-4: (min-width: 480px);
 	/* --viewport-4: 480px; */
 	--viewport-7: (min-width: 768px);
@@ -48,6 +48,7 @@ body {
 	--viewport-12: (min-width: 1200px);
 	/* --viewport-12: 1200px; */
 	--full-height: 100vh;
+	/* --vh: 1vh; */
 }
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -65,6 +66,7 @@ html {
 body {
 	color: var(--main-darkMode);
 	min-height: var(--full-height);
+	min-height: -webkit-fill-available;
 	/* font-family: "Roboto", sans-serif; */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -94,6 +96,7 @@ h2 {
 }
 .wrapper {
 	height: var(--full-height);
+	min-height: -webkit-fill-available;
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
 	scroll-snap-type: y mandatory;
@@ -189,7 +192,8 @@ header .content {
 }
 .isMinimal header,
 .isMinimal header .content {
-	height: 100vh;
+	height: var(--full-height);
+	min-height: -webkit-fill-available;
 }
 header .subcontent {
 	top: 0;
@@ -224,12 +228,15 @@ h3.locationSelectorTitle {
 	left: 0;
 	right: 0;
 	padding: 0 38px;
-	height: 3em;
+	/* height: 3em; */
+	height: 2.5em;
 	display: flex;
 	align-items: center;
 	background-color: var(--main-white);
-	z-index: 4;
-	border-bottom: 1px solid #ccc;
+	z-index: 9;
+	/* border-bottom: 1px solid #ccc; */
+	border-bottom: 1px solid var(--main-black-gradient-point2);
+	box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Credit Settings Container  */

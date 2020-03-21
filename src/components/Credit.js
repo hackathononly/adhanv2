@@ -3,7 +3,7 @@ import {
 	TickIcon,
 	Button,
 	// CloseIcon,
-	// SettingsIcon,
+	SettingsIcon,
 	DatePicker,
 	Checkbox,
 	LanguageSelector
@@ -28,7 +28,7 @@ const Credit = () => {
 			// enableNotification,
 			// isNotificationEnabled,
 			showUserSettingsModal,
-			showLanguageModal,
+			// showLanguageModal,
 			toggleUserSettingsModal,
 			toggleLanguageModal
 			// isLanguageChanged
@@ -41,11 +41,15 @@ const Credit = () => {
 	return (
 		<aside>
 			<div>
-				<DatePicker hijriDate={hijriDate} gregorianDate={serverTime} />
+				<DatePicker
+					selectedLang={selectedLang}
+					hijriDate={hijriDate}
+					gregorianDate={serverTime}
+				/>
 				<section>
 					{/* <span title={translate.subcredit}>{translate.credit}</span> */}
 					{/* {translate.credit} &nbsp;/ */}
-					<LanguageSelector
+					{/* <LanguageSelector
 						isShowing={showLanguageModal}
 						// translate={translate}
 						toggleLanguageModal={toggleLanguageModal}
@@ -59,7 +63,7 @@ const Credit = () => {
 						isShowing={toggleLanguageModal}
 					>
 						{selectedLang}
-					</Button>
+					</Button> */}
 					{/* <a
 					href="/#"
 					className={"settings"}
@@ -67,10 +71,15 @@ const Credit = () => {
 					title={translate.changeLang}
 				>
 					{selectedLang}
-				</aside> */}{" "}
-					&nbsp;/
-					<Button type="settings" isShowing={toggleUserSettingsModal}>
-						{translate.settings}
+				</aside> */}
+					{/* {" "} */}
+					<Button
+						type="settings"
+						title={translate.settings}
+						isShowing={toggleUserSettingsModal}
+					>
+						{/* {translate.settings} */}
+						<SettingsIcon />
 					</Button>
 					{/* <a
 					href="/#"
@@ -83,26 +92,28 @@ const Credit = () => {
 						<div
 							ref={settingsContainer}
 							className={"settingsContainer"}
+							role="presentation"
 						>
-							<Checkbox
-								id={"darkMode"}
-								isSet={setDarkMode}
-								isChecked={isDarkMode}
-							/>
-							<label htmlFor="darkMode">
-								<TickIcon width="30" height="30" />
-								{translate.setDarkMode}
-							</label>
-							<Checkbox
-								id={"minimalMode"}
-								isSet={setMinimal}
-								isChecked={isMinimal}
-							/>
-							<label htmlFor="minimalMode">
-								<TickIcon width="30" height="30" />
-								{translate.setMinimal}
-							</label>
-							{/* <Checkbox
+							<div className="content" role="dialog">
+								<Checkbox
+									id={"darkMode"}
+									isSet={setDarkMode}
+									isChecked={isDarkMode}
+								/>
+								<label htmlFor="darkMode">
+									<TickIcon width="30" height="30" />
+									{translate.setDarkMode}
+								</label>
+								<Checkbox
+									id={"minimalMode"}
+									isSet={setMinimal}
+									isChecked={isMinimal}
+								/>
+								<label htmlFor="minimalMode">
+									<TickIcon width="30" height="30" />
+									{translate.setMinimal}
+								</label>
+								{/* <Checkbox
 								id={"notification"}
 								isSet={enableNotification}
 								isChecked={isNotificationEnabled}
@@ -111,20 +122,21 @@ const Credit = () => {
 								<TickIcon width="30" height="30" />
 								{translate.enableNotification}
 							</label> */}
-							{/* <Button
+								{/* <Button
 							type="close"
 							isShowing={toggleUserSettingsModal}
 						>
 							<CloseIcon width="30" height="30" />
 						</Button> */}
-							<LanguageSelector
-								isShowing={showLanguageModal}
-								// translate={translate}
-								toggleLanguageModal={toggleLanguageModal}
-								langList={languages}
-								setLang={setLang}
-								selectedLang={selectedLang}
-							/>
+								<LanguageSelector
+									// isShowing={showLanguageModal}
+									translate={translate}
+									toggleLanguageModal={toggleLanguageModal}
+									langList={languages}
+									setLang={setLang}
+									selectedLang={selectedLang}
+								/>
+							</div>
 						</div>
 					) : null}
 				</section>

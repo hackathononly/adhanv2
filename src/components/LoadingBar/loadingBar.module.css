@@ -13,6 +13,8 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	min-height: var(--full-height);
+	font-size: 0.8em;
 }
 :global(.enableDarkMode) .loadingBarContainer {
 	background-color: var(--main-darkMode);
@@ -21,4 +23,28 @@
 	align-items: center;
 	display: flex;
 	flex-direction: column;
+	flex: 1;
+	justify-content: center;
+}
+
+.loadingBarContainer footer {
+	/* padding-bottom: 28px; */
+	position: relative;
+	bottom: 36px;
+	font-size: 0.8em;
+	text-align: center;
+	text-transform: capitalize;
+	color: var(--credit-link);
+}
+/* .loadingBarContainer span {
+	display: block;
+} */
+.loadingBarContainer a {
+	color: var(--credit-link);
+	/* text-decoration: underline; */
+	border-bottom: 1px dotted;
+}
+.loadingBarContainer a:hover {
+	border-bottom: 1px solid;
+	text-decoration: none;
 }

@@ -3,9 +3,8 @@ import style from "./button.module.css";
 // import { isObjectEmpty } from "../../customHook/useGeneralHelper";
 
 // import { useGetTranslation } from "../../customHook/useGetTranslation";
-const Button = ({ type, isShowing, children }) => {
+const Button = ({ type, isShowing, title, children }) => {
 	// const { getTranslation: translate } = useGetTranslation();
-	// console.log(translate);
 
 	return (
 		<div
@@ -16,7 +15,7 @@ const Button = ({ type, isShowing, children }) => {
 			<button
 				className={type}
 				// title={translate[type]}
-				// title={translate.type}
+				title={title}
 				onClick={isShowing}
 			>
 				{children}

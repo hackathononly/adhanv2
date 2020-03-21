@@ -135,7 +135,7 @@ export const Header = () => {
 					<Button
 						key={"locationSelector"}
 						type="locationSelector"
-						translate={translate}
+						title={translate.locationSelector}
 						isShowing={toggleLocationModal}
 					>
 						<LocationIcon />
@@ -144,6 +144,7 @@ export const Header = () => {
 						<span>{getSelectedMunicipal || getSelectedState}</span>
 					</Button>
 					<Modal
+						translate={translate}
 						reference={locationSettingsModal}
 						key={"locationSettingsModal"}
 						hide={toggleLocationModal}

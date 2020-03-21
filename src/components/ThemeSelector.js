@@ -1,14 +1,15 @@
 import React from "react";
-// import React, { useRef } from "react";
 import { LoadingBar } from "../index";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
+import { useGetTranslation } from "../customHook/useGetTranslation";
 
 const ThemeSelector = React.memo(({ children }) => {
 	const {
-		isMinimal,
-		isDarkMode,
-		isLoadingBarShown
-	} = useChangeUserSettings();
+			isMinimal,
+			isDarkMode,
+			isLoadingBarShown
+		} = useChangeUserSettings(),
+		{ getTranslation: translate } = useGetTranslation();
 
 	return (
 		<div
@@ -18,10 +19,8 @@ const ThemeSelector = React.memo(({ children }) => {
 				"wrapper"
 			].join(" ")}
 		>
-			{/* <div className="loadingBarContainer"> */}
-			<LoadingBar isShowing={isLoadingBarShown} />
+			<LoadingBar translate={translate} isShowing={isLoadingBarShown} />
 			{children}
-			{/* </div> */}
 		</div>
 	);
 });

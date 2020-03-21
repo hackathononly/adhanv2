@@ -58,6 +58,7 @@ export const Body = () => {
 
 	return isMinimal ? null : (
 		<article>
+			<div className="handlebar"></div>
 			{/* <PrayerCountdown
 				translate={translate}
 				timeToNextPrayer={timeToNextPrayer}

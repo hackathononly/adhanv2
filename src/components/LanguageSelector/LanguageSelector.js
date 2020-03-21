@@ -4,7 +4,8 @@ import { useOuterClickNotifier } from "../../customHook/useGeneralHelper";
 import style from "./languageSelector.module.css";
 
 const LanguageSelector = ({
-	isShowing,
+	translate,
+	// isShowing,
 	// translate,
 	toggleLanguageModal,
 	langList,
@@ -14,15 +15,17 @@ const LanguageSelector = ({
 	const innerRef = useRef(null);
 	useOuterClickNotifier(innerRef, toggleLanguageModal);
 
-	return isShowing ? (
+	// return isShowing ? (
+	return (
 		// return (
 		<section
 			ref={innerRef}
-			className={[style.container, "languages", "settingsContainer"].join(
+			className={[style.container, "languages"].join(
+				// className={[style.container, "languages", "settingsContainer"].join(
 				" "
 			)}
 		>
-			{/* <h3>{translate.changeLang}</h3> */}
+			<h3>{translate.changeLang}</h3>
 			{Object.keys(langList || {}).map(key => (
 				<>
 					{/* <a
@@ -45,7 +48,8 @@ const LanguageSelector = ({
 				</>
 			))}
 		</section>
-	) : null;
+	);
+	// ) : null;
 	// ) ;
 };
 

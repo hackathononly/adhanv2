@@ -31,8 +31,8 @@
 .close button {
 	/* top: 10px;
 	right: 10px; */
-	top: 1em;
-	right: 1em;
+	top: 0.5em;
+	right: 0.5em;
 	position: fixed;
 	border-color: var(--main-transparent);
 	/* padding: 6px 8px; */
@@ -110,27 +110,39 @@
 } */
 
 .settings {
-	display: inline;
-	margin-left: 8px;
+	/* display: flex; */
+	margin-left: 12px;
+	padding-left: 12px;
+	border-left: 1px solid var(--main-black-gradient-point2);
+}
+:global(.enableDarkMode) .settings {
+	border-left-color: var(--main-white);
+}
+.settings button svg {
+	width: 18px;
+	height: 18px;
 }
 .settings button {
 	color: var(--credit-link);
 	/* color: var(--main-white); */
-	font-size: 14px;
-	/* font-size: inherit; */
+	/* font-size: 14px; */
+	font-size: inherit;
 	font-weight: normal;
 	/* line-height: 2em; */
 	text-transform: capitalize;
-	/* border-bottom: 1px dashed; */
+	text-decoration: underline;
+	display: flex;
+	/* justify-content: center;
+	align-items: center; */
 }
 .settings button:hover {
-	text-decoration: underline;
-	border: none;
-	border-bottom: 1px solid;
+	text-decoration: none;
+	/* border: none;
+	border-bottom: 1px solid; */
 	box-shadow: none;
 	cursor: pointer;
 }
-:global(.enableDarkMode) .settings button {
-	color: var(--main-green);
+:global(.enableDarkMode) .settings path {
+	fill: var(--main-green);
 }
 /* @end Custom Styling */

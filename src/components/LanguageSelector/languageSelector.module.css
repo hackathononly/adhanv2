@@ -21,9 +21,9 @@
 .container {
 	box-shadow: 0 6px 30px var(--main-black-gradient-half);
 } */
-.container {
+/* .container {
 	left: 100px;
-}
+} */
 /* .container a {
 	color: var(--main-grey-solid);
 	padding: 4px 12px;
@@ -32,8 +32,11 @@
 } */
 .container button {
 	width: 100%;
-	font-size: 14px;
-	padding: 4px 18px;
+	font-size: inherit;
+	/* font-size: 14px; */
+	/* padding: 4px 18px; */
+	padding: 6px 30px;
+	text-align: left;
 	font-weight: normal;
 	text-transform: capitalize;
 	color: var(--credit-link);
@@ -46,8 +49,23 @@
 }
 
 button.active {
-	background-color: var(--main-grey);
+	/* background-color: var(--main-grey); */
+	background-color: var(--main-green-dark);
+	color: var(--main-white);
 }
+button.active:hover {
+	color: var(--main-white);
+}
+
+.container h3 {
+	font-size: 0.7em;
+	text-align: left;
+	text-transform: uppercase;
+	padding: 0 30px;
+	margin: 4px 0;
+	color: #ccc;
+}
+
 /* .container li {
 	padding: 4px;
 } */

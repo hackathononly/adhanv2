@@ -23,5 +23,5 @@
 } */
 .datePicker .arabic {
 	/* unicode-bidi: bidi-override; */
-	direction: RTL;
+	direction: rtl;
 }

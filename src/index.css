@@ -237,10 +237,10 @@ header .content {
 .isMinimal header,
 .isMinimal header .content {
 	height: var(--full-height);
-	min-height: -webkit-fill-available;
+	/* min-height: -webkit-fill-available; */
 }
 .isMinimal header .settingsContainer .content {
-	height: inherit;
+	height: auto;
 }
 header .subcontent {
 	top: 0;

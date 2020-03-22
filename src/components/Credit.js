@@ -39,15 +39,15 @@ const Credit = () => {
 	useOuterClickNotifier(settingsContainer, toggleUserSettingsModal);
 
 	return (
-		<aside>
-			<div>
+		<aside key={"creditAside"}>
+			<div key={"creditDiv"}>
 				<DatePicker
 					key={"datepickerCredit"}
 					selectedLang={selectedLang}
 					hijriDate={hijriDate}
 					gregorianDate={serverTime}
 				/>
-				<section>
+				<section key={"creditSection"}>
 					{/* <span title={translate.subcredit}>{translate.credit}</span> */}
 					{/* {translate.credit} &nbsp;/ */}
 					{/* <LanguageSelector
@@ -94,17 +94,25 @@ const Credit = () => {
 				</a> */}
 					{showUserSettingsModal ? (
 						<div
+							key={"settingsContainer"}
 							ref={settingsContainer}
 							className={"settingsContainer"}
 							role="presentation"
 						>
-							<div className="content" role="dialog">
+							<div
+								key={"dialogCredit"}
+								className="content"
+								role="dialog"
+							>
 								<Checkbox
 									id={"darkMode"}
 									isSet={setDarkMode}
 									isChecked={isDarkMode}
 								/>
-								<label htmlFor="darkMode">
+								<label
+									key={"darkmodeCredit"}
+									htmlFor="darkMode"
+								>
 									<TickIcon width="30" height="30" />
 									{translate.setDarkMode}
 								</label>
@@ -113,7 +121,10 @@ const Credit = () => {
 									isSet={setMinimal}
 									isChecked={isMinimal}
 								/>
-								<label htmlFor="minimalMode">
+								<label
+									key={"minimalmodeCredit"}
+									htmlFor="minimalMode"
+								>
 									<TickIcon width="30" height="30" />
 									{translate.setMinimal}
 								</label>
@@ -134,7 +145,7 @@ const Credit = () => {
 							<CloseIcon width="30" height="30" />
 						</Button> */}
 								<LanguageSelector
-									key={"languageselectorCredit"}
+									key={"languageselectorCredit-1"}
 									// isShowing={showLanguageModal}
 									translate={translate}
 									toggleLanguageModal={toggleLanguageModal}

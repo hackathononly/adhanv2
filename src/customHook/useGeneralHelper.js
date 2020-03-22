@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useChangeLocationSettings } from "../customHook/useChangeLocationSettings";
 
 // export const isObjectEmpty = item => {
@@ -30,20 +30,27 @@ export const useOuterClickNotifier = (refElement, toggleModal) => {
 		setLocationSettings
 	} = useChangeLocationSettings();
 
-	function handleClick(e) {
-		refElement.current &&
-			!refElement.current.contains(e.target) &&
-			toggleModal();
-	}
-	function escFunction(e) {
-		if (e.keyCode === 27 && locationSettings.isNested) {
-			setLocationSettings({
-				isNested: !locationSettings.isNested
-			});
-		} else {
-			toggleModal();
-		}
-	}
+	const handleClick = useCallback(
+		e => {
+			refElement.current &&
+				!refElement.current.contains(e.target) &&
+				toggleModal();
+		},
+		[refElement, toggleModal]
+	);
+
+	const escFunction = useCallback(
+		e => {
+			if (e.keyCode === 27 && locationSettings.isNested) {
+				setLocationSettings({
+					isNested: !locationSettings.isNested
+				});
+			} else {
+				toggleModal();
+			}
+		},
+		[locationSettings, setLocationSettings, toggleModal]
+	);
 	useEffect(() => {
 		if (refElement.current) {
 			document.addEventListener("click", handleClick);
@@ -53,7 +60,7 @@ export const useOuterClickNotifier = (refElement, toggleModal) => {
 			document.removeEventListener("click", handleClick);
 			document.removeEventListener("keydown", escFunction, false);
 		};
-	}, [toggleModal, refElement]);
+	}, [handleClick, escFunction, refElement]);
 };
 
 /*

@@ -53,7 +53,10 @@ export const Body = () => {
 	// useEffect(() => {
 	// 	storeAndCalc();
 	// }, [solatTime]);
-	useMemo(() => storeAndCalc(solatTime), [solatTime, storeAndCalc]);
+	useMemo(() => {
+		storeAndCalc(solatTime);
+	}, [solatTime]);
+	// useMemo(() => storeAndCalc(solatTime), [solatTime, storeAndCalc]);
 	// useMemo(() => expensiveOperation(solatTime), [solatTime]);
 
 	return isMinimal ? null : (

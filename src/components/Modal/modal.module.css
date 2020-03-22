@@ -146,8 +146,8 @@
 		position: relative;
 	}
 	.modal .content .container {
-		border-top: 1px solid transparent;
-		/* border-top: 1px solid var(--main-black-gradient-point2); */
+		/* border-top: 1px solid transparent; */
+		border-top: 1px solid var(--main-black-gradient-point2);
 		border-bottom: 1px solid var(--main-black-gradient-point2);
 		/* margin: 38px 0; */
 		margin: 2.5em 0;

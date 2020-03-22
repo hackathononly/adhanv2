@@ -16,6 +16,7 @@ const Modal = ({ translate, reference, hide, isShowing, children }) => {
 							<div className={style.content}>
 								<div className={style.container}>
 									<Button
+										key={"close"}
 										type="close"
 										title={translate.close}
 										isShowing={hide}

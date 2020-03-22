@@ -19,7 +19,11 @@ const ThemeSelector = React.memo(({ children }) => {
 				"wrapper"
 			].join(" ")}
 		>
-			<LoadingBar translate={translate} isShowing={isLoadingBarShown} />
+			<LoadingBar
+				key={"loadingbarThemeSelector"}
+				translate={translate}
+				isShowing={isLoadingBarShown}
+			/>
 			{children}
 		</div>
 	);

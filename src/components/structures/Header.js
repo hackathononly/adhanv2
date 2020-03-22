@@ -71,7 +71,7 @@ export const Header = () => {
 		<header>
 			<div className="content">
 				<div className="subcontent">
-					{/* <Button type="settings" isShowing={toggleUserSettingsModal}>
+					{/* <Button key={"settings"} type="settings" isShowing={toggleUserSettingsModal}>
 				<SettingsIcon />
 			</Button> */}
 					{/* <Modal
@@ -121,6 +121,7 @@ export const Header = () => {
 					<h3>{translate.changeLang}</h3>
 					<hr /> */}
 					{/* <LanguageSelector
+					key={"languageselectorHeader"}
 					langList={languages}
 					setLang={setLang}
 					selectedLang={selectedLang}
@@ -128,6 +129,7 @@ export const Header = () => {
 					{/* </div>
 			</Modal> */}
 					<PrayerCountdown
+						key={"prayercountdownHeader"}
 						translate={translate}
 						timeToNextPrayer={timeToNextPrayer}
 						nextPrayer={nextPrayer}
@@ -144,9 +146,9 @@ export const Header = () => {
 						<span>{getSelectedMunicipal || getSelectedState}</span>
 					</Button>
 					<Modal
+						key={"modalHeader"}
 						translate={translate}
 						reference={locationSettingsModal}
-						key={"locationSettingsModal"}
 						hide={toggleLocationModal}
 						isShowing={showLocationModal}
 					>
@@ -168,6 +170,7 @@ export const Header = () => {
 							{translate.locationSelector}
 						</h3>
 						<LocationSelector
+							key={"locationselectorHeader"}
 							translate={translate}
 							locations={locations}
 							locationSettings={locationSettings}
@@ -176,6 +179,7 @@ export const Header = () => {
 						/>
 					</Modal>
 					{/* <DatePicker
+					key={"datepickerHeader"}
 					isShowing={isMinimal}
 					selectedLang={selectedLang}
 					hijriDate={hijriDate}

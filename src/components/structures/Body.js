@@ -53,13 +53,14 @@ export const Body = () => {
 	// useEffect(() => {
 	// 	storeAndCalc();
 	// }, [solatTime]);
-	useMemo(() => storeAndCalc(solatTime), [solatTime]);
+	useMemo(() => storeAndCalc(solatTime), [solatTime, storeAndCalc]);
 	// useMemo(() => expensiveOperation(solatTime), [solatTime]);
 
 	return isMinimal ? null : (
 		<article>
 			<div className="handlebar"></div>
 			{/* <PrayerCountdown
+				key={"prayercountdownBody"}
 				translate={translate}
 				timeToNextPrayer={timeToNextPrayer}
 				nextPrayer={nextPrayer}
@@ -83,6 +84,7 @@ export const Body = () => {
 					{translate.locationSelector}
 				</h3>
 				<LocationSelector
+					key={"locationselectorBody"}
 					translate={translate}
 					locations={locations}
 					locationSettings={locationSettings}
@@ -91,6 +93,7 @@ export const Body = () => {
 				/>
 			</Modal> */}
 			<PrayerTimeList
+				key={"prayertimelistBody"}
 				translate={translate}
 				prayerTimeList={getPrayerTimeList}
 				currentPrayerTime={currentPrayerTime}

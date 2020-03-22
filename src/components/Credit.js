@@ -42,6 +42,7 @@ const Credit = () => {
 		<aside>
 			<div>
 				<DatePicker
+					key={"datepickerCredit"}
 					selectedLang={selectedLang}
 					hijriDate={hijriDate}
 					gregorianDate={serverTime}
@@ -50,6 +51,7 @@ const Credit = () => {
 					{/* <span title={translate.subcredit}>{translate.credit}</span> */}
 					{/* {translate.credit} &nbsp;/ */}
 					{/* <LanguageSelector
+						key={"languageselectorCredit"}
 						isShowing={showLanguageModal}
 						// translate={translate}
 						toggleLanguageModal={toggleLanguageModal}
@@ -58,6 +60,7 @@ const Credit = () => {
 						selectedLang={selectedLang}
 					/>
 					<Button
+						key={"settings"}
 						translate={translate}
 						type="settings"
 						isShowing={toggleLanguageModal}
@@ -74,6 +77,7 @@ const Credit = () => {
 				</aside> */}
 					{/* {" "} */}
 					<Button
+						key={"settings"}
 						type="settings"
 						title={translate.settings}
 						isShowing={toggleUserSettingsModal}
@@ -123,12 +127,14 @@ const Credit = () => {
 								{translate.enableNotification}
 							</label> */}
 								{/* <Button
+								key={"close"}
 							type="close"
 							isShowing={toggleUserSettingsModal}
 						>
 							<CloseIcon width="30" height="30" />
 						</Button> */}
 								<LanguageSelector
+									key={"languageselectorCredit"}
 									// isShowing={showLanguageModal}
 									translate={translate}
 									toggleLanguageModal={toggleLanguageModal}
@@ -142,6 +148,7 @@ const Credit = () => {
 				</section>
 			</div>
 			{/* <Button
+				key={"settings"}
 				type="settings"
 				title={translate.settings}
 				isShowing={toggleUserSettingsModal}

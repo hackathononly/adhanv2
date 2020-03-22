@@ -82,7 +82,7 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function storeAndCalc() {
-		setUserSettings("showLoadingBar", true);
+		// setUserSettings("showLoadingBar", true);
 
 		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=27%20Jan%202020
 		// http://api.aladhan.com/v1/gToH?date=27%20Jan%202020
@@ -91,10 +91,10 @@ export const useSetPrayerTimes = () => {
 		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=2020-01-27
 		// https://api.aladhan.com/v1/gToH?date=27-01-2020
 
-		// axios
-		// 	.get("sampledata/daily.json")
 		axios
-			.get(solatTime)
+			.get("sampledata/daily.json")
+			// axios
+			// 	.get(solatTime)
 			.then(obj => {
 				const response = obj.data,
 					prayerTime = response.prayerTime[0],
@@ -127,7 +127,7 @@ export const useSetPrayerTimes = () => {
 			})
 			.then(datas => {
 				setPrayerTimes(datas); // save datas above into DB
-				getHijriFullDate(datas.serverDate, datas.serverDateReverse); // calculate dates - Hijri and Gregorian
+				// getHijriFullDate(datas.serverDate, datas.serverDateReverse); // calculate dates - Hijri and Gregorian
 				calculatePrayerTimes(datas); // calculate currentPrayerTime, nextPrayerTime and save into DB
 			});
 	}

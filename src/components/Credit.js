@@ -145,7 +145,7 @@ const Credit = () => {
 							<CloseIcon width="30" height="30" />
 						</Button> */}
 								<LanguageSelector
-									key={"languageselectorCredit-1"}
+									key={"languageselectorCredit"}
 									// isShowing={showLanguageModal}
 									translate={translate}
 									toggleLanguageModal={toggleLanguageModal}

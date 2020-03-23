@@ -111,7 +111,7 @@
 
 .settings {
 	/* display: flex; */
-	margin-left: 12px;
+	margin-left: 18px;
 	padding-left: 12px;
 	border-left: 1px solid var(--main-black-gradient-point2);
 }
@@ -123,6 +123,7 @@
 	height: 18px;
 }
 .settings button {
+	border-radius: var(--default-radius);
 	color: var(--credit-link);
 	/* color: var(--main-white); */
 	/* font-size: 14px; */
@@ -134,8 +135,11 @@
 	display: flex;
 	/* justify-content: center;
 	align-items: center; */
+	padding: 6px;
 }
 .settings button:hover {
+	opacity: 0.5;
+	/* background-color: var(--main-green-dark); */
 	text-decoration: none;
 	/* border: none;
 	border-bottom: 1px solid; */

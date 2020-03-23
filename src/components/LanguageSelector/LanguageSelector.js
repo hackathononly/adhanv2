@@ -17,7 +17,6 @@ const LanguageSelector = ({
 
 	// return isShowing ? (
 	return (
-		// return (
 		<section
 			ref={innerRef}
 			className={[style.container, "languages"].join(
@@ -26,26 +25,15 @@ const LanguageSelector = ({
 			)}
 		>
 			<h3>{translate.changeLang}</h3>
-			{Object.keys(langList || {}).map(key => (
-				<>
-					{/* <a
-						key={key}
-						href="/#"
-						title={key}
-						className={key === selectedLang ? style.active : null}
-						onClick={e => setLang(e.currentTarget.text)}
-					>
-						{key}
-					</a> */}
-					<Button
-						key={key}
-						title={key}
-						type={key === selectedLang ? style.active : null}
-						isShowing={e => setLang(e.target.innerHTML)}
-					>
-						{key}
-					</Button>
-				</>
+			{Object.keys(langList || {}).map((item, index) => (
+				<Button
+					key={index}
+					title={item}
+					type={item === selectedLang ? style.active : null}
+					isShowing={e => setLang(e.target.innerHTML)}
+				>
+					{item}
+				</Button>
 			))}
 		</section>
 	);

@@ -187,7 +187,7 @@ export const Header = () => {
 				/> */}
 				</div>
 			</div>
-			<Credit />
+			<Credit key={"creditHeader"} />
 		</header>
 	);
 };

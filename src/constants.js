@@ -44,8 +44,9 @@ const Constants = {
 		minimalMode: false,
 		selectedLang: "english",
 		enableNotification: false,
-		showLoadingBar: false
-		// isScrolling: false
+		showLoadingBar: false,
+		isScrolling: false,
+		hideSettings: false
 		// changeLanguage: false
 	},
 	locationSettings: {

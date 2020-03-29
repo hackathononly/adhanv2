@@ -77,25 +77,29 @@
 	color: var(--main-black);
 	border-radius: 100px;
 	display: flex;
-	padding: 12px 32px 12px 48px;
+	/* padding: 12px 32px 12px 48px; */
+	padding: 12px 28px 12px 24px;
 	border-color: var(--main-transparent);
 	font-size: medium;
-	flex-direction: column;
+	/* flex-direction: column; */
 	justify-content: center;
 	align-content: center;
 	align-items: center;
-	min-height: 62px;
+	/* min-height: 62px; */
+	/* height: 62px; */
 }
 :global(.enableDarkMode) .locationSelector button {
 	color: var(--main-white);
 }
 
 .locationSelector button svg {
-	width: 32px;
-	height: 32px;
+	/* width: 32px;
+	height: 32px; */
+	width: 24px;
+	height: 24px;
 	margin-right: 8px;
-	position: absolute;
-	left: 10px;
+	/* position: absolute;
+	left: 10px; */
 }
 .locationSelector button path {
 	/* fill: var(--main-white); */
@@ -111,7 +115,8 @@
 
 .settings {
 	/* display: flex; */
-	margin-left: 18px;
+	/* margin-left: 18px; */
+	margin-left: 12px;
 	padding-left: 12px;
 	border-left: 1px solid var(--main-black-gradient-point2);
 }
@@ -135,16 +140,19 @@
 	display: flex;
 	/* justify-content: center;
 	align-items: center; */
-	padding: 6px;
+	/* padding: 6px; */
 }
 .settings button:hover {
 	opacity: 0.5;
-	/* background-color: var(--main-green-dark); */
 	text-decoration: none;
 	/* border: none;
 	border-bottom: 1px solid; */
 	box-shadow: none;
 	cursor: pointer;
+	/* box-shadow: 0 0 0 1px var(--main-green-dark); */
+}
+button.settings.active {
+	background-color: var(--main-green-dark);
 }
 :global(.enableDarkMode) .settings path {
 	fill: var(--main-green);

@@ -5,23 +5,31 @@ import { useChangeLocationSettings } from "../customHook/useChangeLocationSettin
 // 	return Object.keys(item).length === 0 && item.constructor === Object;
 // };
 
-// export const useScrollNotifier = (refElement, checkIsScrolling) => {
-// 	function handleScroll(e) {
-// 		const node = e.target,
-// 			lastScrollTop = 0,
-// 			st = window.pageYOffset || node.scrollTop;
+export const useScrollNotifier = (refElement, checkIsScrolling) => {
+	// function handleScroll(e) {
+	// 	const node = e.target,
+	// 		lastScrollTop = 0,
+	// 		st = window.pageYOffset || node.scrollTop;
 
-// 		st > lastScrollTop ? checkIsScrolling(true) : checkIsScrolling(false);
-// 		// lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-// 	}
+	// 	st > lastScrollTop ? checkIsScrolling(true) : checkIsScrolling(false);
+	// 	// lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+	// }
 
-// 	useEffect(() => {
-// 		document.addEventListener("scroll", handleScroll, true);
-// 		return () => {
-// 			document.removeEventListener("scroll", handleScroll);
-// 		};
-// 	}, []);
-// };
+	const handleScroll = useCallback(e => {
+		const node = e.target,
+			lastScrollTop = 0,
+			st = window.pageYOffset || node.scrollTop;
+
+		st > lastScrollTop ? checkIsScrolling(true) : checkIsScrolling(false);
+	}, []);
+
+	useEffect(() => {
+		document.addEventListener("scroll", handleScroll, true);
+		return () => {
+			document.removeEventListener("scroll", handleScroll);
+		};
+	}, [refElement, handleScroll]);
+};
 
 export const useOuterClickNotifier = (refElement, toggleModal) => {
 	// used on language selector , settings, location selector

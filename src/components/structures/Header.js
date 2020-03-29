@@ -14,35 +14,35 @@ import {
 	// SettingsIcon
 } from "../../index";
 import {
-	// useScrollNotifier,
+	useScrollNotifier,
 	useOuterClickNotifier
 	// , useComponentIntoView
 } from "../../customHook/useGeneralHelper";
 import { useGetTranslation } from "../../customHook/useGetTranslation";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
-// import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
+import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
 import { useChangeLocationSettings } from "../../customHook/useChangeLocationSettings";
 
 export const Header = () => {
-	// const {
-	// 		// 		// languages,
-	// 		// 		// setLang,
-	// 		// selectedLang,
-	// 		// 		changeLanguage,
-	// 		// 		isLanguageChanged,
-	// 		// isScrolling,
-	// 		// checkIsScrolling
-	// 		// handleScroll,
-	// 		// isMinimal
-	// 		// 		setMinimal,
-	// 		// 		isDarkMode,
-	// 		// 		setDarkMode,
-	// 		// 		enableNotification,
-	// 		// 		isNotificationEnabled,
-	// 		// 		showUserSettingsModal,
-	// 		// 		toggleUserSettingsModal
-	// 	} = useChangeUserSettings(),
 	const {
+			// 		// languages,
+			// 		// setLang,
+			// selectedLang,
+			// 		changeLanguage,
+			// 		isLanguageChanged,
+			isScrolling,
+			checkIsScrolling
+			// handleScroll,
+			// isMinimal
+			// 		setMinimal,
+			// 		isDarkMode,
+			// 		setDarkMode,
+			// 		enableNotification,
+			// 		isNotificationEnabled,
+			// 		showUserSettingsModal,
+			// 		toggleUserSettingsModal
+		} = useChangeUserSettings(),
+		{
 			locations,
 			locationSettings,
 			setStateName,
@@ -64,13 +64,20 @@ export const Header = () => {
 	const locationSettingsModal = useRef(null);
 	useOuterClickNotifier(locationSettingsModal, toggleLocationModal);
 
-	// const header = useRef(null);
-	// useScrollNotifier(header, checkIsScrolling);
+	const header = useRef(null);
+	useScrollNotifier(header, checkIsScrolling);
 
 	return (
 		<header>
+			<Credit key={"creditHeader"} />
 			<div className="content">
-				<div className="subcontent">
+				{/* <div className="subcontent"> */}
+				<div
+					className={[
+						isScrolling ? "itemScroll" : null,
+						"subcontent"
+					].join(" ")}
+				>
 					{/* <Button key={"settings"} type="settings" isShowing={toggleUserSettingsModal}>
 				<SettingsIcon />
 			</Button> */}
@@ -187,7 +194,6 @@ export const Header = () => {
 				/> */}
 				</div>
 			</div>
-			<Credit key={"creditHeader"} />
 		</header>
 	);
 };

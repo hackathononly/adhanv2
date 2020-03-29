@@ -1,80 +1,54 @@
 .container ul {
+	/* border: 5px solid red; */
 	display: grid;
-	/* grid-template-columns: repeat(2, 1fr); */
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
+	/* grid-template-columns: repeat(3, 1fr); */
 	/* grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(2, 1fr);
 	grid-column-gap: 0px;*/
-	/* grid-row-gap: 1px;
-	grid-column-gap: 1px; */
+	grid-row-gap: 40px;
+	grid-column-gap: 30px;
 	/* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
 	/* height: 50vh; */
 	/* background: var(--main-black-gradient-point2); */
 }
+/* @media screen and (min-width: 40em) {
+	.wrapper {
+		border: 5px solid green;
+	}
+	.container ul {
+		border: 5px solid green;
+		grid-row-gap: 90px;
+		grid-column-gap: 90px;
+		grid-template-columns: repeat(3, 1fr);
+	}
+} */
+@media screen and (min-width: 40em) and (orientation: landscape) {
+	.container ul {
+		/* border: 5px solid black; */
+		/* grid-row-gap: 90px;
+		grid-column-gap: 90px; */
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
 .container li {
-	/* background-color: var(--main-white); */
 	position: relative;
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	text-align: center;
 	justify-content: center;
-	/* border-bottom: 1px solid; */
-	/* border-right: 1px solid; */
-	/* border-color: var(--main-black-gradient-point2); */
-	/* width: 33%; */
-	/* width: 50%; */
-	/* margin-left: -1px; */
-	/* float: left; */
 }
-/* .container li:nth-child(3),
-.container li:nth-child(6) {
-	border-right: none;
-} */
-/* .container li:nth-child(even) {
-	border-right: none;
-} */
 .container label {
-	/* border: 1px solid;
-	border-radius: 8px; */
 	-webkit-tap-highlight-color: rgba(
 		0,
 		0,
 		0,
 		0
 	); /* remove grey background when click label */
-	display: flex;
-	flex-direction: column;
-	padding: 32px 0;
-	/* padding: 28px 0; */
-	/* padding: 20% 0; */
-	align-items: center;
-	text-transform: capitalize;
-	font-weight: bold;
 }
 :global(.enableDarkMode) .container label {
 	color: var(--main-green);
 }
-@media screen and (min-width: 40em) {
-	/* .container label {
-		padding: 56px 0;
-	} */
-	.container ul {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-@media screen and (min-width: 70em) {
-	/* .container label {
-		padding: 68px 0;
-	} */
-
-	.container ul {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-/* @nedia(){
-	.container ul {
-		grid-template-columns: repeat(2, 1fr);
-	}
-} */
 .notificationDisable,
 .container input[type="checkbox"],
 .enableNotification input[type="checkbox"]:checked + label .notification {
@@ -97,15 +71,6 @@
 :global(.enableDarkMode) .notificationDisable path {
 	fill: var(--main-green-dark);
 }
-/* :global(.nextPrayer):before {
-	content: "";
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	bottom: 10px;
-	left: 10px;
-	background-color: var(--main-black-gradient-half);
-} */
 .currentPrayerTime .salahName:before {
 	/* content: ">"; */
 	/* content: "*"; */
@@ -148,7 +113,8 @@
 .salahTime {
 	font-weight: normal;
 	text-transform: uppercase;
-	font-size: medium;
+	/* font-size: medium; */
+	font-size: 14px;
 	/* font-weight: bold; */
 	display: block;
 	color: var(--main-black-gradient-half);

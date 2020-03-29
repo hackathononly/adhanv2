@@ -19,13 +19,13 @@ export const useChangeUserSettings = () => {
 		isMinimal = userSettings.minimalMode,
 		selectedLang = userSettings.selectedLang,
 		isNotificationEnabled = userSettings.enableNotification,
-		isLoadingBarShown = userSettings.showLoadingBar;
-	// isScrolling = userSettings.isScrolling;
+		isLoadingBarShown = userSettings.showLoadingBar,
+		isScrolling = userSettings.isScrolling;
 	// isLanguageChanged = userSettings.changeLanguage;
 
-	// function checkIsScrolling(val) {
-	// 	setUserSettings("isScrolling", val);
-	// }
+	function checkIsScrolling(val) {
+		setUserSettings("isScrolling", val);
+	}
 	function setDarkMode() {
 		return setUserSettings("darkMode", !userSettings.darkMode);
 	}
@@ -82,8 +82,8 @@ export const useChangeUserSettings = () => {
 		isLoadingBarShown,
 		// isLanguageChanged,
 		// changeLanguage,
-		// isScrolling,
-		// checkIsScrolling,
+		isScrolling,
+		checkIsScrolling,
 		isMinimal,
 		setMinimal,
 		isDarkMode,

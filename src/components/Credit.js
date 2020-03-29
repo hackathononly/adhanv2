@@ -3,7 +3,7 @@ import {
 	TickIcon,
 	Button,
 	// CloseIcon,
-	SettingsIcon,
+	// SettingsIcon,
 	DatePicker,
 	Checkbox,
 	LanguageSelector
@@ -41,13 +41,13 @@ const Credit = () => {
 	return (
 		<aside key={"creditAside"}>
 			<div key={"creditDiv"}>
-				<DatePicker
-					key={"datepickerCredit"}
-					selectedLang={selectedLang}
-					hijriDate={hijriDate}
-					gregorianDate={serverTime}
-				/>
 				<section key={"creditSection"}>
+					<DatePicker
+						key={"datepickerCredit"}
+						selectedLang={selectedLang}
+						hijriDate={hijriDate}
+						gregorianDate={serverTime}
+					/>
 					{/* <span title={translate.subcredit}>{translate.credit}</span> */}
 					{/* {translate.credit} &nbsp;/ */}
 					{/* <LanguageSelector
@@ -79,11 +79,16 @@ const Credit = () => {
 					<Button
 						key={"settings"}
 						type="settings"
+						// type={
+						// 	showUserSettingsModal
+						// 		? "settings active"
+						// 		: "settings"
+						// }
 						title={translate.settings}
 						isShowing={toggleUserSettingsModal}
 					>
-						{/* {translate.settings} */}
-						<SettingsIcon />
+						{translate.settings}
+						{/* <SettingsIcon /> */}
 					</Button>
 					{/* <a
 					href="/#"

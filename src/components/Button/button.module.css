@@ -113,16 +113,14 @@
 	color: var(--main-black);
 } */
 
-.settings {
-	/* display: flex; */
-	/* margin-left: 18px; */
+/* .settings {
 	margin-left: 12px;
 	padding-left: 12px;
 	border-left: 1px solid var(--main-black-gradient-point2);
 }
 :global(.enableDarkMode) .settings {
 	border-left-color: var(--main-white);
-}
+} */
 .settings button svg {
 	width: 18px;
 	height: 18px;

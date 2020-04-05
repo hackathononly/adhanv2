@@ -59,8 +59,15 @@ export const Body = () => {
 	// useMemo(() => storeAndCalc(solatTime), [solatTime, storeAndCalc]);
 	// useMemo(() => expensiveOperation(solatTime), [solatTime]);
 
+	// const divStyle = {
+	// 	borderRadius: "20px 20px 0 0",
+	// 	height: "70vh"
+	// 	boxShadow: "0 -1px 2px rgba(0,0,0,0.2)"
+	// };
+
 	return isMinimal ? null : (
 		<article>
+			{/* <div style={divStyle}> */}
 			<div className="handlebar"></div>
 			{/* <PrayerCountdown
 				key={"prayercountdownBody"}
@@ -105,6 +112,7 @@ export const Body = () => {
 				isNotificationEnabled={isNotificationEnabled}
 			/>
 			{/* <Tazkirah description={getRandomTazkirah} /> */}
+			{/* </div> */}
 		</article>
 	);
 };

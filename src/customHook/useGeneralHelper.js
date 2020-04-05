@@ -1,9 +1,27 @@
 import { useEffect, useCallback } from "react";
+// import moment from "moment";
+// import { useSetPrayerTimes } from "../customHook/useSetPrayerTimes";
 import { useChangeLocationSettings } from "../customHook/useChangeLocationSettings";
 
 // export const isObjectEmpty = item => {
 // 	return Object.keys(item).length === 0 && item.constructor === Object;
 // };
+
+/*
+	export const useCurrentTime = () => {
+		const currentTime = moment.utc().local();
+		const [seconds, setSeconds] = useState(currentTime);
+
+		useEffect(() => {
+			const interval = setInterval(() => {
+				setSeconds(currentTime.add(1, "s").format("HH:mm:ss"));
+			}, 1000);
+			return () => clearInterval(interval);
+		}, [currentTime]);
+
+		return seconds;
+	};
+*/
 
 export const useScrollNotifier = (refElement, checkIsScrolling) => {
 	// function handleScroll(e) {
@@ -15,20 +33,30 @@ export const useScrollNotifier = (refElement, checkIsScrolling) => {
 	// 	// lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
 	// }
 
-	const handleScroll = useCallback(e => {
-		const node = e.target,
-			lastScrollTop = 0,
-			st = window.pageYOffset || node.scrollTop;
+	// const handleScroll = useCallback(e => {
+	// 	const node = e.target,
+	// 		lastScrollTop = 0,
+	// 		st = window.pageYOffset || node.scrollTop;
 
-		st > lastScrollTop ? checkIsScrolling(true) : checkIsScrolling(false);
-	}, []);
+	// 	st > lastScrollTop ? checkIsScrolling(true) : checkIsScrolling(false);
+	// }, []);
 
 	useEffect(() => {
+		const handleScroll = e => {
+			const node = e.target,
+				lastScrollTop = 0,
+				st = window.pageYOffset || node.scrollTop;
+
+			st > lastScrollTop
+				? checkIsScrolling(true)
+				: checkIsScrolling(false);
+		};
+
 		document.addEventListener("scroll", handleScroll, true);
 		return () => {
 			document.removeEventListener("scroll", handleScroll);
 		};
-	}, [refElement, handleScroll]);
+	}, [refElement]);
 };
 
 export const useOuterClickNotifier = (refElement, toggleModal) => {

@@ -1,37 +1,61 @@
+.container {
+	height: calc(100% - 60px);
+	width: calc(100% - 60px);
+}
 .container ul {
-	/* border: 5px solid red; */
+	background-color: var(--main-grey);
+	height: 100%;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	/* border: 5px solid red; */
+	/* grid-template-columns: repeat(2, 1fr); */
 	/* grid-template-columns: repeat(3, 1fr); */
 	/* grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(2, 1fr);
 	grid-column-gap: 0px;*/
-	grid-row-gap: 40px;
-	grid-column-gap: 30px;
+	grid-row-gap: 1px;
+	grid-column-gap: 1px;
+	grid-template-columns: repeat(2, 1fr);
+	/* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
 	/* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
-	/* height: 50vh; */
-	/* background: var(--main-black-gradient-point2); */
 }
-/* @media screen and (min-width: 40em) {
-	.wrapper {
-		border: 5px solid green;
+@media screen and (max-width: 808px) {
+	/* iPhone XR */
+	.container {
+		/* border: 2px solid #ff6600; */
+	}
+}
+@media screen and (max-width: 400px) {
+	/* iPhone 7 / Huawei */
+	.container {
+		/* border: 2px solid yellow; */
+	}
+}
+@media screen and (min-width: 40em) {
+	/* Cepes */
+	.container {
+		/* border: 2px solid green;*/
+		height: calc(100% - 30%);
+		width: calc(100% - 30%);
 	}
 	.container ul {
-		border: 5px solid green;
-		grid-row-gap: 90px;
-		grid-column-gap: 90px;
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* height more than width */
+/* @media (orientation: landscape) {
+	.container {
+		border: 2px solid black;
+	}
+	.container ul {
 		grid-template-columns: repeat(3, 1fr);
 	}
 } */
-@media screen and (min-width: 40em) and (orientation: landscape) {
-	.container ul {
-		/* border: 5px solid black; */
-		/* grid-row-gap: 90px;
-		grid-column-gap: 90px; */
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
+
 .container li {
+	/* border: 1px solid #efefef;
+	border-radius: 10px; */
+	background: white;
 	position: relative;
 	display: flex;
 	align-items: center;

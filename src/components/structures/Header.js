@@ -4,7 +4,7 @@ import {
 	Modal,
 	Button,
 	// Checkbox,
-	// DatePicker,
+	DatePicker,
 	PrayerCountdown,
 	LocationSelector
 	// LanguageSelector
@@ -27,7 +27,7 @@ export const Header = () => {
 	const {
 			// 		// languages,
 			// 		// setLang,
-			// selectedLang,
+			selectedLang,
 			// 		changeLanguage,
 			// 		isLanguageChanged,
 			isScrolling,
@@ -54,8 +54,8 @@ export const Header = () => {
 			getSelectedMunicipal
 		} = useChangeLocationSettings(),
 		{
-			// hijriDate,
-			// serverTime,
+			hijriDate,
+			serverTime,
 			nextPrayer,
 			timeToNextPrayer
 		} = useSetPrayerTimes(),
@@ -67,9 +67,43 @@ export const Header = () => {
 	const header = useRef(null);
 	useScrollNotifier(header, checkIsScrolling);
 
+	const haha = {
+		// textAlign: "left",
+		// border: "1px solid transparent",
+		// backgroundColor: "var(--main-white)",
+		// borderRadius: "var(--default-radius)",
+		position: "absolute",
+		bottom: "0",
+		left: "0",
+		right: "0",
+		// justifyContent: "center",
+		// marginRight: "8px",
+		// padding: "0 10px",
+		color: "var(--credit-link)",
+		// display: "flex",
+		// alignItems: "center",
+		// borderBottom: "1px solid var(--credit-link)",
+		fontSize: "12px"
+		// height: "44px"
+		// width: "100%",
+		// display: "flex",
+		// justifyContent: "center",
+		// alignItems: "center"
+	};
+
 	return (
 		<header>
 			<Credit key={"creditHeader"} />
+			<>
+				<div style={haha}>
+					<DatePicker
+						key={"datepickerCredit"}
+						selectedLang={selectedLang}
+						hijriDate={hijriDate}
+						gregorianDate={serverTime}
+					/>
+				</div>
+			</>
 			<div className="content">
 				{/* <div className="subcontent"> */}
 				<div

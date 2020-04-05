@@ -3,8 +3,8 @@ import {
 	TickIcon,
 	Button,
 	// CloseIcon,
-	// SettingsIcon,
-	DatePicker,
+	SettingsIcon,
+	// DatePicker,
 	Checkbox,
 	LanguageSelector
 } from "../index";
@@ -32,8 +32,8 @@ const Credit = () => {
 			toggleUserSettingsModal,
 			toggleLanguageModal
 			// isLanguageChanged
-		} = useChangeUserSettings(),
-		{ hijriDate, serverTime } = useSetPrayerTimes();
+		} = useChangeUserSettings();
+	// { hijriDate, serverTime } = useSetPrayerTimes();
 
 	const settingsContainer = useRef(null);
 	useOuterClickNotifier(settingsContainer, toggleUserSettingsModal);
@@ -42,12 +42,12 @@ const Credit = () => {
 		<aside key={"creditAside"}>
 			<div key={"creditDiv"}>
 				<section key={"creditSection"}>
-					<DatePicker
+					{/* <DatePicker
 						key={"datepickerCredit"}
 						selectedLang={selectedLang}
 						hijriDate={hijriDate}
 						gregorianDate={serverTime}
-					/>
+					/> */}
 					{/* <span title={translate.subcredit}>{translate.credit}</span> */}
 					{/* {translate.credit} &nbsp;/ */}
 					{/* <LanguageSelector
@@ -79,16 +79,11 @@ const Credit = () => {
 					<Button
 						key={"settings"}
 						type="settings"
-						// type={
-						// 	showUserSettingsModal
-						// 		? "settings active"
-						// 		: "settings"
-						// }
 						title={translate.settings}
 						isShowing={toggleUserSettingsModal}
 					>
-						{translate.settings}
-						{/* <SettingsIcon /> */}
+						{/* {translate.settings} */}
+						<SettingsIcon />
 					</Button>
 					{/* <a
 					href="/#"

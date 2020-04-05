@@ -11,6 +11,7 @@ export default {
 		`tazkirah-bm-5`
 	],
 	prayerList: {
+		// imsak: "Imsak",
 		fajr: "Subuh",
 		syuruk: "Syuruk",
 		dhuhr: "Zohor",

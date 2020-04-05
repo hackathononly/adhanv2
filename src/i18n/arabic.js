@@ -9,6 +9,7 @@ export default {
 		`tazkirah-arab-5`
 	],
 	prayerList: {
+		// imsak: "ImsakArab",
 		fajr: "الفجر",
 		syuruk: "الشروق",
 		dhuhr: "الظهر",

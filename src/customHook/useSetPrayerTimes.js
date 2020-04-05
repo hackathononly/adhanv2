@@ -2,6 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import { useStateValue } from "../state";
 import { useGetTranslation } from "../customHook/useGetTranslation";
+// import { useCurrentTime } from "../customHook/useGeneralHelper";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
 import Constants from "../constants";
 
@@ -38,36 +39,41 @@ export const useSetPrayerTimes = () => {
 		return { next: nextWaktu, current: currentWaktu };
 	}
 
-	// const dateTime = {
-	// currentTime(){}
-	// 	formatTime() {
-	// 		return "haha";
-	// 	},
-	// 	formatDate() {
-	// 		return "lala";
-	// 	}
-	// };
-
 	function calculatePrayerTimes(datas) {
 		const dateToday = moment().format("DD/MM/YYYY"),
 			dateTomorrow = moment()
 				.add(1, "days")
 				.format("DD/MM/YYYY"),
-			currentTime = moment().format("HH:mm:ss"),
-			timeStatus = Object.values(datas.list || {}).every(function(
-				dataTime
-			) {
-				return dataTime < currentTime;
-			}),
-			next = Object.values(datas.list || {})
-				.map(function(s) {
-					return timeStatus
-						? moment(dateTomorrow + " " + s, "DD/MM/YYYY HH:mm:ss")
-						: moment(dateToday + " " + s, "DD/MM/YYYY HH:mm:ss");
-				})
-				.find(function(m) {
-					return m.isAfter();
-				});
+			currentTime = moment().format("HH:mm:ss");
+
+		const timeStatus = Object.values(datas.list || {}).every(function(
+			dataTime
+		) {
+			return dataTime < currentTime;
+		});
+
+		const next = Object.values(datas.list || {})
+			.map(function(s) {
+				return timeStatus
+					? moment(dateTomorrow + " " + s, "DD/MM/YYYY HH:mm:ss")
+					: moment(dateToday + " " + s, "DD/MM/YYYY HH:mm:ss");
+			})
+			.find(function(m) {
+				return m.isAfter();
+			});
+
+		// calcute difference time
+		// var now = dateToday + currentTime;
+		// var then = dateToday + "10:20:30";
+		// console.log(
+		// 	moment
+		// 		.utc(
+		// 			moment(now, "DD/MM/YYYY HH:mm:ss").diff(
+		// 				moment(then, "DD/MM/YYYY HH:mm:ss")
+		// 			)
+		// 		)
+		// 		.format("HH:mm:ss")
+		// );
 
 		const time = getCurrentAndNextWaktu(
 			datas.list,
@@ -82,7 +88,7 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function storeAndCalc() {
-		setUserSettings("showLoadingBar", true);
+		// setUserSettings("showLoadingBar", true);
 
 		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=27%20Jan%202020
 		// http://api.aladhan.com/v1/gToH?date=27%20Jan%202020
@@ -91,10 +97,10 @@ export const useSetPrayerTimes = () => {
 		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=2020-01-27
 		// https://api.aladhan.com/v1/gToH?date=27-01-2020
 
-		// axios
-		// 	.get("sampledata/daily.json")
 		axios
-			.get(solatTime)
+			.get("sampledata/daily.json")
+		// axios
+		// 	.get(solatTime)
 			.then(obj => {
 				const response = obj.data,
 					prayerTime = response.prayerTime[0],
@@ -105,6 +111,7 @@ export const useSetPrayerTimes = () => {
 					datas = {
 						silenced: [],
 						list: {
+							// imsak: prayerTime.imsak,
 							fajr: prayerTime.fajr,
 							syuruk: prayerTime.syuruk,
 							dhuhr: prayerTime.dhuhr,

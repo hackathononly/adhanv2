@@ -12,6 +12,7 @@ export default {
 		`tazkirah-en-5`
 	],
 	prayerList: {
+		// imsak: "Imsak",
 		fajr: "Fajr",
 		syuruk: "Syuruk",
 		dhuhr: "Dhuhr",

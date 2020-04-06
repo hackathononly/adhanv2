@@ -9,7 +9,7 @@ import Constants from "../constants";
 export const useSetPrayerTimes = () => {
 	const [
 			{ locationSettings, languages, prayerTimes, userSettings },
-			dispatch
+			dispatch,
 		] = useStateValue(),
 		{ getTranslation: translate } = useGetTranslation(),
 		{ setUserSettings } = useChangeUserSettings(),
@@ -33,7 +33,7 @@ export const useSetPrayerTimes = () => {
 
 	function getCurrentAndNextWaktu(object, value) {
 		const obj = Object.keys(object),
-			nextWaktu = obj.find(key => object[key] === value),
+			nextWaktu = obj.find((key) => object[key] === value),
 			objIndex = obj.indexOf(nextWaktu),
 			currentWaktu = objIndex === 0 ? obj[5] : obj[objIndex - 1];
 		return { next: nextWaktu, current: currentWaktu };
@@ -41,24 +41,22 @@ export const useSetPrayerTimes = () => {
 
 	function calculatePrayerTimes(datas) {
 		const dateToday = moment().format("DD/MM/YYYY"),
-			dateTomorrow = moment()
-				.add(1, "days")
-				.format("DD/MM/YYYY"),
+			dateTomorrow = moment().add(1, "days").format("DD/MM/YYYY"),
 			currentTime = moment().format("HH:mm:ss");
 
-		const timeStatus = Object.values(datas.list || {}).every(function(
+		const timeStatus = Object.values(datas.list || {}).every(function (
 			dataTime
 		) {
 			return dataTime < currentTime;
 		});
 
 		const next = Object.values(datas.list || {})
-			.map(function(s) {
+			.map(function (s) {
 				return timeStatus
 					? moment(dateTomorrow + " " + s, "DD/MM/YYYY HH:mm:ss")
 					: moment(dateToday + " " + s, "DD/MM/YYYY HH:mm:ss");
 			})
-			.find(function(m) {
+			.find(function (m) {
 				return m.isAfter();
 			});
 
@@ -83,12 +81,12 @@ export const useSetPrayerTimes = () => {
 		setPrayerTimes({
 			timeToNextPrayer: next.fromNow(),
 			currentPrayerTime: time.current,
-			nextPrayer: time.next
+			nextPrayer: time.next,
 		});
 	}
 
 	function storeAndCalc() {
-		// setUserSettings("showLoadingBar", true);
+		setUserSettings("showLoadingBar", true);
 
 		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=27%20Jan%202020
 		// http://api.aladhan.com/v1/gToH?date=27%20Jan%202020
@@ -97,11 +95,11 @@ export const useSetPrayerTimes = () => {
 		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=2020-01-27
 		// https://api.aladhan.com/v1/gToH?date=27-01-2020
 
-		axios
-			.get("sampledata/daily.json")
 		// axios
-		// 	.get(solatTime)
-			.then(obj => {
+		// 	.get("sampledata/daily.json")
+		axios
+			.get(solatTime)
+			.then((obj) => {
 				const response = obj.data,
 					prayerTime = response.prayerTime[0],
 					serverDate = response.serverTime.substr(
@@ -117,22 +115,19 @@ export const useSetPrayerTimes = () => {
 							dhuhr: prayerTime.dhuhr,
 							asr: prayerTime.asr,
 							maghrib: prayerTime.maghrib,
-							isha: prayerTime.isha
+							isha: prayerTime.isha,
 						},
 						// serverTime: moment(
 						// 	`${serverTime} ${time.isha}`,
 						// 	"YYYY-MM-DD HH:mm:ss"
 						// ).format("hh:mm A"),
 						serverTime: prayerTime.date.split("-").join(" "),
-						serverDate: serverDate
-							.split("-")
-							.reverse()
-							.join("-"),
-						serverDateReverse: serverDate
+						serverDate: serverDate.split("-").reverse().join("-"),
+						serverDateReverse: serverDate,
 					};
 				return datas;
 			})
-			.then(datas => {
+			.then((datas) => {
 				setPrayerTimes(datas); // save datas above into DB
 				getHijriFullDate(datas.serverDate, datas.serverDateReverse); // calculate dates - Hijri and Gregorian
 				calculatePrayerTimes(datas); // calculate currentPrayerTime, nextPrayerTime and save into DB
@@ -157,13 +152,13 @@ export const useSetPrayerTimes = () => {
 		if (isPrayerTimeSilenced === -1) {
 			// prayerTime does not silenced
 			setPrayerTimes({
-				silenced: [...getSilencedTime, prayerTime]
+				silenced: [...getSilencedTime, prayerTime],
 			});
 		} else {
 			// prayerTime already silenced
 			getSilencedTime.splice(isPrayerTimeSilenced, 1);
 			setPrayerTimes({
-				silenced: [...getSilencedTime]
+				silenced: [...getSilencedTime],
 			});
 		}
 	}
@@ -174,43 +169,43 @@ export const useSetPrayerTimes = () => {
 
 		axios
 			.all([axios.get(islamicDateAPI), axios.get(islamicDateAPIArabic)])
-			.then(obj => {
+			.then((obj) => {
 				const hijriDate = obj[0].data.takwim[serverDateReverse], // Jakim Obj
 					hijriDateArabic = obj[1].data.data.hijri, // Aladhan Obj
 					jakimHijriMonth = hijriDate.split("-")[1], // [ "04" ]
 					jakimHijriDay = hijriDate.split("-")[2]; // [ "19" ]
 
 				const multiLanguageHijriDates = Object.keys(languages || {})
-					.map(keys => {
+					.map((keys) => {
 						const hijriFullDate = [
 							jakimHijriDay,
 							keys === "arabic"
 								? hijriDateArabic.month.ar
 								: Constants.islamicMonth[jakimHijriMonth],
-							hijriDateArabic.year
+							hijriDateArabic.year,
 						].join(" ");
 						return { [keys]: hijriFullDate };
 					})
 					.reduce((result, key) => {
-						Object.keys(key).forEach(lang => {
+						Object.keys(key).forEach((lang) => {
 							result[lang] = key[lang];
 						});
 						return result;
 					}, {});
 
 				setPrayerTimes({
-					hijriDate: multiLanguageHijriDates
+					hijriDate: multiLanguageHijriDates,
 				});
 				setUserSettings("showLoadingBar", false);
 			}, []);
 	}
 
 	function setPrayerTimes(obj) {
-		Object.keys(obj || {}).map(key => {
+		Object.keys(obj || {}).map((key) => {
 			return dispatch({
 				type: "setPrayerTimes",
 				mode: key,
-				value: obj[key]
+				value: obj[key],
 			});
 		});
 	}
@@ -228,6 +223,6 @@ export const useSetPrayerTimes = () => {
 		setPrayerTimes,
 		setSilencedTime,
 		getSilencedTime,
-		storeAndCalc
+		storeAndCalc,
 	};
 };

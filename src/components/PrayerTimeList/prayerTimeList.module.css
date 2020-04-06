@@ -1,6 +1,7 @@
 .container {
 	height: calc(100% - 60px);
 	width: calc(100% - 60px);
+	/* max-width: 1200px; */
 }
 .container ul {
 	background-color: var(--main-grey);
@@ -12,8 +13,8 @@
 	/* grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(2, 1fr);
 	grid-column-gap: 0px;*/
-	grid-row-gap: 1px;
-	grid-column-gap: 1px;
+	grid-row-gap: 0.5px;
+	/* grid-column-gap: 0.5px; */
 	grid-template-columns: repeat(2, 1fr);
 	/* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
 	/* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
@@ -33,9 +34,9 @@
 @media screen and (min-width: 40em) {
 	/* Cepes */
 	.container {
-		/* border: 2px solid green;*/
-		height: calc(100% - 30%);
-		width: calc(100% - 30%);
+		/* border: 2px solid green; */
+		/* height: calc(100% - 30%);
+		width: calc(100% - 30%); */
 	}
 	.container ul {
 		grid-template-columns: repeat(3, 1fr);

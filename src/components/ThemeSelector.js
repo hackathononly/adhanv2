@@ -7,17 +7,14 @@ const ThemeSelector = React.memo(({ children }) => {
 	const {
 			isMinimal,
 			isDarkMode,
-			isLoadingBarShown
+			isLoadingBarShown,
 		} = useChangeUserSettings(),
 		{ getTranslation: translate } = useGetTranslation();
 
 	return (
-		<div
-			className={[
-				isDarkMode ? "enableDarkMode" : null,
-				isMinimal ? "isMinimal" : null,
-				"wrapper"
-			].join(" ")}
+		<main
+			data-theme={isDarkMode ? "dark" : "light"}
+			className={[isMinimal ? "isMinimal" : null, "wrapper"].join(" ")}
 		>
 			<LoadingBar
 				key={"loadingbarThemeSelector"}
@@ -25,7 +22,7 @@ const ThemeSelector = React.memo(({ children }) => {
 				isShowing={isLoadingBarShown}
 			/>
 			{children}
-		</div>
+		</main>
 	);
 });
 

@@ -9,14 +9,14 @@ const PrayerTimeList = React.memo(
 		setSilencedTime,
 		getSilencedTime,
 		currentPrayerTime,
-		isNotificationEnabled
+		isNotificationEnabled,
 	}) => {
 		const prayerTimeKey = Object.keys(translate.prayerList); // get keys of prayerTimes, for defaultChecked purpose : ['fajr', 'syuruk', 'dhuhr', 'asr'...]
 		return (
-			<section
+			<div
 				className={[
 					isNotificationEnabled ? style.enableNotification : null,
-					style.container
+					style.container,
 				].join(" ")}
 			>
 				<ul>
@@ -44,31 +44,33 @@ const PrayerTimeList = React.memo(
 								)}
 							/>
 							<label htmlFor={item}>
-								{isNotificationEnabled
-									? [
-											<Notification
-												key={"notification"}
-												className={
-													("notification",
-													[
-														style.icon,
-														style.notification
-													].join(" "))
-												}
-											/>,
-											<NotificationDisable
-												key={"notificationDisable"}
-												className={
-													("notificationDisable",
-													[
-														style.icon,
-														style.notificationDisable
-													].join(" "))
-												}
-											/>
-									  ]
-									: null}
-								<span className={style.salahName}>{item}</span>
+								<div className={style.salahName}>
+									{isNotificationEnabled
+										? [
+												<Notification
+													key={"notification"}
+													className={
+														("notification",
+														[
+															style.icon,
+															style.notification,
+														].join(" "))
+													}
+												/>,
+												<NotificationDisable
+													key={"notificationDisable"}
+													className={
+														("notificationDisable",
+														[
+															style.icon,
+															style.notificationDisable,
+														].join(" "))
+													}
+												/>,
+										  ]
+										: null}
+									{item}
+								</div>
 								<span className={style.salahTime}>
 									{prayerTimeList[item]}
 								</span>
@@ -76,7 +78,7 @@ const PrayerTimeList = React.memo(
 						</li>
 					))}
 				</ul>
-			</section>
+			</div>
 		);
 	}
 );

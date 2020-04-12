@@ -4,7 +4,13 @@ import { Reducer } from "./reducer";
 import { StateProvider } from "./state";
 
 /* Structure */
-import { Header, Body, ThemeSelector, i18n } from "./index";
+import {
+	// Header,
+	Credit,
+	Body,
+	ThemeSelector,
+	i18n,
+} from "./index";
 
 const App = () => {
 	return (
@@ -19,7 +25,8 @@ const App = () => {
 			locationSettings={Constants.locationSettings}
 		>
 			<ThemeSelector>
-				<Header />
+				{/* <Header /> */}
+				<Credit key={"creditHeader"} />
 				<Body />
 			</ThemeSelector>
 		</StateProvider>

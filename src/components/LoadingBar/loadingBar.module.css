@@ -5,7 +5,8 @@
 	left: 0;
 	right: 0;
 	/* background: url("../src/images/loadingBar.svg") 0 0 no-repeat; */
-	background-color: var(--main-white);
+	/* background-color: var(--main-white); */
+	background-color: var(--loadingBar-background);
 	/* background-size: 50%; */
 	z-index: 8;
 	/* padding: 10px 0 10px 40px; */
@@ -15,9 +16,6 @@
 	flex-direction: column;
 	min-height: var(--full-height);
 	font-size: 0.8em;
-}
-:global(.enableDarkMode) .loadingBarContainer {
-	background-color: var(--main-darkMode);
 }
 .spinner {
 	align-items: center;

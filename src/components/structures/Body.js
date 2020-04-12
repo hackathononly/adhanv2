@@ -1,11 +1,12 @@
 import React, { useRef, useMemo } from "react";
 import {
+	Header,
 	// Tazkirah,
 	// Button,
 	// Modal,
 	// PrayerCountdown,
 	// LocationSelector,
-	PrayerTimeList
+	PrayerTimeList,
 } from "../../index";
 // import {
 // 	LocationIcon,
@@ -20,7 +21,7 @@ import { useChangeLocationSettings } from "../../customHook/useChangeLocationSet
 export const Body = () => {
 	const {
 			isMinimal,
-			isNotificationEnabled
+			isNotificationEnabled,
 			// setUserSettings
 		} = useChangeUserSettings(),
 		{
@@ -29,7 +30,7 @@ export const Body = () => {
 			// setStateName,
 			// setStateCode,
 			// showLocationModal,
-			toggleLocationModal
+			toggleLocationModal,
 			// getSelectedState,
 			// getSelectedStateCode,
 			// getSelectedMunicipal
@@ -41,7 +42,7 @@ export const Body = () => {
 			currentPrayerTime,
 			getPrayerTimeList,
 			setSilencedTime,
-			getSilencedTime
+			getSilencedTime,
 			// nextPrayer,
 			// timeToNextPrayer
 			// setPrayerTimes
@@ -59,16 +60,11 @@ export const Body = () => {
 	// useMemo(() => storeAndCalc(solatTime), [solatTime, storeAndCalc]);
 	// useMemo(() => expensiveOperation(solatTime), [solatTime]);
 
-	// const divStyle = {
-	// 	borderRadius: "20px 20px 0 0",
-	// 	height: "70vh"
-	// 	boxShadow: "0 -1px 2px rgba(0,0,0,0.2)"
-	// };
-
-	return isMinimal ? null : (
+	// return isMinimal ? null : (
+	return (
 		<article>
-			{/* <div style={divStyle}> */}
-			<div className="handlebar"></div>
+			{/* <div className="handlebar"></div> */}
+			<Header />
 			{/* <PrayerCountdown
 				key={"prayercountdownBody"}
 				translate={translate}
@@ -102,17 +98,20 @@ export const Body = () => {
 					setStateCode={setStateCode}
 				/>
 			</Modal> */}
-			<PrayerTimeList
-				key={"prayertimelistBody"}
-				translate={translate}
-				prayerTimeList={getPrayerTimeList}
-				currentPrayerTime={currentPrayerTime}
-				setSilencedTime={setSilencedTime}
-				getSilencedTime={getSilencedTime}
-				isNotificationEnabled={isNotificationEnabled}
-			/>
+			{isMinimal ? null : (
+				<section className="content">
+					<PrayerTimeList
+						key={"prayertimelistBody"}
+						translate={translate}
+						prayerTimeList={getPrayerTimeList}
+						currentPrayerTime={currentPrayerTime}
+						setSilencedTime={setSilencedTime}
+						getSilencedTime={getSilencedTime}
+						isNotificationEnabled={isNotificationEnabled}
+					/>
+				</section>
+			)}
 			{/* <Tazkirah description={getRandomTazkirah} /> */}
-			{/* </div> */}
 		</article>
 	);
 };

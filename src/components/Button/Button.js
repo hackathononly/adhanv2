@@ -1,15 +1,20 @@
 import React from "react";
 import style from "./button.module.css";
 // import { isObjectEmpty } from "../../customHook/useGeneralHelper";
-
 // import { useGetTranslation } from "../../customHook/useGetTranslation";
-const Button = ({ type, isShowing, title, children }) => {
-	// const { getTranslation: translate } = useGetTranslation();
 
+const Button = ({
+	type,
+	isShowing,
+	title,
+	showUserSettingsModal,
+	children,
+}) => {
 	return (
 		<div
 			className={[
-				type ? `${style.btn} ${style[type]}` : `${style.btn} `
+				type ? `${style.btn} ${style[type]}` : `${style.btn} `,
+				showUserSettingsModal ? style.active : "",
 			].join(" ")}
 		>
 			<button

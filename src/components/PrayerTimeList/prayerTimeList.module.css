@@ -1,13 +1,14 @@
 .container {
-	height: calc(100% - 60px);
-	width: calc(100% - 60px);
-	/* max-width: 1200px; */
+	height: calc(100% - 20%);
+	/* width: calc(100% - 60px); */
+	max-width: 700px;
+	/* height: calc(100%-30%); */
+	width: 100%;
 }
 .container ul {
-	background-color: var(--main-grey);
+	background-color: var(--prayerTime-ul-container);
 	height: 100%;
 	display: grid;
-	/* border: 5px solid red; */
 	/* grid-template-columns: repeat(2, 1fr); */
 	/* grid-template-columns: repeat(3, 1fr); */
 	/* grid-template-columns: repeat(3, 1fr);
@@ -15,48 +16,19 @@
 	grid-column-gap: 0px;*/
 	grid-row-gap: 0.5px;
 	/* grid-column-gap: 0.5px; */
-	grid-template-columns: repeat(2, 1fr);
-	/* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
-	/* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
-}
-@media screen and (max-width: 808px) {
-	/* iPhone XR */
-	.container {
-		/* border: 2px solid #ff6600; */
-	}
+	/* grid-template-columns: repeat(2, 1fr); */
+	grid-template-columns: repeat(auto-fill, minmax(var(--minmaxval), 1fr));
+	/* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
 }
 @media screen and (max-width: 400px) {
 	/* iPhone 7 / Huawei */
-	.container {
-		/* border: 2px solid yellow; */
+	:root {
+		--minmaxval: 150px;
 	}
 }
-@media screen and (min-width: 40em) {
-	/* Cepes */
-	.container {
-		/* border: 2px solid green; */
-		/* height: calc(100% - 30%);
-		width: calc(100% - 30%); */
-	}
-	.container ul {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
-/* height more than width */
-/* @media (orientation: landscape) {
-	.container {
-		border: 2px solid black;
-	}
-	.container ul {
-		grid-template-columns: repeat(3, 1fr);
-	}
-} */
 
 .container li {
-	/* border: 1px solid #efefef;
-	border-radius: 10px; */
-	background: white;
+	background-color: var(--prayerTime-li-container);
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -70,91 +42,59 @@
 		0,
 		0
 	); /* remove grey background when click label */
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
-:global(.enableDarkMode) .container label {
-	color: var(--main-green);
+.container label:hover {
+	background-color: var(--main-black-opacity1);
 }
+
 .notificationDisable,
 .container input[type="checkbox"],
 .enableNotification input[type="checkbox"]:checked + label .notification {
 	display: none;
-	/* visibility: hidden; */
 }
 .enableNotification
 	input[type="checkbox"]:checked
 	+ label
 	.notificationDisable {
-	/* visibility: visible; */
-	display: block;
+	display: inline;
+}
+.notification path {
+	fill: var(--prayerTimeList-notification-icon);
 }
 .notificationDisable path {
-	fill: var(--main-black-gradient-half);
-}
-:global(.enableDarkMode) .notification path {
-	fill: var(--main-green);
-}
-:global(.enableDarkMode) .notificationDisable path {
-	fill: var(--main-green-dark);
-}
-.currentPrayerTime .salahName:before {
-	/* content: ">"; */
-	/* content: "*"; */
-	content: " ";
-	position: absolute;
-	/* left: -14px; */
-	padding: 8px;
-	left: -25px;
-	/* background-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%); */
-	background: rgb(105, 231, 129);
-	background: linear-gradient(
-		180deg,
-		rgba(105, 231, 129, 1) 0%,
-		rgba(0, 161, 82, 1) 100%
-	);
-	top: 0;
-	position: absolute;
-	border-radius: 8px;
-}
-.enableNotification input[type="checkbox"]:checked + label .salahName {
-	color: var(--main-grey-solid);
-}
-:global(.enableDarkMode) .salahName {
-	color: var(--main-green);
-}
-:global(.enableDarkMode)
-	.enableNotification
-	input[type="checkbox"]:checked
-	+ label
-	.salahName {
-	color: var(--main-green-dark);
+	fill: var(--prayerTimeList-notificationDisable-icon);
 }
 .salahName {
+	color: var(--prayerTimeList-salahName);
 	position: relative;
-	/* font-size: 22px; */
 	font-size: 18px;
 	font-weight: bold;
-	/* margin-bottom: 4px; */
+	margin: 0 20%;
+	/* display: block; */
 }
 .salahTime {
 	font-weight: normal;
 	text-transform: uppercase;
-	/* font-size: medium; */
 	font-size: 14px;
-	/* font-weight: bold; */
 	display: block;
-	color: var(--main-black-gradient-half);
-}
-:global(.enableDarkMode) .salahTime {
-	color: var(--main-white);
+	color: var(--prayerTimeList-salahTime);
 }
 .icon {
-	width: 24px;
-	height: 24px;
-	margin-bottom: 10px;
-	/* width: 28px;
-	height: 28px;
-	background-size: 30px;*/
-	/* position: absolute;
-	left: 10px;
-	bottom: 34px; */
+	/* width: 18px; */
+	height: 18px;
+	left: 0;
+	/* top: 12px; */
+	/* left: -24px; */
+	position: absolute;
+	-moz-transform: rotate(20deg);
+	-webkit-transform: rotate(20deg);
+	-o-transform: rotate(20deg);
+	-ms-transform: rotate(20deg);
+	transform: rotate(20deg);
 }

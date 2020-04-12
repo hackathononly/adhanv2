@@ -1,7 +1,7 @@
 .btn button {
+	color: var(--button-mainColor);
 	border: 0;
 	text-transform: uppercase;
-	/* letter-spacing: 1px; */
 	-webkit-transition: all 0.4s;
 	-moz-transition: all 0.4s;
 	-o-transition: all 0.4s;
@@ -9,21 +9,16 @@
 	visibility: visible;
 	opacity: 1;
 	font-weight: bold;
-	/* border: 1px solid var(--main-grey); */
 	position: relative;
 	background: none;
-	/* font-family: "Roboto", sans-serif; */
 	font-family: "Inter", sans-serif;
 }
-.btn button svg {
+.btn svg {
 	width: 24px;
 	height: 24px;
 }
 .btn button:hover {
 	cursor: pointer;
-	/* border: 1px solid var(--main-transparent); */
-	/* box-shadow: 0 6px 30px var(--main-black-gradient-half); */
-	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Custom Styling */
@@ -40,56 +35,24 @@
 	/* border-radius: 10px; */
 	z-index: 10;
 }
-/* .settings button {
-	top: 20px;
-	right: 0;
-	padding: 0;
-} */
-/* .settings button:hover,  */
-.close button:hover {
-	box-shadow: none;
-}
-/* .settings button:hover path, */
-.close button:hover path {
-	fill: var(--main-black-gradient-half);
-}
-/* :global(.enableDarkMode) .settings path {
-	fill: var(--main-green);
-}
-:global(.enableDarkMode) .settings:hover path {
-	fill: var(--main-green-dark);
-} */
 
 .locationSelector {
-	/* margin: 42px 0; */
-	/* margin: 20px 0 0; */
 	display: flex;
 	justify-content: center;
 }
+.locationSelector button:hover {
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+}
 .locationSelector button {
-	/* background: var(--main-green); */
-	/* background: linear-gradient(
-		180deg,
-		rgba(105, 231, 129, 1) 0%,
-		rgba(0, 161, 82, 1) 100%
-	); */
 	border-bottom: 1px dotted;
-	color: var(--main-black);
 	border-radius: 100px;
 	display: flex;
-	/* padding: 12px 32px 12px 48px; */
 	padding: 12px 28px 12px 24px;
 	border-color: var(--main-transparent);
 	font-size: medium;
-	/* flex-direction: column; */
 	justify-content: center;
 	align-content: center;
 	align-items: center;
-	/* min-height: 62px; */
-	/* height: 62px; */
-}
-:global(.enableDarkMode) .locationSelector button {
-	color: var(--main-white);
 }
 
 .locationSelector button svg {
@@ -102,31 +65,27 @@
 	left: 10px; */
 }
 .locationSelector button path {
-	/* fill: var(--main-white); */
-	fill: var(--main-black);
+	fill: var(--button-locationPath);
 }
-:global(.enableDarkMode) .locationSelector path {
-	fill: var(--main-white);
+.locationSelector span {
+	padding-bottom: 2px;
+	border-bottom: 1px dotted var(--main-grey-solid);
 }
-/* :global(.enableDarkMode .locationSelector) {
-	background-color: var(--main-green);
-	color: var(--main-black);
-} */
 
-/* .settings {
-	margin-left: 12px;
-	padding-left: 12px;
-	border-left: 1px solid var(--main-black-gradient-point2);
+/* Settings */
+.settings {
+	padding: 6px 10px;
+	border-radius: var(--default-radius);
 }
-:global(.enableDarkMode) .settings {
-	border-left-color: var(--main-white);
-} */
 .settings button svg {
 	width: 18px;
 	height: 18px;
 }
+.settings path {
+	fill: var(--button-settingsPath);
+}
 .settings button {
-	border-radius: var(--default-radius);
+	/* border-radius: var(--default-radius); */
 	color: var(--credit-link);
 	/* color: var(--main-white); */
 	/* font-size: 14px; */
@@ -134,25 +93,17 @@
 	font-weight: normal;
 	/* line-height: 2em; */
 	text-transform: capitalize;
-	text-decoration: underline;
+	/* text-decoration: underline; */
 	display: flex;
-	/* justify-content: center;
-	align-items: center; */
+	/* justify-content: center; */
+	align-items: center;
 	/* padding: 6px; */
 }
-.settings button:hover {
-	opacity: 0.5;
-	text-decoration: none;
-	/* border: none;
-	border-bottom: 1px solid; */
-	box-shadow: none;
-	cursor: pointer;
-	/* box-shadow: 0 0 0 1px var(--main-green-dark); */
+
+.settings:hover {
+	background-color: var(--main-black-opacity1);
 }
-button.settings.active {
-	background-color: var(--main-green-dark);
-}
-:global(.enableDarkMode) .settings path {
-	fill: var(--main-green);
+.settings.active {
+	background-color: var(--main-black-opacity2);
 }
 /* @end Custom Styling */

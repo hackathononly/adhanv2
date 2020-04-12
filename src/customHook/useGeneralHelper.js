@@ -41,8 +41,8 @@ export const useScrollNotifier = (refElement, checkIsScrolling) => {
 	// 	st > lastScrollTop ? checkIsScrolling(true) : checkIsScrolling(false);
 	// }, []);
 
-	useEffect(() => {
-		const handleScroll = e => {
+	const handleScroll = useCallback(
+		(e) => {
 			const node = e.target,
 				lastScrollTop = 0,
 				st = window.pageYOffset || node.scrollTop;
@@ -50,8 +50,11 @@ export const useScrollNotifier = (refElement, checkIsScrolling) => {
 			st > lastScrollTop
 				? checkIsScrolling(true)
 				: checkIsScrolling(false);
-		};
+		},
+		[checkIsScrolling]
+	);
 
+	useEffect(() => {
 		document.addEventListener("scroll", handleScroll, true);
 		return () => {
 			document.removeEventListener("scroll", handleScroll);
@@ -63,11 +66,11 @@ export const useOuterClickNotifier = (refElement, toggleModal) => {
 	// used on language selector , settings, location selector
 	const {
 		locationSettings,
-		setLocationSettings
+		setLocationSettings,
 	} = useChangeLocationSettings();
 
 	const handleClick = useCallback(
-		e => {
+		(e) => {
 			refElement.current &&
 				!refElement.current.contains(e.target) &&
 				toggleModal();
@@ -76,10 +79,10 @@ export const useOuterClickNotifier = (refElement, toggleModal) => {
 	);
 
 	const escFunction = useCallback(
-		e => {
+		(e) => {
 			if (e.keyCode === 27 && locationSettings.isNested) {
 				setLocationSettings({
-					isNested: !locationSettings.isNested
+					isNested: !locationSettings.isNested,
 				});
 			} else {
 				toggleModal();

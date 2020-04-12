@@ -18,12 +18,6 @@ body {
 	width: 100%;
 	height: 100%;
 }
-/*
-header,
-article {
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-} */
 
 /*
 @custom-media ---viewport-4;
@@ -32,44 +26,81 @@ article {
 @custom-media --viewport-12 (min-width: 1200px);
 */
 :root {
-	--link: #1d1da3;
+	--main-bg: #f5f5f5;
+	--main-fontColor: var(--main-darkMode);
+	--section-backgroundColor: var(--main-white);
+	--handlebarColor: var(--main-grey);
+	--credit-link: #5f6368;
+
+	/* Components */
+	--prayerTimeList-salahName: var(--main-darkMode);
+	--prayerTimeList-salahTime: var(--main-black-opacity5);
+	--prayerTimeList-notificationDisable-icon: var(--main-black-opacity5);
+	--prayerTime-ul-container: var(--main-grey);
+	--prayerTime-li-container: var(--main-white);
+	--datePicker-color: var(--credit-link);
+	--loadingBar-background: var(--main-white);
+	--prayerCountdown-header: var(--main-darkMode);
+	--prayerCountdown-bold: var(--main-green-dark);
+	--button-mainColor: var(--main-black);
+	--button-locationPath: var(--main-black);
+	--button-settingsPath: var(--main-black);
+
+	/* Main Colors */
 	--main-green: #69e781;
 	--main-green-dark: #00a152;
 	--main-white: #ffffff;
 	--main-black: #000000;
 	--main-transparent: transparent;
 	--main-darkMode: #333333;
-	--main-darkMode-half: #303030;
 	--main-grey: #e1e1e1;
-	/* --main-grey: #efefef; */
-	/* --main-grey-half: rgba(255, 255, 255, 0.9); */
 	--main-grey-solid: #666666;
-	--credit-link: #5f6368;
-	--main-black-gradient-half: rgba(0, 0, 0, 0.5);
-	--main-black-gradient-point1: rgba(0, 0, 0, 0.1);
-	--main-black-gradient-point2: rgba(0, 0, 0, 0.2);
-	--main-black-gradient-point5: rgba(0, 0, 0, 0.5);
+
+	/* Opacity */
+	--main-black-opacity1: rgba(0, 0, 0, 0.1);
+	--main-black-opacity2: rgba(0, 0, 0, 0.2);
+	--main-black-opacity5: rgba(0, 0, 0, 0.5);
+
+	/* Media Queries */
+	/* --viewport-4: (min-width: 480px);
+	--viewport-4: 480px;
+	--viewport-7: (min-width: 768px);
+	--viewport-7: 768px;
+	--viewport-9: (min-width: 992px);
+	--viewport-9: 992px;
+	--viewport-12: (min-width: 1200px);
+	--viewport-12: 1200px; */
+
+	/* Structure */
+	--full-height: 100vh;
+	--header-height: 94vh;
+	--minmaxval: 200px;
 	--default-radius: 20px;
 	--default-radius-10: 10px;
-	/* --viewport-4: (min-width: 480px); */
-	/* --viewport-4: 480px; */
-	/* --viewport-7: (min-width: 768px); */
-	/* --viewport-7: 768px; */
-	/* --viewport-9: (min-width: 992px); */
-	/* --viewport-9: 992px; */
-	/* --viewport-12: (min-width: 1200px); */
-	/* --viewport-12: 1200px; */
-	--full-height: 100vh;
-	/* --header-height: 97vh; */
-	--header-height: 90vh;
-	--header-height-mobile: 98vh;
-	--minmaxval: 200px;
+}
+[data-theme="dark"] {
+	--main-bg: var(--main-darkMode);
+	--main-fontColor: var(--main-white);
+	--section-backgroundColor: rgba(0, 0, 0, 0.5);
+	--handlebarColor: var(--main-green);
+	--prayerTimeList-salahName: var(--main-green);
+	--prayerTimeList-salahTime: var(--main-white);
+	--prayerTimeList-notification-icon: var(--main-green);
+	--prayerTimeList-notificationDisable-icon: var(--main-green-dark);
+	--prayerTime-ul-container: var(--main-darkMode);
+	--prayerTime-li-container: #191919;
+	--datePicker-color: var(--main-grey-solid);
+	--loadingBar-background: var(--main-darkMode);
+	--prayerCountdown-header: var(--main-white);
+	--prayerCountdown-bold: var(--main-green);
+	--button-mainColor: var(--main-white);
+	--button-locationPath: var(--main-white);
+	--button-settingsPath: var(--main-green);
 }
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
 }
-
 * {
 	margin: 0;
 	padding: 0;
@@ -79,17 +110,15 @@ html {
 	font-family: "Inter", sans-serif;
 }
 body {
-	color: var(--main-darkMode);
+	color: var(--main-fontColor);
 	min-height: var(--full-height);
 	min-height: -webkit-fill-available;
-	/* font-family: "Roboto", sans-serif; */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 20px;
 	letter-spacing: -0.017em;
 	line-height: 28px;
 }
-
 a {
 	text-decoration: none;
 	color: var(--main-darkMode);
@@ -110,6 +139,11 @@ h2 {
 	/* font-size: 1.8em; */
 	font-size: 1.2em;
 }
+.rtl {
+	unicode-bidi: bidi-override !important;
+	direction: unset !important;
+	text-align: right;
+}
 .wrapper {
 	height: var(--full-height);
 	min-height: -webkit-fill-available;
@@ -117,98 +151,79 @@ h2 {
 	-webkit-overflow-scrolling: touch;
 	scroll-snap-type: y mandatory;
 	scroll-snap-type: mandatory;
-	/* background-image: url("images/aa-background.png"); */
-	/* background-color: var(--main-white); */
-	/* background-color: var(--main-grey); */
-	background-color: #f5f5f5;
-	/* background-color: #efefef; */
-	/* background-repeat: repeat; */
-	/* background-position: top left; */
-	/* background-color: #c4c4c4; */
-	/* background-size: 8%; */
-}
-.enableDarkMode.wrapper {
-	/* background: linear-gradient(
-		180deg,
-		var(--main-darkMode) 50%,
-		var(--main-darkMode-half) 50%
-	); */
-	background-color: var(--main-darkMode);
-	color: var(--main-white);
+	background-color: var(--main-bg);
 }
 .isMinimal.wrapper {
 	overflow-y: auto;
-	/* background: var(--main-white); */
 }
-.isMinimal.enableDarkMode.wrapper {
-	background-color: var(--main-darkMode);
-}
-article {
+section.content {
 	transform-style: preserve-3d;
 	/* touch-action: none; */
 	/* padding: 0 4%; */
 	height: calc(var(--full-height) - 30vh);
-	background: var(--main-white);
+	background-color: var(--section-backgroundColor);
 	/* background: var(--main-grey); */
 	border: 2px solid rgba(0, 0, 0, 0.1);
 	border-radius: var(--default-radius) var(--default-radius) 0px 0px;
-	/* box-shadow: 0 2px 0 var(--main-black-gradient-point1); */
 	/* box-shadow: 1px 1px 1px 1px #000000 inset; */
 	/* box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.1); */
 	/* box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2); */
 	/* 0 1px 2px rgba(0,0,0,0.2) */
-	pointer-events: none;
+	/* pointer-events: none; */
 	position: relative;
 	/* margin-left: 10px;
 	margin-right: 10px; */
 	align-items: center;
 }
-.enableDarkMode article {
-	background: var(--main-black-gradient-point5);
-}
-.handlebar {
+section.content::before {
+	content: " ";
 	height: 5px;
 	display: block;
 	width: 40px;
-	/* background-color: var(--main-black-gradient-half); */
-	background-color: var(--main-grey);
+	background-color: var(--handlebarColor);
 	border-radius: 100px;
 	position: absolute;
 	left: 50%;
 	top: 6px;
 	transform: translateX(-50%);
 }
-.enableDarkMode .handlebar {
-	background-color: var(--main-green);
-}
+/* .handlebar {
+	height: 5px;
+	display: block;
+	width: 40px;
+	background-color: var(--handlebarColor);
+	border-radius: 100px;
+	position: absolute;
+	left: 50%;
+	top: 6px;
+	transform: translateX(-50%);
+} */
 
 /* Aside */
-aside section {
-	position: relative;
+/* aside section {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-}
+	justify-content: flex-end;
+} */
 aside {
 	/* box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2); */
 	z-index: 2;
-	position: fixed;
+	/* position: fixed; */
 	/* left: 0; */
-	/* right: 0; */
-	/* top: 0; */
+	right: 3%;
+	top: 0;
 	/* width: 100%; */
 	/* bottom: 36px; */
-	/* position: sticky; */
-	top: 4%;
+	position: fixed;
+	/* top: 4%; */
 	/* top: 0; */
 	/* left: 10%; */
-	right: 4%;
+	/* right: 4%; */
 	/* position:absolute; */
 	/* padding-bottom: 10px; */
 	/* font-size: 18px; */
 	/* background: var(--main-white); */
 	/* color: var(--main-white); */
-	/* border-color: var(--main-black-gradient-half); */
+	/* border-color: var(--main-black-opacity5); */
 	/* background: var(--main-green-dark); */
 	/* -moz-box-shadow: inset 0 -10px 10px -10px #000000;
 	-webkit-box-shadow: inset 0 -10px 10px -10px #000000;
@@ -216,25 +231,24 @@ aside {
 	/* padding: 0 10%; */
 	/* height: calc(var(--full-height) - 86vh); */
 	/* border-bottom: 1px solid var(--main-grey); */
-	font-size: 14px;
+	font-size: 12px;
+	margin-top: 4px;
 }
-.enableDarkMode aside {
-	color: var(--main-white);
-}
+aside
 /* @end Aside */
 
 /* Custom CSS */
 header,
 header .content,
 header .subcontent,
-article {
+section.content {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	/* align-items: center; */
 }
 header,
-article {
+section.content {
 	scroll-snap-align: start;
 	/* scroll-snap-coordinate: 0 0; */
 	scroll-snap-stop: normal;
@@ -242,7 +256,7 @@ article {
 header {
 	position: relative;
 	text-align: center;
-	color: var(--main-black);
+	/* color: var(--main-black); */
 }
 header,
 header .content {
@@ -259,7 +273,7 @@ header .content {
 header .subcontent {
 	top: 0;
 	align-items: center;
-	margin: 0 10%;
+	/* margin: 0 10%; */
 	position: sticky;
 	height: calc(var(--full-height) - 70vh);
 }
@@ -275,7 +289,7 @@ h3.locationSelectorTitle {
 	align-items: center;
 	background-color: var(--main-white);
 	z-index: 9;
-	border-bottom: 1px solid var(--main-black-gradient-point2);
+	border-bottom: 1px solid var(--main-black-opacity2);
 	/* border-bottom: 1px solid #ccc; */
 	/* box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2); */
 	border-top-left-radius: var(--default-radius);
@@ -283,21 +297,6 @@ h3.locationSelectorTitle {
 }
 
 /* Credit Settings Container  */
-/* a.settings {
-	margin-left: 8px;
-	text-transform: capitalize;
-	text-align: center;
-	line-height: 2em;
-	min-width: 50px;
-	display: inline-block;
-	color: var(--credit-link);
-} */
-.enableDarkMode a.settings {
-	color: var(--main-green);
-}
-.enableDarkMode a.settings:hover {
-	color: var(--main-green-dark);
-}
 .settingsContainer {
 	overflow: hidden;
 	display: flex;
@@ -316,10 +315,10 @@ h3.locationSelectorTitle {
 	/* bottom: 28px; */
 	padding: 12px 0;
 	/* right: 0; */
-	/* min-width: 140px; */
+	min-width: 160px;
 	position: absolute;
 	background-color: var(--main-white);
-	/* box-shadow: 0 6px 30px var(--main-black-gradient-half); */
+	/* box-shadow: 0 6px 30px var(--main-black-opacity5); */
 	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 }
 .settingsContainer .content {
@@ -379,7 +378,7 @@ h3.locationSelectorTitle {
 	cursor: pointer;
 }
 .settingsContainer input[type="checkbox"]:checked + label svg path {
-	fill: var(--main-black-gradient-half);
+	fill: var(--main-black-opacity5);
 	display: block;
 }
 .settingsContainer svg path {
@@ -387,7 +386,7 @@ h3.locationSelectorTitle {
 	-moz-transition: all 0.4s;
 	-o-transition: all 0.4s;
 	transition: all 0.4s;
-	fill: var(--main-black-gradient-point1);
+	fill: var(--main-black-opacity1);
 	/* display: none; */
 }
 

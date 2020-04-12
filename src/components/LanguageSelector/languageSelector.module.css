@@ -1,43 +1,9 @@
 .container {
 	display: inherit;
 }
-/* .container {
-	width: 100%;
-	margin-top: 18px;
-}
-.container ul {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-}
-.container a {
-	display: block;
-	padding: 8px 30px;
-	margin-left: -30px;
-	margin-right: -30px;
-	text-transform: capitalize;
-}
-.container a:hover {
-	text-decoration: underline;
-}*/
-/*
-.container {
-	box-shadow: 0 6px 30px var(--main-black-gradient-half);
-} */
-/* .container {
-	left: 100px;
-} */
-/* .container a {
-	color: var(--main-grey-solid);
-	padding: 4px 12px;
-	margin-left: -12px;
-	margin-right: -12px;
-} */
 .container button {
 	width: 100%;
 	font-size: inherit;
-	/* font-size: 14px; */
-	/* padding: 4px 18px; */
 	padding: 6px 30px;
 	text-align: left;
 	font-weight: normal;
@@ -50,16 +16,13 @@
 	text-decoration: underline;
 	box-shadow: none;
 }
-
 button.active {
-	/* background-color: var(--main-grey); */
 	background-color: var(--main-green-dark);
 	color: var(--main-white);
 }
 button.active:hover {
 	color: var(--main-white);
 }
-
 .container h3 {
 	font-size: 0.7em;
 	text-align: left;
@@ -68,20 +31,3 @@ button.active:hover {
 	margin: 4px 0;
 	color: #ccc;
 }
-
-/* .container li {
-	padding: 4px;
-} */
-/* :global(.enableDarkMode) .container,
-:global(.enableDarkMode) .container ul {
-	background-color: var(--main-green);
-}
-:global(.enableDarkMode) .container a {
-	color: var(--main-black);
-} */
-/* .container {
-	position: absolute;
-}
-.container ul {
-	background-color: var(--main-white);
-} */

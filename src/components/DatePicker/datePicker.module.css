@@ -1,26 +1,18 @@
-/* .datePicker {
-	color: var(--main-black);
-} */
-.datePicker small {
-	color: var(--main-black-gradient-half);
+.datePicker {
+	/* position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	font-size: 12px;*/
+	color: var(--datePicker-color);
+	/* display: flex;
+	justify-content: center;
+	align-items: center; */
+	margin-right: 10px;
 }
-:global(.enableDarkMode) .datePicker {
-	color: var(--main-grey);
-}
-:global(.enableDarkMode) small {
-	color: var(--main-white);
-}
-/* .datePicker span {
-	font-weight: bold;
-	font-size: 18px;
-} */
-/* .datePicker small {
-	display: block;
-	font-size: small;
-	font-weight: normal;
-	text-transform: uppercase;
-} */
-.datePicker .arabic {
-	/* unicode-bidi: bidi-override; */
+/* .datePicker.arabic span {
 	direction: rtl;
-}
+	unicode-bidi: bidi-override !important;
+	direction: unset !important;
+	text-align: right;
+} */

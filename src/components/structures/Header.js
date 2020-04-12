@@ -1,21 +1,21 @@
 import React, { useRef } from "react";
 import {
-	Credit,
+	// Credit,
 	Modal,
 	Button,
 	// Checkbox,
-	DatePicker,
+	// DatePicker,
 	PrayerCountdown,
-	LocationSelector
+	LocationSelector,
 	// LanguageSelector
 } from "../../index";
 import {
-	LocationIcon
+	LocationIcon,
 	// SettingsIcon
 } from "../../index";
 import {
 	useScrollNotifier,
-	useOuterClickNotifier
+	useOuterClickNotifier,
 	// , useComponentIntoView
 } from "../../customHook/useGeneralHelper";
 import { useGetTranslation } from "../../customHook/useGetTranslation";
@@ -27,11 +27,11 @@ export const Header = () => {
 	const {
 			// 		// languages,
 			// 		// setLang,
-			selectedLang,
+			// selectedLang,
 			// 		changeLanguage,
 			// 		isLanguageChanged,
 			isScrolling,
-			checkIsScrolling
+			checkIsScrolling,
 			// handleScroll,
 			// isMinimal
 			// 		setMinimal,
@@ -51,13 +51,13 @@ export const Header = () => {
 			toggleLocationModal,
 			getSelectedState,
 			// getSelectedStateCode,
-			getSelectedMunicipal
+			getSelectedMunicipal,
 		} = useChangeLocationSettings(),
 		{
-			hijriDate,
-			serverTime,
+			// hijriDate,
+			// serverTime,
 			nextPrayer,
-			timeToNextPrayer
+			timeToNextPrayer,
 		} = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
 
@@ -67,49 +67,21 @@ export const Header = () => {
 	const header = useRef(null);
 	useScrollNotifier(header, checkIsScrolling);
 
-	const haha = {
-		// textAlign: "left",
-		// border: "1px solid transparent",
-		// backgroundColor: "var(--main-white)",
-		// borderRadius: "var(--default-radius)",
-		position: "absolute",
-		bottom: "0",
-		left: "0",
-		right: "0",
-		// justifyContent: "center",
-		// marginRight: "8px",
-		// padding: "0 10px",
-		color: "var(--credit-link)",
-		// display: "flex",
-		// alignItems: "center",
-		// borderBottom: "1px solid var(--credit-link)",
-		fontSize: "12px"
-		// height: "44px"
-		// width: "100%",
-		// display: "flex",
-		// justifyContent: "center",
-		// alignItems: "center"
-	};
-
 	return (
 		<header>
-			<Credit key={"creditHeader"} />
-			<>
-				<div style={haha}>
-					<DatePicker
-						key={"datepickerCredit"}
-						selectedLang={selectedLang}
-						hijriDate={hijriDate}
-						gregorianDate={serverTime}
-					/>
-				</div>
-			</>
+			{/* <Credit key={"creditHeader"} /> */}
+			{/* <DatePicker
+				key={"datepickerCredit"}
+				selectedLang={selectedLang}
+				hijriDate={hijriDate}
+				gregorianDate={serverTime}
+			/> */}
 			<div className="content">
 				{/* <div className="subcontent"> */}
 				<div
 					className={[
 						isScrolling ? "itemScroll" : null,
-						"subcontent"
+						"subcontent",
 					].join(" ")}
 				>
 					{/* <Button key={"settings"} type="settings" isShowing={toggleUserSettingsModal}>

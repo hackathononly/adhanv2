@@ -86,6 +86,7 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function storeAndCalc() {
+		// getYearlyPrayerTime(); // run when save as PWA
 		setUserSettings("showLoadingBar", true);
 
 		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=27%20Jan%202020
@@ -132,6 +133,26 @@ export const useSetPrayerTimes = () => {
 				getHijriFullDate(datas.serverDate, datas.serverDateReverse); // calculate dates - Hijri and Gregorian
 				calculatePrayerTimes(datas); // calculate currentPrayerTime, nextPrayerTime and save into DB
 			});
+	}
+
+	function getYearlyPrayerTime() {
+		Object.keys(Constants.locations || {}).map((state) => {
+			Object.keys(Constants.locations[state] || {}).map((stateCode) => {
+				axios
+					.get(
+						"https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=" +
+							stateCode
+					)
+					.then((obj) => {
+						console.log(obj);
+						const cacheAsset = ["/sampledata/yearly.json"];
+						caches.open("test-cache").then(function (cache) {
+							cache.addAll(cacheAsset);
+							cache.add(new Response(obj));
+						});
+					});
+			});
+		});
 	}
 
 	function getPrayerTimeList() {
@@ -215,12 +236,12 @@ export const useSetPrayerTimes = () => {
 		timeToNextPrayer,
 		solatTime, // pass state code to axios on Body
 		hijriDate,
-		getHijriFullDate,
+		// getHijriFullDate,
 		serverTime,
 		prayerTimeList,
 		currentPrayerTime,
 		getPrayerTimeList: getPrayerTimeList(),
-		setPrayerTimes,
+		// setPrayerTimes,
 		setSilencedTime,
 		getSilencedTime,
 		storeAndCalc,

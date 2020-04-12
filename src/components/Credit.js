@@ -4,9 +4,9 @@ import {
 	Button,
 	// CloseIcon,
 	SettingsIcon,
-	// DatePicker,
+	DatePicker,
 	Checkbox,
-	LanguageSelector
+	LanguageSelector,
 } from "../index";
 import { useOuterClickNotifier } from "../customHook/useGeneralHelper";
 import { useGetTranslation } from "../customHook/useGetTranslation";
@@ -25,32 +25,32 @@ const Credit = () => {
 			setMinimal,
 			isDarkMode,
 			setDarkMode,
-			// enableNotification,
-			// isNotificationEnabled,
+			enableNotification,
+			isNotificationEnabled,
 			showUserSettingsModal,
 			// showLanguageModal,
 			toggleUserSettingsModal,
-			toggleLanguageModal
+			toggleLanguageModal,
 			// isLanguageChanged
-		} = useChangeUserSettings();
-	// { hijriDate, serverTime } = useSetPrayerTimes();
+		} = useChangeUserSettings(),
+		{ hijriDate, serverTime } = useSetPrayerTimes();
 
 	const settingsContainer = useRef(null);
 	useOuterClickNotifier(settingsContainer, toggleUserSettingsModal);
 
 	return (
 		<aside key={"creditAside"}>
-			<div key={"creditDiv"}>
-				<section key={"creditSection"}>
-					{/* <DatePicker
+			{/* <div key={"creditDiv"}>
+				<section key={"creditSection"}> */}
+			{/* <DatePicker
 						key={"datepickerCredit"}
 						selectedLang={selectedLang}
 						hijriDate={hijriDate}
 						gregorianDate={serverTime}
 					/> */}
-					{/* <span title={translate.subcredit}>{translate.credit}</span> */}
-					{/* {translate.credit} &nbsp;/ */}
-					{/* <LanguageSelector
+			{/* <span title={translate.subcredit}>{translate.credit}</span> */}
+			{/* {translate.credit} &nbsp;/ */}
+			{/* <LanguageSelector
 						key={"languageselectorCredit"}
 						isShowing={showLanguageModal}
 						// translate={translate}
@@ -67,7 +67,7 @@ const Credit = () => {
 					>
 						{selectedLang}
 					</Button> */}
-					{/* <a
+			{/* <a
 					href="/#"
 					className={"settings"}
 					onClick={toggleLanguageModal}
@@ -75,89 +75,86 @@ const Credit = () => {
 				>
 					{selectedLang}
 				</aside> */}
-					{/* {" "} */}
-					<Button
-						key={"settings"}
-						type="settings"
-						title={translate.settings}
-						isShowing={toggleUserSettingsModal}
-					>
-						{/* {translate.settings} */}
-						<SettingsIcon />
-					</Button>
-					{/* <a
+			{/* {" "} */}
+			<Button
+				key={"settings"}
+				type={"settings"}
+				showUserSettingsModal={showUserSettingsModal}
+				title={translate.settings}
+				isShowing={toggleUserSettingsModal}
+			>
+				{/* {translate.settings} */}
+				<DatePicker
+				key={"datepickerCredit"}
+				selectedLang={selectedLang}
+				hijriDate={hijriDate}
+				gregorianDate={serverTime}
+			/>
+				<SettingsIcon />
+			</Button>
+			{/* <a
 					href="/#"
 					className={"settings"}
 					onClick={toggleUserSettingsModal}
 				>
 					{translate.settings}
 				</a> */}
-					{showUserSettingsModal ? (
-						<div
-							key={"settingsContainer"}
-							ref={settingsContainer}
-							className={"settingsContainer"}
-							role="presentation"
-						>
-							<div
-								key={"dialogCredit"}
-								className="content"
-								role="dialog"
-							>
-								<Checkbox
-									id={"darkMode"}
-									isSet={setDarkMode}
-									isChecked={isDarkMode}
-								/>
-								<label
-									key={"darkmodeCredit"}
-									htmlFor="darkMode"
-								>
-									<TickIcon width="30" height="30" />
-									{translate.setDarkMode}
-								</label>
-								<Checkbox
-									id={"minimalMode"}
-									isSet={setMinimal}
-									isChecked={isMinimal}
-								/>
-								<label
-									key={"minimalmodeCredit"}
-									htmlFor="minimalMode"
-								>
-									<TickIcon width="30" height="30" />
-									{translate.setMinimal}
-								</label>
-								{/* <Checkbox
-								id={"notification"}
-								isSet={enableNotification}
-								isChecked={isNotificationEnabled}
-							/>
-							<label htmlFor="notification">
-								<TickIcon width="30" height="30" />
-								{translate.enableNotification}
-							</label> */}
-								{/* <Button
+			{showUserSettingsModal ? (
+				<div
+					key={"settingsContainer"}
+					ref={settingsContainer}
+					className={"settingsContainer"}
+					role="presentation"
+				>
+					<div key={"dialogCredit"} className="content" role="dialog">
+						<Checkbox
+							id={"darkMode"}
+							isSet={setDarkMode}
+							isChecked={isDarkMode}
+						/>
+						<label key={"darkmodeCredit"} htmlFor="darkMode">
+							<TickIcon width="30" height="30" />
+							{translate.setDarkMode}
+						</label>
+						<Checkbox
+							id={"minimalMode"}
+							isSet={setMinimal}
+							isChecked={isMinimal}
+						/>
+						<label key={"minimalmodeCredit"} htmlFor="minimalMode">
+							<TickIcon width="30" height="30" />
+							{translate.setMinimal}
+						</label>
+						<Checkbox
+							id={"notification"}
+							isSet={enableNotification}
+							isChecked={isNotificationEnabled}
+						/>
+						<label htmlFor="notification">
+							<TickIcon width="30" height="30" />
+							{translate.enableNotification}
+						</label>
+						{/* <Button
 								key={"close"}
 							type="close"
 							isShowing={toggleUserSettingsModal}
 						>
 							<CloseIcon width="30" height="30" />
 						</Button> */}
-								<LanguageSelector
-									key={"languageselectorCredit"}
-									// isShowing={showLanguageModal}
-									translate={translate}
-									toggleLanguageModal={toggleLanguageModal}
-									langList={languages}
-									setLang={setLang}
-									selectedLang={selectedLang}
-								/>
-							</div>
-						</div>
-					) : null}
-				</section>
-			</div>
+						<LanguageSelector
+							key={"languageselectorCredit"}
+							// isShowing={showLanguageModal}
+							translate={translate}
+							toggleLanguageModal={toggleLanguageModal}
+							langList={languages}
+							setLang={setLang}
+							selectedLang={selectedLang}
+						/>
+					</div>
+				</div>
+			) : null}
+			{/* </section>
+			</div> */}
 			{/* <Button
 				key={"settings"}
 				type="settings"

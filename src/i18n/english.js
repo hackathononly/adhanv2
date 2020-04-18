@@ -30,6 +30,7 @@ export default {
 	// setLocation: "Select Location",
 	credit: "AA",
 	subcredit: "coded in Malaysia",
+	subcredit_extra: "Thank you frontliners #covid19Malaysia",
 	enableNotification: "Enable notification",
 	currentPrayerTime: "Current prayer time"
 };

@@ -8,8 +8,13 @@
 	/* display: flex;
 	justify-content: center;
 	align-items: center; */
-	margin-right: 10px;
+	margin-right: 8px;
 }
+/* .datePicker span {
+	color: var(--main-black);
+	display: inline-block;
+	margin-left: 8px;
+} */
 /* .datePicker.arabic span {
 	direction: rtl;
 	unicode-bidi: bidi-override !important;

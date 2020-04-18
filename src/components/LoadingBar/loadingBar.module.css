@@ -4,6 +4,7 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
+	color: var(--main-fontColor);
 	/* background: url("../src/images/loadingBar.svg") 0 0 no-repeat; */
 	/* background-color: var(--main-white); */
 	background-color: var(--loadingBar-background);
@@ -34,9 +35,9 @@
 	text-transform: capitalize;
 	color: var(--credit-link);
 }
-/* .loadingBarContainer span {
+.loadingBarContainer span:nth-child(3) {
 	display: block;
-} */
+}
 .loadingBarContainer a {
 	color: var(--credit-link);
 	/* text-decoration: underline; */

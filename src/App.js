@@ -6,7 +6,7 @@ import { StateProvider } from "./state";
 /* Structure */
 import {
 	// Header,
-	Credit,
+	// Credit,
 	Body,
 	ThemeSelector,
 	i18n,
@@ -26,7 +26,7 @@ const App = () => {
 		>
 			<ThemeSelector>
 				{/* <Header /> */}
-				<Credit key={"creditHeader"} />
+				{/* <Credit key={"creditHeader"} /> */}
 				<Body />
 			</ThemeSelector>
 		</StateProvider>

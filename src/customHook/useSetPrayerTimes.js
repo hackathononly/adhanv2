@@ -98,8 +98,8 @@ export const useSetPrayerTimes = () => {
 
 		// axios
 		// 	.get("sampledata/daily.json")
-		axios
-			.get(solatTime)
+			axios
+				.get(solatTime)
 			.then((obj) => {
 				const response = obj.data,
 					prayerTime = response.prayerTime[0],

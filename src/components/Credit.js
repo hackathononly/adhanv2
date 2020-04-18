@@ -83,13 +83,13 @@ const Credit = () => {
 				title={translate.settings}
 				isShowing={toggleUserSettingsModal}
 			>
-				{/* {translate.settings} */}
 				<DatePicker
-				key={"datepickerCredit"}
-				selectedLang={selectedLang}
-				hijriDate={hijriDate}
-				gregorianDate={serverTime}
-			/>
+					key={"datepickerCredit"}
+					selectedLang={selectedLang}
+					hijriDate={hijriDate}
+					gregorianDate={serverTime}
+				/>
+				{/* {translate.settings} */}
 				<SettingsIcon />
 			</Button>
 			{/* <a

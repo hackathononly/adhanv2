@@ -73,7 +73,8 @@ body {
 
 	/* Structure */
 	--full-height: 100vh;
-	--header-height: 94vh;
+	--header-height: 84vh;
+	/* --header-height: 94vh; */
 	--minmaxval: 200px;
 	--default-radius: 20px;
 	--default-radius-10: 10px;
@@ -81,14 +82,14 @@ body {
 [data-theme="dark"] {
 	--main-bg: var(--main-darkMode);
 	--main-fontColor: var(--main-white);
-	--section-backgroundColor: rgba(0, 0, 0, 0.5);
+	--section-backgroundColor: var(--main-black-opacity2);
 	--handlebarColor: var(--main-green);
 	--prayerTimeList-salahName: var(--main-green);
 	--prayerTimeList-salahTime: var(--main-white);
 	--prayerTimeList-notification-icon: var(--main-green);
 	--prayerTimeList-notificationDisable-icon: var(--main-green-dark);
 	--prayerTime-ul-container: var(--main-darkMode);
-	--prayerTime-li-container: #191919;
+	--prayerTime-li-container: var(--main-black-opacity2);
 	--datePicker-color: var(--main-grey-solid);
 	--loadingBar-background: var(--main-darkMode);
 	--prayerCountdown-header: var(--main-white);
@@ -174,6 +175,7 @@ section.content {
 	/* margin-left: 10px;
 	margin-right: 10px; */
 	align-items: center;
+	z-index: 2;
 }
 section.content::before {
 	content: " ";
@@ -206,14 +208,14 @@ section.content::before {
 } */
 aside {
 	/* box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2); */
-	z-index: 2;
+	/* z-index: 2; */
 	/* position: fixed; */
 	/* left: 0; */
-	right: 3%;
-	top: 0;
+	/* right: 3%; */
+	/* top: 0; */
 	/* width: 100%; */
 	/* bottom: 36px; */
-	position: fixed;
+	position: relative;
 	/* top: 4%; */
 	/* top: 0; */
 	/* left: 10%; */
@@ -232,7 +234,11 @@ aside {
 	/* height: calc(var(--full-height) - 86vh); */
 	/* border-bottom: 1px solid var(--main-grey); */
 	font-size: 12px;
-	margin-top: 4px;
+	/* margin-top: 4px; */
+	/* left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	justify-content: center; */
 }
 aside
 /* @end Aside */
@@ -261,6 +267,7 @@ header {
 header,
 header .content {
 	height: var(--header-height);
+	z-index: 3;
 }
 .isMinimal header,
 .isMinimal header .content {
@@ -298,7 +305,7 @@ h3.locationSelectorTitle {
 
 /* Credit Settings Container  */
 .settingsContainer {
-	overflow: hidden;
+	/* overflow: hidden; */
 	display: flex;
 	flex-direction: column;
 	/* flex-wrap: wrap; */
@@ -310,6 +317,7 @@ h3.locationSelectorTitle {
 	/* left: 80px; */
 	top: 3em;
 	/* right: -50px; */
+	left: 0;
 	right: 0;
 	/* bottom: 30px; */
 	/* bottom: 28px; */

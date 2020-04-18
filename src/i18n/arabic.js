@@ -27,6 +27,7 @@ export default {
 	// setLocation: "اختر موقعا",
 	credit: "AA",
 	subcredit: "صنع في ماليزيا",
+	subcredit_extra: "شكرا لكم على خط المواجهة #covid19Malaysia",
 	enableNotification: "تفعيل الإشعارات",
 	currentPrayerTime: "وقت الصلاة الحالي"
 };

@@ -26,7 +26,11 @@
 		--minmaxval: 150px;
 	}
 }
-
+.container h2 {
+	text-align: center;
+	font-size: 1em;
+	color: var(--prayerCountdown-header);
+}
 .container li {
 	background-color: var(--prayerTime-li-container);
 	position: relative;
@@ -35,6 +39,18 @@
 	text-align: center;
 	justify-content: center;
 }
+/* .currentPrayerTime .salahName:before {
+	content: " ";
+	position: absolute;
+	padding: 8px;
+	background: rgb(105, 231, 129);
+	background: linear-gradient(
+		180deg,
+		rgba(105, 231, 129, 1) 0%,
+		rgba(0, 161, 82, 1) 100%
+	);
+	border-radius: 8px;
+} */
 .container label {
 	-webkit-tap-highlight-color: rgba(
 		0,
@@ -50,9 +66,12 @@
 	justify-content: center;
 }
 .container label:hover {
-	background-color: var(--main-black-opacity1);
+	/* background-color: var(--main-black-opacity1); */
+	cursor: pointer;
 }
-
+.container label:hover > .salahName {
+	opacity: 0.8;
+}
 .notificationDisable,
 .container input[type="checkbox"],
 .enableNotification input[type="checkbox"]:checked + label .notification {

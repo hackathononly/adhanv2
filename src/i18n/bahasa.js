@@ -29,6 +29,7 @@ export default {
 	// setLocation: "Pilih Lokasi",
 	credit: "AA",
 	subcredit: "kod di Malaysia",
+	subcredit_extra: "Terima kasih barisan hadapan #covid19Malaysia",
 	enableNotification: "Tunjuk notifikasi",
 	currentPrayerTime: "Waktu solat sekarang"
 };

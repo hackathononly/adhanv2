@@ -12,6 +12,10 @@ const LoadingBar = ({ isShowing, translate }) => {
 			<footer>
 				<a href="/#">{translate.credit}</a>
 				<span title={translate.subcredit}> {translate.subcredit}</span>
+				<span title={translate.subcredit_extra}>
+					{" "}
+					{translate.subcredit_extra}
+				</span>
 			</footer>
 		</div>
 	) : null;

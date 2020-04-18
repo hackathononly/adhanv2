@@ -38,12 +38,12 @@ const Constants = {
 		waktuSolatStateCode: "WLY01"
 	},
 	userSettings: {
-		darkMode: true,
+		darkMode: false,
 		showModal: false,
 		showLanguageModal: false,
 		minimalMode: false,
 		selectedLang: "english",
-		enableNotification: true,
+		enableNotification: false,
 		showLoadingBar: false,
 		isScrolling: false,
 		hideSettings: false

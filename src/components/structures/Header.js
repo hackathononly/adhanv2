@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import {
-	// Credit,
+	Credit,
 	Modal,
 	Button,
 	// Checkbox,
@@ -153,11 +153,12 @@ export const Header = () => {
 						title={translate.locationSelector}
 						isShowing={toggleLocationModal}
 					>
-						<LocationIcon />
+						{/* <LocationIcon /> */}
 						{/* {getSelectedState} */}
 						{/* <span>{getSelectedStateCode || getSelectedState}</span> */}
 						<span>{getSelectedMunicipal || getSelectedState}</span>
 					</Button>
+					<Credit key={"creditHeader"} />
 					<Modal
 						key={"modalHeader"}
 						translate={translate}

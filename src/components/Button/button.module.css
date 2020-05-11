@@ -1,3 +1,15 @@
+:root {
+	--button-mainColor: var(--cs1-dark);
+	/* --button-borderColor: var(--main-black-opacity5); */
+	--button-settingsPath: var(--cs1-dark);
+	--button-settings-hover: var(--cs1-grey);
+}
+[data-theme="dark"] {
+	--button-mainColor: var(--cs2-light);
+	/* --button-borderColor: var(--cs2-light); */
+	--button-settingsPath: var(--cs2-green);
+	--button-settings-hover: var(--cs2-black);
+}
 .btn button {
 	color: var(--button-mainColor);
 	border: 0;
@@ -26,7 +38,6 @@
 	top: 0.5em;
 	right: 0.5em;
 	position: fixed;
-	border-color: var(--main-transparent);
 	/* padding: 6px 8px; */
 	padding: 6px;
 	/* border-radius: 10px; */
@@ -41,24 +52,13 @@
 	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 } */
 .locationSelector button {
-	border-bottom: 1px dotted;
-	border-radius: 100px;
 	display: flex;
 	padding: 12px 28px 12px 24px;
-	border-color: var(--main-transparent);
 	font-size: medium;
 	justify-content: center;
 	align-content: center;
 	align-items: center;
 }
-/* .locationSelector button svg {
-	width: 24px;
-	height: 24px;
-	margin-right: 8px;
-}
-.locationSelector button path {
-	fill: var(--button-locationPath);
-} */
 .locationSelector span {
 	padding-bottom: 4px;
 	border-bottom: 1px solid;
@@ -81,10 +81,6 @@
 	fill: var(--button-settingsPath);
 }
 .settings button {
-	/* border-radius: var(--default-radius); */
-	/* color: var(--credit-link); */
-	/* color: var(--main-white); */
-	/* font-size: 14px; */
 	font-size: inherit;
 	font-weight: normal;
 	/* line-height: 2em; */

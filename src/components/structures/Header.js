@@ -35,7 +35,7 @@ export const Header = () => {
 			// handleScroll,
 			// isMinimal
 			// 		setMinimal,
-			// 		isDarkMode,
+			isDarkMode,
 			// 		setDarkMode,
 			// 		enableNotification,
 			// 		isNotificationEnabled,
@@ -165,6 +165,7 @@ export const Header = () => {
 						reference={locationSettingsModal}
 						hide={toggleLocationModal}
 						isShowing={showLocationModal}
+						isDarkMode={isDarkMode}
 					>
 						{/* <div className={"settingsContainer"}>
 					<h3>

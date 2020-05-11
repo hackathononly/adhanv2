@@ -1,3 +1,14 @@
+:root {
+	--loadingBar-AA-color: var(--cs1-dark);
+	--loadingBar-background: var(--main-white);
+	--loadingBar-spinner-backgroundColor: var(--cs1-dark);
+}
+[data-theme="dark"] {
+	--loadingBar-AA-color: var(--cs2-green);
+	--loadingBar-background: var(--cs2-grey);
+	--loadingBar-spinner-backgroundColor: var(--cs2-green);
+}
+
 .loadingBarContainer {
 	position: fixed;
 	top: 0;
@@ -6,7 +17,6 @@
 	right: 0;
 	color: var(--main-fontColor);
 	/* background: url("../src/images/loadingBar.svg") 0 0 no-repeat; */
-	/* background-color: var(--main-white); */
 	background-color: var(--loadingBar-background);
 	/* background-size: 50%; */
 	z-index: 8;
@@ -25,6 +35,9 @@
 	flex: 1;
 	justify-content: center;
 }
+.spinner path {
+	fill: var(--loadingBar-spinner-backgroundColor);
+}
 
 .loadingBarContainer footer {
 	/* padding-bottom: 28px; */
@@ -33,17 +46,14 @@
 	font-size: 0.8em;
 	text-align: center;
 	text-transform: capitalize;
-	color: var(--credit-link);
 }
 .loadingBarContainer span:nth-child(3) {
 	display: block;
 }
 .loadingBarContainer a {
-	color: var(--credit-link);
-	/* text-decoration: underline; */
-	border-bottom: 1px dotted;
+	color: var(--loadingBar-AA-color);
+	text-decoration: underline;
 }
 .loadingBarContainer a:hover {
-	border-bottom: 1px solid;
 	text-decoration: none;
 }

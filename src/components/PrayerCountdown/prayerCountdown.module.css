@@ -1,3 +1,9 @@
+:root {
+	--prayerCountdown-header: var(--cs1-dark);
+}
+[data-theme="dark"] {
+	--prayerCountdown-header: var(--cs2-light);
+}
 .container h2 {
 	color: var(--prayerCountdown-header);
 }

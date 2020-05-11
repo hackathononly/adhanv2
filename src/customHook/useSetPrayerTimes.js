@@ -128,7 +128,6 @@ export const useSetPrayerTimes = () => {
 				calculatePrayerTimes(datas);
 				setYearlyPrayerTime(); // Save yearly prayertime
 				setHijriFullDate(datas.serverDate, datas.serverDateReverse); // ! shouldnt called every API call
-				setUserSettings({ showLoadingBar: false });
 			})
 			.catch((e) => {
 				console.log(e);
@@ -226,6 +225,7 @@ export const useSetPrayerTimes = () => {
 				setPrayerTimes({
 					hijriDate: dateData(responses),
 				});
+				setUserSettings({ showLoadingBar: false });
 			})
 			.catch((e) => {
 				console.log(e);

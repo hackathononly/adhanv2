@@ -1,3 +1,16 @@
+:root {
+	--prayerTimeList-salahName: var(--cs1-dark);
+	--prayerTimeList-salahTime: var(--cs1-grey-darker);
+	--prayerTimeList-notification-icon: var(--cs1-dark);
+	--prayerTimeList-notificationDisable-icon: var(--cs1-dark);
+}
+[data-theme="dark"] {
+	--prayerTimeList-salahName: var(--cs2-green);
+	--prayerTimeList-salahTime: var(--cs2-light);
+	--prayerTimeList-notification-icon: var(--cs2-green);
+	--prayerTimeList-notificationDisable-icon: var(--cs2-green);
+}
+
 .container {
 	height: calc(100% - 20%);
 	/* width: calc(100% - 60px); */
@@ -24,11 +37,6 @@
 	:root {
 		--minmaxval: 150px;
 	}
-}
-.container h2 {
-	text-align: center;
-	font-size: 1em;
-	color: var(--prayerCountdown-header);
 }
 .container li {
 	position: relative;

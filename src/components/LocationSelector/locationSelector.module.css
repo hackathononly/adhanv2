@@ -1,3 +1,11 @@
+:root {
+	/* --locationSelector-anchor-color: var(--cs1-grey-darker); */
+	--locationSelector-anchor-color: var(--main-white);
+	--locationSelector-anchor-backgroundColor: var(--cs1-grey-darker);
+}
+[data-theme="dark"] {
+	--locationSelector-anchor-backgroundColor: var(--cs2-green);
+}
 .locationSelector {
 	position: relative;
 	/* max-width: 100%; */
@@ -59,8 +67,8 @@
 	cursor: pointer;
 }
 .locationSelector a.active {
-	color: var(--main-white);
-	background-color: var(--main-green);
+	color: var(--locationSelector-anchor-color);
+	background-color: var(--locationSelector-anchor-backgroundColor);
 }
 .locationSelector ul.stateActive {
 	display: block;

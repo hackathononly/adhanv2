@@ -1,3 +1,14 @@
+:root {
+	--languageSelector-button-color: var(--cs1-dark);
+	--languageSelector-button-active-bgcolor: var(--cs1-grey-darker);
+	--languageSelector-button-active-color: var(--main-white);
+	--languageSelector-button-active-hover: var(--main-white);
+}
+[data-theme="dark"] {
+	--languageSelector-button-color: var(--cs1-black);
+	--languageSelector-button-active-bgcolor: var(--cs2-green);
+}
+
 .container {
 	display: inherit;
 }
@@ -8,20 +19,19 @@
 	text-align: left;
 	font-weight: normal;
 	text-transform: capitalize;
-	color: var(--main-darkMode);
+	color: var(--languageSelector-button-color);
 }
 .container button:hover {
 	border: none;
-	color: var(--main-green);
 	text-decoration: underline;
 	box-shadow: none;
 }
 button.active {
-	background-color: var(--main-green);
-	color: var(--main-white);
+	background-color: var(--languageSelector-button-active-bgcolor);
+	color: var(--languageSelector-button-active-color);
 }
 button.active:hover {
-	color: var(--main-white);
+	color: var(--languageSelector-button-active-hover);
 }
 .container h3 {
 	font-size: 10px;

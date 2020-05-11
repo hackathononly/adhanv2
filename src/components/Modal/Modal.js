@@ -3,11 +3,15 @@ import ReactDOM from "react-dom";
 import style from "./modal.module.css";
 import { Button, CloseIcon } from "../../index";
 
-const Modal = ({ translate, reference, hide, isShowing, children }) => {
+const Modal = ({ translate, reference, hide, isShowing, isDarkMode, children }) => {
 	return isShowing
 		? ReactDOM.createPortal(
 				<>
-					<div className={style.overlay} role="presentation">
+					<div
+						data-theme={isDarkMode ? "dark" : "light"}
+						className={style.overlay}
+						role="presentation"
+					>
 						<div
 							ref={reference}
 							className={[style.modal, style.open].join(" ")}

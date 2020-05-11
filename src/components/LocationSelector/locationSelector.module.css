@@ -51,7 +51,7 @@
 	justify-content: center;
 }
 .locationSelector a {
-	padding: 6px 38px;
+	padding: 6px 24px;
 	flex-direction: column;
 	font-size: 0.8em;
 }
@@ -59,8 +59,8 @@
 	cursor: pointer;
 }
 .locationSelector a.active {
-	background-color: var(--main-grey);
-	/* background-color: var(--main-green); */
+	color: var(--main-white);
+	background-color: var(--main-green);
 }
 .locationSelector ul.stateActive {
 	display: block;

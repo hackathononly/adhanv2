@@ -1,4 +1,8 @@
-import React, { useRef, useMemo } from "react";
+import React, {
+	// useRef,
+	// useMemo,
+	useEffect,
+} from "react";
 import {
 	Header,
 	// Tazkirah,
@@ -12,11 +16,11 @@ import {
 // 	LocationIcon,
 // 	SettingsIcon
 // } from "../../index";
-import { useOuterClickNotifier } from "../../customHook/useGeneralHelper";
+// import { useOuterClickNotifier } from "../../customHook/useGeneralHelper";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
 import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
 import { useGetTranslation } from "../../customHook/useGetTranslation";
-import { useChangeLocationSettings } from "../../customHook/useChangeLocationSettings";
+// import { useChangeLocationSettings } from "../../customHook/useChangeLocationSettings";
 
 export const Body = () => {
 	const {
@@ -24,19 +28,19 @@ export const Body = () => {
 			isNotificationEnabled,
 			// setUserSettings
 		} = useChangeUserSettings(),
+		// {
+		// locations,
+		// locationSettings,
+		// setStateName,
+		// setStateCode,
+		// showLocationModal,
+		// toggleLocationModal,
+		// getSelectedState,
+		// getSelectedStateCode,
+		// getSelectedMunicipal
+		// } = useChangeLocationSettings(),
 		{
-			// locations,
-			// locationSettings,
-			// setStateName,
-			// setStateCode,
-			// showLocationModal,
-			toggleLocationModal,
-			// getSelectedState,
-			// getSelectedStateCode,
-			// getSelectedMunicipal
-		} = useChangeLocationSettings(),
-		{
-			solatTime,
+			// solatTime,
 			storeAndCalc,
 			// prayerTimeList,
 			currentPrayerTime,
@@ -49,16 +53,16 @@ export const Body = () => {
 		} = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
 
-	const locationSettingsModal = useRef(null);
-	useOuterClickNotifier(locationSettingsModal, toggleLocationModal);
-	// useEffect(() => {
+	// const locationSettingsModal = useRef(null);
+	// useOuterClickNotifier(locationSettingsModal, toggleLocationModal);
+
+	useEffect(() => {
+		storeAndCalc();
+	}, []);
+
+	// useMemo(() => {
 	// 	storeAndCalc();
 	// }, [solatTime]);
-	useMemo(() => {
-		storeAndCalc(solatTime);
-	}, [solatTime]);
-	// useMemo(() => storeAndCalc(solatTime), [solatTime, storeAndCalc]);
-	// useMemo(() => expensiveOperation(solatTime), [solatTime]);
 
 	// return isMinimal ? null : (
 	return (

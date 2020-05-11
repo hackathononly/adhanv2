@@ -1,24 +1,25 @@
-import React, { useRef } from "react";
+import React from // , { useRef }
+"react";
 import { Button } from "../../index";
-import { useOuterClickNotifier } from "../../customHook/useGeneralHelper";
+// import { useOuterClickNotifier } from "../../customHook/useGeneralHelper";
 import style from "./languageSelector.module.css";
 
 const LanguageSelector = ({
 	translate,
 	// isShowing,
 	// translate,
-	toggleLanguageModal,
+	// toggleLanguageModal,
 	langList,
 	setLang,
-	selectedLang
+	selectedLang,
 }) => {
-	const innerRef = useRef(null);
-	useOuterClickNotifier(innerRef, toggleLanguageModal);
+	// const innerRef = useRef(null);
+	// useOuterClickNotifier(innerRef, toggleLanguageModal);
 
 	// return isShowing ? (
 	return (
 		<section
-			ref={innerRef}
+			// ref={innerRef}
 			className={[style.container, "languages"].join(
 				// className={[style.container, "languages", "settingsContainer"].join(
 				" "
@@ -30,7 +31,7 @@ const LanguageSelector = ({
 					key={index}
 					title={item}
 					type={item === selectedLang ? style.active : null}
-					isShowing={e => setLang(e.target.innerHTML)}
+					isShowing={(e) => setLang(e.target.innerHTML)}
 				>
 					{item}
 				</Button>

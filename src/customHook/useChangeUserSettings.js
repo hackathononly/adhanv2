@@ -1,4 +1,5 @@
 import { useStateValue } from "../state";
+import { useAdhanAppDB } from "../customHook/useAdhanAppDB";
 
 export const useChangeUserSettings = () => {
 	/*
@@ -15,39 +16,52 @@ export const useChangeUserSettings = () => {
 	const [{ languages, userSettings }, dispatch] = useStateValue(),
 		isDarkMode = userSettings.darkMode,
 		showUserSettingsModal = userSettings.showModal,
-		showLanguageModal = userSettings.showLanguageModal,
+		// showLanguageModal = userSettings.showLanguageModal,
 		isMinimal = userSettings.minimalMode,
 		selectedLang = userSettings.selectedLang,
 		isNotificationEnabled = userSettings.enableNotification,
 		isLoadingBarShown = userSettings.showLoadingBar,
 		isScrolling = userSettings.isScrolling;
 	// isLanguageChanged = userSettings.changeLanguage;
+	const { updateRecord } = useAdhanAppDB();
 
 	function checkIsScrolling(val) {
-		setUserSettings("isScrolling", val);
+		setUserSettings({ isScrolling: val });
 	}
 	function setDarkMode() {
-		return setUserSettings("darkMode", !userSettings.darkMode);
+		// setLocalStorage("userSettings", "darkMode", !userSettings.darkMode);
+		setUserSettings({ darkMode: !userSettings.darkMode });
 	}
 	function toggleUserSettingsModal() {
 		// showUserSettingsModal
 		// 	? (document.body.style.overflow = "auto")
 		// 	: (document.body.style.overflow = "hidden");
-		return setUserSettings("showModal", !showUserSettingsModal);
+
+		// setUserSettings("showModal", !showUserSettingsModal);
+		setUserSettings({ showModal: !showUserSettingsModal });
 	}
-	function toggleLanguageModal() {
-		// showLanguageModal
-		// 	? (document.body.style.overflow = "auto")
-		// 	: (document.body.style.overflow = "hidden");
-		return setUserSettings("showLanguageModal", !showLanguageModal);
-	}
+	// function toggleLanguageModal() {
+	// showLanguageModal
+	// 	? (document.body.style.overflow = "auto")
+	// 	: (document.body.style.overflow = "hidden");
+	// return setUserSettings("showLanguageModal", !showLanguageModal);
+	// }
 	function setMinimal() {
-		return setUserSettings("minimalMode", !userSettings.minimalMode);
+		// setLocalStorage(
+		// 	"userSettings",
+		// 	"minimalMode",
+		// 	!userSettings.minimalMode
+		// );
+		// setUserSettings("minimalMode", !userSettings.minimalMode);
+		setUserSettings({ minimalMode: !userSettings.minimalMode });
 	}
 	function setLang(lang) {
-		return setUserSettings("selectedLang", lang);
+		// !@ save to localStorage
+		// setLocalStorage("userSettings", "selectedLang", selectedLang);
+		// setUserSettings("selectedLang", lang);
+		setUserSettings({ selectedLang: lang });
 	}
-	function notifyMe() {
+	/* 	function notifyMe() {
 		// Let's check if the browser supports notifications
 		if (!("Notification" in window)) {
 			alert("This browser does not support desktop notification");
@@ -73,13 +87,18 @@ export const useChangeUserSettings = () => {
 		}
 		// At last, if the user has denied notifications, and you
 		// want to be respectful there is no need to bother them any more.
-	}
+	} */
 	function enableNotification() {
 		// notifyMe();
-		return setUserSettings(
-			"enableNotification",
-			!userSettings.enableNotification
-		);
+		// setLocalStorage(
+		// 	"userSettings",
+		// 	"enableNotification",
+		// 	!userSettings.enableNotification
+		// );
+		// setUserSettings("enableNotification", !userSettings.enableNotification);
+		setUserSettings({
+			enableNotification: !userSettings.enableNotification,
+		});
 	}
 	// function setHeightVH() {
 	// 	// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
@@ -98,11 +117,24 @@ export const useChangeUserSettings = () => {
 	// function changeLanguage() {
 	// 	return setUserSettings("changeLanguage", !userSettings.changeLanguage);
 	// }
-	function setUserSettings(mode, val) {
-		dispatch({
-			type: "setUserSettings",
-			mode: mode,
-			value: val,
+	// function setLocalStorage(key, path, val) {
+	// 	const item = JSON.parse(localStorage[key]),
+	// 		itemValue = { ...item, [path]: val };
+	// 	localStorage.setItem(key, JSON.stringify(itemValue));
+	// }
+	function setUserSettings(setting) {
+		updateRecord("user", setting);
+		// dispatch({
+		// 	type: "setUserSettings",
+		// 	mode: mode,
+		// 	value: val,
+		// });
+		Object.keys(setting).map((key) => {
+			return dispatch({
+				type: "setUserSettings",
+				mode: key,
+				value: setting[key],
+			});
 		});
 	}
 	return {
@@ -123,7 +155,7 @@ export const useChangeUserSettings = () => {
 		isNotificationEnabled,
 		showUserSettingsModal,
 		toggleUserSettingsModal,
-		showLanguageModal,
-		toggleLanguageModal,
+		// showLanguageModal,
+		// toggleLanguageModal,
 	};
 };

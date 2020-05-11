@@ -1,12 +1,11 @@
 .container {
 	height: calc(100% - 20%);
 	/* width: calc(100% - 60px); */
-	max-width: 700px;
+	max-width: 690px;
 	/* height: calc(100%-30%); */
 	width: 100%;
 }
 .container ul {
-	background-color: var(--prayerTime-ul-container);
 	height: 100%;
 	display: grid;
 	/* grid-template-columns: repeat(2, 1fr); */
@@ -14,8 +13,8 @@
 	/* grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(2, 1fr);
 	grid-column-gap: 0px;*/
-	grid-row-gap: 0.5px;
-	/* grid-column-gap: 0.5px; */
+	grid-row-gap: 1px;
+	/* grid-column-gap: 1px; */
 	/* grid-template-columns: repeat(2, 1fr); */
 	grid-template-columns: repeat(auto-fill, minmax(var(--minmaxval), 1fr));
 	/* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
@@ -32,7 +31,6 @@
 	color: var(--prayerCountdown-header);
 }
 .container li {
-	background-color: var(--prayerTime-li-container);
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -66,7 +64,6 @@
 	justify-content: center;
 }
 .container label:hover {
-	/* background-color: var(--main-black-opacity1); */
 	cursor: pointer;
 }
 .container label:hover > .salahName {

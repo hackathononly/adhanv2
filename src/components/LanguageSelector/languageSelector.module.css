@@ -8,23 +8,23 @@
 	text-align: left;
 	font-weight: normal;
 	text-transform: capitalize;
-	color: var(--credit-link);
+	color: var(--main-darkMode);
 }
 .container button:hover {
 	border: none;
-	color: var(--main-green-dark);
+	color: var(--main-green);
 	text-decoration: underline;
 	box-shadow: none;
 }
 button.active {
-	background-color: var(--main-green-dark);
+	background-color: var(--main-green);
 	color: var(--main-white);
 }
 button.active:hover {
 	color: var(--main-white);
 }
 .container h3 {
-	font-size: 0.7em;
+	font-size: 10px;
 	text-align: left;
 	text-transform: uppercase;
 	padding: 0 30px;

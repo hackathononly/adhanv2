@@ -103,7 +103,12 @@ const Credit = () => {
 				<div
 					key={"settingsContainer"}
 					ref={settingsContainer}
-					className={"settingsContainer"}
+					// className={"settingsContainer"}
+					// className={[style.modal, style.open].join(" ")}
+					className={[
+						showUserSettingsModal ? "settingsContainer" : null,
+						"animate",
+					].join(" ")}
 					role="presentation"
 				>
 					<div key={"dialogCredit"} className="content" role="dialog">

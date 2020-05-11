@@ -10,6 +10,4 @@
 .container b {
 	line-height: 1.8em;
 	text-transform: capitalize;
-	font-weight: normal;
-	color: var(--prayerCountdown-bold);
 }

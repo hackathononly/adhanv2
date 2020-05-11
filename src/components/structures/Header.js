@@ -9,10 +9,10 @@ import {
 	LocationSelector,
 	// LanguageSelector
 } from "../../index";
-import {
-	LocationIcon,
-	// SettingsIcon
-} from "../../index";
+// import {
+// 	LocationIcon,
+// 	SettingsIcon
+// } from "../../index";
 import {
 	useScrollNotifier,
 	useOuterClickNotifier,

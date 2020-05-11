@@ -1,20 +1,20 @@
 import { useStateValue } from "../state";
+import { useAdhanAppDB } from "../customHook/useAdhanAppDB";
 // import { useScrollTop } from "../helper";
 
 export const useChangeLocationSettings = () => {
 	const [
 			{ initialState, locations, locationSettings },
-			dispatch
+			dispatch,
 		] = useStateValue(),
+		{ updateRecord } = useAdhanAppDB(),
 		showLocationModal = locationSettings.showModal,
 		getSelectedState =
 			locationSettings.selectedState || initialState.waktuSolatState,
-		getSelectedMunicipal = locationSettings.selectedMunicipal
-			.toString()
-			.slice(
-				0,
-				locationSettings.selectedMunicipal.toString().indexOf(",")
-			),
+		getSelectedMunicipal = locationSettings.selectedMunicipal.slice(
+			0,
+			locationSettings.selectedMunicipal.indexOf(",")
+		),
 		getSelectedStateCode =
 			locationSettings.selectedStateCode ||
 			initialState.waktuSolatStateCode;
@@ -27,7 +27,7 @@ export const useChangeLocationSettings = () => {
 		// ! set wrapper overflow as hidden
 
 		setLocationSettings({
-			showModal: !locationSettings.showModal
+			showModal: !locationSettings.showModal,
 		});
 	}
 	function setStateName(val) {
@@ -43,21 +43,22 @@ export const useChangeLocationSettings = () => {
 				locationSettings.selectedStateCode &&
 				locationSettings.selectedState === val
 					? locationSettings.selectedStateCode
-					: Object.keys(locations[val])[0] // when click on state name, get first state code value
+					: Object.keys(locations[val])[0], // when click on state name, get first state code value
 		});
 	}
 	function setStateCode(val) {
 		setLocationSettings({
 			selectedMunicipal: locations[getSelectedState][val].toString(),
-			selectedStateCode: val
+			selectedStateCode: val,
 		});
 	}
-	function setLocationSettings(obj) {
-		Object.keys(obj).map(key => {
+	function setLocationSettings(setting) {
+		updateRecord("location", setting);
+		Object.keys(setting).map((key) => {
 			return dispatch({
 				type: "setLocationSettings",
 				mode: key,
-				value: obj[key]
+				value: setting[key],
 			});
 		});
 	}
@@ -71,6 +72,6 @@ export const useChangeLocationSettings = () => {
 		getSelectedMunicipal,
 		showLocationModal,
 		toggleLocationModal,
-		setLocationSettings
+		setLocationSettings,
 	};
 };

@@ -25,8 +25,9 @@ body {
 @custom-media --viewport-9 (min-width: 992px);
 @custom-media --viewport-12 (min-width: 1200px);
 */
+
 :root {
-	--main-bg: #f5f5f5;
+	--main-bg: var(--main-white);
 	--main-fontColor: var(--main-darkMode);
 	--section-backgroundColor: var(--main-white);
 	--handlebarColor: var(--main-grey);
@@ -34,27 +35,24 @@ body {
 
 	/* Components */
 	--prayerTimeList-salahName: var(--main-darkMode);
-	--prayerTimeList-salahTime: var(--main-black-opacity5);
-	--prayerTimeList-notificationDisable-icon: var(--main-black-opacity5);
-	--prayerTime-ul-container: var(--main-grey);
-	--prayerTime-li-container: var(--main-white);
-	--datePicker-color: var(--credit-link);
+	--prayerTimeList-salahTime: var(--main-darkMode);
+	--prayerTimeList-notificationDisable-icon: var(--main-darkMode);
 	--loadingBar-background: var(--main-white);
 	--prayerCountdown-header: var(--main-darkMode);
-	--prayerCountdown-bold: var(--main-green-dark);
 	--button-mainColor: var(--main-black);
-	--button-locationPath: var(--main-black);
+	--button-borderColor: var(--main-black-opacity5);
+	/* --button-locationPath: var(--main-black); */
 	--button-settingsPath: var(--main-black);
+	--button-settings-hover: var(--main-black);
 
 	/* Main Colors */
 	--main-green: #69e781;
-	--main-green-dark: #00a152;
-	--main-white: #ffffff;
-	--main-black: #000000;
 	--main-transparent: transparent;
-	--main-darkMode: #333333;
 	--main-grey: #e1e1e1;
-	--main-grey-solid: #666666;
+	--main-white: #eee;
+	--main-black: #232931;
+	--main-darkMode: #393e46;
+	--main-green: #4ecca3;
 
 	/* Opacity */
 	--main-black-opacity1: rgba(0, 0, 0, 0.1);
@@ -73,7 +71,7 @@ body {
 
 	/* Structure */
 	--full-height: 100vh;
-	--header-height: 84vh;
+	--header-height: 94vh;
 	/* --header-height: 94vh; */
 	--minmaxval: 200px;
 	--default-radius: 20px;
@@ -82,22 +80,21 @@ body {
 [data-theme="dark"] {
 	--main-bg: var(--main-darkMode);
 	--main-fontColor: var(--main-white);
-	--section-backgroundColor: var(--main-black-opacity2);
+	--section-backgroundColor: var(--main-black);
 	--handlebarColor: var(--main-green);
 	--prayerTimeList-salahName: var(--main-green);
 	--prayerTimeList-salahTime: var(--main-white);
 	--prayerTimeList-notification-icon: var(--main-green);
-	--prayerTimeList-notificationDisable-icon: var(--main-green-dark);
-	--prayerTime-ul-container: var(--main-darkMode);
-	--prayerTime-li-container: var(--main-black-opacity2);
-	--datePicker-color: var(--main-grey-solid);
+	--prayerTimeList-notificationDisable-icon: var(--main-green);
 	--loadingBar-background: var(--main-darkMode);
 	--prayerCountdown-header: var(--main-white);
-	--prayerCountdown-bold: var(--main-green);
 	--button-mainColor: var(--main-white);
-	--button-locationPath: var(--main-white);
+	--button-borderColor: var(--main-white);
+	/* --button-locationPath: var(--main-white); */
 	--button-settingsPath: var(--main-green);
+	--button-settings-hover: var(--main-black);
 }
+
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
@@ -119,6 +116,9 @@ body {
 	font-size: 20px;
 	letter-spacing: -0.017em;
 	line-height: 28px;
+	/* font-size: 24px;
+	letter-spacing: -0.019em;
+	line-height: 34px; */
 }
 a {
 	text-decoration: none;
@@ -164,12 +164,11 @@ section.content {
 	height: calc(var(--full-height) - 30vh);
 	background-color: var(--section-backgroundColor);
 	/* background: var(--main-grey); */
-	border: 2px solid rgba(0, 0, 0, 0.1);
+	/* border: 2px solid rgba(0, 0, 0, 0.1); */
 	border-radius: var(--default-radius) var(--default-radius) 0px 0px;
-	/* box-shadow: 1px 1px 1px 1px #000000 inset; */
+	/* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); */
 	/* box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.1); */
 	/* box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2); */
-	/* 0 1px 2px rgba(0,0,0,0.2) */
 	/* pointer-events: none; */
 	position: relative;
 	/* margin-left: 10px;
@@ -225,8 +224,6 @@ aside {
 	/* font-size: 18px; */
 	/* background: var(--main-white); */
 	/* color: var(--main-white); */
-	/* border-color: var(--main-black-opacity5); */
-	/* background: var(--main-green-dark); */
 	/* -moz-box-shadow: inset 0 -10px 10px -10px #000000;
 	-webkit-box-shadow: inset 0 -10px 10px -10px #000000;
 	box-shadow: inset 0 -10px 10px -10px #000000; */
@@ -290,14 +287,13 @@ h3.locationSelectorTitle {
 	top: 0;
 	left: 0;
 	right: 0;
-	padding: 0 38px;
+	padding: 0 24px;
 	height: 2.5em;
 	display: flex;
 	align-items: center;
 	background-color: var(--main-white);
 	z-index: 9;
-	border-bottom: 1px solid var(--main-black-opacity2);
-	/* border-bottom: 1px solid #ccc; */
+	/* border-bottom: 1px solid var(--main-darkMode); */
 	/* box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2); */
 	border-top-left-radius: var(--default-radius);
 	border-top-right-radius: var(--default-radius);
@@ -305,6 +301,7 @@ h3.locationSelectorTitle {
 
 /* Credit Settings Container  */
 .settingsContainer {
+	color: var(--main-darkMode);
 	/* overflow: hidden; */
 	display: flex;
 	flex-direction: column;
@@ -326,8 +323,7 @@ h3.locationSelectorTitle {
 	min-width: 160px;
 	position: absolute;
 	background-color: var(--main-white);
-	/* box-shadow: 0 6px 30px var(--main-black-opacity5); */
-	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 10px 0 var(--main-black-opacity2);
 }
 .settingsContainer .content {
 	display: block;
@@ -367,11 +363,7 @@ h3.locationSelectorTitle {
 	display: flex;
 	align-items: center;
 	padding: 2px 12px;
-	min-width: 136px;
-	/* margin-left: -12px;
-	margin-right: -12px; */
-	/* flex-basis: 100%;*/
-	/* padding-left: 20px; */
+	/* min-width: 136px; */
 }
 .settingsContainer a,
 .settingsContainer label {
@@ -379,7 +371,7 @@ h3.locationSelectorTitle {
 }
 .settingsContainer a:hover,
 .settingsContainer label:hover {
-	color: var(--main-green-dark);
+	color: var(--main-green);
 	text-decoration: underline;
 }
 .settingsContainer label:hover {
@@ -402,7 +394,7 @@ h3.locationSelectorTitle {
 	/* .wrapper {
 		border: 5px solid yellow;
 	} */
-	header .itemScroll.subcontent {
+	/* header .itemScroll.subcontent {
 		flex-direction: unset;
-	}
+	} */
 }

@@ -1,9 +1,11 @@
 import axios from "axios";
 import moment from "moment";
 import { useStateValue } from "../state";
+import { useAdhanAppDB } from "../customHook/useAdhanAppDB";
 import { useGetTranslation } from "../customHook/useGetTranslation";
 // import { useCurrentTime } from "../customHook/useGeneralHelper";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
+// import { useGeneralHelper } from "../customHook/useGeneralHelper";
 import Constants from "../constants";
 
 export const useSetPrayerTimes = () => {
@@ -13,6 +15,7 @@ export const useSetPrayerTimes = () => {
 		] = useStateValue(),
 		{ getTranslation: translate } = useGetTranslation(),
 		{ setUserSettings } = useChangeUserSettings(),
+		{ addToStore, isRecordExist } = useAdhanAppDB(),
 		selectedLang = userSettings.selectedLang;
 
 	const serverTime = prayerTimes.serverTime,
@@ -86,72 +89,75 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function storeAndCalc() {
-		// getYearlyPrayerTime(); // run when save as PWA
-		setUserSettings("showLoadingBar", true);
+		// Show loading bar
+		setUserSettings({ showLoadingBar: true });
 
-		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=27%20Jan%202020
-		// http://api.aladhan.com/v1/gToH?date=27%20Jan%202020
+		// init - userSettings, locationSettings, date
+		addToStore("settings", userSettings);
+		addToStore("settings", locationSettings);
 
-		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/TakwimSolat&period=today&zone=WLY01
-		// https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=2020-01-27
-		// https://api.aladhan.com/v1/gToH?date=27-01-2020
+		const prayerTimeData = (response) => {
+			const prayerTime = response.prayerTime[0],
+				serverDate = response.serverTime.substr(
+					0,
+					response.serverTime.indexOf(" ")
+				);
+			return {
+				silenced: [],
+				list: {
+					fajr: prayerTime.fajr,
+					syuruk: prayerTime.syuruk,
+					dhuhr: prayerTime.dhuhr,
+					asr: prayerTime.asr,
+					maghrib: prayerTime.maghrib,
+					isha: prayerTime.isha,
+				},
+				serverTime: prayerTime.date.split("-").join(" "),
+				serverDate: serverDate.split("-").reverse().join("-"),
+				serverDateReverse: serverDate,
+			};
+		};
 
-		// axios
-		// 	.get("sampledata/daily.json")
-			axios
-				.get(solatTime)
-			.then((obj) => {
-				const response = obj.data,
-					prayerTime = response.prayerTime[0],
-					serverDate = response.serverTime.substr(
-						0,
-						response.serverTime.indexOf(" ")
-					),
-					datas = {
-						silenced: [],
-						list: {
-							// imsak: prayerTime.imsak,
-							fajr: prayerTime.fajr,
-							syuruk: prayerTime.syuruk,
-							dhuhr: prayerTime.dhuhr,
-							asr: prayerTime.asr,
-							maghrib: prayerTime.maghrib,
-							isha: prayerTime.isha,
-						},
-						// serverTime: moment(
-						// 	`${serverTime} ${time.isha}`,
-						// 	"YYYY-MM-DD HH:mm:ss"
-						// ).format("hh:mm A"),
-						serverTime: prayerTime.date.split("-").join(" "),
-						serverDate: serverDate.split("-").reverse().join("-"),
-						serverDateReverse: serverDate,
-					};
-				return datas;
+		// const getData = axios.get("sampledata/daily.json");
+		const getData = axios.get(solatTime);
+		getData
+			.then((response) => {
+				const datas = prayerTimeData(response.data);
+
+				setPrayerTimes(datas);
+				calculatePrayerTimes(datas);
+				setYearlyPrayerTime(); // Save yearly prayertime
+				setHijriFullDate(datas.serverDate, datas.serverDateReverse); // ! shouldnt called every API call
+				setUserSettings({ showLoadingBar: false });
 			})
-			.then((datas) => {
-				setPrayerTimes(datas); // save datas above into DB
-				getHijriFullDate(datas.serverDate, datas.serverDateReverse); // calculate dates - Hijri and Gregorian
-				calculatePrayerTimes(datas); // calculate currentPrayerTime, nextPrayerTime and save into DB
+			.catch((e) => {
+				console.log(e);
 			});
 	}
 
-	function getYearlyPrayerTime() {
+	function setYearlyPrayerTime() {
 		Object.keys(Constants.locations || {}).map((state) => {
-			Object.keys(Constants.locations[state] || {}).map((stateCode) => {
-				axios
-					.get(
-						"https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=" +
-							stateCode
-					)
-					.then((obj) => {
-						console.log(obj);
-						const cacheAsset = ["/sampledata/yearly.json"];
-						caches.open("test-cache").then(function (cache) {
-							cache.addAll(cacheAsset);
-							cache.add(new Response(obj));
-						});
+			return Object.keys(Constants.locations[state] || {}).map(
+				async (stateCode) => {
+					async function getYearlyData() {
+						const result = await axios
+							.get(Constants.waktuSolatURLYearly(stateCode))
+							.catch((e) => {
+								console.log(e);
+							});
+						addToStore("prayerTime", result.data);
+					}
+
+					// hardcode Johor Code - JHR01
+					isRecordExist("prayerTime", "JHR01").then((status) => {
+						if (status) {
+							console.log("rec exist in index db");
+						} else {
+							getYearlyData();
+						}
 					});
-			});
+				}
+			);
 		});
 	}
 
@@ -184,41 +190,46 @@ export const useSetPrayerTimes = () => {
 		}
 	}
 
-	function getHijriFullDate(serverDate, serverDateReverse) {
+	function setHijriFullDate(serverDate, serverDateReverse) {
 		const islamicDateAPI = Constants.hijriDate(serverDateReverse), // islamicDateAPI = "/sampledata/constants-date.json",
 			islamicDateAPIArabic = Constants.hijriDateArabic(serverDate);
 
+		const dateData = (response) => {
+			const jakimDate = response[0].data.takwim[serverDateReverse],
+				jakimMonth = jakimDate.split("-")[1],
+				jakimDay = jakimDate.split("-")[2],
+				alAdhanDate = response[1].data.data.hijri;
+
+			const multiLanguageHijriDates = Object.keys(languages || {})
+				.map((keys) => {
+					const hijriFullDate = [
+						jakimDay,
+						keys === "arabic"
+							? alAdhanDate.month.ar
+							: Constants.islamicMonth[jakimMonth],
+						alAdhanDate.year,
+					].join(" ");
+					return { [keys]: hijriFullDate };
+				})
+				.reduce((result, key) => {
+					Object.keys(key).forEach((lang) => {
+						result[lang] = key[lang];
+					});
+					return result;
+				}, {});
+			return multiLanguageHijriDates;
+		};
+
 		axios
 			.all([axios.get(islamicDateAPI), axios.get(islamicDateAPIArabic)])
-			.then((obj) => {
-				const hijriDate = obj[0].data.takwim[serverDateReverse], // Jakim Obj
-					hijriDateArabic = obj[1].data.data.hijri, // Aladhan Obj
-					jakimHijriMonth = hijriDate.split("-")[1], // [ "04" ]
-					jakimHijriDay = hijriDate.split("-")[2]; // [ "19" ]
-
-				const multiLanguageHijriDates = Object.keys(languages || {})
-					.map((keys) => {
-						const hijriFullDate = [
-							jakimHijriDay,
-							keys === "arabic"
-								? hijriDateArabic.month.ar
-								: Constants.islamicMonth[jakimHijriMonth],
-							hijriDateArabic.year,
-						].join(" ");
-						return { [keys]: hijriFullDate };
-					})
-					.reduce((result, key) => {
-						Object.keys(key).forEach((lang) => {
-							result[lang] = key[lang];
-						});
-						return result;
-					}, {});
-
+			.then((responses) => {
 				setPrayerTimes({
-					hijriDate: multiLanguageHijriDates,
+					hijriDate: dateData(responses),
 				});
-				setUserSettings("showLoadingBar", false);
-			}, []);
+			})
+			.catch((e) => {
+				console.log(e);
+			});
 	}
 
 	function setPrayerTimes(obj) {
@@ -234,9 +245,8 @@ export const useSetPrayerTimes = () => {
 	return {
 		nextPrayer,
 		timeToNextPrayer,
-		solatTime, // pass state code to axios on Body
+		// solatTime, // pass state code to axios on Body
 		hijriDate,
-		// getHijriFullDate,
 		serverTime,
 		prayerTimeList,
 		currentPrayerTime,

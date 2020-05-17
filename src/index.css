@@ -29,6 +29,7 @@ body {
 :root {
 	/* Main Colors */
 	--main-white: white;
+	--main-border-color: #e0e0e0;
 
 	/* Color Scheme 1 Light Mode - https://colorhunt.co/palette/1649 */
 	--cs1-light: #f0f5f9;
@@ -123,6 +124,17 @@ h2 {
 	direction: unset !important;
 	text-align: right;
 }
+/* invisible scroll bar */
+.wrapper {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.wrapper::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+/* @end invisible scroll bar */
 .wrapper {
 	height: var(--full-height);
 	min-height: -webkit-fill-available;
@@ -242,7 +254,7 @@ header .subcontent {
 h3.locationSelectorTitle {
 	position: fixed;
 	font-size: 1em;
-	top: 0;
+	top: 1px;
 	left: 0;
 	right: 0;
 	padding: 0 24px;
@@ -251,8 +263,8 @@ h3.locationSelectorTitle {
 	align-items: center;
 	background-color: var(--main-white);
 	z-index: 9;
-	border-top-left-radius: var(--default-radius);
-	border-top-right-radius: var(--default-radius);
+	border-bottom: 1px solid var(--main-border-color);
+	/* box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3); */
 }
 
 /* Credit Settings Container  */

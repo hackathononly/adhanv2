@@ -41,7 +41,7 @@ export const Body = () => {
 		// } = useChangeLocationSettings(),
 		{
 			// solatTime,
-			storeAndCalc,
+			initAdhanApp,
 			// prayerTimeList,
 			currentPrayerTime,
 			getPrayerTimeList,
@@ -57,11 +57,11 @@ export const Body = () => {
 	// useOuterClickNotifier(locationSettingsModal, toggleLocationModal);
 
 	useEffect(() => {
-		storeAndCalc();
+		initAdhanApp();
 	}, []);
 
 	// useMemo(() => {
-	// 	storeAndCalc();
+	// 	initAdhanApp();
 	// }, [solatTime]);
 
 	// return isMinimal ? null : (

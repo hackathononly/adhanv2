@@ -91,7 +91,7 @@
 		visibility: hidden;
 		opacity: 0;
 		z-index: 10;
-		/* width: 100%; 10% occupied by padding */
+		width: 100vw;
 		/* height: 80%; */
 		/* height: calc(100% - (40px)); */
 		height: calc(100% - (20vh));
@@ -104,8 +104,8 @@
 	}
 	.modal .content .container {
 		/* border-top: 1px solid transparent; */
-		border-top: 1px solid var(--main-black-opacity1);
-		border-bottom: 1px solid var(--main-black-opacity1);
+		border-top: 1px solid var(--main-border-color);
+		border-bottom: 1px solid var(--main-border-color);
 		/* margin: 38px 0; */
 		margin: 2.5em 0;
 		/* height: calc(100% - (80px)); */

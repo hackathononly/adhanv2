@@ -1,12 +1,10 @@
 :root {
 	--button-mainColor: var(--cs1-dark);
-	/* --button-borderColor: var(--main-black-opacity5); */
 	--button-settingsPath: var(--cs1-dark);
 	--button-settings-hover: var(--cs1-grey);
 }
 [data-theme="dark"] {
 	--button-mainColor: var(--cs2-light);
-	/* --button-borderColor: var(--cs2-light); */
 	--button-settingsPath: var(--cs2-green);
 	--button-settings-hover: var(--cs2-black);
 }
@@ -62,7 +60,6 @@
 .locationSelector span {
 	padding-bottom: 4px;
 	border-bottom: 1px solid;
-	border-color: var(--button-borderColor);
 }
 .locationSelector button:hover span {
 	opacity: 0.8;

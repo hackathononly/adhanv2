@@ -3,7 +3,7 @@ import { LoadingBar } from "../index";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
 import { useGetTranslation } from "../customHook/useGetTranslation";
 
-const ThemeSelector = React.memo(({ children }) => {
+const ThemeSelector = ({ children }) => {
 	const {
 			isMinimal,
 			isDarkMode,
@@ -24,6 +24,6 @@ const ThemeSelector = React.memo(({ children }) => {
 			{children}
 		</main>
 	);
-});
+};
 
 export default ThemeSelector;

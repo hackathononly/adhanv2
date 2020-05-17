@@ -35,29 +35,35 @@ export const useAdhanAppDB = () => {
 	}
 
 	async function isRecordExist(storeName, keyPath) {
-		const store = (await transactionIDB()).objectStore(storeName);
-		let cursor = (await store.openCursor(keyPath)) !== null;
+		const store = (await transactionIDB()).objectStore(storeName),
+			cursor = (await store.openCursor(keyPath)) !== null;
 		return cursor;
 	}
 
-	// addToStore("settings", userSettings);
-	async function addToStore(storeName, value) {
-		const keyPath = value.type || value.zone;
+	async function getRecordByKey(storeName, keyPath) {
+		const store = (await transactionIDB()).objectStore(storeName);
+		return store.get(keyPath);
+	}
 
-		try {
-			const recordStatus = await isRecordExist(storeName, keyPath);
-			if (recordStatus) {
-				// console.log("key exist");
-				return;
-			} else {
-				// console.log("dont exist");
+	async function addToStore(storeName, value) {
+		const isValueInArray = Array.isArray(value),
+			add = async (key, value) => {
 				(await IDBStore()).add(storeName, {
 					...value,
-					type: value.type,
+					type: key,
 				});
-			}
-		} catch (error) {
-			console.log(error);
+			},
+			checkRecordStatus = async (key, value) => {
+				const recordStatus = await isRecordExist(storeName, key);
+				recordStatus ? console.log("key exist") : add(key, value);
+			};
+
+		if (isValueInArray) {
+			value.forEach((value) => {
+				checkRecordStatus(value.type, value);
+			});
+		} else {
+			checkRecordStatus(value.zone, value);
 		}
 	}
 
@@ -88,5 +94,6 @@ export const useAdhanAppDB = () => {
 		addToStore,
 		updateRecord,
 		isRecordExist,
+		getRecordByKey,
 	};
 };

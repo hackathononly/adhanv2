@@ -4,7 +4,7 @@ import { useStateValue } from "../state";
 import { useAdhanAppDB } from "../customHook/useAdhanAppDB";
 import { useGetTranslation } from "../customHook/useGetTranslation";
 // import { useCurrentTime } from "../customHook/useGeneralHelper";
-import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
+// import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
 // import { useGeneralHelper } from "../customHook/useGeneralHelper";
 import Constants from "../constants";
 
@@ -14,8 +14,8 @@ export const useSetPrayerTimes = () => {
 			dispatch,
 		] = useStateValue(),
 		{ getTranslation: translate } = useGetTranslation(),
-		{ setUserSettings } = useChangeUserSettings(),
-		{ addToStore, isRecordExist } = useAdhanAppDB(),
+		// { setUserSettings } = useChangeUserSettings(),
+		{ addToStore, isRecordExist, getRecordByKey } = useAdhanAppDB(),
 		selectedLang = userSettings.selectedLang;
 
 	const serverTime = prayerTimes.serverTime,
@@ -29,10 +29,6 @@ export const useSetPrayerTimes = () => {
 		),
 		getSilencedTime = prayerTimes.silenced,
 		prayerTimeList = prayerTimes.list;
-
-	// function getKeyByValue(object, value) {
-	// 	return Object.keys(object).find(key => object[key] === value);
-	// }
 
 	function getCurrentAndNextWaktu(object, value) {
 		const obj = Object.keys(object),
@@ -88,76 +84,140 @@ export const useSetPrayerTimes = () => {
 		});
 	}
 
-	function storeAndCalc() {
-		// Show loading bar
-		setUserSettings({ showLoadingBar: true });
+	function getKeyByValue(obj, value) {
+		let object = obj.prayerTime;
+		let val = Object.keys(object).find((key) => {
+			return object[key].date === value;
+		});
+		return object[val];
+	}
 
-		// init - userSettings, locationSettings, date
-		addToStore("settings", userSettings);
-		addToStore("settings", locationSettings);
+	function getReverseDate(response) {
+		return Object.keys(response || {}).map((keys) => {
+			return keys;
+		});
+	}
 
-		const prayerTimeData = (response) => {
-			const prayerTime = response.prayerTime[0],
-				serverDate = response.serverTime.substr(
-					0,
-					response.serverTime.indexOf(" ")
-				);
-			return {
-				silenced: [],
-				list: {
-					fajr: prayerTime.fajr,
-					syuruk: prayerTime.syuruk,
-					dhuhr: prayerTime.dhuhr,
-					asr: prayerTime.asr,
-					maghrib: prayerTime.maghrib,
-					isha: prayerTime.isha,
-				},
-				serverTime: prayerTime.date.split("-").join(" "),
-				serverDate: serverDate.split("-").reverse().join("-"),
-				serverDateReverse: serverDate,
-			};
+	async function getAllData() {
+		const islamicDateAPI = Constants.hijriDate(
+				moment().format("YYYY-MM-DD")
+			),
+			islamicDateAPIArabic = Constants.hijriDateArabic(
+				moment().format("DD-MM-YYYY")
+			);
+
+		/* Get Data From IDB */
+		const prayerTimeDatas = await getRecordByKey(
+				"prayerTime",
+				locationSettings.selectedStateCode ||
+					Constants.defaultSettings.waktuSolatStateCode
+			),
+			hasPrayerTimeStored = prayerTimeDatas === undefined;
+		/* @end From IDB */
+
+		try {
+			const responses = await axios.all([
+				// axios.get("sampledata/daily.json"),
+				hasPrayerTimeStored
+					? axios.get(solatTime)
+					: {
+							data: {
+								...prayerTimeDatas,
+								prayerTime: [
+									getKeyByValue(
+										prayerTimeDatas || {},
+										"18-Mei-2020"
+									),
+								],
+							},
+					  },
+				axios.get(islamicDateAPI),
+				axios.get(islamicDateAPIArabic),
+			]);
+
+			return responses;
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
+	function getPrayerTimeDatas(response) {
+		const prayerTime = response.prayerTime[0],
+			serverDate = response.serverTime.substr(
+				0,
+				response.serverTime.indexOf(" ")
+			);
+
+		return {
+			silenced: [],
+			list: {
+				fajr: prayerTime.fajr,
+				syuruk: prayerTime.syuruk,
+				dhuhr: prayerTime.dhuhr,
+				asr: prayerTime.asr,
+				maghrib: prayerTime.maghrib,
+				isha: prayerTime.isha,
+			},
+			serverTime: prayerTime.date.split("-").join("-"),
+			serverDate: serverDate.split("-").reverse().join("-"),
+			serverDateReverse: serverDate,
 		};
+	}
 
-		// const getData = axios.get("sampledata/daily.json");
-		const getData = axios.get(solatTime);
-		getData
-			.then((response) => {
-				const datas = prayerTimeData(response.data);
+	async function initAdhanApp() {
+		setYearlyPrayerTime(); // Save yearly prayertime
 
-				setPrayerTimes(datas);
-				calculatePrayerTimes(datas);
-				setYearlyPrayerTime(); // Save yearly prayertime
-				setHijriFullDate(datas.serverDate, datas.serverDateReverse); // ! shouldnt called every API call
+		// Show Loading Bar
+		// setUserSettings({ showLoadingBar: true });
+
+		// Add stores to IDB
+		addToStore("settings", [userSettings, locationSettings]);
+
+		// Get Datas
+		const fetchDatas = await getAllData(),
+			prayerTimeResponses = getPrayerTimeDatas(fetchDatas[0].data),
+			dateResponses = [fetchDatas[1].data, fetchDatas[2].data];
+
+		setPrayerTimes(prayerTimeResponses);
+		calculatePrayerTimes(prayerTimeResponses);
+		setHijriFullDate(dateResponses); // ! shouldnt called every API call
+	}
+
+	function getStateCodes() {
+		return Object.keys(Constants.locations || {})
+			.map((state) => {
+				return Object.keys(Constants.locations[state] || {}).map(
+					(stateCode) => {
+						return stateCode;
+					}
+				);
 			})
-			.catch((e) => {
-				console.log(e);
-			});
+			.flat();
 	}
 
 	function setYearlyPrayerTime() {
-		Object.keys(Constants.locations || {}).map((state) => {
-			return Object.keys(Constants.locations[state] || {}).map(
-				async (stateCode) => {
-					async function getYearlyData() {
-						const result = await axios
-							.get(Constants.waktuSolatURLYearly(stateCode))
-							.catch((e) => {
-								console.log(e);
-							});
+		const getStatePrayerTime = (stateCode) => {
+			return axios.get(Constants.waktuSolatURLYearly(stateCode));
+		};
+
+		try {
+			getStateCodes().forEach((stateCode) => {
+				(async () => {
+					const hasStateAdded = await isRecordExist(
+						"prayerTime",
+						stateCode
+					);
+					if (hasStateAdded) {
+						console.log("state existed in index db");
+					} else {
+						const result = await getStatePrayerTime(stateCode);
 						addToStore("prayerTime", result.data);
 					}
-
-					// hardcode Johor Code - JHR01
-					isRecordExist("prayerTime", "JHR01").then((status) => {
-						if (status) {
-							console.log("rec exist in index db");
-						} else {
-							getYearlyData();
-						}
-					});
-				}
-			);
-		});
+				})();
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	function getPrayerTimeList() {
@@ -189,15 +249,13 @@ export const useSetPrayerTimes = () => {
 		}
 	}
 
-	function setHijriFullDate(serverDate, serverDateReverse) {
-		const islamicDateAPI = Constants.hijriDate(serverDateReverse), // islamicDateAPI = "/sampledata/constants-date.json",
-			islamicDateAPIArabic = Constants.hijriDateArabic(serverDate);
-
+	function setHijriFullDate(dateObj) {
 		const dateData = (response) => {
-			const jakimDate = response[0].data.takwim[serverDateReverse],
+			const reverseTarikh = getReverseDate(response[0].takwim),
+				jakimDate = response[0].takwim[reverseTarikh],
 				jakimMonth = jakimDate.split("-")[1],
 				jakimDay = jakimDate.split("-")[2],
-				alAdhanDate = response[1].data.data.hijri;
+				alAdhanDate = response[1].data.hijri;
 
 			const multiLanguageHijriDates = Object.keys(languages || {})
 				.map((keys) => {
@@ -219,17 +277,10 @@ export const useSetPrayerTimes = () => {
 			return multiLanguageHijriDates;
 		};
 
-		axios
-			.all([axios.get(islamicDateAPI), axios.get(islamicDateAPIArabic)])
-			.then((responses) => {
-				setPrayerTimes({
-					hijriDate: dateData(responses),
-				});
-				setUserSettings({ showLoadingBar: false });
-			})
-			.catch((e) => {
-				console.log(e);
-			});
+		setPrayerTimes({
+			hijriDate: dateData(dateObj),
+		});
+		// setUserSettings({ showLoadingBar: false });
 	}
 
 	function setPrayerTimes(obj) {
@@ -245,7 +296,7 @@ export const useSetPrayerTimes = () => {
 	return {
 		nextPrayer,
 		timeToNextPrayer,
-		// solatTime, // pass state code to axios on Body
+		// solatTime,
 		hijriDate,
 		serverTime,
 		prayerTimeList,
@@ -254,6 +305,6 @@ export const useSetPrayerTimes = () => {
 		// setPrayerTimes,
 		setSilencedTime,
 		getSilencedTime,
-		storeAndCalc,
+		initAdhanApp,
 	};
 };

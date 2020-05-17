@@ -4,7 +4,7 @@ import { useStateValue } from "../state";
 import { useAdhanAppDB } from "../customHook/useAdhanAppDB";
 import { useGetTranslation } from "../customHook/useGetTranslation";
 // import { useCurrentTime } from "../customHook/useGeneralHelper";
-// import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
+import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
 // import { useGeneralHelper } from "../customHook/useGeneralHelper";
 import Constants from "../constants";
 
@@ -14,7 +14,7 @@ export const useSetPrayerTimes = () => {
 			dispatch,
 		] = useStateValue(),
 		{ getTranslation: translate } = useGetTranslation(),
-		// { setUserSettings } = useChangeUserSettings(),
+		{ setUserSettings } = useChangeUserSettings(),
 		{ addToStore, isRecordExist, getRecordByKey } = useAdhanAppDB(),
 		selectedLang = userSettings.selectedLang;
 
@@ -168,7 +168,7 @@ export const useSetPrayerTimes = () => {
 		setYearlyPrayerTime(); // Save yearly prayertime
 
 		// Show Loading Bar
-		// setUserSettings({ showLoadingBar: true });
+		setUserSettings({ showLoadingBar: true });
 
 		// Add stores to IDB
 		addToStore("settings", [userSettings, locationSettings]);
@@ -280,7 +280,7 @@ export const useSetPrayerTimes = () => {
 		setPrayerTimes({
 			hijriDate: dateData(dateObj),
 		});
-		// setUserSettings({ showLoadingBar: false });
+		setUserSettings({ showLoadingBar: false });
 	}
 
 	function setPrayerTimes(obj) {

@@ -84,11 +84,15 @@ export const useSetPrayerTimes = () => {
 		});
 	}
 
-	function getKeyByValue(obj, value) {
-		let object = obj.prayerTime;
-		let val = Object.keys(object).find((key) => {
-			return object[key].date === value;
-		});
+	function getKeyByValue(obj) {
+		const bits = obj.serverTime.split(/\D/),
+			month = Constants.malayMonth[bits[1]],
+			targetDate = bits[2].concat("-", month, "-", bits[0]);
+
+		let object = obj.prayerTime,
+			val = Object.keys(object).find((key) => {
+				return object[key].date === targetDate;
+			});
 		return object[val];
 	}
 
@@ -97,6 +101,39 @@ export const useSetPrayerTimes = () => {
 			return keys;
 		});
 	}
+
+	const datasFormat = {
+		statePrayerTime: (prayerTimeDatas) => {
+			return {
+				data: {
+					...prayerTimeDatas,
+					prayerTime: [getKeyByValue(prayerTimeDatas || {})],
+				},
+			};
+		},
+		dayPrayerTime: (response) => {
+			const prayerTime = response.prayerTime[0],
+				serverDate = response.serverTime.substr(
+					0,
+					response.serverTime.indexOf(" ")
+				);
+
+			return {
+				silenced: [],
+				list: {
+					fajr: prayerTime.fajr,
+					syuruk: prayerTime.syuruk,
+					dhuhr: prayerTime.dhuhr,
+					asr: prayerTime.asr,
+					maghrib: prayerTime.maghrib,
+					isha: prayerTime.isha,
+				},
+				serverTime: prayerTime.date,
+				serverDate: serverDate.split("-").reverse().join("-"),
+				serverDateReverse: serverDate,
+			};
+		},
+	};
 
 	async function getAllData() {
 		const islamicDateAPI = Constants.hijriDate(
@@ -112,75 +149,65 @@ export const useSetPrayerTimes = () => {
 				locationSettings.selectedStateCode ||
 					Constants.defaultSettings.waktuSolatStateCode
 			),
-			hasPrayerTimeStored = prayerTimeDatas === undefined;
+			hasPrayerTimeStored = prayerTimeDatas !== undefined;
 		/* @end From IDB */
 
 		try {
 			const responses = await axios.all([
-				// axios.get("sampledata/daily.json"),
 				hasPrayerTimeStored
-					? axios.get(solatTime)
-					: {
-							data: {
-								...prayerTimeDatas,
-								prayerTime: [
-									getKeyByValue(
-										prayerTimeDatas || {},
-										"18-Mei-2020"
-									),
-								],
-							},
-					  },
+					? datasFormat.statePrayerTime(prayerTimeDatas)
+					: axios.get(solatTime),
 				axios.get(islamicDateAPI),
 				axios.get(islamicDateAPIArabic),
 			]);
-
 			return responses;
 		} catch (e) {
 			console.log(e);
 		}
 	}
 
-	function getPrayerTimeDatas(response) {
-		const prayerTime = response.prayerTime[0],
-			serverDate = response.serverTime.substr(
-				0,
-				response.serverTime.indexOf(" ")
-			);
-
-		return {
-			silenced: [],
-			list: {
-				fajr: prayerTime.fajr,
-				syuruk: prayerTime.syuruk,
-				dhuhr: prayerTime.dhuhr,
-				asr: prayerTime.asr,
-				maghrib: prayerTime.maghrib,
-				isha: prayerTime.isha,
-			},
-			serverTime: prayerTime.date.split("-").join("-"),
-			serverDate: serverDate.split("-").reverse().join("-"),
-			serverDateReverse: serverDate,
-		};
-	}
-
 	async function initAdhanApp() {
-		setYearlyPrayerTime(); // Save yearly prayertime
-
 		// Show Loading Bar
-		setUserSettings({ showLoadingBar: true });
+		// setUserSettings({ showLoadingBar: true });
 
 		// Add stores to IDB
 		addToStore("settings", [userSettings, locationSettings]);
 
-		// Get Datas
-		const fetchDatas = await getAllData(),
-			prayerTimeResponses = getPrayerTimeDatas(fetchDatas[0].data),
-			dateResponses = [fetchDatas[1].data, fetchDatas[2].data];
+		try {
+			const getStatePrayerTime = (stateCode) => {
+					return axios.get(Constants.waktuSolatURLYearly(stateCode));
+				},
+				processStateCode = async (stateCode) => {
+					const hasStateAdded = await isRecordExist(
+						"prayerTime",
+						stateCode
+					);
+					if (hasStateAdded) {
+						console.log("state existed in index db");
+					} else {
+						const result = await getStatePrayerTime(stateCode);
+						addToStore("prayerTime", result.data);
+					}
+				};
 
-		setPrayerTimes(prayerTimeResponses);
-		calculatePrayerTimes(prayerTimeResponses);
-		setHijriFullDate(dateResponses); // ! shouldnt called every API call
+			getStateCodes().map((stateCode) => {
+				processStateCode(stateCode);
+			});
+
+			processStateCode().then(async () => {
+				const fetchDatas = await getAllData(), // check if data exist in IDB happen here
+					prayerTimeResponses = datasFormat.dayPrayerTime(
+						fetchDatas[0].data
+					),
+					dateResponses = [fetchDatas[1].data, fetchDatas[2].data];
+
+				setPrayerTimes(prayerTimeResponses);
+				calculatePrayerTimes(prayerTimeResponses);
+				setHijriFullDate(dateResponses); // ! shouldnt called every API call
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	function getStateCodes() {
@@ -193,31 +220,6 @@ export const useSetPrayerTimes = () => {
 				);
 			})
 			.flat();
-	}
-
-	function setYearlyPrayerTime() {
-		const getStatePrayerTime = (stateCode) => {
-			return axios.get(Constants.waktuSolatURLYearly(stateCode));
-		};
-
-		try {
-			getStateCodes().forEach((stateCode) => {
-				(async () => {
-					const hasStateAdded = await isRecordExist(
-						"prayerTime",
-						stateCode
-					);
-					if (hasStateAdded) {
-						console.log("state existed in index db");
-					} else {
-						const result = await getStatePrayerTime(stateCode);
-						addToStore("prayerTime", result.data);
-					}
-				})();
-			});
-		} catch (error) {
-			console.log(error);
-		}
 	}
 
 	function getPrayerTimeList() {

@@ -14,18 +14,15 @@ export const useChangeLocationSettings = () => {
 		getSelectedMunicipal = locationSettings.selectedMunicipal.slice(
 			0,
 			locationSettings.selectedMunicipal.indexOf(",")
-		),
-		getSelectedStateCode =
-			locationSettings.selectedStateCode ||
-			initialState.waktuSolatStateCode;
+		);
+	// getSelectedStateCode =
+	// 	locationSettings.selectedStateCode ||
+	// 	initialState.waktuSolatStateCode;
 
 	function toggleLocationModal() {
 		locationSettings.showModal
 			? (document.body.style.overflow = "auto")
 			: (document.body.style.overflow = "hidden");
-
-		// ! set wrapper overflow as hidden
-
 		setLocationSettings({
 			showModal: !locationSettings.showModal,
 		});
@@ -68,7 +65,7 @@ export const useChangeLocationSettings = () => {
 		setStateCode,
 		setStateName,
 		getSelectedState,
-		getSelectedStateCode,
+		// getSelectedStateCode,
 		getSelectedMunicipal,
 		showLocationModal,
 		toggleLocationModal,

@@ -1,9 +1,10 @@
 import { openDB } from "idb";
 import { useStateValue } from "../state";
 import Constants from "../constants";
+import { useLayoutEffect } from "react";
 
 export const useAdhanAppDB = () => {
-	const [{ locationSettings, userSettings }] = useStateValue(),
+	const [{ locationSettings, userSettings, prayerTimes }] = useStateValue(),
 		tableName = Constants.db.table,
 		dbName = Constants.db.name,
 		aaTables = {
@@ -55,7 +56,9 @@ export const useAdhanAppDB = () => {
 			},
 			checkRecordStatus = async (key, value) => {
 				const recordStatus = await isRecordExist(storeName, key);
-				recordStatus ? console.log("key exist") : add(key, value);
+				recordStatus
+					? console.log(storeName, key, "record exist in IDB")
+					: add(key, value);
 			};
 
 		if (isValueInArray) {
@@ -63,14 +66,19 @@ export const useAdhanAppDB = () => {
 				checkRecordStatus(value.type, value);
 			});
 		} else {
-			checkRecordStatus(value.zone, value);
+			checkRecordStatus(value.type || value.zone, value);
 		}
 	}
 
 	async function updateRecord(key, value) {
 		const store = (await transactionIDB()).objectStore("settings"),
 			newKey = key,
-			data = key === "user" ? userSettings : locationSettings,
+			data =
+				key === "user"
+					? userSettings
+					: key === "location"
+					? locationSettings
+					: await store.get("prayertime"),
 			newData = Object.keys(data || {})
 				.map((key) => {
 					return value[key] !== undefined
@@ -82,9 +90,8 @@ export const useAdhanAppDB = () => {
 						: "";
 				})
 				.filter((item) => item !== "")[0]; // filter for first, non-empty item
-		// store.put({ type: key, newData });
 		try {
-			store.put(newData);
+			store.put(key === "prayertime" ? value : newData);
 		} catch (error) {
 			console.log(error);
 		}

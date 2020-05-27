@@ -70,14 +70,6 @@ const Constants = {
 		// hideSettings: false
 		// changeLanguage: false
 	},
-	locationSettings: {
-		type: "location",
-		isNested: false,
-		showModal: false,
-		selectedState: "Wilayah Persekutuan",
-		selectedMunicipal: "Kuala Lumpur, Putrajaya",
-		selectedStateCode: "WLY01",
-	},
 	prayerTimes: {
 		nextPrayer: "",
 		currentPrayerTime: "",
@@ -87,6 +79,14 @@ const Constants = {
 		serverTime: "",
 		machineTime: "",
 		hijriDate: {},
+	},
+	locationSettings: {
+		type: "location",
+		isNested: false,
+		showModal: false,
+		selectedState: "Wilayah Persekutuan",
+		selectedMunicipal: "Kuala Lumpur, Putrajaya",
+		selectedStateCode: "WLY01",
 	},
 	locations: {
 		Johor: {

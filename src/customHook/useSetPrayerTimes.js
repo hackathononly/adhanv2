@@ -15,7 +15,12 @@ export const useSetPrayerTimes = () => {
 		] = useStateValue(),
 		{ getTranslation: translate } = useGetTranslation(),
 		{ setUserSettings } = useChangeUserSettings(),
-		{ addToStore, isRecordExist, getRecordByKey } = useAdhanAppDB(),
+		{
+			addToStore,
+			isRecordExist,
+			updateRecord,
+			getRecordByKey,
+		} = useAdhanAppDB(),
 		selectedLang = userSettings.selectedLang;
 
 	const serverTime = prayerTimes.serverTime,
@@ -59,29 +64,16 @@ export const useSetPrayerTimes = () => {
 				return m.isAfter();
 			});
 
-		// calcute difference time
-		// var now = dateToday + currentTime;
-		// var then = dateToday + "10:20:30";
-		// console.log(
-		// 	moment
-		// 		.utc(
-		// 			moment(now, "DD/MM/YYYY HH:mm:ss").diff(
-		// 				moment(then, "DD/MM/YYYY HH:mm:ss")
-		// 			)
-		// 		)
-		// 		.format("HH:mm:ss")
-		// );
-
 		const time = getCurrentAndNextWaktu(
 			datas.list,
 			next.format("HH:mm:ss")
 		);
 
-		setPrayerTimes({
+		return {
 			timeToNextPrayer: next.fromNow(),
 			currentPrayerTime: time.current,
 			nextPrayer: time.next,
-		});
+		};
 	}
 
 	function getKeyByValue(obj) {
@@ -142,21 +134,9 @@ export const useSetPrayerTimes = () => {
 			islamicDateAPIArabic = Constants.hijriDateArabic(
 				moment().format("DD-MM-YYYY")
 			);
-
-		/* Get Data From IDB */
-		const prayerTimeDatas = await getRecordByKey(
-				"prayerTime",
-				locationSettings.selectedStateCode ||
-					Constants.defaultSettings.waktuSolatStateCode
-			),
-			hasPrayerTimeStored = prayerTimeDatas !== undefined;
-		/* @end From IDB */
-
 		try {
 			const responses = await axios.all([
-				hasPrayerTimeStored
-					? datasFormat.statePrayerTime(prayerTimeDatas)
-					: axios.get(solatTime),
+				axios.get(solatTime),
 				axios.get(islamicDateAPI),
 				axios.get(islamicDateAPIArabic),
 			]);
@@ -168,7 +148,7 @@ export const useSetPrayerTimes = () => {
 
 	async function initAdhanApp() {
 		// Show Loading Bar
-		// setUserSettings({ showLoadingBar: true });
+		setUserSettings({ showLoadingBar: true });
 
 		// Add stores to IDB
 		addToStore("settings", [userSettings, locationSettings]);
@@ -194,17 +174,50 @@ export const useSetPrayerTimes = () => {
 				processStateCode(stateCode);
 			});
 
-			processStateCode().then(async () => {
-				const fetchDatas = await getAllData(), // check if data exist in IDB happen here
-					prayerTimeResponses = datasFormat.dayPrayerTime(
-						fetchDatas[0].data
-					),
-					dateResponses = [fetchDatas[1].data, fetchDatas[2].data];
+			processStateCode()
+				.then(async () => {
+					return await getRecordByKey("settings", "prayertime");
+				})
+				.then(async function (response) {
+					let dataCollections = {};
+					if (response) {
+						// retrieve data from IDB
+						const prayerTimeResponses = response,
+							dateResponses = response.hijriDate,
+							currentAndNextPrayers = calculatePrayerTimes(
+								prayerTimeResponses
+							);
 
-				setPrayerTimes(prayerTimeResponses);
-				calculatePrayerTimes(prayerTimeResponses);
-				setHijriFullDate(dateResponses); // ! shouldnt called every API call
-			});
+						dataCollections = {
+							hijriDate: dateResponses,
+							...prayerTimeResponses,
+							...currentAndNextPrayers,
+						};
+					} else {
+						const fetchDatas = await getAllData(),
+							prayerTimeResponses = datasFormat.dayPrayerTime(
+								fetchDatas[0].data
+							),
+							dateResponses = [
+								fetchDatas[1].data,
+								fetchDatas[2].data,
+							],
+							currentAndNextPrayers = calculatePrayerTimes(
+								prayerTimeResponses
+							),
+							hijriDates = calculateHijriFullDate(dateResponses);
+
+						dataCollections = {
+							hijriDate: hijriDates,
+							...prayerTimeResponses,
+							...currentAndNextPrayers,
+						};
+					}
+					setPrayerTimes(dataCollections);
+				})
+				.then(function () {
+					setUserSettings({ showLoadingBar: false });
+				});
 		} catch (error) {
 			console.log(error);
 		}
@@ -251,46 +264,53 @@ export const useSetPrayerTimes = () => {
 		}
 	}
 
-	function setHijriFullDate(dateObj) {
-		const dateData = (response) => {
-			const reverseTarikh = getReverseDate(response[0].takwim),
-				jakimDate = response[0].takwim[reverseTarikh],
-				jakimMonth = jakimDate.split("-")[1],
-				jakimDay = jakimDate.split("-")[2],
-				alAdhanDate = response[1].data.hijri;
+	function calculateHijriFullDate(response) {
+		const reverseTarikh = getReverseDate(response[0].takwim),
+			jakimDate = response[0].takwim[reverseTarikh],
+			jakimMonth = jakimDate.split("-")[1],
+			jakimDay = jakimDate.split("-")[2],
+			alAdhanDate = response[1].data.hijri;
 
-			const multiLanguageHijriDates = Object.keys(languages || {})
-				.map((keys) => {
-					const hijriFullDate = [
-						jakimDay,
-						keys === "arabic"
-							? alAdhanDate.month.ar
-							: Constants.islamicMonth[jakimMonth],
-						alAdhanDate.year,
-					].join(" ");
-					return { [keys]: hijriFullDate };
-				})
-				.reduce((result, key) => {
-					Object.keys(key).forEach((lang) => {
-						result[lang] = key[lang];
-					});
-					return result;
-				}, {});
-			return multiLanguageHijriDates;
-		};
-
-		setPrayerTimes({
-			hijriDate: dateData(dateObj),
-		});
-		setUserSettings({ showLoadingBar: false });
+		const multiLanguageHijriDates = Object.keys(languages || {})
+			.map((keys) => {
+				const hijriFullDate = [
+					jakimDay,
+					keys === "arabic"
+						? alAdhanDate.month.ar
+						: Constants.islamicMonth[jakimMonth],
+					alAdhanDate.year,
+				].join(" ");
+				return { [keys]: hijriFullDate };
+			})
+			.reduce((result, key) => {
+				Object.keys(key).forEach((lang) => {
+					result[lang] = key[lang];
+				});
+				return result;
+			}, {});
+		return multiLanguageHijriDates;
 	}
 
-	function setPrayerTimes(obj) {
-		Object.keys(obj || {}).map((key) => {
+	async function setPrayerTimes(value) {
+		const prayerTimeRecord = await getRecordByKey("settings", "prayertime");
+		if (prayerTimeRecord === undefined) {
+			addToStore("settings", {
+				type: "prayertime",
+				...value,
+			});
+		} else {
+			const datas = {
+				...prayerTimeRecord,
+				...value,
+			};
+			updateRecord("prayertime", datas);
+		}
+
+		Object.keys(value || {}).map((key) => {
 			return dispatch({
 				type: "setPrayerTimes",
 				mode: key,
-				value: obj[key],
+				value: value[key],
 			});
 		});
 	}

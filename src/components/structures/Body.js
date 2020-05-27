@@ -104,15 +104,19 @@ export const Body = () => {
 			</Modal> */}
 			{isMinimal ? null : (
 				<section className="content">
-					<PrayerTimeList
-						key={"prayertimelistBody"}
-						translate={translate}
-						prayerTimeList={getPrayerTimeList}
-						currentPrayerTime={currentPrayerTime}
-						setSilencedTime={setSilencedTime}
-						getSilencedTime={getSilencedTime}
-						isNotificationEnabled={isNotificationEnabled}
-					/>
+					<div className="scroll-content-outer">
+						<div className="scroll-content-inner">
+							<PrayerTimeList
+								key={"prayertimelistBody"}
+								translate={translate}
+								prayerTimeList={getPrayerTimeList}
+								currentPrayerTime={currentPrayerTime}
+								setSilencedTime={setSilencedTime}
+								getSilencedTime={getSilencedTime}
+								isNotificationEnabled={isNotificationEnabled}
+							/>
+						</div>
+					</div>
 				</section>
 			)}
 			{/* <Tazkirah description={getRandomTazkirah} /> */}

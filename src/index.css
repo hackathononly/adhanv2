@@ -163,16 +163,15 @@ section.content {
 	/* position: relative; */
 	/* margin-left: 10px;
 	margin-right: 10px; */
-	align-items: center;
-	z-index: 2;
-
+	/* align-items: center;
+	z-index: 2; */
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	overflow: hidden;
 	height: calc(100% - 4.7rem);
-	z-index: 4;
+	z-index: 3;
 }
 section.content .scroll-content-outer {
 	left: -20px;
@@ -261,7 +260,7 @@ header,
 header .content {
 	/* height: var(--header-height); */
 	height: var(--full-height);
-	z-index: 3;
+	/* z-index: 3; */
 }
 .isMinimal header,
 .isMinimal header .content {
@@ -272,11 +271,15 @@ header .content {
 	height: auto;
 }
 header .subcontent {
-	top: 0;
+	/* top: 0; */
 	align-items: center;
 	/* margin: 0 10%; */
-	position: sticky;
-	height: calc(var(--full-height) - 70vh);
+	/* position: sticky; */
+	z-index: 5;
+	/* height: calc(var(--full-height) - 70vh); */
+}
+header .subcontent.itemScroll {
+	z-index: 1;
 }
 h3.locationSelectorTitle {
 	position: fixed;

@@ -44,8 +44,8 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function calculatePrayerTimes(datas) {
-		const dateToday = moment().format("DD/MM/YYYY"),
-			dateTomorrow = moment().add(1, "days").format("DD/MM/YYYY"),
+		const dateToday = moment().format("DD-MM-YYYY"),
+			dateTomorrow = moment().add(1, "days").format("DD-MM-YYYY"),
 			currentTime = moment().format("HH:mm:ss");
 
 		const timeStatus = Object.values(datas.list || {}).every(function (

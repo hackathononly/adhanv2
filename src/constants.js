@@ -16,7 +16,7 @@ const Constants = {
 		`https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=${serverTime}`,
 	hijriDateArabic: (serverTime) =>
 		`//api.aladhan.com/v1/gToH?date=${serverTime}`, //http://api.aladhan.com/v1/gToH?date=22-11-2019
-	malayMonth: {
+	monthMalay: {
 		"01": "Jan",
 		"02": "Feb",
 		"03": "Mac",
@@ -29,6 +29,34 @@ const Constants = {
 		"10": "Okt",
 		"11": "Nov",
 		"12": "Dis",
+	},
+	islamicMonthMalay: {
+		"01": "Muharram",
+		"02": "Safar",
+		"03": "Rabi'ulawal",
+		"04": "Rabi'ulakhir",
+		"05": "Jamadilawal",
+		"06": "Jamadilakhir",
+		"07": "Rejab",
+		"08": "Sya'ban",
+		"09": "Ramadhan",
+		"10": "Shawwal",
+		"11": "Zulqa'idah",
+		"12": "Zulhijjah",
+	},
+	islamicMonthArab: {
+		"01": "مُحَرَّم",
+		"02": "صَفَر",
+		"03": "رَبيع الأوّل",
+		"04": "رَبيع الثاني",
+		"05": "جُمادى الأولى",
+		"06": "جُمادى الآخرة",
+		"07": "رَجَب",
+		"08": "شَعْبان",
+		"09": "رَمَضان",
+		"10": "شَوّال",
+		"11": "ذوالقعدة",
+		"12": "ذوالحجة",
 	},
 	islamicMonth: {
 		"01": "Muharram",
@@ -77,7 +105,7 @@ const Constants = {
 		silenced: [],
 		list: {},
 		serverTime: "",
-		machineTime: "",
+		// machineTime: "",
 		hijriDate: {},
 	},
 	locationSettings: {

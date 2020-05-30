@@ -1,5 +1,6 @@
 import { useStateValue } from "../state";
 import { useAdhanAppDB } from "../customHook/useAdhanAppDB";
+import { useSetPrayerTimes } from "../customHook/useSetPrayerTimes";
 // import { useScrollTop } from "../helper";
 
 export const useChangeLocationSettings = () => {
@@ -7,7 +8,8 @@ export const useChangeLocationSettings = () => {
 			{ initialState, locations, locationSettings },
 			dispatch,
 		] = useStateValue(),
-		{ updateRecord } = useAdhanAppDB(),
+		{ updateRecord, getRecordByKey } = useAdhanAppDB(),
+		{ setPrayerTimes, getTodayIDBPrayerTime } = useSetPrayerTimes(),
 		showLocationModal = locationSettings.showModal,
 		getSelectedState =
 			locationSettings.selectedState || initialState.waktuSolatState,
@@ -49,8 +51,28 @@ export const useChangeLocationSettings = () => {
 			selectedStateCode: val,
 		});
 	}
-	function setLocationSettings(setting) {
+	async function setLocationSettings(setting) {
 		updateRecord("location", setting);
+
+		if (Reflect.has(setting, "selectedStateCode")) {
+			// check if setting objeact has selectedStateCode key
+			const prayerTimeRecord = await getRecordByKey(
+				"prayerTime",
+				setting.selectedStateCode
+			);
+			const prayerTime = getTodayIDBPrayerTime(prayerTimeRecord);
+			setPrayerTimes({
+				list: {
+					fajr: prayerTime.fajr,
+					syuruk: prayerTime.syuruk,
+					dhuhr: prayerTime.dhuhr,
+					asr: prayerTime.asr,
+					maghrib: prayerTime.maghrib,
+					isha: prayerTime.isha,
+				},
+			});
+		}
+
 		Object.keys(setting).map((key) => {
 			return dispatch({
 				type: "setLocationSettings",

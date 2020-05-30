@@ -2,17 +2,6 @@ import { useStateValue } from "../state";
 import { useAdhanAppDB } from "../customHook/useAdhanAppDB";
 
 export const useChangeUserSettings = () => {
-	/*
-	userSettings: {
-		darkMode: true,
-		showModal: false,
-		minimalMode: false,
-		selectedLang: "bahasa",
-		enableNotification: false,
-		showLoadingBar: false,
-		changeLanguage: false
-	},
-	*/
 	const [{ languages, userSettings }, dispatch] = useStateValue(),
 		isDarkMode = userSettings.darkMode,
 		showUserSettingsModal = userSettings.showModal,
@@ -23,7 +12,11 @@ export const useChangeUserSettings = () => {
 		isLoadingBarShown = userSettings.showLoadingBar,
 		isScrolling = userSettings.isScrolling;
 	// isLanguageChanged = userSettings.changeLanguage;
-	const { updateRecord } = useAdhanAppDB();
+	const {
+		// addToStore,
+		getRecordByKey,
+		updateRecord,
+	} = useAdhanAppDB();
 
 	function checkIsScrolling(val) {
 		setUserSettings({ isScrolling: val });
@@ -122,13 +115,18 @@ export const useChangeUserSettings = () => {
 	// 		itemValue = { ...item, [path]: val };
 	// 	localStorage.setItem(key, JSON.stringify(itemValue));
 	// }
-	function setUserSettings(setting) {
+	async function setUserSettings(setting) {
+		const userSettingsRecord = await getRecordByKey("settings", "user");
+		console.log(userSettingsRecord, setting);
 		updateRecord("user", setting);
-		// dispatch({
-		// 	type: "setUserSettings",
-		// 	mode: mode,
-		// 	value: val,
+
+		// const userSettingsRecord = async () => {
+		// 	return await getRecordByKey("settings", "user");
+		// };
+		// userSettingsRecord().then(function (response) {
+		// 	console.log(response);
 		// });
+
 		Object.keys(setting).map((key) => {
 			return dispatch({
 				type: "setUserSettings",
@@ -137,6 +135,7 @@ export const useChangeUserSettings = () => {
 			});
 		});
 	}
+
 	return {
 		setUserSettings,
 		isLoadingBarShown,

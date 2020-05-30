@@ -10,7 +10,12 @@ import Constants from "../constants";
 
 export const useSetPrayerTimes = () => {
 	const [
-			{ locationSettings, languages, prayerTimes, userSettings },
+			{
+				locationSettings,
+				// languages,
+				prayerTimes,
+				userSettings,
+			},
 			dispatch,
 		] = useStateValue(),
 		{ getTranslation: translate } = useGetTranslation(),
@@ -28,12 +33,19 @@ export const useSetPrayerTimes = () => {
 		nextPrayer = prayerTimes.nextPrayer,
 		timeToNextPrayer = prayerTimes.timeToNextPrayer,
 		currentPrayerTime = prayerTimes.currentPrayerTime,
-		solatTime = Constants.waktuSolatURL(
-			locationSettings.selectedStateCode ||
-				Constants.defaultSettings.waktuSolatStateCode
-		),
+		// solatTime = Constants.waktuSolatURL(
+		// 	locationSettings.selectedStateCode ||
+		// 		Constants.defaultSettings.waktuSolatStateCode
+		// ),
 		getSilencedTime = prayerTimes.silenced,
-		prayerTimeList = prayerTimes.list;
+		prayerTimeList = prayerTimes.list,
+		dateToday = moment().format("DD-MM-YYYY");
+
+	const dateTodayMalay = function () {
+		const bits = dateToday.split(/\D/),
+			month = Constants.monthMalay[bits[1]];
+		return bits[0].concat("-", month, "-", bits[2]);
+	};
 
 	function getCurrentAndNextWaktu(object, value) {
 		const obj = Object.keys(object),
@@ -44,8 +56,7 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function calculatePrayerTimes(datas) {
-		const dateToday = moment().format("DD-MM-YYYY"),
-			dateTomorrow = moment().add(1, "days").format("DD-MM-YYYY"),
+		const dateTomorrow = moment().add(1, "days").format("DD-MM-YYYY"),
 			currentTime = moment().format("HH:mm:ss");
 
 		const timeStatus = Object.values(datas.list || {}).every(function (
@@ -76,75 +87,24 @@ export const useSetPrayerTimes = () => {
 		};
 	}
 
-	function getKeyByValue(obj) {
-		const bits = obj.serverTime.split(/\D/),
-			month = Constants.malayMonth[bits[1]],
-			targetDate = bits[2].concat("-", month, "-", bits[0]);
-
-		let object = obj.prayerTime,
-			val = Object.keys(object).find((key) => {
-				return object[key].date === targetDate;
-			});
-		return object[val];
-	}
-
-	function getReverseDate(response) {
-		return Object.keys(response || {}).map((keys) => {
-			return keys;
-		});
-	}
-
-	const datasFormat = {
-		statePrayerTime: (prayerTimeDatas) => {
-			return {
-				data: {
-					...prayerTimeDatas,
-					prayerTime: [getKeyByValue(prayerTimeDatas || {})],
-				},
-			};
-		},
-		dayPrayerTime: (response) => {
-			const prayerTime = response.prayerTime[0],
-				serverDate = response.serverTime.substr(
-					0,
-					response.serverTime.indexOf(" ")
-				);
-
-			return {
-				silenced: [],
-				list: {
-					fajr: prayerTime.fajr,
-					syuruk: prayerTime.syuruk,
-					dhuhr: prayerTime.dhuhr,
-					asr: prayerTime.asr,
-					maghrib: prayerTime.maghrib,
-					isha: prayerTime.isha,
-				},
-				serverTime: prayerTime.date,
-				serverDate: serverDate.split("-").reverse().join("-"),
-				serverDateReverse: serverDate,
-			};
-		},
-	};
-
-	async function getAllData() {
-		const islamicDateAPI = Constants.hijriDate(
-				moment().format("YYYY-MM-DD")
-			),
-			islamicDateAPIArabic = Constants.hijriDateArabic(
-				moment().format("DD-MM-YYYY")
-			);
-		try {
-			const responses = await axios.all([
-				axios.get(solatTime),
-				axios.get(islamicDateAPI),
-				axios.get(islamicDateAPIArabic),
-			]);
-			return responses;
-		} catch (e) {
-			console.log(e);
+	function getTodayIDBPrayerTime(obj) {
+		if (obj) {
+			let object = obj.prayerTime,
+				val = Object.keys(object).find((key) => {
+					return object[key].date === dateTodayMalay();
+				});
+			return object[val];
+		} else {
+			console.log(obj, " obj undefined");
+			return {};
 		}
 	}
+
+	// function getReverseDate(response) {
+	// 	return Object.keys(response || {}).map((keys) => {
+	// 		return keys;
+	// 	});
+	// }
 
 	async function initAdhanApp() {
 		// Show Loading Bar
@@ -154,65 +114,88 @@ export const useSetPrayerTimes = () => {
 		addToStore("settings", [userSettings, locationSettings]);
 
 		try {
-			const getStatePrayerTime = (stateCode) => {
-					return axios.get(Constants.waktuSolatURLYearly(stateCode));
-				},
-				processStateCode = async (stateCode) => {
-					const hasStateAdded = await isRecordExist(
-						"prayerTime",
-						stateCode
-					);
-					if (hasStateAdded) {
-						console.log("state existed in index db");
-					} else {
-						const result = await getStatePrayerTime(stateCode);
-						addToStore("prayerTime", result.data);
-					}
-				};
+			const getStateYearlyPrayerTimes = (stateCode) => {
+				return axios.get(Constants.waktuSolatURLYearly(stateCode));
+			};
+
+			const calculateStateYearlyPrayerTimes = async (stateCode) => {
+				const hasStateAdded = await isRecordExist(
+					"prayerTime",
+					stateCode
+				);
+				if (hasStateAdded) {
+					console.log("state already existed in index db");
+				} else {
+					const result = await getStateYearlyPrayerTimes(stateCode);
+					addToStore("prayerTime", result.data);
+				}
+			};
 
 			getStateCodes().map((stateCode) => {
-				processStateCode(stateCode);
+				calculateStateYearlyPrayerTimes(stateCode);
 			});
 
-			processStateCode()
+			calculateStateYearlyPrayerTimes()
 				.then(async () => {
-					return await getRecordByKey("settings", "prayertime");
+					return await getRecordByKey(
+						"prayerTime",
+						locationSettings.selectedStateCode
+					);
 				})
 				.then(async function (response) {
-					let dataCollections = {};
-					if (response) {
-						// retrieve data from IDB
-						const prayerTimeResponses = response,
-							dateResponses = response.hijriDate,
-							currentAndNextPrayers = calculatePrayerTimes(
-								prayerTimeResponses
-							);
+					// response is from yearly prayer times from IDB prayerTime table
+					const prayerTime = getTodayIDBPrayerTime(response),
+						day = prayerTime.date.split("-")[0],
+						month = prayerTime.date.split("-")[1],
+						monthNum = Object.keys(Constants.monthMalay).find(
+							(key) => {
+								const monthNum =
+									Constants.monthMalay[key] === month;
+								return monthNum;
+							}
+						),
+						year = prayerTime.date.split("-")[2],
+						fullDate = day.concat("-", monthNum, "-", year);
 
-						dataCollections = {
-							hijriDate: dateResponses,
-							...prayerTimeResponses,
-							...currentAndNextPrayers,
-						};
-					} else {
-						const fetchDatas = await getAllData(),
-							prayerTimeResponses = datasFormat.dayPrayerTime(
-								fetchDatas[0].data
-							),
-							dateResponses = [
-								fetchDatas[1].data,
-								fetchDatas[2].data,
-							],
-							currentAndNextPrayers = calculatePrayerTimes(
-								prayerTimeResponses
-							),
-							hijriDates = calculateHijriFullDate(dateResponses);
+					// const dateResponses = {
+					// 	arabic: "07 شَوّال 1441",
+					// 	bahasa: "07 Syawal 1441",
+					// 	english: "07 Syawal 1441",
+					// };
 
-						dataCollections = {
-							hijriDate: hijriDates,
-							...prayerTimeResponses,
-							...currentAndNextPrayers,
-						};
-					}
+					const prayerTimesIDB = await getRecordByKey(
+						"settings",
+						"prayertime"
+					);
+
+					const prayerTimeResponses = {
+						silenced: prayerTimesIDB ? prayerTimesIDB.silenced : [],
+						list: {
+							fajr: prayerTime.fajr,
+							syuruk: prayerTime.syuruk,
+							dhuhr: prayerTime.dhuhr,
+							asr: prayerTime.asr,
+							maghrib: prayerTime.maghrib,
+							isha: prayerTime.isha,
+						},
+						serverTime: prayerTime.date,
+						serverDate: fullDate,
+					};
+
+					const currentAndNextPrayers = calculatePrayerTimes(
+						prayerTimeResponses
+					);
+
+					const hijriDate = calculateHijriFullDate(
+						prayerTimeResponses
+					);
+
+					const dataCollections = {
+						hijriDate,
+						...prayerTimeResponses,
+						...currentAndNextPrayers,
+					};
+
 					setPrayerTimes(dataCollections);
 				})
 				.then(function () {
@@ -265,29 +248,36 @@ export const useSetPrayerTimes = () => {
 	}
 
 	function calculateHijriFullDate(response) {
-		const reverseTarikh = getReverseDate(response[0].takwim),
-			jakimDate = response[0].takwim[reverseTarikh],
-			jakimMonth = jakimDate.split("-")[1],
-			jakimDay = jakimDate.split("-")[2],
-			alAdhanDate = response[1].data.hijri;
+		// const reverseTarikh = getReverseDate(response[0].takwim),
+		// 	jakimDate = response[0].takwim[reverseTarikh],
+		// 	jakimMonth = jakimDate.split("-")[1],
+		// 	jakimDay = jakimDate.split("-")[2],
+		// 	alAdhanDate = response[1].data.hijri;
 
-		const multiLanguageHijriDates = Object.keys(languages || {})
-			.map((keys) => {
-				const hijriFullDate = [
-					jakimDay,
-					keys === "arabic"
-						? alAdhanDate.month.ar
-						: Constants.islamicMonth[jakimMonth],
-					alAdhanDate.year,
-				].join(" ");
-				return { [keys]: hijriFullDate };
-			})
-			.reduce((result, key) => {
-				Object.keys(key).forEach((lang) => {
-					result[lang] = key[lang];
-				});
-				return result;
-			}, {});
+		// const a = Object.keys(languages || {})
+		// 	.map((keys) => {
+		// 		const hijriFullDate = [
+		// 			jakimDay,
+		// 			keys === "arabic"
+		// 				? alAdhanDate.month.ar
+		// 				: Constants.islamicMonth[jakimMonth],
+		// 			alAdhanDate.year,
+		// 		].join(" ");
+		// 		return { [keys]: hijriFullDate };
+		// 	})
+		// 	.reduce((result, key) => {
+		// 		Object.keys(key).forEach((lang) => {
+		// 			result[lang] = key[lang];
+		// 		});
+		// 		return result;
+		// 	}, {});
+
+		const multiLanguageHijriDates = {
+			arabic: "07 شَوّال 1441",
+			bahasa: "07 Syawal 1441",
+			english: "07 Syawal 1441",
+		};
+
 		return multiLanguageHijriDates;
 	}
 
@@ -324,9 +314,10 @@ export const useSetPrayerTimes = () => {
 		prayerTimeList,
 		currentPrayerTime,
 		getPrayerTimeList: getPrayerTimeList(),
-		// setPrayerTimes,
+		setPrayerTimes,
 		setSilencedTime,
 		getSilencedTime,
 		initAdhanApp,
+		getTodayIDBPrayerTime,
 	};
 };

@@ -6,7 +6,7 @@ const LocationSelector = ({
 	setStateName,
 	setStateCode,
 	locations,
-	locationSettings
+	locationSettings,
 }) => {
 	const locationSelector = useRef(null);
 	const executeScroll = () => {
@@ -25,10 +25,10 @@ const LocationSelector = ({
 					left: locationSettings.isNested ? "-100%" : "0",
 					transitionDuration: locationSettings.isNested
 						? "300ms"
-						: "300ms"
+						: "300ms",
 				}}
 			>
-				{Object.keys(locations || {}).map(state => (
+				{Object.keys(locations || {}).map((state) => (
 					<li key={state}>
 						<a
 							key={"container_" + state}
@@ -52,7 +52,7 @@ const LocationSelector = ({
 								display:
 									locationSettings.selectedState === state
 										? "block"
-										: "none"
+										: "none",
 							}}
 						>
 							<li className={style.home}>
@@ -68,7 +68,7 @@ const LocationSelector = ({
 								</a>
 							</li>
 							{Object.keys(locations[state] || {}).map(
-								subitem => (
+								(subitem) => (
 									<li key={subitem}>
 										<a
 											href="/#"

@@ -30,12 +30,13 @@ import { ReactComponent as TickIcon } from "./images/tickIcon.svg";
 
 /* Components */
 import Credit from "./components/Credit";
+import SettingsProvider from "./components/SettingsProvider";
 import Modal from "./components/Modal/Modal";
-import Button from "./components/Button/Button";
 import Checkbox from "./components/Checkbox";
+import Button from "./components/Button/Button";
 import Tazkirah from "./components/Tazkirah/Tazkirah";
-import DatePicker from "./components/DatePicker/DatePicker";
 import ThemeSelector from "./components/ThemeSelector";
+import DatePicker from "./components/DatePicker/DatePicker";
 import LoadingBar from "./components/LoadingBar/LoadingBar";
 import PrayerTimeList from "./components/PrayerTimeList/PrayerTimeList";
 import PrayerCountdown from "./components/PrayerCountdown/PrayerCountdown";
@@ -45,13 +46,13 @@ import LanguageSelector from "./components/LanguageSelector/LanguageSelector";
 export const i18n = { arabic, bahasa, english };
 export { Header, Body };
 export {
-	Notification,
-	NotificationDisable,
+	TickIcon,
+	CloseIcon,
 	LocationIcon,
 	SettingsIcon,
-	CloseIcon,
-	TickIcon,
-	LoadingBarIcon
+	Notification,
+	LoadingBarIcon,
+	NotificationDisable,
 };
 export {
 	Modal,
@@ -60,12 +61,13 @@ export {
 	Checkbox,
 	Tazkirah,
 	DatePicker,
-	ThemeSelector,
 	LoadingBar,
+	ThemeSelector,
+	SettingsProvider,
 	PrayerTimeList,
 	PrayerCountdown,
 	LocationSelector,
-	LanguageSelector
+	LanguageSelector,
 };
 ReactDOM.render(<App />, document.getElementById("root"));
 

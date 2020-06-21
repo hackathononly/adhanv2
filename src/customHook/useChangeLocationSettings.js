@@ -1,25 +1,22 @@
 import { useStateValue } from "../state";
 import { useAdhanAppDB } from "../customHook/useAdhanAppDB";
 import { useSetPrayerTimes } from "../customHook/useSetPrayerTimes";
-// import { useScrollTop } from "../helper";
 
 export const useChangeLocationSettings = () => {
-	const [
-			{ initialState, locations, locationSettings },
-			dispatch,
-		] = useStateValue(),
+	const [{ locations, locationSettings }, dispatch] = useStateValue(),
 		{ updateRecord, getRecordByKey } = useAdhanAppDB(),
-		{ setPrayerTimes, getTodayIDBPrayerTime } = useSetPrayerTimes(),
-		showLocationModal = locationSettings.showModal,
-		getSelectedState =
-			locationSettings.selectedState || initialState.waktuSolatState,
-		getSelectedMunicipal = locationSettings.selectedMunicipal.slice(
+		{
+			setPrayerTimes,
+			getTodayPrayerTime,
+			calculateCurrentNextPrayerTimes,
+		} = useSetPrayerTimes();
+
+	const getSelectedMunicipal = locationSettings.selectedMunicipal.slice(
 			0,
 			locationSettings.selectedMunicipal.indexOf(",")
-		);
-	// getSelectedStateCode =
-	// 	locationSettings.selectedStateCode ||
-	// 	initialState.waktuSolatStateCode;
+		),
+		getSelectedState = locationSettings.selectedState,
+		showLocationModal = locationSettings.showModal;
 
 	function toggleLocationModal() {
 		locationSettings.showModal
@@ -52,16 +49,12 @@ export const useChangeLocationSettings = () => {
 		});
 	}
 	async function setLocationSettings(setting) {
-		updateRecord("location", setting);
-
-		if (Reflect.has(setting, "selectedStateCode")) {
-			// check if setting objeact has selectedStateCode key
-			const prayerTimeRecord = await getRecordByKey(
+		const prayerTimeRecord = await getRecordByKey(
 				"prayerTime",
-				setting.selectedStateCode
-			);
-			const prayerTime = getTodayIDBPrayerTime(prayerTimeRecord);
-			setPrayerTimes({
+				locationSettings.selectedStateCode
+			),
+			prayerTime = getTodayPrayerTime(prayerTimeRecord),
+			prayerTimeList = {
 				list: {
 					fajr: prayerTime.fajr,
 					syuruk: prayerTime.syuruk,
@@ -70,8 +63,11 @@ export const useChangeLocationSettings = () => {
 					maghrib: prayerTime.maghrib,
 					isha: prayerTime.isha,
 				},
-			});
-		}
+			};
+
+		updateRecord("location", setting);
+		setPrayerTimes(prayerTimeList);
+		calculateCurrentNextPrayerTimes(prayerTimeList);
 
 		Object.keys(setting).map((key) => {
 			return dispatch({
@@ -87,7 +83,6 @@ export const useChangeLocationSettings = () => {
 		setStateCode,
 		setStateName,
 		getSelectedState,
-		// getSelectedStateCode,
 		getSelectedMunicipal,
 		showLocationModal,
 		toggleLocationModal,

@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import {
 	TickIcon,
 	Button,
-	// CloseIcon,
 	SettingsIcon,
 	DatePicker,
 	Checkbox,
@@ -11,7 +10,6 @@ import {
 import { useOuterClickNotifier } from "../customHook/useGeneralHelper";
 import { useGetTranslation } from "../customHook/useGetTranslation";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
-// import Button from "./Button/Button";
 import { useSetPrayerTimes } from "../customHook/useSetPrayerTimes";
 
 const Credit = () => {
@@ -20,7 +18,6 @@ const Credit = () => {
 			languages,
 			setLang,
 			selectedLang,
-			// changeLanguage,
 			isMinimal,
 			setMinimal,
 			isDarkMode,
@@ -28,10 +25,7 @@ const Credit = () => {
 			enableNotification,
 			isNotificationEnabled,
 			showUserSettingsModal,
-			// showLanguageModal,
 			toggleUserSettingsModal,
-			toggleLanguageModal,
-			// isLanguageChanged
 		} = useChangeUserSettings(),
 		{ hijriDate, serverTime } = useSetPrayerTimes();
 
@@ -40,42 +34,6 @@ const Credit = () => {
 
 	return (
 		<aside key={"creditAside"}>
-			{/* <div key={"creditDiv"}>
-				<section key={"creditSection"}> */}
-			{/* <DatePicker
-						key={"datepickerCredit"}
-						selectedLang={selectedLang}
-						hijriDate={hijriDate}
-						gregorianDate={serverTime}
-					/> */}
-			{/* <span title={translate.subcredit}>{translate.credit}</span> */}
-			{/* {translate.credit} &nbsp;/ */}
-			{/* <LanguageSelector
-						key={"languageselectorCredit"}
-						isShowing={showLanguageModal}
-						// translate={translate}
-						toggleLanguageModal={toggleLanguageModal}
-						langList={languages}
-						setLang={setLang}
-						selectedLang={selectedLang}
-					/>
-					<Button
-						key={"settings"}
-						translate={translate}
-						type="settings"
-						isShowing={toggleLanguageModal}
-					>
-						{selectedLang}
-					</Button> */}
-			{/* <a
-					href="/#"
-					className={"settings"}
-					onClick={toggleLanguageModal}
-					title={translate.changeLang}
-				>
-					{selectedLang}
-				</aside> */}
-			{/* {" "} */}
 			<Button
 				key={"settings"}
 				type={"settings"}
@@ -89,22 +47,12 @@ const Credit = () => {
 					hijriDate={hijriDate}
 					gregorianDate={serverTime}
 				/>
-				{/* {translate.settings} */}
 				<SettingsIcon />
 			</Button>
-			{/* <a
-					href="/#"
-					className={"settings"}
-					onClick={toggleUserSettingsModal}
-				>
-					{translate.settings}
-				</a> */}
 			{showUserSettingsModal ? (
 				<div
 					key={"settingsContainer"}
 					ref={settingsContainer}
-					// className={"settingsContainer"}
-					// className={[style.modal, style.open].join(" ")}
 					className={[
 						showUserSettingsModal ? "settingsContainer" : null,
 						"animate",
@@ -139,18 +87,9 @@ const Credit = () => {
 							<TickIcon width="30" height="30" />
 							{translate.enableNotification}
 						</label>
-						{/* <Button
-								key={"close"}
-							type="close"
-							isShowing={toggleUserSettingsModal}
-						>
-							<CloseIcon width="30" height="30" />
-						</Button> */}
 						<LanguageSelector
 							key={"languageselectorCredit"}
-							// isShowing={showLanguageModal}
 							translate={translate}
-							toggleLanguageModal={toggleLanguageModal}
 							langList={languages}
 							setLang={setLang}
 							selectedLang={selectedLang}
@@ -158,16 +97,6 @@ const Credit = () => {
 					</div>
 				</div>
 			) : null}
-			{/* </section>
-			</div> */}
-			{/* <Button
-				key={"settings"}
-				type="settings"
-				title={translate.settings}
-				isShowing={toggleUserSettingsModal}
-			>
-				<SettingsIcon />
-			</Button> */}
 		</aside>
 	);
 };

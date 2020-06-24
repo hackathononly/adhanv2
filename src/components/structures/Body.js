@@ -1,4 +1,4 @@
-import React from "react"; // , { useEffect }
+import React, { useEffect } from "react";
 import { Header, PrayerTimeList } from "../../index";
 import { useSetPrayerTimes } from "../../customHook/useSetPrayerTimes";
 import { useChangeUserSettings } from "../../customHook/useChangeUserSettings";
@@ -15,9 +15,9 @@ export const Body = () => {
 		} = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
 
-	// useEffect(() => {
-	initAdhanApp();
-	// }, []);
+	useEffect(() => {
+		initAdhanApp();
+	}, []);
 
 	return (
 		<article>

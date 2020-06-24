@@ -17,8 +17,8 @@ export const useSetPrayerTimes = () => {
 		nextPrayer = prayerTimes.nextPrayer,
 		serverTime = prayerTimes.serverTime,
 		getSilencedTime = prayerTimes.silenced,
-		timeToNextPrayer = prayerTimes.timeToNextPrayer,
-		prayerTimeList = prayerTimes.list;
+		timeToNextPrayer = prayerTimes.timeToNextPrayer;
+		// prayerTimeList = prayerTimes.list;
 
 	const dateToday = moment().format("DD-MM-YYYY"),
 		dateTodayMalay = function () {

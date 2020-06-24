@@ -41,25 +41,25 @@ export const useScrollNotifier = (refElement, checkIsScrolling) => {
 	// 	st > lastScrollTop ? checkIsScrolling(true) : checkIsScrolling(false);
 	// }, []);
 
-	const handleScroll = useCallback(
-		(e) => {
-			const node = e.target,
-				lastScrollTop = 0,
-				st = window.pageYOffset || node.scrollTop;
+	// const handleScroll = useCallback(
+	// 	(e) => {
+	// 		const node = e.target,
+	// 			lastScrollTop = 0,
+	// 			st = window.pageYOffset || node.scrollTop;
 
-			st > lastScrollTop
-				? checkIsScrolling(true)
-				: checkIsScrolling(false);
-		},
-		[checkIsScrolling]
-	);
+	// 		st > lastScrollTop
+	// 			? checkIsScrolling(true)
+	// 			: checkIsScrolling(false);
+	// 	},
+	// 	[checkIsScrolling]
+	// );
 
-	useEffect(() => {
-		document.addEventListener("scroll", handleScroll, true);
-		return () => {
-			document.removeEventListener("scroll", handleScroll);
-		};
-	}, [refElement]);
+	// useEffect(() => {
+	// 	document.addEventListener("scroll", handleScroll, true);
+	// 	return () => {
+	// 		document.removeEventListener("scroll", handleScroll);
+	// 	};
+	// }, [refElement]);
 };
 
 export const useOuterClickNotifier = (refElement, toggleModal) => {

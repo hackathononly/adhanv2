@@ -8,6 +8,7 @@ export const useChangeLocationSettings = () => {
 		{
 			setPrayerTimes,
 			getTodayPrayerTime,
+			getPrayerTimeDatas,
 			calculateCurrentNextPrayerTimes,
 		} = useSetPrayerTimes();
 
@@ -53,17 +54,9 @@ export const useChangeLocationSettings = () => {
 				"prayerTime",
 				locationSettings.selectedStateCode
 			),
-			prayerTime = getTodayPrayerTime(prayerTimeRecord),
-			prayerTimeList = {
-				list: {
-					fajr: prayerTime.fajr,
-					syuruk: prayerTime.syuruk,
-					dhuhr: prayerTime.dhuhr,
-					asr: prayerTime.asr,
-					maghrib: prayerTime.maghrib,
-					isha: prayerTime.isha,
-				},
-			};
+			todayPrayerTime = getTodayPrayerTime(prayerTimeRecord),
+			prayerTimeList = getPrayerTimeDatas(todayPrayerTime);
+		// console.log(todayPrayerTime);
 
 		updateRecord("location", setting);
 		setPrayerTimes(prayerTimeList);

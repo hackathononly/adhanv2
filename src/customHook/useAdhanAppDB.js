@@ -8,7 +8,7 @@ export const useAdhanAppDB = () => {
 		tableName = Constants.db.table;
 
 	async function IDBStore() {
-		return await openDB(dbName, 1);
+		return await openDB(dbName, Constants.db.version);
 	}
 
 	async function transactionIDB() {

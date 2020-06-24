@@ -64,6 +64,7 @@ const Constants = {
 		arabic: "arabic",
 	},
 	db: {
+		version: 3,
 		name: "adhanapp",
 		table: ["settings", "prayerTime"],
 	},
@@ -85,6 +86,7 @@ const Constants = {
 		// changeLanguage: false
 	},
 	prayerTimes: {
+		type: "prayertime",
 		nextPrayer: "",
 		currentPrayerTime: "",
 		timeToNextPrayer: "",

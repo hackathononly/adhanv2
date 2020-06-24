@@ -9,9 +9,9 @@ export const Body = () => {
 		{
 			initAdhanApp,
 			currentPrayerTime,
-			getPrayerTimeList,
 			setSilencedTime,
 			getSilencedTime,
+			getPrayerTimeList,
 		} = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
 

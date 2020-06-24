@@ -34,9 +34,8 @@ export const useChangeUserSettings = () => {
 			enableNotification: !userSettings.enableNotification,
 		});
 	}
-	function setUserSettings(setting) {
+	async function setUserSettings(setting) {
 		updateRecord("user", setting);
-
 		Object.keys(setting).map((key) => {
 			return dispatch({
 				type: "setUserSettings",

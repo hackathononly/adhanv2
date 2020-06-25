@@ -118,8 +118,8 @@ export const useSetPrayerTimes = () => {
 	}
 	async function initAdhanApp() {
 		try {
-			const hijriDates = getHijriFullDate(),
-				currentNextPrayerTimes = calculateCurrentNextPrayerTimes();
+			const hijriDates = await getHijriFullDate(),
+				currentNextPrayerTimes = await calculateCurrentNextPrayerTimes();
 
 			setPrayerTimes({
 				type: "prayertime",

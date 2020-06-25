@@ -11,7 +11,7 @@ export const Body = () => {
 			currentPrayerTime,
 			setSilencedTime,
 			getSilencedTime,
-			getPrayerTimeList,
+			prayerTimeList,
 		} = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
 
@@ -29,7 +29,7 @@ export const Body = () => {
 							<PrayerTimeList
 								key={"prayertimelistBody"}
 								translate={translate}
-								prayerTimeList={getPrayerTimeList}
+								prayerTimeList={prayerTimeList}
 								currentPrayerTime={currentPrayerTime}
 								setSilencedTime={setSilencedTime}
 								getSilencedTime={getSilencedTime}

@@ -120,7 +120,7 @@ h2 {
 	font-size: 1.2em;
 }
 .rtl {
-	unicode-bidi: bidi-override !important;
+	/* unicode-bidi: bidi-override !important; */
 	direction: unset !important;
 	text-align: right;
 }

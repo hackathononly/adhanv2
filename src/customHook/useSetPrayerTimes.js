@@ -18,7 +18,6 @@ export const useSetPrayerTimes = () => {
 		serverTime = prayerTimes.serverTime,
 		getSilencedTime = prayerTimes.silenced,
 		timeToNextPrayer = prayerTimes.timeToNextPrayer;
-		// prayerTimeList = prayerTimes.list;
 
 	const dateToday = moment().format("DD-MM-YYYY"),
 		dateTodayMalay = function () {
@@ -27,7 +26,11 @@ export const useSetPrayerTimes = () => {
 			return dateSplit[0].concat("-", month, "-", dateSplit[2]);
 		};
 
-	function getTodayPrayerTime(obj) {
+	async function getTodayPrayerTime() {
+		const obj = await getRecordByKey(
+			"prayerTime",
+			locationSettings.selectedStateCode
+		);
 		if (obj) {
 			let object = obj.prayerTime,
 				val = Object.keys(object).find((key) => {
@@ -39,7 +42,9 @@ export const useSetPrayerTimes = () => {
 			return {};
 		}
 	}
-	function getHijriFullDate(response) {
+	async function getHijriFullDate() {
+		const response = await getTodayPrayerTime();
+
 		const hijriFull = response.hijri.split("-"),
 			hijriMonth = Constants.islamicMonthMalay[hijriFull[1]],
 			hijrifullDate =
@@ -59,7 +64,10 @@ export const useSetPrayerTimes = () => {
 			},
 		};
 	}
-	function calculateCurrentNextPrayerTimes(datas) {
+	async function calculateCurrentNextPrayerTimes() {
+		const todayPrayerTime = await getTodayPrayerTime(),
+			datas = getPrayerTimeDatas(todayPrayerTime);
+
 		const dateTomorrow = moment().add(1, "days").format("DD-MM-YYYY"),
 			currentTime = moment().format("HH:mm:ss"),
 			prayerTimeData = datas.list;
@@ -88,6 +96,7 @@ export const useSetPrayerTimes = () => {
 			currentPrayerTime = objIndex === 0 ? obj[5] : obj[objIndex - 1];
 
 		return {
+			...datas,
 			timeToNextPrayer: next.fromNow(),
 			currentPrayerTime: currentPrayerTime,
 			nextPrayer: nextPrayerTime,
@@ -109,35 +118,16 @@ export const useSetPrayerTimes = () => {
 	}
 	async function initAdhanApp() {
 		try {
-			// Show Loading Bar
-			// setUserSettings({ showLoadingBar: true });
-
-			const selectedStatePrayerTime = await getRecordByKey(
-					"prayerTime",
-					locationSettings.selectedStateCode
-				),
-				todayPrayerTime = await getTodayPrayerTime(
-					selectedStatePrayerTime
-				);
-
-			const prayerTimeFull = getPrayerTimeDatas(todayPrayerTime);
-			// const prayerTimeFull = getFormattedPrayerTimeList();
-
-			const hijriDates = getHijriFullDate(todayPrayerTime),
-				currentNextPrayerTimes = calculateCurrentNextPrayerTimes(
-					prayerTimeFull
-				);
+			const hijriDates = getHijriFullDate(),
+				currentNextPrayerTimes = calculateCurrentNextPrayerTimes();
 
 			setPrayerTimes({
 				type: "prayertime",
 				...hijriDates,
 				...currentNextPrayerTimes,
-				...prayerTimeFull,
 			});
 		} catch (error) {
 			console.error(error.message);
-		} finally {
-			// setUserSettings({ showLoadingBar: false });
 		}
 	}
 	function setSilencedTime(prayerTime) {
@@ -166,17 +156,6 @@ export const useSetPrayerTimes = () => {
 			return result;
 		}, {});
 	}
-
-	// function getFormattedPrayerTimeList() {
-	// 	return Object.keys(prayerTimeList || {}).reduce((result, key) => {
-	// 		result[key] = moment(
-	// 			`${dateToday} ${prayerTimeList[key]}`,
-	// 			"YYYY-MM-DD HH:mm:ss"
-	// 		).format("hh:mm A");
-	// 		return result;
-	// 	}, {});
-	// }
-
 	async function setPrayerTimes(value) {
 		try {
 			const prayerTimeRecord = await getRecordByKey(
@@ -207,7 +186,7 @@ export const useSetPrayerTimes = () => {
 		timeToNextPrayer,
 		hijriDate,
 		serverTime,
-		getPrayerTimeList: getFormattedPrayerTimeList(),
+		prayerTimeList: getFormattedPrayerTimeList(),
 		setPrayerTimes,
 		setSilencedTime,
 		getSilencedTime,

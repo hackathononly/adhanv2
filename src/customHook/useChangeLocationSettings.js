@@ -4,11 +4,9 @@ import { useSetPrayerTimes } from "../customHook/useSetPrayerTimes";
 
 export const useChangeLocationSettings = () => {
 	const [{ locations, locationSettings }, dispatch] = useStateValue(),
-		{ updateRecord, getRecordByKey } = useAdhanAppDB(),
+		{ updateRecord } = useAdhanAppDB(),
 		{
 			setPrayerTimes,
-			getTodayPrayerTime,
-			getPrayerTimeDatas,
 			calculateCurrentNextPrayerTimes,
 		} = useSetPrayerTimes();
 
@@ -50,17 +48,12 @@ export const useChangeLocationSettings = () => {
 		});
 	}
 	async function setLocationSettings(setting) {
-		const prayerTimeRecord = await getRecordByKey(
-				"prayerTime",
-				locationSettings.selectedStateCode
-			),
-			todayPrayerTime = getTodayPrayerTime(prayerTimeRecord),
-			prayerTimeList = getPrayerTimeDatas(todayPrayerTime);
-		// console.log(todayPrayerTime);
-
+		const currentNextPrayerTime = await calculateCurrentNextPrayerTimes();
+		setPrayerTimes({
+			type: "prayertime",
+			...currentNextPrayerTime,
+		});
 		updateRecord("location", setting);
-		setPrayerTimes(prayerTimeList);
-		calculateCurrentNextPrayerTimes(prayerTimeList);
 
 		Object.keys(setting).map((key) => {
 			return dispatch({

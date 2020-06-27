@@ -74,13 +74,13 @@ const Constants = {
 	},
 	userSettings: {
 		type: "user",
-		darkMode: true,
+		darkMode: false,
 		showModal: false,
 		// showLanguageModal: false,
 		minimalMode: false,
 		selectedLang: "english",
 		enableNotification: true,
-		showLoadingBar: false,
+		// showLoadingBar: false,
 		isScrolling: false,
 		// hideSettings: false
 		// changeLanguage: false

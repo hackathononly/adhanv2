@@ -11,7 +11,7 @@ export const useChangeUserSettings = () => {
 		isScrolling = userSettings.isScrolling,
 		isMinimal = userSettings.minimalMode,
 		selectedLang = userSettings.selectedLang,
-		isLoadingBarShown = userSettings.showLoadingBar,
+		// isLoadingBarShown = userSettings.showLoadingBar,
 		showUserSettingsModal = userSettings.showModal;
 
 	function checkIsScrolling(val) {
@@ -47,7 +47,7 @@ export const useChangeUserSettings = () => {
 
 	return {
 		setUserSettings,
-		isLoadingBarShown,
+		// isLoadingBarShown,
 		isScrolling,
 		checkIsScrolling,
 		isMinimal,

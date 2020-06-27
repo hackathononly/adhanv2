@@ -4,11 +4,25 @@ import { Reducer } from "./reducer";
 import { StateProvider } from "./state";
 import { SettingsContext } from "./components/SettingsProvider";
 
-import { Body, ThemeSelector, i18n, SettingsProvider } from "./index";
+import {
+	Body,
+	ThemeSelector,
+	i18n,
+	LoadingBar,
+	SettingsProvider,
+} from "./index";
 
 export default function AppWrapper() {
 	return (
-		<Suspense fallback={<p>Loading...</p>}>
+		<Suspense
+			fallback={
+				<LoadingBar
+					key={"loadingbarThemeSelector"}
+					// translate={translate}
+				/>
+			}
+		>
+			{/* // <Suspense fallback={<p>Loading...</p>}> */}
 			<SettingsProvider>
 				<App />
 			</SettingsProvider>

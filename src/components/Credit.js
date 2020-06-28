@@ -47,7 +47,7 @@ const Credit = () => {
 					hijriDate={hijriDate}
 					gregorianDate={serverTime}
 				/>
-				<SettingsIcon />
+				{/* <SettingsIcon /> */}
 			</Button>
 			{showUserSettingsModal ? (
 				<div
@@ -60,6 +60,7 @@ const Credit = () => {
 					role="presentation"
 				>
 					<div key={"dialogCredit"} className="content" role="dialog">
+						<h3>{translate.changeSettings}</h3>
 						<Checkbox
 							id={"darkMode"}
 							isSet={setDarkMode}

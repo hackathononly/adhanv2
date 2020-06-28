@@ -41,51 +41,55 @@ export const Header = () => {
 	useScrollNotifier(header, checkIsScrolling);
 
 	return (
-		<header>
-			<div className="content">
-				<div
-					className={[
-						isScrolling ? "itemScroll" : null,
-						"subcontent",
-					].join(" ")}
-				>
-					<PrayerCountdown
-						key={"prayercountdownHeader"}
-						translate={translate}
-						timeToNextPrayer={timeToNextPrayer}
-						nextPrayer={nextPrayer}
-					/>
-					<Button
-						key={"locationSelector"}
-						type="locationSelector"
-						title={translate.locationSelector}
-						isShowing={toggleLocationModal}
+		<>
+			<Credit key={"creditHeader"} />
+			<header>
+				<div className="content">
+					<div
+						className={[
+							isScrolling ? "itemScroll" : null,
+							"subcontent",
+						].join(" ")}
 					>
-						<span>{getSelectedMunicipal || getSelectedState}</span>
-					</Button>
-					<Credit key={"creditHeader"} />
-					<Modal
-						key={"modalHeader"}
-						translate={translate}
-						reference={locationSettingsModal}
-						hide={toggleLocationModal}
-						isShowing={showLocationModal}
-						isDarkMode={isDarkMode}
-					>
-						<h3 className={"locationSelectorTitle"}>
-							{translate.locationSelector}
-						</h3>
-						<LocationSelector
-							key={"locationselectorHeader"}
+						<PrayerCountdown
+							key={"prayercountdownHeader"}
 							translate={translate}
-							locations={locations}
-							locationSettings={locationSettings}
-							setStateName={setStateName}
-							setStateCode={setStateCode}
+							timeToNextPrayer={timeToNextPrayer}
+							nextPrayer={nextPrayer}
 						/>
-					</Modal>
+						<Button
+							key={"locationSelector"}
+							type="locationSelector"
+							title={translate.locationSelector}
+							isShowing={toggleLocationModal}
+						>
+							<span>
+								{getSelectedMunicipal || getSelectedState}
+							</span>
+						</Button>
+						<Modal
+							key={"modalHeader"}
+							translate={translate}
+							reference={locationSettingsModal}
+							hide={toggleLocationModal}
+							isShowing={showLocationModal}
+							isDarkMode={isDarkMode}
+						>
+							<h3 className={"locationSelectorTitle"}>
+								{translate.locationSelector}
+							</h3>
+							<LocationSelector
+								key={"locationselectorHeader"}
+								translate={translate}
+								locations={locations}
+								locationSettings={locationSettings}
+								setStateName={setStateName}
+								setStateCode={setStateCode}
+							/>
+						</Modal>
+					</div>
 				</div>
-			</div>
-		</header>
+			</header>
+		</>
 	);
 };

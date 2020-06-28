@@ -87,13 +87,14 @@
 	/* justify-content: center; */
 	align-items: center;
 	/* padding: 6px; */
-	padding: 6px 10px;
+	/* padding: 6px 10px; */
+	padding: 10px;
 	border-radius: var(--default-radius);
 }
 
 .settings button:hover,
 .settings.active button {
 	background-color: var(--button-settings-hover);
-	transform: scale(1.1);
+	/* transform: scale(1.1); */
 }
 /* @end Custom Styling */

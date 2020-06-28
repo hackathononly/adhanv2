@@ -9,7 +9,7 @@ export default {
 		`tazkirah-en-2`,
 		`tazkirah-en-3`,
 		`tazkirah-en-4`,
-		`tazkirah-en-5`
+		`tazkirah-en-5`,
 	],
 	prayerList: {
 		// imsak: "Imsak",
@@ -18,13 +18,14 @@ export default {
 		dhuhr: "Dhuhr",
 		asr: "Asr",
 		maghrib: "Maghrib",
-		isha: "Isha"
+		isha: "Isha",
 	},
 	close: "Close",
 	settings: "Settings",
 	locationSelector: "Select location",
 	prayerTimeEstimate: "to",
 	changeLang: "Change Language",
+	changeSettings: "Change Settings",
 	setDarkMode: "Set dark mode",
 	setMinimal: "Set minimal mode",
 	// setLocation: "Select Location",
@@ -32,5 +33,5 @@ export default {
 	subcredit: "coded in Malaysia",
 	subcredit_extra: "Thank you frontliners #covid19Malaysia",
 	enableNotification: "Enable notification",
-	currentPrayerTime: "Current prayer time"
+	currentPrayerTime: "Current prayer time",
 };

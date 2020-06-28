@@ -93,6 +93,7 @@
 		opacity: 0;
 		z-index: 10;
 		width: 100vw;
+		max-width: 800px;
 		/* height: 80%; */
 		/* height: calc(100% - (40px)); */
 		height: calc(100% - (20vh));

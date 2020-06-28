@@ -33,11 +33,3 @@ button.active {
 button.active:hover {
 	color: var(--languageSelector-button-active-hover);
 }
-.container h3 {
-	font-size: 10px;
-	text-align: left;
-	text-transform: uppercase;
-	padding: 0 30px;
-	margin: 4px 0;
-	color: #ccc;
-}

@@ -8,7 +8,7 @@ export default {
 		`tazkirah-bm-2`,
 		`tazkirah-bm-3`,
 		`tazkirah-bm-4`,
-		`tazkirah-bm-5`
+		`tazkirah-bm-5`,
 	],
 	prayerList: {
 		// imsak: "Imsak",
@@ -17,13 +17,14 @@ export default {
 		dhuhr: "Zohor",
 		asr: "Asar",
 		maghrib: "Maghrib",
-		isha: "Isyak"
+		isha: "Isyak",
 	},
 	close: "Tutup",
 	settings: "Penetapan",
 	locationSelector: "Pilih lokasi",
 	prayerTimeEstimate: "ke",
 	changeLang: "Tukar bahasa",
+	changeSettings: "Tukar tetapan",
 	setDarkMode: "Pilih mod gelap",
 	setMinimal: "Pilih mod minimal",
 	// setLocation: "Pilih Lokasi",
@@ -31,5 +32,5 @@ export default {
 	subcredit: "kod di Malaysia",
 	subcredit_extra: "Terima kasih barisan hadapan #covid19Malaysia",
 	enableNotification: "Tunjuk notifikasi",
-	currentPrayerTime: "Waktu solat sekarang"
+	currentPrayerTime: "Waktu solat sekarang",
 };

@@ -45,31 +45,35 @@ const PrayerTimeList = React.memo(
 							/>
 							<label htmlFor={item}>
 								<div className={style.salahName}>
-									{isNotificationEnabled
-										? [
-												<Notification
-													key={"notification"}
-													className={
-														("notification",
-														[
-															style.icon,
-															style.notification,
-														].join(" "))
-													}
-												/>,
-												<NotificationDisable
-													key={"notificationDisable"}
-													className={
-														("notificationDisable",
-														[
-															style.icon,
-															style.notificationDisable,
-														].join(" "))
-													}
-												/>,
-										  ]
-										: null}
-									{item}
+									<span>
+										{isNotificationEnabled
+											? [
+													<Notification
+														key={"notification"}
+														className={
+															("notification",
+															[
+																style.icon,
+																style.notification,
+															].join(" "))
+														}
+													/>,
+													<NotificationDisable
+														key={
+															"notificationDisable"
+														}
+														className={
+															("notificationDisable",
+															[
+																style.icon,
+																style.notificationDisable,
+															].join(" "))
+														}
+													/>,
+											  ]
+											: null}
+										{item}
+									</span>
 								</div>
 								<span className={style.salahTime}>
 									{prayerTimeList[item]}

@@ -1,4 +1,5 @@
 export default {
+	lang: "Ar",
 	back: "خلف",
 	backDesc: "العودة إلى قائمة الدولة",
 	tazkirahDesc: [

@@ -1,4 +1,5 @@
 export default {
+	lang: "En",
 	back: "Back",
 	backDesc: "Return to state list",
 	tazkirahDesc: [

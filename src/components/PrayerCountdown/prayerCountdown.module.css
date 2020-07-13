@@ -14,6 +14,7 @@
 	text-transform: capitalize;
 }
 .container b {
-	line-height: 1.8em;
+	/* line-height: 1.8em;
+	background:red; */
 	text-transform: capitalize;
 }

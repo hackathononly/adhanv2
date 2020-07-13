@@ -51,20 +51,37 @@
 } */
 .locationSelector button {
 	display: flex;
-	padding: 12px 28px 12px 24px;
-	font-size: medium;
+	padding: 12px 18px 12px 16px;
+	/* font-size: small; */
 	justify-content: center;
 	align-content: center;
 	align-items: center;
+	/* border-radius: 0.35rem; */
+	border-radius: var(--default-radius-10);
+	box-shadow: 0 2px 10px var(--main-black-opacity05),
+		0 1px 2px var(--main-black-opacity1);
+	background-color: var(--languageSelector-button-active-bgcolor);
+	color: var(--languageSelector-button-active-color);
+	margin: 12px 0;
 }
 .locationSelector span {
-	padding-bottom: 4px;
-	border-bottom: 1px solid;
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding-left: 24px;
 }
 .locationSelector button:hover span {
 	opacity: 0.8;
 }
-
+.locationSelector svg {
+	width: 18px;
+	height: 18px;
+	left: 0;
+	position: absolute;
+}
+.locationSelector path {
+	fill: var(--languageSelector-button-active-color);
+}
 /* Settings */
 /* .settings {
 	padding: 6px 10px;
@@ -87,9 +104,10 @@
 	/* justify-content: center; */
 	align-items: center;
 	/* padding: 6px; */
-	/* padding: 6px 10px; */
-	padding: 10px;
+	padding: 8px 10px;
+	/* padding: 10px; */
 	border-radius: var(--default-radius);
+	/* margin: 12px 0; */
 }
 
 .settings button:hover,

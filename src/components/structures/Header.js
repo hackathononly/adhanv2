@@ -3,6 +3,7 @@ import {
 	Credit,
 	Modal,
 	Button,
+	LocationIcon,
 	PrayerCountdown,
 	LocationSelector,
 } from "../../index";
@@ -64,6 +65,7 @@ export const Header = () => {
 							isShowing={toggleLocationModal}
 						>
 							<span>
+								<LocationIcon />
 								{getSelectedMunicipal || getSelectedState}
 							</span>
 						</Button>

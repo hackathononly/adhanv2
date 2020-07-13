@@ -1,4 +1,5 @@
 export default {
+	lang: "BM",
 	back: "Kembali",
 	backDesc: "Kembali ke senarai negeri",
 	tazkirahDesc: [

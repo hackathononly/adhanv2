@@ -15,18 +15,20 @@
 	height: 100%;
 	/* height: calc(100% - 20%); */
 	/* width: calc(100% - 60px); */
-	max-width: 690px;
+	max-width: 800px;
 	/* height: calc(100%-30%); */
 	margin: 0 auto;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	/* border-radius: var(--default-radius) var(--default-radius) 0px 0px; */
+	border-radius: var(--default-radius) var(--default-radius) 0px 0px;
 }
 .container ul {
 	/* height: 100%; */
 	height: calc(100% - 20%);
+	margin: auto 0;
+	/* height: 50%; */
 	display: grid;
 	/* grid-template-columns: repeat(2, 1fr); */
 	/* grid-template-columns: repeat(3, 1fr); */
@@ -109,6 +111,9 @@
 	margin: 0 20%;
 	/* display: block; */
 }
+.salahName span {
+	position: relative;
+}
 .salahTime {
 	font-weight: normal;
 	text-transform: uppercase;
@@ -119,9 +124,9 @@
 .icon {
 	width: 18px;
 	height: 18px;
-	left: 0;
+	/* left: 0; */
 	/* top: 12px; */
-	/* left: -24px; */
+	left: -24px;
 	position: absolute;
 	-moz-transform: rotate(20deg);
 	-webkit-transform: rotate(20deg);

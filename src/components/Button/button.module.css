@@ -108,11 +108,12 @@
 	/* padding: 10px; */
 	border-radius: var(--default-radius);
 	/* margin: 12px 0; */
+	background-color: var(--button-settings-hover);
 }
 
 .settings button:hover,
 .settings.active button {
-	background-color: var(--button-settings-hover);
-	/* transform: scale(1.1); */
+	/* background-color: var(--button-settings-hover); */
+	transform: scale(1.1);
 }
 /* @end Custom Styling */

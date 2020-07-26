@@ -12,6 +12,7 @@ import { default as english } from "./i18n/english";
 /* Main Structure */
 import { Body } from "./components/structures/Body";
 import { Header } from "./components/structures/Header";
+import { Footer } from "./components/structures/Footer";
 
 /* Resources - Icons */
 // prayerTimeList
@@ -44,7 +45,7 @@ import LocationSelector from "./components/LocationSelector/LocationSelector";
 import LanguageSelector from "./components/LanguageSelector/LanguageSelector";
 
 export const i18n = { arabic, bahasa, english };
-export { Header, Body };
+export { Header, Body, Footer };
 export {
 	TickIcon,
 	CloseIcon,

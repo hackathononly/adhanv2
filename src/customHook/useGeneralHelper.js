@@ -46,7 +46,7 @@ export const useScrollNotifier = (refElement, checkIsScrolling) => {
 			const node = e.target,
 				lastScrollTop = 0,
 				st = window.pageYOffset || node.scrollTop;
-
+			document.body.style = "--scrollingSize: " + st + "px";
 			st > lastScrollTop
 				? checkIsScrolling(true)
 				: checkIsScrolling(false);

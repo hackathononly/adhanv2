@@ -12,7 +12,8 @@ export const useChangeUserSettings = () => {
 		isMinimal = userSettings.minimalMode,
 		selectedLang = userSettings.selectedLang,
 		// isLoadingBarShown = userSettings.showLoadingBar,
-		showUserSettingsModal = userSettings.showModal;
+		showUserSettingsModal = userSettings.showModal,
+		showSelectLangModal = userSettings.showSelectLangModal;
 
 	function checkIsScrolling(val) {
 		setUserSettings({ isScrolling: val });
@@ -22,6 +23,9 @@ export const useChangeUserSettings = () => {
 	}
 	function toggleUserSettingsModal() {
 		setUserSettings({ showModal: !showUserSettingsModal });
+	}
+	function toggleSelectLangModal() {
+		setUserSettings({ showSelectLangModal: !showSelectLangModal });
 	}
 	function setMinimal() {
 		setUserSettings({ minimalMode: !userSettings.minimalMode });
@@ -59,6 +63,8 @@ export const useChangeUserSettings = () => {
 		selectedLang,
 		enableNotification,
 		isNotificationEnabled,
+		showSelectLangModal,
+		toggleSelectLangModal,
 		showUserSettingsModal,
 		toggleUserSettingsModal,
 	};

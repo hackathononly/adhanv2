@@ -15,14 +15,14 @@
 	height: 100%;
 	/* height: calc(100% - 20%); */
 	/* width: calc(100% - 60px); */
-	max-width: 800px;
+	/* max-width: 800px; */
 	/* height: calc(100%-30%); */
-	margin: 0 auto;
-	width: 100%;
+	/* margin: 0 auto; */
+	/* width: 100%; */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	border-radius: var(--default-radius) var(--default-radius) 0px 0px;
+	/* border-radius: var(--default-radius) var(--default-radius) 0px 0px; */
 }
 .container ul {
 	/* height: 100%; */
@@ -30,29 +30,51 @@
 	margin: auto 0;
 	/* height: 50%; */
 	display: grid;
-	/* grid-template-columns: repeat(2, 1fr); */
-	/* grid-template-columns: repeat(3, 1fr); */
-	/* grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-	grid-column-gap: 0px;*/
-	grid-row-gap: 1px;
-	/* grid-column-gap: 1px; */
-	/* grid-template-columns: repeat(2, 1fr); */
+	/* grid-row-gap: 1px;
+	grid-column-gap: 1px; */
 	grid-template-columns: repeat(auto-fill, minmax(var(--minmaxval), 1fr));
-	/* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+	margin-left: 10%;
+	margin-right: 10%;
 }
-@media screen and (max-width: 400px) {
-	/* iPhone 7 / Huawei */
+@media screen and (min-width: 768px) {
+	/* .container label {
+
+		background: blue;
+	} */
+	.container ul {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+@media screen and (min-width: 992px) {
+	/* .container label {
+		background: yellow;
+	} */
+	.container ul {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+@media screen and (min-width: 1200px) {
+	/* .container label {
+		background: green;
+	} */
+	.container ul {
+		/* grid-template-columns: repeat(6, 1fr); */
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+/* @media screen and (max-width: 400px) {
+	iPhone 7 / Huawei
 	:root {
 		--minmaxval: 150px;
 	}
-}
+} */
 .container li {
 	position: relative;
 	display: flex;
 	align-items: center;
 	text-align: center;
 	justify-content: center;
+	background-color: var(--main-bg);
 }
 /* .currentPrayerTime .salahName:before {
 	content: " ";

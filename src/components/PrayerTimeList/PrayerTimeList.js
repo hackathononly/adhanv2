@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox, Notification, NotificationDisable } from "../../index";
+import { Checkbox, Notification, NotificationDisable, Footer } from "../../index";
 import style from "./prayerTimeList.module.css";
 
 const PrayerTimeList = React.memo(
@@ -48,29 +48,29 @@ const PrayerTimeList = React.memo(
 									<span>
 										{isNotificationEnabled
 											? [
-													<Notification
-														key={"notification"}
-														className={
-															("notification",
+												<Notification
+													key={"notification"}
+													className={
+														("notification",
 															[
 																style.icon,
 																style.notification,
 															].join(" "))
-														}
-													/>,
-													<NotificationDisable
-														key={
-															"notificationDisable"
-														}
-														className={
-															("notificationDisable",
+													}
+												/>,
+												<NotificationDisable
+													key={
+														"notificationDisable"
+													}
+													className={
+														("notificationDisable",
 															[
 																style.icon,
 																style.notificationDisable,
 															].join(" "))
-														}
-													/>,
-											  ]
+													}
+												/>,
+											]
 											: null}
 										{item}
 									</span>
@@ -82,6 +82,7 @@ const PrayerTimeList = React.memo(
 						</li>
 					))}
 				</ul>
+				<Footer />
 			</div>
 		);
 	}

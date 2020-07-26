@@ -63,6 +63,7 @@
 	background-color: var(--languageSelector-button-active-bgcolor);
 	color: var(--languageSelector-button-active-color);
 	margin: 12px 0;
+	z-index: 1;
 }
 .locationSelector span {
 	display: flex;

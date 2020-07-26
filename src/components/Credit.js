@@ -5,7 +5,7 @@ import {
 	// SettingsIcon,
 	DatePicker,
 	Checkbox,
-	// LanguageSelector,
+	LanguageSelector,
 } from "../index";
 import { useOuterClickNotifier } from "../customHook/useGeneralHelper";
 import { useGetTranslation } from "../customHook/useGetTranslation";
@@ -15,8 +15,8 @@ import { useSetPrayerTimes } from "../customHook/useSetPrayerTimes";
 const Credit = () => {
 	const { getTranslation: translate } = useGetTranslation(),
 		{
-			// languages,
-			// setLang,
+			languages,
+			setLang,
 			selectedLang,
 			isMinimal,
 			setMinimal,
@@ -26,11 +26,14 @@ const Credit = () => {
 			isNotificationEnabled,
 			showUserSettingsModal,
 			toggleUserSettingsModal,
+			showSelectLangModal,
+			toggleSelectLangModal
 		} = useChangeUserSettings(),
 		{ hijriDate, serverTime } = useSetPrayerTimes();
 
-	const settingsContainer = useRef(null);
+	const settingsContainer = useRef(null), langContainer = useRef(null);
 	useOuterClickNotifier(settingsContainer, toggleUserSettingsModal);
+	useOuterClickNotifier(langContainer, toggleSelectLangModal);
 	return (
 		<aside key={"creditAside"}>
 			<DatePicker
@@ -43,9 +46,9 @@ const Credit = () => {
 				{/* <Button
 					key={"language"}
 					type={"language"}
-					showUserSettingsModal={showUserSettingsModal}
+					showSelectLangModal={showSelectLangModal}
 					title={translate.settings}
-					isShowing={toggleUserSettingsModal}
+					isShowing={toggleSelectLangModal}
 				>
 					{translate.lang}
 				</Button> */}
@@ -74,7 +77,7 @@ const Credit = () => {
 							className="content"
 							role="dialog"
 						>
-							{/* <h3>{translate.changeSettings}</h3> */}
+							<h3>{translate.changeSettings}</h3>
 							<Checkbox
 								id={"darkMode"}
 								isSet={setDarkMode}
@@ -105,24 +108,46 @@ const Credit = () => {
 								<TickIcon width="30" height="30" />
 								{translate.enableNotification}
 							</label>
-							{/* <LanguageSelector
+						</div>
+					</div>
+				) : null}
+			</div>
+			<div className={"buttonContainer"}>
+				<Button
+					key={"language"}
+					type={"language"}
+					showSelectLangModal={showSelectLangModal}
+					title={translate.settings}
+					isShowing={toggleSelectLangModal}
+				>
+					{translate.lang}
+				</Button>
+				{showSelectLangModal ? (
+					<div
+						key={"langContainer"}
+						ref={langContainer}
+						className={[
+							showSelectLangModal ? "settingsContainer" : null,
+							"animate",
+						].join(" ")}
+						role="presentation"
+					>
+						<div
+							key={"dialogCredit"}
+							className="content"
+							role="dialog"
+						>
+							<LanguageSelector
 								key={"languageselectorCredit"}
 								translate={translate}
 								langList={languages}
 								setLang={setLang}
 								selectedLang={selectedLang}
-							/> */}
+							/>
 						</div>
 					</div>
 				) : null}
 			</div>
-			{/* <LanguageSelector
-				key={"languageselectorCredit"}
-				translate={translate}
-				langList={languages}
-				setLang={setLang}
-				selectedLang={selectedLang}
-			/> */}
 		</aside>
 	);
 };

@@ -76,7 +76,7 @@ const Constants = {
 		type: "user",
 		darkMode: false,
 		showModal: false,
-		// showLanguageModal: false,
+		showSelectLangModal: false,
 		minimalMode: false,
 		selectedLang: "english",
 		enableNotification: true,

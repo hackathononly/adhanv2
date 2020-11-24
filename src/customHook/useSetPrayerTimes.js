@@ -6,9 +6,9 @@ import Constants from "../constants";
 
 export const useSetPrayerTimes = () => {
 	const [
-			{ locationSettings, prayerTimes, userSettings },
-			dispatch,
-		] = useStateValue(),
+		{ locationSettings, prayerTimes, userSettings },
+		dispatch,
+	] = useStateValue(),
 		{ getTranslation: translate } = useGetTranslation(),
 		{ updateRecord, getRecordByKey } = useAdhanAppDB(),
 		selectedLang = userSettings.selectedLang;

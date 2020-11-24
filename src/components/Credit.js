@@ -3,14 +3,14 @@ import {
 	TickIcon,
 	Button,
 	// SettingsIcon,
-	DatePicker,
+	// DatePicker,
 	Checkbox,
 	LanguageSelector,
 } from "../index";
 import { useOuterClickNotifier } from "../customHook/useGeneralHelper";
 import { useGetTranslation } from "../customHook/useGetTranslation";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
-import { useSetPrayerTimes } from "../customHook/useSetPrayerTimes";
+// import { useSetPrayerTimes } from "../customHook/useSetPrayerTimes";
 
 const Credit = () => {
 	const { getTranslation: translate } = useGetTranslation(),
@@ -28,20 +28,20 @@ const Credit = () => {
 			toggleUserSettingsModal,
 			showSelectLangModal,
 			toggleSelectLangModal
-		} = useChangeUserSettings(),
-		{ hijriDate, serverTime } = useSetPrayerTimes();
+		} = useChangeUserSettings();
+	// { hijriDate, serverTime } = useSetPrayerTimes();
 
 	const settingsContainer = useRef(null), langContainer = useRef(null);
 	useOuterClickNotifier(settingsContainer, toggleUserSettingsModal);
 	useOuterClickNotifier(langContainer, toggleSelectLangModal);
 	return (
 		<aside key={"creditAside"}>
-			<DatePicker
+			{/* <DatePicker
 				key={"datepickerCredit"}
 				selectedLang={selectedLang}
 				hijriDate={hijriDate}
 				gregorianDate={serverTime}
-			/>
+			/> */}
 			<div className={"buttonContainer"}>
 				{/* <Button
 					key={"language"}

@@ -3,7 +3,8 @@ import {
 	Credit,
 	Modal,
 	Button,
-	LocationIcon,
+	DatePicker,
+	// LocationIcon,
 	PrayerCountdown,
 	LocationSelector,
 } from "../../index";
@@ -18,11 +19,12 @@ import { useChangeLocationSettings } from "../../customHook/useChangeLocationSet
 
 export const Header = () => {
 	const {
-			isScrolling,
-			checkIsScrolling,
-			isDarkMode,
-		} = useChangeUserSettings(),
+		// isScrolling,
+		checkIsScrolling,
+		isDarkMode,
+	} = useChangeUserSettings(),
 		{
+			selectedLang,
 			locations,
 			locationSettings,
 			setStateName,
@@ -32,7 +34,7 @@ export const Header = () => {
 			getSelectedState,
 			getSelectedMunicipal,
 		} = useChangeLocationSettings(),
-		{ nextPrayer, timeToNextPrayer } = useSetPrayerTimes(),
+		{ nextPrayer, timeToNextPrayer, hijriDate, serverTime } = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
 
 	const locationSettingsModal = useRef(null);
@@ -46,12 +48,13 @@ export const Header = () => {
 			<Credit key={"creditHeader"} />
 			<header>
 				<div className="content">
-					<div
+					{/* <div
 						className={[
 							isScrolling ? "itemScroll" : null,
 							"subcontent",
 						].join(" ")}
-					>
+					> */}
+					<div className={"subcontent"}>
 						<PrayerCountdown
 							key={"prayercountdownHeader"}
 							translate={translate}
@@ -65,8 +68,14 @@ export const Header = () => {
 							isShowing={toggleLocationModal}
 						>
 							<span>
-								<LocationIcon />
+								{/* <LocationIcon /> */}
 								{getSelectedMunicipal || getSelectedState}
+								<DatePicker
+									key={"datepickerCredit"}
+									selectedLang={selectedLang}
+									hijriDate={hijriDate}
+									gregorianDate={serverTime}
+								/>
 							</span>
 						</Button>
 						<Modal

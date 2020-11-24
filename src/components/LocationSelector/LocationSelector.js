@@ -10,6 +10,7 @@ const LocationSelector = ({
 }) => {
 	const locationSelector = useRef(null);
 	const executeScroll = () => {
+		// console.log(locationSelector.current.getElementsByTagName('ul'));
 		locationSelector.current.scrollIntoView(true);
 		// locationSelector.current.scrollBy(0, -10);
 		// locationSelector.current.scrollIntoView({
@@ -19,8 +20,9 @@ const LocationSelector = ({
 		// locationSelector.current.classList.add("top");
 	};
 	return (
-		<div ref={locationSelector} className={style.locationSelector}>
+		<div className={style.locationSelector}>
 			<ul
+				ref={locationSelector}
 				style={{
 					left: locationSettings.isNested ? "-100%" : "0",
 					transitionDuration: locationSettings.isNested
@@ -75,7 +77,7 @@ const LocationSelector = ({
 											title={subitem}
 											className={
 												subitem ===
-												locationSettings.selectedStateCode
+													locationSettings.selectedStateCode
 													? style.active
 													: null
 											}

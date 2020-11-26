@@ -193,8 +193,8 @@ section.content .scroll-content-inner {
 	background-color: var(--main-bg);
 	/* left: 4%;
 	right: 3%; */
-	left: 32px;
-	right: 32px;
+	left: 16px;
+	right: 16px;
 	/* width: 100%; */
 	position: absolute;
 	/* top: 95%; */

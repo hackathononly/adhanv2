@@ -239,7 +239,7 @@ aside {
 	left: 0;
 	right: 0;
 	z-index: 11;
-	padding: 8px 32px;
+	padding: 8px 16px;
 }
 aside h1 {
 	color: var(--button-mainColor);

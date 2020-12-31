@@ -107,16 +107,18 @@
 	/* justify-content: center; */
 	align-items: center;
 	/* padding: 6px; */
-	padding: 8px 10px;
+	/* padding: 8px 10px; */
+	padding: 8px 0;
 	/* padding: 10px; */
-	border-radius: var(--default-radius);
+	/* border-radius: var(--default-radius); */
 	/* margin: 12px 0; */
-	background-color: var(--button-settings-hover);
+	/* background-color: var(--button-settings-hover); */
 }
 
 .settings button:hover,
 .settings.active button {
 	/* background-color: var(--button-settings-hover); */
-	transform: scale(1.1);
+	/* transform: scale(1.1); */
+	text-decoration: underline;
 }
 /* @end Custom Styling */

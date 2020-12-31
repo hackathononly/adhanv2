@@ -1,5 +1,8 @@
 import React from "react";
-import { Checkbox, Notification, NotificationDisable, Footer } from "../../index";
+import {
+	Checkbox, Notification, NotificationDisable
+	// , Footer
+} from "../../index";
 import style from "./prayerTimeList.module.css";
 
 const PrayerTimeList = React.memo(
@@ -82,7 +85,7 @@ const PrayerTimeList = React.memo(
 						</li>
 					))}
 				</ul>
-				<Footer />
+				{/* <Footer /> */}
 			</div>
 		);
 	}

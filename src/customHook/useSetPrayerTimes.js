@@ -95,6 +95,24 @@ export const useSetPrayerTimes = () => {
 			objIndex = obj.indexOf(nextPrayerTime),
 			currentPrayerTime = objIndex === 0 ? obj[5] : obj[objIndex - 1];
 
+		// function display() {
+		// 	var today = new Date();
+		// 	var month = today.getMonth();
+		// 	var day = today.getDay();
+		// 	var year = today.getFullYear();
+
+		// 	var hour = today.getHours() > 12 ? today.getHours() - 12 : today.getHours();
+		// 	var minute = today.getMinutes();
+		// 	var seconds = today.getSeconds();
+		// 	var milliseconds = today.getMilliseconds();
+
+		// 	var output = month + '/' + day + '/' + year + ' - ' +
+		// 		hour + ':' + minute + ':' + seconds + ':' + milliseconds;
+
+		// 	document.write(output);
+		// }
+		// setInterval(display, 3000);
+
 		return {
 			...datas,
 			timeToNextPrayer: next.fromNow(),

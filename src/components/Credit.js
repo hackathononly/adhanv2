@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import {
 	TickIcon,
 	Button,
+	Footer,
 	// SettingsIcon,
 	// DatePicker,
 	Checkbox,
@@ -26,7 +27,7 @@ const Credit = () => {
 			isNotificationEnabled,
 			showUserSettingsModal,
 			toggleUserSettingsModal,
-			showSelectLangModal,
+			// showSelectLangModal,
 			toggleSelectLangModal
 		} = useChangeUserSettings();
 	// { hijriDate, serverTime } = useSetPrayerTimes();
@@ -60,7 +61,6 @@ const Credit = () => {
 					isShowing={toggleUserSettingsModal}
 				>
 					{translate.settings}
-					{/* <SettingsIcon /> */}
 				</Button>
 				{showUserSettingsModal ? (
 					<div
@@ -108,11 +108,20 @@ const Credit = () => {
 								<TickIcon width="30" height="30" />
 								{translate.enableNotification}
 							</label>
+							<LanguageSelector
+								key={"languageselectorCredit"}
+								translate={translate}
+								langList={languages}
+								setLang={setLang}
+								selectedLang={selectedLang}
+							/>
 						</div>
+				<Footer />
+
 					</div>
 				) : null}
 			</div>
-			<div className={"buttonContainer"}>
+			{/* <div className={"buttonContainer"}>
 				<Button
 					key={"language"}
 					type={"language"}
@@ -147,7 +156,7 @@ const Credit = () => {
 						</div>
 					</div>
 				) : null}
-			</div>
+			</div> */}
 		</aside>
 	);
 };

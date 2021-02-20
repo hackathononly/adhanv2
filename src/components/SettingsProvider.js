@@ -78,6 +78,9 @@ async function initIDB() {
 		}
 	} catch (error) {
 		console.log(error);
+		// error when no data found aka new year, reset() :
+		// empty database
+		// get year data
 	}
 }
 

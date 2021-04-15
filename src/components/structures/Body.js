@@ -17,7 +17,7 @@ export const Body = () => {
 
 	useEffect(() => {
 		initAdhanApp();
-	}, []);
+	}, [initAdhanApp]);
 
 	return (
 		<article>

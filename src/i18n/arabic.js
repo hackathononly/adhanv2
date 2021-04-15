@@ -1,4 +1,5 @@
-export default {
+const arabic = {
+	// export default {
 	lang: "Ar",
 	back: "خلف",
 	backDesc: "العودة إلى قائمة الدولة",
@@ -33,3 +34,5 @@ export default {
 	enableNotification: "تفعيل الإشعارات",
 	currentPrayerTime: "وقت الصلاة الحالي",
 };
+
+export default arabic;

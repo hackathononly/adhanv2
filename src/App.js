@@ -6,9 +6,9 @@ import { SettingsContext } from "./components/SettingsProvider";
 
 import {
 	Body,
-	ThemeSelector,
 	i18n,
 	LoadingBar,
+	ThemeSelector,
 	SettingsProvider,
 } from "./index";
 
@@ -18,7 +18,7 @@ export default function AppWrapper() {
 			fallback={
 				<LoadingBar
 					key={"loadingbarThemeSelector"}
-					// translate={translate}
+				// translate={translate}
 				/>
 			}
 		>
@@ -37,11 +37,11 @@ const App = () => {
 		<StateProvider
 			i18n={i18n}
 			reducer={Reducer}
-			locations={Constants.locations}
-			languages={Constants.languages}
-			locationSettings={settings[0]}
 			prayerTimes={settings[1]}
 			userSettings={settings[2]}
+			locationSettings={settings[0]}
+			locations={Constants.locations}
+			languages={Constants.languages}
 			initialState={Constants.defaultSettings}
 		>
 			<ThemeSelector>

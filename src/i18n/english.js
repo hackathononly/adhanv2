@@ -1,4 +1,4 @@
-export default {
+const english = {
 	lang: "En",
 	back: "Back",
 	backDesc: "Return to state list",
@@ -36,3 +36,5 @@ export default {
 	enableNotification: "Enable notification",
 	currentPrayerTime: "Current prayer time",
 };
+
+export default english;

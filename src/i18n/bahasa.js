@@ -1,4 +1,4 @@
-export default {
+const bahasa = {
 	lang: "BM",
 	back: "Kembali",
 	backDesc: "Kembali ke senarai negeri",
@@ -35,3 +35,5 @@ export default {
 	enableNotification: "Tunjuk notifikasi",
 	currentPrayerTime: "Waktu solat sekarang",
 };
+
+export default bahasa;

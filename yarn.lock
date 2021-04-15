@@ -6002,10 +6002,10 @@
   "resolved" "https://registry.npmjs.org/is-string/-/is-string-1.0.5.tgz"
   "version" "1.0.5"
 
-"is-svg@^3.0.0":
+"is-svg@^4.2.2":
   "integrity" "sha512-gi4iHK53LR2ujhLVVj+37Ykh9GLqYHX6JOVXbLAucaG/Cqw9xwdFOjDM2qeifLs1sF1npXXFvDu0r5HNgCMrzQ=="
-  "resolved" "https://registry.npmjs.org/is-svg/-/is-svg-3.0.0.tgz"
-  "version" "3.0.0"
+  "resolved" "https://registry.npmjs.org/is-svg/-/is-svg-4.2.2.tgz"
+  "version" "4.2.2"
   dependencies:
     "html-comment-regex" "^1.1.0"
 
@@ -8615,7 +8615,7 @@
   "resolved" "https://registry.npmjs.org/postcss-svgo/-/postcss-svgo-4.0.2.tgz"
   "version" "4.0.2"
   dependencies:
-    "is-svg" "^3.0.0"
+    "is-svg" "^4.2.2"
     "postcss" "^7.0.0"
     "postcss-value-parser" "^3.0.0"
     "svgo" "^1.0.0"
@@ -8924,10 +8924,10 @@
     "regenerator-runtime" "^0.13.7"
     "whatwg-fetch" "^3.4.1"
 
-"react-dev-utils@^11.0.3":
+"react-dev-utils@^11.0.4":
   "integrity" "sha512-4lEA5gF4OHrcJLMUV1t+4XbNDiJbsAWCH5Z2uqlTqW6dD7Cf5nEASkeXrCI/Mz83sI2o527oBIFKVMXtRf1Vtg=="
-  "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-11.0.3.tgz"
-  "version" "11.0.3"
+  "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-11.0.4.tgz"
+  "version" "11.0.4"
   dependencies:
     "@babel/code-frame" "7.10.4"
     "address" "1.1.2"
@@ -9032,7 +9032,7 @@
     "postcss-safe-parser" "5.0.2"
     "prompts" "2.4.0"
     "react-app-polyfill" "^2.0.0"
-    "react-dev-utils" "^11.0.3"
+    "react-dev-utils" "^11.0.4"
     "react-refresh" "^0.8.3"
     "resolve" "1.18.1"
     "resolve-url-loader" "^3.1.2"

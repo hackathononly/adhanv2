@@ -59,7 +59,7 @@ export const useScrollNotifier = (refElement, checkIsScrolling) => {
 		return () => {
 			document.removeEventListener("scroll", handleScroll);
 		};
-	}, [handleScroll, refElement]);
+	}, [refElement]);
 };
 
 export const useOuterClickNotifier = (refElement, toggleModal) => {

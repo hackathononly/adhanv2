@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "axios": "^0.21.1",
-    "idb": "^6.0.0",
+    "idb": "^6.1.2",
     "moment": "^2.29.1"
   }
 }

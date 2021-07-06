@@ -8,7 +8,7 @@ import {
 	Checkbox,
 	LanguageSelector,
 } from "../index";
-import { useOuterClickNotifier } from "../customHook/useGeneralHelper";
+// import { useOuterClickNotifier } from "../customHook/useGeneralHelper";
 import { useGetTranslation } from "../customHook/useGetTranslation";
 import { useChangeUserSettings } from "../customHook/useChangeUserSettings";
 // import { useSetPrayerTimes } from "../customHook/useSetPrayerTimes";
@@ -28,13 +28,14 @@ const Credit = () => {
 			showUserSettingsModal,
 			toggleUserSettingsModal,
 			// showSelectLangModal,
-			toggleSelectLangModal
+			// toggleSelectLangModal
 		} = useChangeUserSettings();
 	// { hijriDate, serverTime } = useSetPrayerTimes();
 
-	const settingsContainer = useRef(null), langContainer = useRef(null);
-	useOuterClickNotifier(settingsContainer, toggleUserSettingsModal);
-	useOuterClickNotifier(langContainer, toggleSelectLangModal);
+	const settingsContainer = useRef(null);
+	// const langContainer = useRef(null);
+	// useOuterClickNotifier(settingsContainer, toggleUserSettingsModal);
+	// useOuterClickNotifier(langContainer, toggleSelectLangModal);
 	return (
 		<aside key={"creditAside"}>
 			{/* <DatePicker
@@ -56,9 +57,9 @@ const Credit = () => {
 				<Button
 					key={"settings"}
 					type={"settings"}
-					showUserSettingsModal={showUserSettingsModal}
 					title={translate.settings}
 					isShowing={toggleUserSettingsModal}
+					showUserSettingsModal={showUserSettingsModal}
 				>
 					{translate.settings}
 				</Button>
@@ -116,8 +117,7 @@ const Credit = () => {
 								selectedLang={selectedLang}
 							/>
 						</div>
-				<Footer />
-
+						{/* <Footer /> */}
 					</div>
 				) : null}
 			</div>

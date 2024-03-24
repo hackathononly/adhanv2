@@ -2,11 +2,11 @@ import React, { useRef } from "react";
 import {
 	TickIcon,
 	Button,
-	Footer,
+	// Footer,
 	// SettingsIcon,
 	// DatePicker,
 	Checkbox,
-	LanguageSelector,
+	LanguageSelector
 } from "../index";
 // import { useOuterClickNotifier } from "../customHook/useGeneralHelper";
 import { useGetTranslation } from "../customHook/useGetTranslation";
@@ -26,7 +26,7 @@ const Credit = () => {
 			enableNotification,
 			isNotificationEnabled,
 			showUserSettingsModal,
-			toggleUserSettingsModal,
+			toggleUserSettingsModal
 			// showSelectLangModal,
 			// toggleSelectLangModal
 		} = useChangeUserSettings();
@@ -69,7 +69,7 @@ const Credit = () => {
 						ref={settingsContainer}
 						className={[
 							showUserSettingsModal ? "settingsContainer" : null,
-							"animate",
+							"animate"
 						].join(" ")}
 						role="presentation"
 					>

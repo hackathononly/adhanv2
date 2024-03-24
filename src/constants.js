@@ -1,7 +1,7 @@
 const Constants = {
-	waktuSolatURL: (locationCode) =>
+	waktuSolatURL: locationCode =>
 		`https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=today&zone=${locationCode}`,
-	waktuSolatURLYearly: (locationCode) =>
+	waktuSolatURLYearly: locationCode =>
 		`https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=${locationCode}`,
 	// waktuSolatURLYearly: (locationCode) =>
 	// 	`https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=${locationCode}`,
@@ -12,9 +12,9 @@ const Constants = {
 		"https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=today&zone={}",
 	waktuSolatURLMonthly:
 		"https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=month&zone={}",
-	hijriDate: (serverTime) =>
+	hijriDate: serverTime =>
 		`https://cors-anywhere.herokuapp.com/https://www.e-solat.gov.my/index.php?r=esolatApi/tarikhtakwim&period=today&datetype=miladi&date=${serverTime}`,
-	hijriDateArabic: (serverTime) =>
+	hijriDateArabic: serverTime =>
 		`//api.aladhan.com/v1/gToH?date=${serverTime}`, //http://api.aladhan.com/v1/gToH?date=22-11-2019
 	monthMalay: {
 		"01": "Jan",
@@ -28,7 +28,7 @@ const Constants = {
 		"09": "Sep",
 		"10": "Oct",
 		"11": "Nov",
-		"12": "Dec",
+		"12": "Dec"
 	},
 	islamicMonthMalay: {
 		"01": "Muharram",
@@ -42,7 +42,7 @@ const Constants = {
 		"09": "Ramadhan",
 		"10": "Shawwal",
 		"11": "Zulqa'idah",
-		"12": "Zulhijjah",
+		"12": "Zulhijjah"
 	},
 	islamicMonthArab: {
 		"01": "مُحَرَّم",
@@ -56,21 +56,21 @@ const Constants = {
 		"09": "رَمَضان",
 		"10": "شَوّال",
 		"11": "ذوالقعدة",
-		"12": "ذوالحجة",
+		"12": "ذوالحجة"
 	},
 	languages: {
 		english: "english",
 		bahasa: "bahasa",
-		arabic: "arabic",
+		arabic: "arabic"
 	},
 	db: {
 		version: 3,
 		name: "adhanapp",
-		table: ["settings", "prayerTime"],
+		table: ["settings", "prayerTime"]
 	},
 	defaultSettings: {
 		waktuSolatState: "Wilayah Persekutuan",
-		waktuSolatStateCode: "WLY01",
+		waktuSolatStateCode: "WLY01"
 	},
 	userSettings: {
 		type: "user",
@@ -81,7 +81,7 @@ const Constants = {
 		selectedLang: "english",
 		enableNotification: true,
 		// showLoadingBar: false,
-		isScrolling: false,
+		isScrolling: false
 		// hideSettings: false
 		// changeLanguage: false
 	},
@@ -94,7 +94,7 @@ const Constants = {
 		list: {},
 		serverTime: "",
 		// machineTime: "",
-		hijriDate: {},
+		hijriDate: {}
 	},
 	locationSettings: {
 		type: "location",
@@ -102,13 +102,13 @@ const Constants = {
 		showModal: false,
 		selectedState: "Wilayah Persekutuan",
 		selectedMunicipal: "Kuala Lumpur, Putrajaya",
-		selectedStateCode: "WLY01",
+		selectedStateCode: "WLY01"
 	},
 	locations: {
 		Johor: {
 			JHR01: "Pulau Aur dan Pulau Pemanggil ",
 			JHR02: "Johor Bharu, Kota Tinggi, Mersing",
-			JHR03: "Kluang, Pontian",
+			JHR03: "Kluang, Pontian"
 		},
 		Kedah: {
 			KDH01: "Kota Setar, Kubang Pasu, Pokok Sena (Daerah Kecil)",
@@ -117,19 +117,19 @@ const Constants = {
 			KDH04: "Baling ",
 			KDH05: "Bandar Baharu, Kulim",
 			KDH06: "Langkawi ",
-			KDH07: "Gunung Jerai ",
+			KDH07: "Gunung Jerai "
 		},
 		Kelantan: {
 			KTN01:
 				"Bachok, Kota Bharu, Machang, Pasir Mas, Pasir Puteh, Tanah Merah, Tumpat, Kuala Krai, Mukim Chiku",
-			KTN03: "Gua Musang (Daerah Galas Dan Bertam), Jeli",
+			KTN03: "Gua Musang (Daerah Galas Dan Bertam), Jeli"
 		},
 		Melaka: {
-			MLK01: "SELURUH NEGERI MELAKA ",
+			MLK01: "SELURUH NEGERI MELAKA "
 		},
 		"Negeri Sembilan": {
 			NGS01: "Tampin, Jempol",
-			NGS02: "Jelebu, Kuala Pilah, Port Dickson, Rembau, Seremban",
+			NGS02: "Jelebu, Kuala Pilah, Port Dickson, Rembau, Seremban"
 		},
 		Pahang: {
 			PHG01: "Pulau Tioman ",
@@ -137,13 +137,13 @@ const Constants = {
 			PHG03: "Jerantut, Temerloh, Maran, Bera, Chenor, Jengka",
 			PHG04: "Bentong, Lipis, Raub",
 			PHG05: "Genting Sempah, Janda Baik, Bukit Tinggi",
-			PHG06: "Cameron Highlands, Genting Higlands, Bukit Fraser",
+			PHG06: "Cameron Highlands, Genting Higlands, Bukit Fraser"
 		},
 		Perlis: {
-			PLS01: "Kangar, Padang Besar, Arau",
+			PLS01: "Kangar, Padang Besar, Arau"
 		},
 		"Pulau Pinang": {
-			PNG01: "Seluruh Negeri Pulau Pinang ",
+			PNG01: "Seluruh Negeri Pulau Pinang "
 		},
 		Perak: {
 			PRK01: "Tapah, Slim River, Tanjung Malim",
@@ -156,7 +156,7 @@ const Constants = {
 				"Kg Gajah, Teluk Intan, Bagan Datuk, Seri Iskandar, Beruas, Parit, Lumut, Sitiawan, Pulau Pangkor",
 
 			PRK06: "Selama, Taiping, Bagan Serai, Parit Buntar",
-			PRK07: "Bukit Larut ",
+			PRK07: "Bukit Larut "
 		},
 		Sabah: {
 			SBH01:
@@ -175,14 +175,14 @@ const Constants = {
 			SBH08:
 				"Pensiangan, Keningau, Tambunan, Nabawan, Bahagian Pendalaman (Atas)",
 			SBH09:
-				"Beaufort, Kuala Penyu, Sipitang, Tenom, Long Pa Sia, Membakut, Weston, Bahagian Pendalaman (Bawah)",
+				"Beaufort, Kuala Penyu, Sipitang, Tenom, Long Pa Sia, Membakut, Weston, Bahagian Pendalaman (Bawah)"
 		},
 		Selangor: {
 			SGR01:
 				"Gombak, Petaling, Sepang, Hulu Langat, Hulu Selangor, Rawang, S.Alam",
 
 			SGR02: "Kuala Selangor, Sabak Bernam",
-			SGR03: "Klang, Kuala Langat",
+			SGR03: "Klang, Kuala Langat"
 		},
 		Sarawak: {
 			SWK01: "Limbang, Lawas, Sundar, Trusan",
@@ -197,19 +197,19 @@ const Constants = {
 
 			SWK07: "Serian, Simunjan, Samarahan, Sebuyau, Meludam",
 			SWK08: "Kuching, Bau, Lundu, Sematan",
-			SWK09: "Zon Khas (Kampung Patarikan)",
+			SWK09: "Zon Khas (Kampung Patarikan)"
 		},
 		Terengganu: {
 			TRG01: "Kuala Terengganu, Marang, Kuala Nerus",
 			TRG02: "Besut, Setiu",
 			TRG03: "Hulu Terengganu ",
-			TRG04: "Dungun, Kemaman",
+			TRG04: "Dungun, Kemaman"
 		},
 		"Wilayah Persekutuan": {
 			WLY01: "Kuala Lumpur, Putrajaya",
-			WLY02: "Labuan ",
-		},
-	},
+			WLY02: "Labuan "
+		}
+	}
 };
 
 export default Constants;

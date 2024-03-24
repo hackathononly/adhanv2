@@ -7,7 +7,7 @@ import { useGetTranslation } from "../../customHook/useGetTranslation";
 export const Body = () => {
 	const { isMinimal, isNotificationEnabled } = useChangeUserSettings(),
 		{
-			//	initAdhanApp,
+			initAdhanApp,
 			currentPrayerTime,
 			setSilencedTime,
 			getSilencedTime,
@@ -16,7 +16,7 @@ export const Body = () => {
 		{ getTranslation: translate } = useGetTranslation();
 
 	useEffect(() => {
-		//initAdhanApp();
+		initAdhanApp();
 	}, []);
 
 	return (

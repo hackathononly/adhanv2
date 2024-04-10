@@ -42,7 +42,7 @@
 		]
 	},
 	"devDependencies": {
-		"axios": "^1.6.8",
+		"axios": "^0.28.0",
 		"glob-parent": ">=6.0.2",
 		"idb": "^8.0.0",
 		"immer": ">=10.0.4",

@@ -11,7 +11,7 @@ export const Body = () => {
 			currentPrayerTime,
 			setSilencedTime,
 			getSilencedTime,
-			prayerTimeList,
+			prayerTimeList
 		} = useSetPrayerTimes(),
 		{ getTranslation: translate } = useGetTranslation();
 
